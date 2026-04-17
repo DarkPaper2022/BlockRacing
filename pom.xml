@@ -34,11 +34,107 @@
             <groupId>com.github.kangarko</groupId>
             <artifactId>Foundation</artifactId>
             <version>6.9.23</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>AuthMe</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>BentoBox</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>CitizensAPI</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>CMIAPI</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>DiscordSRV</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>EssentialsX</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>Factions</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>FactionsUUID</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>MassiveCore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>mcMMO</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>MultiverseCore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>MythicMobs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>NuVotifier</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>PlaceholderAPI</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>ProtocolLib</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>Residence</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>SimpleClans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>Towny</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>TownyChat</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>Vault</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>WorldEdit</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mineacademy.plugin</groupId>
+                    <artifactId>WorldGuard</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
