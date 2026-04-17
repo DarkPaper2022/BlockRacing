@@ -18,6 +18,17 @@ import static top.lqsnow.blockracing.managers.Gui.checkBlockInventory;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class Block {
+    private static final float EASY_DISABLE_PROGRESS = 0.75f;
+    private static final int EASY_START_WEIGHT = 100;
+    private static final int MEDIUM_EARLY_START_WEIGHT = 20;
+    private static final int MEDIUM_MID_WEIGHT = 60;
+    private static final int MEDIUM_LATE_WEIGHT = 80;
+    private static final float MEDIUM_WEIGHT_TURNING_POINT = 0.4f;
+    private static final int HARD_EARLY_START_WEIGHT = 1;
+    private static final int HARD_MID_WEIGHT = 30;
+    private static final int HARD_LATE_WEIGHT = 90;
+    private static final float HARD_WEIGHT_TURNING_POINT = 0.5f;
+
     public static List<String> easyBlocks, mediumBlocks, hardBlocks, dyedBlocks, endBlocks, blocks;
     public static List<String> allBlocks = new ArrayList<>();
     public static int maxBlockAmount;
@@ -165,30 +176,38 @@ public class Block {
     }
 
     // Calculate weight for easy blocks
-    // Weight decreases from 100 to 20 as progress goes from 0 to 1
+    // Weight decreases to 0, then easy targets are disabled in the late game.
     public static int calculateEasyBlocksWeight(float progress) {
-        return (int) (100 - 80 * progress);
+        if (progress >= EASY_DISABLE_PROGRESS) {
+            return 0;
+        }
+
+        return Math.max(0, (int) (EASY_START_WEIGHT - EASY_START_WEIGHT * progress / EASY_DISABLE_PROGRESS));
     }
 
     // Calculate weight for medium blocks
-    // Weight increases from 20 to 60 as progress goes from 0 to 0.4,
-    // then remains constant at 60 as progress goes from 0.4 to 1
+    // Weight ramps up early, then keeps growing in the late game.
     public static int calculateMediumBlocksWeight(float progress) {
-        if (progress <= 0.4) {
-            return (int) (20 + 40 * progress / 0.4);
+        if (progress <= MEDIUM_WEIGHT_TURNING_POINT) {
+            return (int) (MEDIUM_EARLY_START_WEIGHT
+                    + (MEDIUM_MID_WEIGHT - MEDIUM_EARLY_START_WEIGHT) * progress / MEDIUM_WEIGHT_TURNING_POINT);
         } else {
-            return 60;
+            return (int) (MEDIUM_MID_WEIGHT
+                    + (MEDIUM_LATE_WEIGHT - MEDIUM_MID_WEIGHT)
+                    * (progress - MEDIUM_WEIGHT_TURNING_POINT) / (1 - MEDIUM_WEIGHT_TURNING_POINT));
         }
     }
 
     // Calculate weight for hard blocks
-    // Weight increases from 1 to 20 as progress goes from 0 to 0.5,
-    // then increases from 20 to 60 as progress goes from 0.5 to 1
+    // Weight grows throughout the game and becomes dominant late.
     public static int calculateHardBlocksWeight(float progress) {
-        if (progress <= 0.5) {
-            return (int) (1 + 19 * progress / 0.5);
+        if (progress <= HARD_WEIGHT_TURNING_POINT) {
+            return (int) (HARD_EARLY_START_WEIGHT
+                    + (HARD_MID_WEIGHT - HARD_EARLY_START_WEIGHT) * progress / HARD_WEIGHT_TURNING_POINT);
         } else {
-            return (int) (20 + 40 * (progress - 0.5) / 0.5);
+            return (int) (HARD_MID_WEIGHT
+                    + (HARD_LATE_WEIGHT - HARD_MID_WEIGHT)
+                    * (progress - HARD_WEIGHT_TURNING_POINT) / (1 - HARD_WEIGHT_TURNING_POINT));
         }
     }
 
