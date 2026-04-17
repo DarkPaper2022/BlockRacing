@@ -18,12 +18,12 @@ import static top.lqsnow.blockracing.managers.Gui.checkBlockInventory;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class Block {
-    private static final float EASY_DISABLE_PROGRESS = 0.75f;
-    private static final int EASY_START_WEIGHT = 100;
-    private static final int MEDIUM_EARLY_START_WEIGHT = 20;
-    private static final int MEDIUM_MID_WEIGHT = 60;
-    private static final int MEDIUM_LATE_WEIGHT = 80;
-    private static final float MEDIUM_WEIGHT_TURNING_POINT = 0.4f;
+    private static final float EASY_DISABLE_PROGRESS = 0.68f;
+    private static final int EASY_START_WEIGHT = 90;
+    private static final int MEDIUM_EARLY_START_WEIGHT = 30;
+    private static final int MEDIUM_MID_WEIGHT = 70;
+    private static final int MEDIUM_LATE_WEIGHT = 84;
+    private static final float MEDIUM_WEIGHT_TURNING_POINT = 0.35f;
     private static final int HARD_EARLY_START_WEIGHT = 1;
     private static final int HARD_MID_WEIGHT = 30;
     private static final int HARD_LATE_WEIGHT = 90;
