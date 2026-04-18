@@ -18,6 +18,7 @@ import static top.lqsnow.blockracing.managers.Gui.checkBlockInventory;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class Block {
+    private static final Random RANDOM = new Random();
     private static final float EASY_DISABLE_PROGRESS = 0.68f;
     private static final int EASY_START_WEIGHT = 90;
     private static final int MEDIUM_EARLY_START_WEIGHT = 30;
@@ -28,6 +29,27 @@ public class Block {
     private static final int HARD_MID_WEIGHT = 30;
     private static final int HARD_LATE_WEIGHT = 90;
     private static final float HARD_WEIGHT_TURNING_POINT = 0.5f;
+    private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
+    private static final String STRIPPED_PREFIX = "STRIPPED_";
+    private static final String FAMILY_TAG_PREFIX = "family:";
+    private static final String CATEGORY_TAG_PREFIX = "category:";
+    private static final String GROUP_TAG_PREFIX = "group:";
+    private static final List<String> WOOD_FAMILIES = List.of(
+            "DARK_OAK",
+            "PALE_OAK",
+            "MANGROVE",
+            "CRIMSON",
+            "SPRUCE",
+            "JUNGLE",
+            "CHERRY",
+            "BAMBOO",
+            "WARPED",
+            "BIRCH",
+            "ACACIA",
+            "OAK"
+    );
+    private static final Map<String, Set<String>> WOOD_CATEGORY_GROUPS = createWoodCategoryGroups();
+    private static final Map<String, Set<String>> RELATED_BLOCK_TAG_CACHE = new HashMap<>();
 
     public static List<String> easyBlocks, mediumBlocks, hardBlocks, dyedBlocks, endBlocks, blocks;
     public static List<String> allBlocks = new ArrayList<>();
@@ -77,8 +99,6 @@ public class Block {
 
         addUpBlocks();
 
-        // Create temporary file to generate blocks
-        List<String> blocksTemp = new ArrayList<>(blocks);
         List<String> easyTemp = new ArrayList<>(easyBlocks);
         List<String> mediumTemp = new ArrayList<>(mediumBlocks);
         List<String> hardTemp = new ArrayList<>(hardBlocks);
@@ -88,6 +108,7 @@ public class Block {
         // Choose blocks
         int blockAmount = Setting.getBlockAmount();
         List<String> targetBlocks = new ArrayList<>();
+        Set<String> suppressedRelatedTags = new HashSet<>();
 
         for (int i = 0; i < blockAmount; i++) {
             // Calculate weights for each difficulty
@@ -116,10 +137,11 @@ public class Block {
             String difficulty = chooseDifficulty(easyWeight, mediumWeight, hardWeight, dyedWeight, endWeight);
 
             // Select a block from the corresponding difficulty list
-            String selectedBlock = selectBlock(difficulty, easyTemp, mediumTemp, hardTemp, dyedTemp, endTemp);
+            String selectedBlock = selectBlock(difficulty, easyTemp, mediumTemp, hardTemp, dyedTemp, endTemp, suppressedRelatedTags);
 
             // Add the selected block to targetBlocks
             targetBlocks.add(selectedBlock);
+            suppressedRelatedTags.addAll(getRelatedBlockTags(selectedBlock));
 
             // Remove the selected block from the corresponding difficulty list
             switch (difficulty) {
@@ -130,9 +152,6 @@ public class Block {
                 case "end" -> endTemp.remove(selectedBlock);
                 default -> throw new IllegalArgumentException("Invalid difficulty");
             }
-
-            // Remove the selected block from the total blocksTemp
-            blocksTemp.remove(selectedBlock);
         }
 
         return targetBlocks;
@@ -141,7 +160,7 @@ public class Block {
     // Method to choose difficulty based on weights
     private static String chooseDifficulty(int easyWeight, int mediumWeight, int hardWeight, int dyedWeight, int endWeight) {
         int totalWeight = easyWeight + mediumWeight + hardWeight + dyedWeight + endWeight;
-        int randomNumber = new Random().nextInt(totalWeight);
+        int randomNumber = RANDOM.nextInt(totalWeight);
 
         if (randomNumber < easyWeight) {
             return "easy";
@@ -158,21 +177,109 @@ public class Block {
 
     // Method to select a block from the corresponding difficulty list
     private static String selectBlock(String difficulty, List<String> easyTemp, List<String> mediumTemp,
-                                      List<String> hardTemp, List<String> dyedTemp, List<String> endTemp) {
+                                      List<String> hardTemp, List<String> dyedTemp, List<String> endTemp,
+                                      Set<String> suppressedRelatedTags) {
         return switch (difficulty) {
-            case "easy" -> selectRandomBlockFromList(easyTemp);
-            case "medium" -> selectRandomBlockFromList(mediumTemp);
-            case "hard" -> selectRandomBlockFromList(hardTemp);
-            case "dyed" -> selectRandomBlockFromList(dyedTemp);
-            case "end" -> selectRandomBlockFromList(endTemp);
+            case "easy" -> selectWeightedBlockFromList(easyTemp, suppressedRelatedTags);
+            case "medium" -> selectWeightedBlockFromList(mediumTemp, suppressedRelatedTags);
+            case "hard" -> selectWeightedBlockFromList(hardTemp, suppressedRelatedTags);
+            case "dyed" -> selectWeightedBlockFromList(dyedTemp, suppressedRelatedTags);
+            case "end" -> selectWeightedBlockFromList(endTemp, suppressedRelatedTags);
             default -> throw new IllegalArgumentException("Invalid difficulty");
         };
     }
 
-    // Method to select a random block from a list
-    private static String selectRandomBlockFromList(List<String> blockList) {
-        int randomIndex = new Random().nextInt(blockList.size());
-        return blockList.get(randomIndex);
+    // Method to select a weighted block from a list.
+    // Wood-family and wood-category related blocks are reduced after one has appeared.
+    private static String selectWeightedBlockFromList(List<String> blockList, Set<String> suppressedRelatedTags) {
+        double totalWeight = 0;
+        List<Double> weights = new ArrayList<>(blockList.size());
+
+        for (String candidate : blockList) {
+            double weight = calculateRelatedBlockSelectionWeight(candidate, suppressedRelatedTags);
+            weights.add(weight);
+            totalWeight += weight;
+        }
+
+        double randomValue = RANDOM.nextDouble(totalWeight);
+
+        for (int i = 0; i < blockList.size(); i++) {
+            randomValue -= weights.get(i);
+            if (randomValue < 0) {
+                return blockList.get(i);
+            }
+        }
+
+        return blockList.get(blockList.size() - 1);
+    }
+
+    private static double calculateRelatedBlockSelectionWeight(String candidate, Set<String> suppressedRelatedTags) {
+        if (suppressedRelatedTags.isEmpty()) {
+            return 1.0D;
+        }
+
+        Set<String> candidateTags = getRelatedBlockTags(candidate);
+        if (candidateTags.isEmpty()) {
+            return 1.0D;
+        }
+
+        for (String tag : candidateTags) {
+            if (suppressedRelatedTags.contains(tag)) {
+                return RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER;
+            }
+        }
+
+        return 1.0D;
+    }
+
+    private static Set<String> getRelatedBlockTags(String blockName) {
+        return RELATED_BLOCK_TAG_CACHE.computeIfAbsent(blockName, Block::createRelatedBlockTags);
+    }
+
+    private static Set<String> createRelatedBlockTags(String blockName) {
+        String normalizedBlockName = normalizeWoodBlockName(blockName);
+        String family = extractWoodFamily(normalizedBlockName);
+        if (family == null || !normalizedBlockName.startsWith(family + "_")) {
+            return Set.of();
+        }
+
+        String category = normalizedBlockName.substring(family.length() + 1);
+        if (category.isEmpty()) {
+            return Set.of();
+        }
+
+        Set<String> tags = new HashSet<>();
+        tags.add(FAMILY_TAG_PREFIX + family);
+        tags.add(CATEGORY_TAG_PREFIX + category);
+
+        for (Map.Entry<String, Set<String>> entry : WOOD_CATEGORY_GROUPS.entrySet()) {
+            if (entry.getValue().contains(category)) {
+                tags.add(GROUP_TAG_PREFIX + entry.getKey());
+            }
+        }
+
+        return Set.copyOf(tags);
+    }
+
+    private static String normalizeWoodBlockName(String blockName) {
+        return blockName.startsWith(STRIPPED_PREFIX) ? blockName.substring(STRIPPED_PREFIX.length()) : blockName;
+    }
+
+    private static String extractWoodFamily(String normalizedBlockName) {
+        for (String family : WOOD_FAMILIES) {
+            if (normalizedBlockName.startsWith(family + "_")) {
+                return family;
+            }
+        }
+
+        return null;
+    }
+
+    private static Map<String, Set<String>> createWoodCategoryGroups() {
+        Map<String, Set<String>> categoryGroups = new HashMap<>();
+        categoryGroups.put("SIGN_SERIES", Set.of("SIGN", "HANGING_SIGN"));
+        categoryGroups.put("SAPLING_SERIES", Set.of("SAPLING", "PROPAGULE", "FUNGUS"));
+        return Collections.unmodifiableMap(categoryGroups);
     }
 
     // Calculate weight for easy blocks

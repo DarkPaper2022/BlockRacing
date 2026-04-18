@@ -2,6 +2,10 @@
 
 这份文档说明如何维护 `简单`、`普通`、`困难` 等方块池在总列表里的抽取权重。
 
+如果你要改“某个方块出现后，关联方块在池内降权”的逻辑，看：
+
+- `/home/darkpaper/Game/blockeracing-src/RelatedBlockSuppressionMaintenance.md`
+
 ## 核心文件
 
 权重曲线定义在：
