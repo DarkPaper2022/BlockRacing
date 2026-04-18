@@ -30,6 +30,7 @@ public class Block {
     private static final int HARD_LATE_WEIGHT = 90;
     private static final float HARD_WEIGHT_TURNING_POINT = 0.5f;
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
+    private static final double MINIMUM_SELECTION_WEIGHT = 0.01D;
     private static final String STRIPPED_PREFIX = "STRIPPED_";
     private static final String FAMILY_TAG_PREFIX = "family:";
     private static final String CATEGORY_TAG_PREFIX = "category:";
@@ -164,6 +165,9 @@ public class Block {
     // Method to choose difficulty based on weights
     private static String chooseDifficulty(int easyWeight, int mediumWeight, int hardWeight, int dyedWeight, int endWeight) {
         int totalWeight = easyWeight + mediumWeight + hardWeight + dyedWeight + endWeight;
+        if (totalWeight <= 0) {
+            throw new IllegalStateException("No block pools are available for selection.");
+        }
         int randomNumber = RANDOM.nextInt(totalWeight);
 
         if (randomNumber < easyWeight) {
@@ -229,7 +233,7 @@ public class Block {
 
         for (String tag : candidateTags) {
             if (suppressedRelatedTags.contains(tag)) {
-                return RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER;
+                return Math.max(MINIMUM_SELECTION_WEIGHT, RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER);
             }
         }
 
