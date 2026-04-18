@@ -33,3 +33,7 @@ commands:
   randomteam:
     usage: "/randomteam"
     description: "Random team."
+  sampleblocks:
+    usage: "/sampleblocks [amount]"
+    description: "Generate a pre-game sample block list."
+    permission: op

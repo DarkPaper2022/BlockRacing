@@ -95,8 +95,15 @@ public class Block {
         Bukkit.getLogger().info("Blue team blocks: " + blueTeamBlocks.toString());
     }
 
-    private static List<String> generateBlocks() {
+    public static List<String> generateSampleBlocks(int blockAmount) {
+        return generateBlocks(blockAmount);
+    }
 
+    private static List<String> generateBlocks() {
+        return generateBlocks(Setting.getBlockAmount());
+    }
+
+    private static List<String> generateBlocks(int blockAmount) {
         addUpBlocks();
 
         List<String> easyTemp = new ArrayList<>(easyBlocks);
@@ -104,9 +111,6 @@ public class Block {
         List<String> hardTemp = new ArrayList<>(hardBlocks);
         List<String> dyedTemp = new ArrayList<>(dyedBlocks);
         List<String> endTemp = new ArrayList<>(endBlocks);
-
-        // Choose blocks
-        int blockAmount = Setting.getBlockAmount();
         List<String> targetBlocks = new ArrayList<>();
         Set<String> suppressedRelatedTags = new HashSet<>();
 

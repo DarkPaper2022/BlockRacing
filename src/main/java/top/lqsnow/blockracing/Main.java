@@ -40,6 +40,8 @@ public class Main extends SimplePlugin {
         getPluginCommand("block").setExecutor(new GetBlock());
         getPluginCommand("block").setTabCompleter(new GetBlock());
         getPluginCommand("randomteam").setExecutor(new RandomTeam());
+        getPluginCommand("sampleblocks").setExecutor(new SampleBlocks());
+        getPluginCommand("sampleblocks").setTabCompleter(new SampleBlocks());
 
         // Save resources
         saveIfAbsent(

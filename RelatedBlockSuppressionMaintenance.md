@@ -183,3 +183,19 @@
 4. 运行 `start.sh`
 5. 执行 `brcheck reload`
 6. 如需验证联动效果，用脚本或 `jshell` 连续模拟，检查目标样本里同木种/同类别是否明显下降
+
+## 预览 sample 列表
+
+如果你只是想在“游戏开始前”看一份样本列表，而不真的开局，可以用：
+
+- `/sampleblocks`
+- `/sampleblocks 64`
+
+这个命令会按当前启用的方块池、当前权重曲线、当前关联降权规则生成一份 sample 列表，但不会写入：
+
+- `redTeamBlocks`
+- `blueTeamBlocks`
+- `redTeamRemainingBlocks`
+- `blueTeamRemainingBlocks`
+
+所以它只用于预览和调参，不代表下一局正式开始后一定抽到同一份内容。
