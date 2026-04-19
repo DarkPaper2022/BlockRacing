@@ -137,7 +137,6 @@ public class Block {
             if (endTemp.size() != 0)
                 endWeight = Setting.isEnableEndBlock() ? calculateEndBlocksWeight((float) i / blockAmount) : 0;
 
-
             // Choose difficulty based on weights
             String difficulty = chooseDifficulty(easyWeight, mediumWeight, hardWeight, dyedWeight, endWeight);
 
@@ -291,13 +290,13 @@ public class Block {
     }
 
     // Calculate weight for easy blocks
-    // Weight decreases to 0, then easy targets are disabled in the late game.
+    // Weight decreases through the game but keeps a minimum fallback weight of 1.
     public static int calculateEasyBlocksWeight(float progress) {
         if (progress >= EASY_DISABLE_PROGRESS) {
-            return 0;
+            return 1;
         }
 
-        return Math.max(0, (int) (EASY_START_WEIGHT - EASY_START_WEIGHT * progress / EASY_DISABLE_PROGRESS));
+        return Math.max(1, (int) (EASY_START_WEIGHT - EASY_START_WEIGHT * progress / EASY_DISABLE_PROGRESS));
     }
 
     // Calculate weight for medium blocks
