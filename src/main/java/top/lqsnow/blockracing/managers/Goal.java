@@ -3,6 +3,7 @@ package top.lqsnow.blockracing.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -99,6 +101,12 @@ public class Goal {
                     .allMatch(Objects::nonNull);
         }
 
+        if (requirement instanceof EquipmentRequirement equipmentRequirement) {
+            return equipmentRequirement.items().stream()
+                    .map(ItemTarget::material)
+                    .allMatch(Objects::nonNull);
+        }
+
         if (requirement instanceof AdvancementRequirement advancementRequirement) {
             return Bukkit.getAdvancement(NamespacedKey.minecraft(advancementRequirement.key())) != null;
         }
@@ -111,6 +119,12 @@ public class Goal {
 
         if (requirement instanceof ItemRequirement itemRequirement) {
             return inventoryContainsAll(player.getInventory(), itemRequirement.items());
+        }
+
+        if (requirement instanceof EquipmentRequirement equipmentRequirement) {
+            return equipmentRequirement.requireAll()
+                    ? equipmentContainsAll(player, equipmentRequirement.items())
+                    : equipmentContainsAny(player, equipmentRequirement.items());
         }
 
         if (requirement instanceof AdvancementRequirement advancementRequirement) {
@@ -130,7 +144,45 @@ public class Goal {
             return player.getLevel() >= levelRequirement.level();
         }
 
+        if (requirement instanceof LocationRequirement locationRequirement) {
+            return isAtLocation(player, locationRequirement.type());
+        }
+
         return false;
+    }
+
+    private static boolean equipmentContainsAll(Player player, List<ItemTarget> items) {
+        List<Material> equipment = getEquipment(player);
+        return items.stream().allMatch(item -> equipment.contains(item.material()));
+    }
+
+    private static boolean equipmentContainsAny(Player player, List<ItemTarget> items) {
+        List<Material> equipment = getEquipment(player);
+        return items.stream().anyMatch(item -> equipment.contains(item.material()));
+    }
+
+    private static List<Material> getEquipment(Player player) {
+        List<Material> equipment = new ArrayList<>();
+        addEquipment(equipment, player.getInventory().getHelmet());
+        addEquipment(equipment, player.getInventory().getChestplate());
+        addEquipment(equipment, player.getInventory().getLeggings());
+        addEquipment(equipment, player.getInventory().getBoots());
+        return equipment;
+    }
+
+    private static void addEquipment(List<Material> equipment, ItemStack item) {
+        if (item != null) {
+            equipment.add(item.getType());
+        }
+    }
+
+    private static boolean isAtLocation(Player player, LocationRequirement.Type type) {
+        return switch (type) {
+            case HEIGHT_LIMIT -> player.getLocation().getY() >= player.getWorld().getMaxHeight() - 1;
+            case BEDROCK -> player.getLocation().getY() <= player.getWorld().getMinHeight() + 6;
+            case NETHER_ROOF -> player.getWorld().getEnvironment().equals(World.Environment.NETHER)
+                    && player.getLocation().getY() >= 128;
+        };
     }
 
     private static int countCompletedAdvancements(Player player) {
@@ -202,6 +254,14 @@ public class Goal {
             return key.isEmpty() ? null : new AdvancementRequirement(key);
         }
 
+        if (rawRequirement.startsWith("equipment-all:")) {
+            return parseEquipmentRequirement(rawRequirement.substring("equipment-all:".length()), true);
+        }
+
+        if (rawRequirement.startsWith("equipment-any:")) {
+            return parseEquipmentRequirement(rawRequirement.substring("equipment-any:".length()), false);
+        }
+
         if (rawRequirement.startsWith("advancement-count:")) {
             return parsePositiveInt(rawRequirement.substring("advancement-count:".length()))
                     .map(AdvancementCountRequirement::new);
@@ -212,7 +272,36 @@ public class Goal {
                     .map(LevelRequirement::new);
         }
 
+        if (rawRequirement.startsWith("location:")) {
+            return parseLocationRequirement(rawRequirement.substring("location:".length()));
+        }
+
         return null;
+    }
+
+    private static Requirement parseEquipmentRequirement(String rawItems, boolean requireAll) {
+        List<ItemTarget> items = parseItems(rawItems);
+        return items.isEmpty() ? null : new EquipmentRequirement(List.copyOf(items), requireAll);
+    }
+
+    private static Requirement parseLocationRequirement(String rawLocationType) {
+        try {
+            return new LocationRequirement(LocationRequirement.Type.valueOf(rawLocationType.trim().toUpperCase(Locale.ROOT).replace('-', '_')));
+        } catch (IllegalArgumentException exception) {
+            return null;
+        }
+    }
+
+    private static List<ItemTarget> parseItems(String rawItems) {
+        List<ItemTarget> items = new ArrayList<>();
+        for (String rawItem : rawItems.split(",")) {
+            ItemTarget item = parseItem(rawItem.trim());
+            if (item == null) {
+                return List.of();
+            }
+            items.add(item);
+        }
+        return items;
     }
 
     private static ItemTarget parseItem(String rawItem) {
@@ -254,10 +343,13 @@ public class Goal {
     private record Definition(String id, String label, Requirement requirement) {
     }
 
-    private sealed interface Requirement permits ItemRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement {
+    private sealed interface Requirement permits ItemRequirement, EquipmentRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement {
     }
 
     private record ItemRequirement(List<ItemTarget> items) implements Requirement {
+    }
+
+    private record EquipmentRequirement(List<ItemTarget> items, boolean requireAll) implements Requirement {
     }
 
     private record AdvancementRequirement(String key) implements Requirement {
@@ -267,6 +359,14 @@ public class Goal {
     }
 
     private record LevelRequirement(int level) implements Requirement {
+    }
+
+    private record LocationRequirement(Type type) implements Requirement {
+        private enum Type {
+            HEIGHT_LIMIT,
+            BEDROCK,
+            NETHER_ROOF
+        }
     }
 
     private record ItemTarget(Material material, int amount) {
