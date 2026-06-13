@@ -498,21 +498,21 @@ public class Game {
 
         @Override
         public void run() {
+            if (!getCurrentGameState().equals(GameState.INGAME)) {
+                this.cancel();
+                return;
+            }
 
             // Inventory check
             checkRedInventory();
-            checkBlueInventory();
-
-            // Win check
-            if (redTeamRemainingBlocks.isEmpty()) {
-                redWin();
-                showRanking();
+            if (!getCurrentGameState().equals(GameState.INGAME)) {
                 this.cancel();
+                return;
             }
-            if (blueTeamRemainingBlocks.isEmpty()) {
-                blueWin();
-                showRanking();
+            checkBlueInventory();
+            if (!getCurrentGameState().equals(GameState.INGAME)) {
                 this.cancel();
+                return;
             }
 
             // Roll check
@@ -670,6 +670,9 @@ public class Game {
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         redTeamRemainingBlocks.remove(block);
+        if (skipMutualTask(blueTeamRemainingBlocks, block)) {
+            blueTeamTotalBlockAmount -= 1;
+        }
         if (Setting.isSpeedMode())
             redTeamScore += 3;
         else
@@ -677,6 +680,11 @@ public class Game {
         redTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
+        if (redTeamCurrentBlockAmount >= redTeamTotalBlockAmount) {
+            redWin();
+            showRanking();
+            return;
+        }
         // Put items into the opponent's team chest
         if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = blueTeamChest.size() - 1; i >= 0; i--) {
@@ -700,6 +708,9 @@ public class Game {
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         blueTeamRemainingBlocks.remove(block);
+        if (skipMutualTask(redTeamRemainingBlocks, block)) {
+            redTeamTotalBlockAmount -= 1;
+        }
         if (Setting.isSpeedMode())
             blueTeamScore += 3;
         else
@@ -707,6 +718,11 @@ public class Game {
         blueTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
+        if (blueTeamCurrentBlockAmount >= blueTeamTotalBlockAmount) {
+            blueWin();
+            showRanking();
+            return;
+        }
         // Put items into the opponent's team chest
         if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = redTeamChest.size() - 1; i >= 0; i--) {
@@ -755,6 +771,10 @@ public class Game {
 
     public static String getTargetDisplayName(String target) {
         return Goal.isGoal(target) ? Goal.getDisplayName(target) : TranslationUtil.getValue(target);
+    }
+
+    private static boolean skipMutualTask(List<String> opponentRemainingBlocks, String completedBlock) {
+        return opponentRemainingBlocks.remove(completedBlock);
     }
 
     public static List<String> getOnlinePlayersString() {
