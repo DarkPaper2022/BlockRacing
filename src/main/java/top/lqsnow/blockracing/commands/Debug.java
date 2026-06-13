@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.lqsnow.blockracing.managers.Message;
-import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,11 +97,11 @@ public class Debug implements CommandExecutor, TabCompleter {
             if (args[1].equalsIgnoreCase("red")) {
                 String block = getCurrentBlocks("red").get(Integer.parseInt(args[2]) - 1);
                 Material material = Material.getMaterial(block);
-                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, TranslationUtil.getValue(block), material.getTranslationKey()));
+                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, getTargetDisplayName(block), material == null ? "custom-goal" : material.getTranslationKey()));
             } else if (args[1].equalsIgnoreCase("blue")) {
                 String block = getCurrentBlocks("blue").get(Integer.parseInt(args[2]) - 1);
                 Material material = Material.getMaterial(block);
-                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, TranslationUtil.getValue(block), material.getTranslationKey()));
+                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, getTargetDisplayName(block), material == null ? "custom-goal" : material.getTranslationKey()));
             }
         }
 

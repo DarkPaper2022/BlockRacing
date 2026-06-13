@@ -50,6 +50,7 @@ public class Main extends SimplePlugin {
                 "HardBlocks.txt",
                 "DyedBlocks.txt",
                 "EndBlocks.txt",
+                "DraftoutGoals.txt",
                 "zh_cn.json",
                 "en_us.json"
         );

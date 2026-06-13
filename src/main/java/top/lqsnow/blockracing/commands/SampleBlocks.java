@@ -8,7 +8,7 @@ import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.lqsnow.blockracing.managers.Block;
-import top.lqsnow.blockracing.utils.TranslationUtil;
+import top.lqsnow.blockracing.managers.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class SampleBlocks implements CommandExecutor, TabCompleter {
         sender.sendMessage("[BlockRacing] Sample block list (" + blockAmount + "):");
         for (int i = 0; i < sampleBlocks.size(); i++) {
             String blockName = sampleBlocks.get(i);
-            String translatedName = TranslationUtil.getValue(blockName);
+            String translatedName = Game.getTargetDisplayName(blockName);
             sender.sendMessage(String.format("%02d. %s (%s)", i + 1, blockName, translatedName));
         }
         Bukkit.getLogger().info("[BlockRacing] Sample block list generated: " + sampleBlocks);

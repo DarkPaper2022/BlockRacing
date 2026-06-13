@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.lqsnow.blockracing.managers.Game;
-import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,25 +31,38 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (args.length == 0) {
+        if (args.length < 2) {
             player.sendMessage(t("&cMissing parameters"));
             return true;
         }
 
-        if (args[1].isEmpty()) {
-            player.sendMessage(t("&cMissing parameters"));
-            return true;
-        } else if (Integer.parseInt(args[1]) > 4) {
+        int index;
+        try {
+            index = Integer.parseInt(args[1]);
+        } catch (NumberFormatException exception) {
             player.sendMessage(t("&cParameters error"));
             return true;
         }
 
+        if (index < 1 || index > 4) {
+            player.sendMessage(t("&cMissing parameters"));
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("red")) {
-            String block = getCurrentBlocks("red").get(Integer.parseInt(args[1]) - 1);
-            sender.sendMessage(String.format(TranslationUtil.getValue(block)));
+            if (index > getCurrentBlocks("red").size()) {
+                player.sendMessage(t("&cParameters error"));
+                return true;
+            }
+            String block = getCurrentBlocks("red").get(index - 1);
+            sender.sendMessage(Game.getTargetDisplayName(block));
         } else if (args[0].equalsIgnoreCase("blue")) {
-            String block = getCurrentBlocks("blue").get(Integer.parseInt(args[1]) - 1);
-            sender.sendMessage(String.format(TranslationUtil.getValue(block)));
+            if (index > getCurrentBlocks("blue").size()) {
+                player.sendMessage(t("&cParameters error"));
+                return true;
+            }
+            String block = getCurrentBlocks("blue").get(index - 1);
+            sender.sendMessage(Game.getTargetDisplayName(block));
         }
         return true;
     }

@@ -595,6 +595,15 @@ public class Game {
         // Complete from player
         for (String player : redTeamPlayers) {
             for (String block : getCurrentBlocks("red")) {
+                if (Goal.isGoal(block)) {
+                    String completionSource = Goal.findCompletionSource(block, redTeamPlayers, redTeamChest,
+                            Message.NOTICE_RED_TEAM_CHEST.getString());
+                    if (completionSource != null) {
+                        redTaskComplete(block, completionSource);
+                        return;
+                    }
+                    continue;
+                }
                 Player p = Bukkit.getPlayer(player);
                 if (p == null)
                     continue;
@@ -606,6 +615,9 @@ public class Game {
         }
         // Complete from team chest
         for (String block : getCurrentBlocks("red")) {
+            if (Goal.isGoal(block)) {
+                continue;
+            }
             for (Inventory chest : redTeamChest) {
                 if (chest.contains(Material.valueOf(block))) {
                     redTaskComplete(block, Message.NOTICE_RED_TEAM_CHEST.getString());
@@ -619,6 +631,15 @@ public class Game {
         // Complete from player
         for (String player : blueTeamPlayers) {
             for (String block : getCurrentBlocks("blue")) {
+                if (Goal.isGoal(block)) {
+                    String completionSource = Goal.findCompletionSource(block, blueTeamPlayers, blueTeamChest,
+                            Message.NOTICE_BLUE_TEAM_CHEST.getString());
+                    if (completionSource != null) {
+                        blueTaskComplete(block, completionSource);
+                        return;
+                    }
+                    continue;
+                }
                 Player p = Bukkit.getPlayer(player);
                 if (p == null)
                     continue;
@@ -630,6 +651,9 @@ public class Game {
         }
         // Complete from team chest
         for (String block : getCurrentBlocks("blue")) {
+            if (Goal.isGoal(block)) {
+                continue;
+            }
             for (Inventory chest : blueTeamChest) {
                 if (chest.contains(Material.valueOf(block))) {
                     blueTaskComplete(block, Message.NOTICE_BLUE_TEAM_CHEST.getString());
@@ -640,10 +664,10 @@ public class Game {
     }
 
     public static void redTaskComplete(String block, String player) {
-        sendAll(Message.NOTICE_RED_COLLECT.getString().replace("%block%", TranslationUtil.getValue(block))
+        sendAll(Message.NOTICE_RED_COLLECT.getString().replace("%block%", getTargetDisplayName(block))
                 .replace("%player%", player));
         Bukkit.getLogger().info(Message.NOTICE_RED_COLLECT.getString()
-                .replace("%block%", TranslationUtil.getValue(block)).replace("%player%", player).replaceAll("§.", ""));
+                .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         redTeamRemainingBlocks.remove(block);
         if (Setting.isSpeedMode())
@@ -654,7 +678,7 @@ public class Game {
         collect(player);
         updateScoreboard();
         // Put items into the opponent's team chest
-        if (Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
+        if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = blueTeamChest.size() - 1; i >= 0; i--) {
                 Inventory chest = blueTeamChest.get(i);
                 int emptyPos = chest.firstEmpty();
@@ -665,15 +689,15 @@ public class Game {
                 return;
             }
             sendAll(Message.NOTICE_TEAM_CHEST_FULL.getString().replace("%team%", Message.TEAM_BLUE_NAME.getString())
-                    .replace("%block%", TranslationUtil.getValue(block)));
+                    .replace("%block%", getTargetDisplayName(block)));
         }
     }
 
     public static void blueTaskComplete(String block, String player) {
-        sendAll(Message.NOTICE_BLUE_COLLECT.getString().replace("%block%", TranslationUtil.getValue(block))
+        sendAll(Message.NOTICE_BLUE_COLLECT.getString().replace("%block%", getTargetDisplayName(block))
                 .replace("%player%", player));
         Bukkit.getLogger().info(Message.NOTICE_BLUE_COLLECT.getString()
-                .replace("%block%", TranslationUtil.getValue(block)).replace("%player%", player).replaceAll("§.", ""));
+                .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         blueTeamRemainingBlocks.remove(block);
         if (Setting.isSpeedMode())
@@ -684,7 +708,7 @@ public class Game {
         collect(player);
         updateScoreboard();
         // Put items into the opponent's team chest
-        if (Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
+        if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = redTeamChest.size() - 1; i >= 0; i--) {
                 Inventory chest = redTeamChest.get(i);
                 int emptyPos = chest.firstEmpty();
@@ -695,7 +719,7 @@ public class Game {
                 return;
             }
             sendAll(Message.NOTICE_TEAM_CHEST_FULL.getString().replace("%team%", Message.TEAM_RED_NAME.getString())
-                    .replace("%block%", TranslationUtil.getValue(block)));
+                    .replace("%block%", getTargetDisplayName(block)));
         }
     }
 
@@ -727,6 +751,10 @@ public class Game {
             case "blue" -> blueTeamRemainingBlocks.subList(0, Math.min(blueTeamRemainingBlocks.size(), 4));
             default -> throw new IllegalStateException("Unexpected value: " + team);
         };
+    }
+
+    public static String getTargetDisplayName(String target) {
+        return Goal.isGoal(target) ? Goal.getDisplayName(target) : TranslationUtil.getValue(target);
     }
 
     public static List<String> getOnlinePlayersString() {

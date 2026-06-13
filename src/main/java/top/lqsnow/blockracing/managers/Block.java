@@ -52,7 +52,7 @@ public class Block {
     private static final Map<String, Set<String>> WOOD_CATEGORY_GROUPS = createWoodCategoryGroups();
     private static final Map<String, Set<String>> RELATED_BLOCK_TAG_CACHE = new HashMap<>();
 
-    public static List<String> easyBlocks, mediumBlocks, hardBlocks, dyedBlocks, endBlocks, blocks;
+    public static List<String> easyBlocks, mediumBlocks, hardBlocks, dyedBlocks, endBlocks, draftoutGoals, blocks;
     public static List<String> allBlocks = new ArrayList<>();
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
@@ -66,13 +66,17 @@ public class Block {
         hardBlocks = List.of(readFile("HardBlocks.txt"));
         dyedBlocks = List.of(readFile("DyedBlocks.txt"));
         endBlocks = List.of(readFile("EndBlocks.txt"));
+        draftoutGoals = Goal.load(readFile("DraftoutGoals.txt"));
         addUpBlocks();
     }
 
     public static void addUpBlocks() {
         allBlocks.clear();
         allBlocks.addAll(List.copyOf(easyBlocks));
-        if (Setting.isEnableMediumBlock()) allBlocks.addAll(List.copyOf(mediumBlocks));
+        if (Setting.isEnableMediumBlock()) {
+            allBlocks.addAll(List.copyOf(mediumBlocks));
+            allBlocks.addAll(List.copyOf(draftoutGoals));
+        }
         if (Setting.isEnableHardBlock()) allBlocks.addAll(List.copyOf(hardBlocks));
         if (Setting.isEnableDyedBlock()) allBlocks.addAll(List.copyOf(dyedBlocks));
         if (Setting.isEnableEndBlock()) allBlocks.addAll(List.copyOf(endBlocks));
@@ -109,6 +113,7 @@ public class Block {
 
         List<String> easyTemp = new ArrayList<>(easyBlocks);
         List<String> mediumTemp = new ArrayList<>(mediumBlocks);
+        mediumTemp.addAll(draftoutGoals);
         List<String> hardTemp = new ArrayList<>(hardBlocks);
         List<String> dyedTemp = new ArrayList<>(dyedBlocks);
         List<String> endTemp = new ArrayList<>(endBlocks);
@@ -349,6 +354,14 @@ public class Block {
     public static boolean checkBlock() {
         boolean flag = true;
         for (String str : blocks) {
+            if (Goal.isKnownGoalId(str)) {
+                if (!Goal.isValid(str)) {
+                    Bukkit.getLogger().severe("[BlockRacing] Invalid Draftout goal: " + str);
+                    sendAll(String.format(Message.NOTICE_ERROR_BLOCK.getString(), Goal.getDisplayName(str)));
+                    flag = false;
+                }
+                continue;
+            }
             try {
                 ItemStack item = ItemCreator.of(CompMaterial.fromMaterial(Material.valueOf(str))).amount(64).make();
                 checkBlockInventory.setItem(0, item);
@@ -367,6 +380,7 @@ public class Block {
         hardBlocks = List.of(readFile("HardBlocks.txt"));
         dyedBlocks = List.of(readFile("DyedBlocks.txt"));
         endBlocks = List.of(readFile("EndBlocks.txt"));
+        draftoutGoals = Goal.load(readFile("DraftoutGoals.txt"));
         addUpBlocks();
     }
 
