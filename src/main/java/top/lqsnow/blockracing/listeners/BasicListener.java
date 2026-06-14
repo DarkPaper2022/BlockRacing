@@ -1,12 +1,27 @@
 package top.lqsnow.blockracing.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityBreedEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTameEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 import top.lqsnow.blockracing.Main;
 import top.lqsnow.blockracing.managers.*;
 import top.lqsnow.blockracing.menus.PreGameMenu;
@@ -91,6 +106,127 @@ public class BasicListener implements Listener {
             event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, -1, 1, false, false));
             event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, -1, 1, false, false));
         }, 10L);
+    }
+
+    @EventHandler
+    private void onEntityDeath(EntityDeathEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+        Player killer = event.getEntity().getKiller();
+        if (killer != null) {
+            Goal.recordKill(killer, event.getEntityType());
+        }
+    }
+
+    @EventHandler
+    private void onEntityBreed(EntityBreedEvent event) {
+        if (!isInGame() || !(event.getBreeder() instanceof Player player)) {
+            return;
+        }
+        Goal.recordBreed(player, event.getEntityType());
+    }
+
+    @EventHandler
+    private void onEntityTame(EntityTameEvent event) {
+        if (!isInGame() || !(event.getOwner() instanceof Player player)) {
+            return;
+        }
+        Goal.recordTame(player, event.getEntityType());
+    }
+
+    @EventHandler
+    private void onPlayerItemConsume(PlayerItemConsumeEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+        ItemStack item = event.getItem();
+        Goal.recordConsume(event.getPlayer(), item.getType());
+        ItemMeta meta = item.getItemMeta();
+        if (meta instanceof PotionMeta potionMeta && potionMeta.getBasePotionType() != null) {
+            Goal.recordConsumePotion(event.getPlayer(), potionMeta.getBasePotionType().name());
+        }
+    }
+
+    @EventHandler
+    private void onCraftItem(CraftItemEvent event) {
+        if (!isInGame() || !(event.getWhoClicked() instanceof Player player)) {
+            return;
+        }
+        ItemStack result = event.getCurrentItem();
+        if (result == null || result.getType().equals(Material.AIR)) {
+            result = event.getRecipe().getResult();
+        }
+        if (result != null && !result.getType().equals(Material.AIR)) {
+            Goal.recordCraft(player, result.getType());
+        }
+    }
+
+    @EventHandler
+    private void onPlayerInteract(PlayerInteractEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+        Action action = event.getAction();
+        if (!action.equals(Action.RIGHT_CLICK_BLOCK)) {
+            return;
+        }
+        org.bukkit.block.Block clickedBlock = event.getClickedBlock();
+        if (clickedBlock != null) {
+            Goal.recordUseBlock(event.getPlayer(), clickedBlock.getType());
+        }
+    }
+
+    @EventHandler
+    private void onEntityDamage(EntityDamageEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+
+        if (event.getEntity() instanceof Player player) {
+            Goal.recordDamageTaken(player, event.getFinalDamage());
+        }
+
+        if (event instanceof EntityDamageByEntityEvent damageByEntityEvent) {
+            Player damager = getPlayerDamager(damageByEntityEvent.getDamager());
+            if (damager != null) {
+                Goal.recordDamageDealt(damager, event.getFinalDamage());
+            }
+        }
+    }
+
+    @EventHandler
+    private void onPlayerDeath(PlayerDeathEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+
+        EntityDamageEvent damageEvent = event.getEntity().getLastDamageCause();
+        Entity attacker = null;
+        if (damageEvent instanceof EntityDamageByEntityEvent damageByEntityEvent) {
+            attacker = damageByEntityEvent.getDamager();
+            if (attacker instanceof Projectile projectile && projectile.getShooter() instanceof Entity shooter) {
+                attacker = shooter;
+            }
+        }
+        Goal.recordDeath(event.getEntity(), damageEvent == null ? null : damageEvent.getCause(), attacker == null ? null : attacker.getType());
+    }
+
+    private static Player getPlayerDamager(Entity damager) {
+        if (damager instanceof Player player) {
+            return player;
+        }
+        if (damager instanceof Projectile projectile) {
+            ProjectileSource shooter = projectile.getShooter();
+            if (shooter instanceof Player player) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private static boolean isInGame() {
+        return Game.getCurrentGameState().equals(Game.GameState.INGAME);
     }
 
     public static void setBlockAmount(int blockAmount, Boolean sendMessage) {

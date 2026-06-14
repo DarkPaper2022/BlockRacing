@@ -8,6 +8,26 @@
 # - advancement-count:amount
 # - level:amount
 # - location:height-limit|bedrock|nether-roof
+# - effect:namespaced_effect_key
+# - hunger:empty
+# - kill:ENTITY_TYPE
+# - kill-total:amount
+# - kill-unique-hostile:amount
+# - kill-undead:amount
+# - kill-arthropod:amount
+# - breed:ENTITY_TYPE
+# - breed-unique:amount
+# - tame:ENTITY_TYPE
+# - consume:MATERIAL
+# - consume-potion:POTION_TYPE
+# - consume-all:MATERIAL,MATERIAL
+# - consume-unique:amount
+# - craft-unique:amount
+# - use-block:MATERIAL
+# - damage-dealt:amount
+# - damage-taken:amount
+# - death-cause:DAMAGE_CAUSE
+# - death-attacker:ENTITY_TYPE
 OBTAIN_WOODEN_TOOLS|Obtain all Wooden Tools|item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE
 OBTAIN_STONE_TOOLS|Obtain all Stone Tools|item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE
 OBTAIN_IRON_TOOLS|Obtain all Iron Tools|item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE
@@ -25,6 +45,46 @@ WEAR_CHAIN_ARMOR_PIECE|Wear a Chain Armor Piece|equipment-any:CHAINMAIL_HELMET,C
 WEAR_IRON_ARMOR|Wear Full Iron Armor|equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS
 WEAR_DIAMOND_ARMOR|Wear Full Diamond Armor|equipment-all:DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS
 WEAR_COPPER_ARMOR|Wear Full Copper Armor|equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS
+TAME_CAT|Tame a Cat|tame:CAT
+TAME_PARROT|Tame a Parrot|tame:PARROT
+TAME_HORSE|Tame a Horse|tame:HORSE
+TAME_WOLF|Tame a Wolf|tame:WOLF
+TAME_NAUTILUS|Tame a Nautilus|tame:NAUTILUS
+BREED_4_UNIQUE_ANIMALS|Breed 4 Unique Animals|breed-unique:4
+BREED_6_UNIQUE_ANIMALS|Breed 6 Unique Animals|breed-unique:6
+BREED_8_UNIQUE_ANIMALS|Breed 8 Unique Animals|breed-unique:8
+BREED_CHICKEN|Breed Chickens|breed:CHICKEN
+BREED_COW|Breed Cows|breed:COW
+BREED_HOGLIN|Breed Hoglins|breed:HOGLIN
+BREED_PIG|Breed Pigs|breed:PIG
+BREED_CAMEL|Breed Camels|breed:CAMEL
+BREED_ARMADILLO|Breed Armadillos|breed:ARMADILLO
+BREED_RABBIT|Breed Rabbits|breed:RABBIT
+BREED_FOX|Breed Foxes|breed:FOX
+BREED_SHEEP|Breed Sheep|breed:SHEEP
+BREED_STRIDER|Breed Striders|breed:STRIDER
+BREED_GOAT|Breed Goats|breed:GOAT
+BREED_FROGS|Breed Frogs|breed:FROG
+KILL_WITCH|Kill Witch|kill:WITCH
+KILL_BOGGED|Kill Bogged|kill:BOGGED
+KILL_PARCHED|Kill Parched|kill:PARCHED
+KILL_ZOMBIE_VILLAGER|Kill Zombie Villager|kill:ZOMBIE_VILLAGER
+KILL_STRAY|Kill Stray|kill:STRAY
+KILL_ZOGLIN|Kill Zoglin|kill:ZOGLIN
+KILL_SILVERFISH|Kill Silverfish|kill:SILVERFISH
+KILL_GUARDIAN|Kill Guardian|kill:GUARDIAN
+KILL_GHAST|Kill Ghast|kill:GHAST
+KILL_BAT|Kill Bat|kill:BAT
+KILL_SNOW_GOLEM|Kill Snow Golem|kill:SNOW_GOLEM
+KILL_ELDER_GUARDIAN|Kill Elder Guardian|kill:ELDER_GUARDIAN
+KILL_WARDEN|Kill Warden|kill:WARDEN
+KILL_7_UNIQUE_HOSTILE_MOBS|Kill 7 Unique Hostile Mobs|kill-unique-hostile:7
+KILL_10_UNIQUE_HOSTILE_MOBS|Kill 10 Unique Hostile Mobs|kill-unique-hostile:10
+KILL_13_UNIQUE_HOSTILE_MOBS|Kill 13 Unique Hostile Mobs|kill-unique-hostile:13
+KILL_15_UNIQUE_HOSTILE_MOBS|Kill 15 Unique Hostile Mobs|kill-unique-hostile:15
+KILL_30_UNDEAD_MOBS|Kill 30 Undead Mobs|kill-undead:30
+KILL_20_ARTHROPOD_MOBS|Kill 20 Arthropod Mobs|kill-arthropod:20
+KILL_100_MOBS|Kill 100 mobs|kill-total:100
 OBTAIN_ALL_FURNACES|Obtain every type of Furnace|item:FURNACE,BLAST_FURNACE,SMOKER
 OBTAIN_ALL_MINECARTS|Obtain every type of Minecart|item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART
 OBTAIN_ALL_MUSHROOMS|Obtain every type of Mushroom|item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS
@@ -83,6 +143,22 @@ OBTAIN_BRICK_WALL|Obtain Brick Wall|item:BRICK_WALL
 OBTAIN_MOSSY_STONE_BRICK_WALL|Obtain Mossy Stone Brick Wall|item:MOSSY_STONE_BRICK_WALL
 OBTAIN_MUD_BRICK_WALL|Obtain Mud Brick Wall|item:MUD_BRICK_WALL
 OBTAIN_RED_NETHER_BRICK_STAIRS|Obtain Red Nether Brick Stairs|item:RED_NETHER_BRICK_STAIRS
+EAT_5_UNIQUE_FOOD|Eat 5 Unique Foods|consume-unique:5
+EAT_10_UNIQUE_FOOD|Eat 10 Unique Foods|consume-unique:10
+EAT_15_UNIQUE_FOOD|Eat 15 Unique Foods|consume-unique:15
+EAT_20_UNIQUE_FOOD|Eat 20 Unique Foods|consume-unique:20
+EAT_25_UNIQUE_FOOD|Eat 25 Unique Foods|consume-unique:25
+EAT_ALL_SOUPS|Eat every type of Soup|consume-all:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW
+EAT_BEETROOT_SOUP|Eat Beetroot Soup|consume:BEETROOT_SOUP
+EAT_CHORUS_FRUIT|Eat Chorus Fruit|consume:CHORUS_FRUIT
+EAT_COOKIE|Eat Cookie|consume:COOKIE
+EAT_GLOW_BERRY|Eat Glow Berry|consume:GLOW_BERRIES
+EAT_POISONOUS_POTATO|Eat Poisonous Potato|consume:POISONOUS_POTATO
+EAT_PUMPKIN_PIE|Eat Pumpkin Pie|consume:PUMPKIN_PIE
+EAT_RABBIT_STEW|Eat Rabbit Stew|consume:RABBIT_STEW
+EAT_SUSPICIOUS_STEW|Eat Suspicious Stew|consume:SUSPICIOUS_STEW
+DRINK_HONEY_BOTTLE|Drink Honey Bottle|consume:HONEY_BOTTLE
+DRINK_WATER_BOTTLE|Drink Water Bottle|consume-potion:WATER
 ENTER_NETHER|Enter Nether|advancement:story/enter_the_nether
 ENTER_END|Enter The End|advancement:end/root
 GET_EYE_SPY_ADVANCEMENT|Find a Stronghold|advancement:story/follow_ender_eye
@@ -93,6 +169,16 @@ GET_BULLSEYE_ADVANCEMENT|Obtain "Bullseye" Advancement|advancement:adventure/bul
 GET_HIRED_HELP_ADVANCEMENT|Construct an Iron Golem|advancement:adventure/summon_iron_golem
 GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT|Obtain "This Boat Has Legs" Advancement|advancement:nether/ride_strider
 GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT|Obtain "Not Quite Nine Lives" Advancement|advancement:nether/charge_respawn_anchor
+GET_ABSORPTION_STATUS_EFFECT|Get Absorption|effect:absorption
+GET_BAD_OMEN_STATUS_EFFECT|Get Bad Omen|effect:bad_omen
+GET_GLOWING_STATUS_EFFECT|Get Glowing|effect:glowing
+GET_JUMP_BOOST_STATUS_EFFECT|Get Jump Boost|effect:jump_boost
+GET_LEVITATION_STATUS_EFFECT|Get Levitation|effect:levitation
+GET_MINING_FATIGUE_STATUS_EFFECT|Get Mining Fatigue|effect:mining_fatigue
+GET_NAUSEA_STATUS_EFFECT|Get Nausea|effect:nausea
+GET_POISON_STATUS_EFFECT|Get Poison|effect:poison
+GET_WEAKNESS_STATUS_EFFECT|Get Weakness|effect:weakness
+REMOVE_STATUS_EFFECT_USING_MILK|Remove Effect using Milk Bucket|consume:MILK_BUCKET
 GET_10_ADVANCEMENTS|Get 10 Advancements|advancement-count:10
 GET_20_ADVANCEMENTS|Get 20 Advancements|advancement-count:20
 GET_30_ADVANCEMENTS|Get 30 Advancements|advancement-count:30
@@ -101,3 +187,91 @@ REACH_EXP_LEVEL_20|Reach XP level 20|level:20
 REACH_HEIGHT_LIMIT|Reach height limit|location:height-limit
 REACH_BEDROCK|Reach Bedrock|location:bedrock
 REACH_NETHER_ROOF|Get on Nether Roof|location:nether-roof
+EMPTY_HUNGER_BAR|Empty Hunger Bar|hunger:empty
+USE_STONECUTTER|Use Stonecutter|use-block:STONECUTTER
+USE_ANVIL|Use Anvil|use-block:ANVIL
+USE_ENCHANTING_TABLE|Use Enchanting Table|use-block:ENCHANTING_TABLE
+USE_GRINDSTONE|Use Grindstone|use-block:GRINDSTONE
+USE_LOOM|Use Loom to design a Banner|use-block:LOOM
+USE_SMITHING_TABLE|Use Smithing Table|use-block:SMITHING_TABLE
+USE_CAULDRON|Use Cauldron to wash something|use-block:CAULDRON
+USE_COMPOSTER|Fill Composter and get Bone Meal|use-block:COMPOSTER
+USE_JUKEBOX|Play a Music Disc in Jukebox|use-block:JUKEBOX
+CRAFT_20_UNIQUE_ITEMS|Craft 20 Unique Items|craft-unique:20
+CRAFT_50_UNIQUE_ITEMS|Craft 50 Unique Items|craft-unique:50
+CRAFT_100_UNIQUE_ITEMS|Craft 100 Unique Items|craft-unique:100
+TAKE_200_DAMAGE|Take 200 damage|damage-taken:200
+DEAL_400_DAMAGE|Deal 400 damage|damage-dealt:400
+DIE_BY_DROWNING|Die by Drowning|death-cause:DROWNING
+DIE_BY_CACTUS|Die to Cactus|death-cause:CONTACT
+DIE_BY_MAGIC|Die by Magic|death-cause:MAGIC
+DIE_TO_VOID|Die by falling in Void|death-cause:VOID
+FREEZE_TO_DEATH|Die by Freezing|death-cause:FREEZE
+DIE_TO_POLAR_BEAR|Die to Polar Bear|death-attacker:POLAR_BEAR
+DIE_TO_PUFFERFISH|Die to Pufferfish|death-attacker:PUFFERFISH
+DIE_TO_WARDEN|Die to Warden|death-attacker:WARDEN
+WEAR_UNIQUE_COLORED_LEATHER_ARMOR|Wear Full Leather Armor, in different colors|equipment-unique-leather-colors:4
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLACK|Wear Black Leather helmet|equipment-colored:LEATHER_HELMET,BLACK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_WHITE|Wear White Leather helmet|equipment-colored:LEATHER_HELMET,WHITE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GRAY|Wear Gray Leather helmet|equipment-colored:LEATHER_HELMET,GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_GRAY|Wear Light gray Leather helmet|equipment-colored:LEATHER_HELMET,LIGHT_GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLUE|Wear Blue Leather helmet|equipment-colored:LEATHER_HELMET,BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_BLUE|Wear Light blue Leather helmet|equipment-colored:LEATHER_HELMET,LIGHT_BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_ORANGE|Wear Orange Leather helmet|equipment-colored:LEATHER_HELMET,ORANGE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_RED|Wear Red Leather helmet|equipment-colored:LEATHER_HELMET,RED
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_YELLOW|Wear Yellow Leather helmet|equipment-colored:LEATHER_HELMET,YELLOW
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_MAGENTA|Wear Magenta Leather helmet|equipment-colored:LEATHER_HELMET,MAGENTA
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PINK|Wear Pink Leather helmet|equipment-colored:LEATHER_HELMET,PINK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PURPLE|Wear Purple Leather helmet|equipment-colored:LEATHER_HELMET,PURPLE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GREEN|Wear Green Leather helmet|equipment-colored:LEATHER_HELMET,GREEN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIME|Wear Lime Leather helmet|equipment-colored:LEATHER_HELMET,LIME
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_CYAN|Wear Cyan Leather helmet|equipment-colored:LEATHER_HELMET,CYAN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BROWN|Wear Brown Leather helmet|equipment-colored:LEATHER_HELMET,BROWN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLACK|Wear Black Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,BLACK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_WHITE|Wear White Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,WHITE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GRAY|Wear Gray Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_GRAY|Wear Light gray Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,LIGHT_GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLUE|Wear Blue Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_BLUE|Wear Light blue Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,LIGHT_BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_ORANGE|Wear Orange Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,ORANGE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_RED|Wear Red Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,RED
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_YELLOW|Wear Yellow Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,YELLOW
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_MAGENTA|Wear Magenta Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,MAGENTA
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PINK|Wear Pink Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,PINK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PURPLE|Wear Purple Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,PURPLE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GREEN|Wear Green Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,GREEN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIME|Wear Lime Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,LIME
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_CYAN|Wear Cyan Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,CYAN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BROWN|Wear Brown Leather chestplate|equipment-colored:LEATHER_CHESTPLATE,BROWN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLACK|Wear Black Leather leggings|equipment-colored:LEATHER_LEGGINGS,BLACK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_WHITE|Wear White Leather leggings|equipment-colored:LEATHER_LEGGINGS,WHITE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GRAY|Wear Gray Leather leggings|equipment-colored:LEATHER_LEGGINGS,GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_GRAY|Wear Light gray Leather leggings|equipment-colored:LEATHER_LEGGINGS,LIGHT_GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLUE|Wear Blue Leather leggings|equipment-colored:LEATHER_LEGGINGS,BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_BLUE|Wear Light blue Leather leggings|equipment-colored:LEATHER_LEGGINGS,LIGHT_BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_ORANGE|Wear Orange Leather leggings|equipment-colored:LEATHER_LEGGINGS,ORANGE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_RED|Wear Red Leather leggings|equipment-colored:LEATHER_LEGGINGS,RED
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_YELLOW|Wear Yellow Leather leggings|equipment-colored:LEATHER_LEGGINGS,YELLOW
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_MAGENTA|Wear Magenta Leather leggings|equipment-colored:LEATHER_LEGGINGS,MAGENTA
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PINK|Wear Pink Leather leggings|equipment-colored:LEATHER_LEGGINGS,PINK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PURPLE|Wear Purple Leather leggings|equipment-colored:LEATHER_LEGGINGS,PURPLE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GREEN|Wear Green Leather leggings|equipment-colored:LEATHER_LEGGINGS,GREEN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIME|Wear Lime Leather leggings|equipment-colored:LEATHER_LEGGINGS,LIME
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_CYAN|Wear Cyan Leather leggings|equipment-colored:LEATHER_LEGGINGS,CYAN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BROWN|Wear Brown Leather leggings|equipment-colored:LEATHER_LEGGINGS,BROWN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLACK|Wear Black Leather boots|equipment-colored:LEATHER_BOOTS,BLACK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_WHITE|Wear White Leather boots|equipment-colored:LEATHER_BOOTS,WHITE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GRAY|Wear Gray Leather boots|equipment-colored:LEATHER_BOOTS,GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_GRAY|Wear Light gray Leather boots|equipment-colored:LEATHER_BOOTS,LIGHT_GRAY
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLUE|Wear Blue Leather boots|equipment-colored:LEATHER_BOOTS,BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_BLUE|Wear Light blue Leather boots|equipment-colored:LEATHER_BOOTS,LIGHT_BLUE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_ORANGE|Wear Orange Leather boots|equipment-colored:LEATHER_BOOTS,ORANGE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_RED|Wear Red Leather boots|equipment-colored:LEATHER_BOOTS,RED
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_YELLOW|Wear Yellow Leather boots|equipment-colored:LEATHER_BOOTS,YELLOW
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_MAGENTA|Wear Magenta Leather boots|equipment-colored:LEATHER_BOOTS,MAGENTA
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PINK|Wear Pink Leather boots|equipment-colored:LEATHER_BOOTS,PINK
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PURPLE|Wear Purple Leather boots|equipment-colored:LEATHER_BOOTS,PURPLE
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GREEN|Wear Green Leather boots|equipment-colored:LEATHER_BOOTS,GREEN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIME|Wear Lime Leather boots|equipment-colored:LEATHER_BOOTS,LIME
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_CYAN|Wear Cyan Leather boots|equipment-colored:LEATHER_BOOTS,CYAN
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BROWN|Wear Brown Leather boots|equipment-colored:LEATHER_BOOTS,BROWN

@@ -216,6 +216,7 @@ public class Game {
         setCurrentGameState(GameState.INGAME);
         closeAllPlayersMenu();
         editAmountPlayer.clear();
+        Goal.resetProgress();
         setupBlocks();
         redTeamTotalBlockAmount = redTeamBlocks.size();
         blueTeamTotalBlockAmount = blueTeamBlocks.size();
