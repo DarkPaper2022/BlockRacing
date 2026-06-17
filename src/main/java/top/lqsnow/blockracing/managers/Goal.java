@@ -143,6 +143,34 @@ public class Goal {
         return List.copyOf(goals);
     }
 
+    public static void clearDefinitions() {
+        DEFINITIONS.clear();
+        DISPLAY_NAMES.clear();
+    }
+
+    public static String registerDefinition(String id, String label, String rawRequirement) {
+        if (id == null || label == null || rawRequirement == null) {
+            return null;
+        }
+
+        String normalizedId = id.trim();
+        String normalizedLabel = label.trim();
+        Requirement requirement = parseRequirement(rawRequirement.trim());
+
+        if (normalizedId.isEmpty() || normalizedLabel.isEmpty() || requirement == null) {
+            return null;
+        }
+
+        DEFINITIONS.put(normalizedId, new Definition(normalizedId, normalizedLabel, requirement));
+        return encode(normalizedId);
+    }
+
+    public static void loadRegisteredDisplayNames() {
+        DISPLAY_NAMES.clear();
+        loadDisplayNames();
+        Bukkit.getLogger().info("[BlockRacing] Loaded Draftout goals: " + DEFINITIONS.size());
+    }
+
     public static void resetProgress() {
         KILLED_ENTITY_TYPES.clear();
         KILL_COUNTS.clear();

@@ -45,12 +45,7 @@ public class Main extends SimplePlugin {
 
         // Save resources
         saveIfAbsent(
-                "EasyBlocks.txt",
-                "MediumBlocks.txt",
-                "HardBlocks.txt",
-                "DyedBlocks.txt",
-                "EndBlocks.txt",
-                "DraftoutGoals.txt",
+                "Targets.csv",
                 "DraftoutGoals_zh_cn.yml",
                 "zh_cn.json",
                 "en_us.json"

@@ -6,11 +6,9 @@
 # 语言
 lang: zh_cn
 
-# 除去easy-block以外的四种额外方块库设置
+# 除去简单目标以外的额外目标难度设置
 medium-block: true
 hard-block: true
-dyed-block: false
-end-block: false
 
 # 一局游戏需要收集的方块总数
 block-amount: 64

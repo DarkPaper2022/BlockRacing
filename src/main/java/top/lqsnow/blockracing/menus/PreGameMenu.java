@@ -33,12 +33,6 @@ public class PreGameMenu extends Menu {
     @Position(21)
     private final Button hardBlock;
 
-    @Position(22)
-    private final Button dyedBlock;
-
-    @Position(23)
-    private final Button endBlock;
-
     @Position(24)
     private final Button changeBlockAmount;
 
@@ -120,42 +114,6 @@ public class PreGameMenu extends Menu {
                         Message.MENU_HARD_BLOCKS.getString() + Message.MENU_ENABLED.getString()).make();
                 else return ItemCreator.of(CompMaterial.RED_CONCRETE,
                         Message.MENU_HARD_BLOCKS.getString() + Message.MENU_DISABLED.getString()).make();
-            }
-        };
-
-        // Toggle dyed block
-        this.dyedBlock = new Button() {
-            @Override
-            public void onClickedInMenu(Player player, Menu menu, ClickType click) {
-                Setting.toggleDyedBlock();
-                updateMenu(PreGameMenu.this);
-                updateScoreboard();
-            }
-
-            @Override
-            public ItemStack getItem() {
-                if (Setting.isEnableDyedBlock()) return ItemCreator.of(CompMaterial.GREEN_CONCRETE,
-                        Message.MENU_DYED_BLOCKS.getString() + Message.MENU_ENABLED.getString()).make();
-                else return ItemCreator.of(CompMaterial.RED_CONCRETE,
-                        Message.MENU_DYED_BLOCKS.getString() + Message.MENU_DISABLED.getString()).make();
-            }
-        };
-
-        // Toggle end block
-        this.endBlock = new Button() {
-            @Override
-            public void onClickedInMenu(Player player, Menu menu, ClickType click) {
-                Setting.toggleEndBlock();
-                updateMenu(PreGameMenu.this);
-                updateScoreboard();
-            }
-
-            @Override
-            public ItemStack getItem() {
-                if (Setting.isEnableEndBlock()) return ItemCreator.of(CompMaterial.GREEN_CONCRETE,
-                        Message.MENU_END_BLOCKS.getString() + Message.MENU_ENABLED.getString()).make();
-                else return ItemCreator.of(CompMaterial.RED_CONCRETE,
-                        Message.MENU_END_BLOCKS.getString() + Message.MENU_DISABLED.getString()).make();
             }
         };
 

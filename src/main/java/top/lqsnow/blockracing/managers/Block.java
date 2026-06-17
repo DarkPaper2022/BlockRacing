@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -35,6 +36,7 @@ public class Block {
     private static final String FAMILY_TAG_PREFIX = "family:";
     private static final String CATEGORY_TAG_PREFIX = "category:";
     private static final String GROUP_TAG_PREFIX = "group:";
+    private static final String TARGETS_FILE_NAME = "Targets.csv";
     private static final List<String> WOOD_FAMILIES = List.of(
             "DARK_OAK",
             "PALE_OAK",
@@ -52,7 +54,7 @@ public class Block {
     private static final Map<String, Set<String>> WOOD_CATEGORY_GROUPS = createWoodCategoryGroups();
     private static final Map<String, Set<String>> RELATED_BLOCK_TAG_CACHE = new HashMap<>();
 
-    public static List<String> easyBlocks, mediumBlocks, hardBlocks, dyedBlocks, endBlocks, draftoutGoals, blocks;
+    public static List<String> easyBlocks, mediumBlocks, hardBlocks, blocks;
     public static List<String> allBlocks = new ArrayList<>();
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
@@ -61,12 +63,7 @@ public class Block {
     public static List<String> blueTeamRemainingBlocks = new ArrayList<>();
 
     public Block() {
-        easyBlocks = List.of(readFile("EasyBlocks.txt"));
-        mediumBlocks = List.of(readFile("MediumBlocks.txt"));
-        hardBlocks = List.of(readFile("HardBlocks.txt"));
-        dyedBlocks = List.of(readFile("DyedBlocks.txt"));
-        endBlocks = List.of(readFile("EndBlocks.txt"));
-        draftoutGoals = Goal.load(readFile("DraftoutGoals.txt"));
+        loadTargets();
         addUpBlocks();
     }
 
@@ -75,11 +72,8 @@ public class Block {
         allBlocks.addAll(List.copyOf(easyBlocks));
         if (Setting.isEnableMediumBlock()) {
             allBlocks.addAll(List.copyOf(mediumBlocks));
-            allBlocks.addAll(List.copyOf(draftoutGoals));
         }
         if (Setting.isEnableHardBlock()) allBlocks.addAll(List.copyOf(hardBlocks));
-        if (Setting.isEnableDyedBlock()) allBlocks.addAll(List.copyOf(dyedBlocks));
-        if (Setting.isEnableEndBlock()) allBlocks.addAll(List.copyOf(endBlocks));
         blocks = List.copyOf(allBlocks);
         maxBlockAmount = blocks.size();
     }
@@ -111,10 +105,7 @@ public class Block {
 
         List<String> easyTemp = new ArrayList<>(easyBlocks);
         List<String> mediumTemp = new ArrayList<>(mediumBlocks);
-        mediumTemp.addAll(draftoutGoals);
         List<String> hardTemp = new ArrayList<>(hardBlocks);
-        List<String> dyedTemp = new ArrayList<>(dyedBlocks);
-        List<String> endTemp = new ArrayList<>(endBlocks);
         List<String> targetBlocks = new ArrayList<>();
         Set<String> suppressedRelatedTags = new HashSet<>();
 
@@ -123,8 +114,6 @@ public class Block {
             int easyWeight = 0;
             int mediumWeight = 0;
             int hardWeight = 0;
-            int dyedWeight = 0;
-            int endWeight = 0;
 
             if (easyTemp.size() != 0) easyWeight = calculateEasyBlocksWeight((float) i / blockAmount);
 
@@ -134,17 +123,11 @@ public class Block {
             if (hardTemp.size() != 0)
                 hardWeight = Setting.isEnableHardBlock() ? calculateHardBlocksWeight((float) i / blockAmount) : 0;
 
-            if (dyedTemp.size() != 0)
-                dyedWeight = Setting.isEnableDyedBlock() ? calculateDyedBlocksWeight((float) i / blockAmount) : 0;
-
-            if (endTemp.size() != 0)
-                endWeight = Setting.isEnableEndBlock() ? calculateEndBlocksWeight((float) i / blockAmount) : 0;
-
             // Choose difficulty based on weights
-            String difficulty = chooseDifficulty(easyWeight, mediumWeight, hardWeight, dyedWeight, endWeight);
+            String difficulty = chooseDifficulty(easyWeight, mediumWeight, hardWeight);
 
             // Select a block from the corresponding difficulty list
-            String selectedBlock = selectBlock(difficulty, easyTemp, mediumTemp, hardTemp, dyedTemp, endTemp, suppressedRelatedTags);
+            String selectedBlock = selectBlock(difficulty, easyTemp, mediumTemp, hardTemp, suppressedRelatedTags);
 
             // Add the selected block to targetBlocks
             targetBlocks.add(selectedBlock);
@@ -155,8 +138,6 @@ public class Block {
                 case "easy" -> easyTemp.remove(selectedBlock);
                 case "medium" -> mediumTemp.remove(selectedBlock);
                 case "hard" -> hardTemp.remove(selectedBlock);
-                case "dyed" -> dyedTemp.remove(selectedBlock);
-                case "end" -> endTemp.remove(selectedBlock);
                 default -> throw new IllegalArgumentException("Invalid difficulty");
             }
         }
@@ -165,8 +146,8 @@ public class Block {
     }
 
     // Method to choose difficulty based on weights
-    private static String chooseDifficulty(int easyWeight, int mediumWeight, int hardWeight, int dyedWeight, int endWeight) {
-        int totalWeight = easyWeight + mediumWeight + hardWeight + dyedWeight + endWeight;
+    private static String chooseDifficulty(int easyWeight, int mediumWeight, int hardWeight) {
+        int totalWeight = easyWeight + mediumWeight + hardWeight;
         if (totalWeight <= 0) {
             throw new IllegalStateException("No block pools are available for selection.");
         }
@@ -176,25 +157,18 @@ public class Block {
             return "easy";
         } else if (randomNumber < easyWeight + mediumWeight) {
             return "medium";
-        } else if (randomNumber < easyWeight + mediumWeight + hardWeight) {
-            return "hard";
-        } else if (randomNumber < easyWeight + mediumWeight + hardWeight + dyedWeight) {
-            return "dyed";
         } else {
-            return "end";
+            return "hard";
         }
     }
 
     // Method to select a block from the corresponding difficulty list
     private static String selectBlock(String difficulty, List<String> easyTemp, List<String> mediumTemp,
-                                      List<String> hardTemp, List<String> dyedTemp, List<String> endTemp,
-                                      Set<String> suppressedRelatedTags) {
+                                      List<String> hardTemp, Set<String> suppressedRelatedTags) {
         return switch (difficulty) {
             case "easy" -> selectWeightedBlockFromList(easyTemp, suppressedRelatedTags);
             case "medium" -> selectWeightedBlockFromList(mediumTemp, suppressedRelatedTags);
             case "hard" -> selectWeightedBlockFromList(hardTemp, suppressedRelatedTags);
-            case "dyed" -> selectWeightedBlockFromList(dyedTemp, suppressedRelatedTags);
-            case "end" -> selectWeightedBlockFromList(endTemp, suppressedRelatedTags);
             default -> throw new IllegalArgumentException("Invalid difficulty");
         };
     }
@@ -328,26 +302,6 @@ public class Block {
         }
     }
 
-    // Calculate weight for dyed blocks
-    // Weight remains constant at 10 regardless of progress
-    public static int calculateDyedBlocksWeight(float progress) {
-        return 10;
-    }
-
-    // Calculate weight for end blocks
-    // Weight is 0 for progress from 0 to 0.8 (Unless only the end block is left),
-    // then increases to 60 as progress goes from 0.8 to 1
-    public static int calculateEndBlocksWeight(float progress) {
-        float prop = (float) endBlocks.size() / blocks.size();
-        if (progress <= 1 - prop) {
-            if (progress <= 0.8) return 0;
-            if (progress > 0.8) return (int) (60 * (progress - 0.8) / 0.2);
-        } else {
-            return 60;
-        }
-        return 0;
-    }
-
     // Check if there are any problems with the blocks imported from the file
     public static boolean checkBlock() {
         boolean flag = true;
@@ -373,29 +327,110 @@ public class Block {
     }
 
     public static void reloadBlock() {
-        easyBlocks = List.of(readFile("EasyBlocks.txt"));
-        mediumBlocks = List.of(readFile("MediumBlocks.txt"));
-        hardBlocks = List.of(readFile("HardBlocks.txt"));
-        dyedBlocks = List.of(readFile("DyedBlocks.txt"));
-        endBlocks = List.of(readFile("EndBlocks.txt"));
-        draftoutGoals = Goal.load(readFile("DraftoutGoals.txt"));
+        loadTargets();
         addUpBlocks();
     }
 
-    public static String[] readFile(String fileName) {
+    private static void loadTargets() {
+        List<String> loadedEasyBlocks = new ArrayList<>();
+        List<String> loadedMediumBlocks = new ArrayList<>();
+        List<String> loadedHardBlocks = new ArrayList<>();
+
+        Goal.clearDefinitions();
+
+        for (List<String> row : readCsvFile(TARGETS_FILE_NAME)) {
+            if (row.size() < 3) {
+                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                continue;
+            }
+
+            String id = row.get(0).trim();
+            String type = row.get(1).trim().toLowerCase(Locale.ROOT);
+            String difficulty = row.get(2).trim().toLowerCase(Locale.ROOT);
+            String displayName = row.size() >= 4 ? row.get(3).trim() : "";
+            String requirement = row.size() >= 5 ? row.get(4).trim() : "";
+
+            if (id.isEmpty() || type.isEmpty() || difficulty.isEmpty()) {
+                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                continue;
+            }
+
+            String target = switch (type) {
+                case "block" -> id;
+                case "goal" -> Goal.registerDefinition(id, displayName, requirement);
+                default -> null;
+            };
+
+            if (target == null) {
+                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                continue;
+            }
+
+            switch (difficulty) {
+                case "easy" -> loadedEasyBlocks.add(target);
+                case "normal", "medium" -> loadedMediumBlocks.add(target);
+                case "hard" -> loadedHardBlocks.add(target);
+                default -> Bukkit.getLogger().warning("[BlockRacing] Invalid target difficulty: " + difficulty + " in " + row);
+            }
+        }
+
+        easyBlocks = List.copyOf(loadedEasyBlocks);
+        mediumBlocks = List.copyOf(loadedMediumBlocks);
+        hardBlocks = List.copyOf(loadedHardBlocks);
+        Goal.loadRegisteredDisplayNames();
+        Bukkit.getLogger().info("[BlockRacing] Loaded targets: easy=" + easyBlocks.size()
+                + ", normal=" + mediumBlocks.size() + ", hard=" + hardBlocks.size());
+    }
+
+    private static List<List<String>> readCsvFile(String fileName) {
+        List<List<String>> rows = new ArrayList<>();
         try {
             File file = new File(Main.getInstance().getDataFolder(), fileName);
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            List<String> lines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
             String line;
+            boolean header = true;
             while ((line = reader.readLine()) != null) {
-                if (!line.equals("")) lines.add(line);
+                if (line.isBlank() || line.trim().startsWith("#")) {
+                    continue;
+                }
+                if (header) {
+                    header = false;
+                    if (line.toLowerCase(Locale.ROOT).startsWith("id,")) {
+                        continue;
+                    }
+                }
+                rows.add(parseCsvLine(line));
             }
             reader.close();
-            return lines.toArray(new String[0]);
         } catch (IOException e) {
-            Main.getInstance().getLogger().log(Level.SEVERE, "[BlockRacing] Error reading blocks file!", e);
+            Main.getInstance().getLogger().log(Level.SEVERE, "[BlockRacing] Error reading targets file!", e);
         }
-        return null;
+        return rows;
+    }
+
+    private static List<String> parseCsvLine(String line) {
+        List<String> values = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean quoted = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '"') {
+                if (quoted && i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                    current.append('"');
+                    i++;
+                } else {
+                    quoted = !quoted;
+                }
+            } else if (c == ',' && !quoted) {
+                values.add(current.toString());
+                current.setLength(0);
+            } else {
+                current.append(c);
+            }
+        }
+
+        values.add(current.toString());
+        return values;
     }
 }

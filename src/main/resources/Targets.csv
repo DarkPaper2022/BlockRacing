@@ -1,0 +1,975 @@
+id,type,difficulty,display_name,requirement
+ACACIA_BUTTON,block,easy,,
+ACACIA_DOOR,block,easy,,
+ACACIA_FENCE,block,easy,,
+ACACIA_FENCE_GATE,block,easy,,
+ACACIA_HANGING_SIGN,block,easy,,
+ACACIA_LEAVES,block,easy,,
+ACACIA_LOG,block,easy,,
+ACACIA_PLANKS,block,easy,,
+ACACIA_PRESSURE_PLATE,block,easy,,
+ACACIA_SAPLING,block,easy,,
+ACACIA_SIGN,block,easy,,
+ACACIA_SLAB,block,easy,,
+ACACIA_STAIRS,block,easy,,
+ACACIA_TRAPDOOR,block,easy,,
+ACACIA_WOOD,block,easy,,
+ACTIVATOR_RAIL,block,easy,,
+ALLIUM,block,easy,,
+ANDESITE,block,easy,,
+ANDESITE_SLAB,block,easy,,
+ANDESITE_STAIRS,block,easy,,
+ANDESITE_WALL,block,easy,,
+AZALEA,block,easy,,
+AZALEA_LEAVES,block,easy,,
+AZURE_BLUET,block,easy,,
+BAMBOO_BLOCK,block,easy,,
+BAMBOO_BUTTON,block,easy,,
+BAMBOO_DOOR,block,easy,,
+BAMBOO_FENCE,block,easy,,
+BAMBOO_FENCE_GATE,block,easy,,
+BAMBOO_HANGING_SIGN,block,easy,,
+BAMBOO_MOSAIC,block,easy,,
+BAMBOO_MOSAIC_SLAB,block,easy,,
+BAMBOO_MOSAIC_STAIRS,block,easy,,
+BAMBOO_PLANKS,block,easy,,
+BAMBOO_PRESSURE_PLATE,block,easy,,
+BAMBOO_SIGN,block,easy,,
+BAMBOO_SLAB,block,easy,,
+BAMBOO_STAIRS,block,easy,,
+BAMBOO_TRAPDOOR,block,easy,,
+BARREL,block,easy,,
+BASALT,block,easy,,
+BELL,block,easy,,
+BIG_DRIPLEAF,block,easy,,
+BIRCH_BUTTON,block,easy,,
+BIRCH_DOOR,block,easy,,
+BIRCH_FENCE,block,easy,,
+BIRCH_FENCE_GATE,block,easy,,
+BIRCH_LEAVES,block,easy,,
+BIRCH_LOG,block,easy,,
+BIRCH_PLANKS,block,easy,,
+BIRCH_PRESSURE_PLATE,block,easy,,
+BIRCH_SAPLING,block,easy,,
+BIRCH_SIGN,block,easy,,
+BIRCH_SLAB,block,easy,,
+BIRCH_STAIRS,block,easy,,
+BIRCH_TRAPDOOR,block,easy,,
+BIRCH_WOOD,block,easy,,
+BLAST_FURNACE,block,easy,,
+BONE_BLOCK,block,easy,,
+BREWING_STAND,block,easy,,
+BRICKS,block,easy,,
+BLUE_ORCHID,block,easy,,
+CACTUS,block,easy,,
+CAKE,block,easy,,
+CALCITE,block,easy,,
+CAMPFIRE,block,easy,,
+CARTOGRAPHY_TABLE,block,easy,,
+CARVED_PUMPKIN,block,easy,,
+CAULDRON,block,easy,,
+IRON_CHAIN,block,easy,,
+CHERRY_BUTTON,block,easy,,
+CHERRY_DOOR,block,easy,,
+CHERRY_FENCE,block,easy,,
+CHERRY_FENCE_GATE,block,easy,,
+CHERRY_HANGING_SIGN,block,easy,,
+CHERRY_LEAVES,block,easy,,
+CHERRY_LOG,block,easy,,
+CHERRY_PLANKS,block,easy,,
+CHERRY_PRESSURE_PLATE,block,easy,,
+CHERRY_SAPLING,block,easy,,
+CHERRY_SIGN,block,easy,,
+CHERRY_SLAB,block,easy,,
+CHERRY_STAIRS,block,easy,,
+CHERRY_TRAPDOOR,block,easy,,
+CHERRY_WOOD,block,easy,,
+CHEST,block,easy,,
+COARSE_DIRT,block,easy,,
+COBBLED_DEEPSLATE,block,easy,,
+COBBLED_DEEPSLATE_SLAB,block,easy,,
+COBBLED_DEEPSLATE_STAIRS,block,easy,,
+COBBLED_DEEPSLATE_WALL,block,easy,,
+COBBLESTONE,block,easy,,
+COBBLESTONE_SLAB,block,easy,,
+COBBLESTONE_STAIRS,block,easy,,
+COBBLESTONE_WALL,block,easy,,
+COBWEB,block,easy,,
+COCOA_BEANS,block,easy,,
+COMPOSTER,block,easy,,
+CORNFLOWER,block,easy,,
+CRAFTING_TABLE,block,easy,,
+CRIMSON_HANGING_SIGN,block,easy,,
+DANDELION,block,easy,,
+DARK_OAK_BUTTON,block,easy,,
+DARK_OAK_DOOR,block,easy,,
+DARK_OAK_FENCE,block,easy,,
+DARK_OAK_FENCE_GATE,block,easy,,
+DARK_OAK_HANGING_SIGN,block,easy,,
+DARK_OAK_LEAVES,block,easy,,
+DARK_OAK_LOG,block,easy,,
+DARK_OAK_PLANKS,block,easy,,
+DARK_OAK_PRESSURE_PLATE,block,easy,,
+DARK_OAK_SAPLING,block,easy,,
+DARK_OAK_SIGN,block,easy,,
+DARK_OAK_SLAB,block,easy,,
+DARK_OAK_STAIRS,block,easy,,
+DARK_OAK_TRAPDOOR,block,easy,,
+DARK_OAK_WOOD,block,easy,,
+DEAD_BUSH,block,easy,,
+DEEPSLATE,block,easy,,
+DEEPSLATE_BRICKS,block,easy,,
+DEEPSLATE_BRICK_SLAB,block,easy,,
+DEEPSLATE_BRICK_STAIRS,block,easy,,
+DEEPSLATE_BRICK_WALL,block,easy,,
+DETECTOR_RAIL,block,easy,,
+DIORITE,block,easy,,
+DIORITE_SLAB,block,easy,,
+DIORITE_STAIRS,block,easy,,
+DIORITE_WALL,block,easy,,
+DIRT,block,easy,,
+DISPENSER,block,easy,,
+DRIED_KELP_BLOCK,block,easy,,
+DROPPER,block,easy,,
+FLETCHING_TABLE,block,easy,,
+FLOWER_POT,block,easy,,
+FURNACE,block,easy,,
+GLASS,block,easy,,
+GLASS_PANE,block,easy,,
+GRANITE,block,easy,,
+GRANITE_SLAB,block,easy,,
+GRANITE_STAIRS,block,easy,,
+GRANITE_WALL,block,easy,,
+GRAVEL,block,easy,,
+GRINDSTONE,block,easy,,
+HEAVY_WEIGHTED_PRESSURE_PLATE,block,easy,,
+HOPPER,block,easy,,
+IRON_BARS,block,easy,,
+IRON_DOOR,block,easy,,
+IRON_TRAPDOOR,block,easy,,
+JUKEBOX,block,easy,,
+JUNGLE_BUTTON,block,easy,,
+JUNGLE_DOOR,block,easy,,
+JUNGLE_FENCE,block,easy,,
+JUNGLE_FENCE_GATE,block,easy,,
+JUNGLE_HANGING_SIGN,block,easy,,
+JUNGLE_LEAVES,block,easy,,
+JUNGLE_LOG,block,easy,,
+JUNGLE_PLANKS,block,easy,,
+JUNGLE_PRESSURE_PLATE,block,easy,,
+JUNGLE_SAPLING,block,easy,,
+JUNGLE_SIGN,block,easy,,
+JUNGLE_SLAB,block,easy,,
+JUNGLE_STAIRS,block,easy,,
+JUNGLE_TRAPDOOR,block,easy,,
+JUNGLE_WOOD,block,easy,,
+LADDER,block,easy,,
+LANTERN,block,easy,,
+LECTERN,block,easy,,
+LEVER,block,easy,,
+LIGHTNING_ROD,block,easy,,
+LIGHT_WEIGHTED_PRESSURE_PLATE,block,easy,,
+LILAC,block,easy,,
+LILY_OF_THE_VALLEY,block,easy,,
+LILY_PAD,block,easy,,
+LOOM,block,easy,,
+MANGROVE_HANGING_SIGN,block,easy,,
+MELON,block,easy,,
+MUD,block,easy,,
+NETHERRACK,block,easy,,
+NOTE_BLOCK,block,easy,,
+OAK_BUTTON,block,easy,,
+OAK_DOOR,block,easy,,
+OAK_FENCE,block,easy,,
+OAK_FENCE_GATE,block,easy,,
+OAK_HANGING_SIGN,block,easy,,
+OAK_LEAVES,block,easy,,
+OAK_LOG,block,easy,,
+OAK_PLANKS,block,easy,,
+OAK_PRESSURE_PLATE,block,easy,,
+OAK_SAPLING,block,easy,,
+OAK_SIGN,block,easy,,
+OAK_SLAB,block,easy,,
+OAK_STAIRS,block,easy,,
+OAK_TRAPDOOR,block,easy,,
+OAK_WOOD,block,easy,,
+OBSIDIAN,block,easy,,
+OXEYE_DAISY,block,easy,,
+PACKED_MUD,block,easy,,
+PEONY,block,easy,,
+PINK_PETALS,block,easy,,
+PISTON,block,easy,,
+POINTED_DRIPSTONE,block,easy,,
+POLISHED_ANDESITE,block,easy,,
+POLISHED_DIORITE,block,easy,,
+POLISHED_GRANITE,block,easy,,
+POPPY,block,easy,,
+POWERED_RAIL,block,easy,,
+PUMPKIN,block,easy,,
+RAIL,block,easy,,
+REDSTONE_LAMP,block,easy,,
+REDSTONE_TORCH,block,easy,,
+RED_MUSHROOM,block,easy,,
+BROWN_MUSHROOM,block,easy,,
+RED_SAND,block,easy,,
+RED_SANDSTONE,block,easy,,
+RED_TULIP,block,easy,,
+ORANGE_TULIP,block,easy,,
+WHITE_TULIP,block,easy,,
+ROSE_BUSH,block,easy,,
+SAND,block,easy,,
+SANDSTONE,block,easy,,
+SCAFFOLDING,block,easy,,
+SEA_PICKLE,block,easy,,
+SHROOMLIGHT,block,easy,,
+SMITHING_TABLE,block,easy,,
+SMOKER,block,easy,,
+SMOOTH_STONE,block,easy,,
+SNOW_BLOCK,block,easy,,
+SPORE_BLOSSOM,block,easy,,
+SPRUCE_BUTTON,block,easy,,
+SPRUCE_DOOR,block,easy,,
+SPRUCE_FENCE,block,easy,,
+SPRUCE_FENCE_GATE,block,easy,,
+SPRUCE_HANGING_SIGN,block,easy,,
+SPRUCE_LEAVES,block,easy,,
+SPRUCE_LOG,block,easy,,
+SPRUCE_PLANKS,block,easy,,
+SPRUCE_PRESSURE_PLATE,block,easy,,
+SPRUCE_SAPLING,block,easy,,
+SPRUCE_SIGN,block,easy,,
+SPRUCE_SLAB,block,easy,,
+SPRUCE_STAIRS,block,easy,,
+SPRUCE_TRAPDOOR,block,easy,,
+SPRUCE_WOOD,block,easy,,
+STICKY_PISTON,block,easy,,
+STONE,block,easy,,
+STONECUTTER,block,easy,,
+STONE_BRICKS,block,easy,,
+STONE_BUTTON,block,easy,,
+STONE_PRESSURE_PLATE,block,easy,,
+STONE_SLAB,block,easy,,
+STONE_STAIRS,block,easy,,
+STRIPPED_ACACIA_WOOD,block,easy,,
+STRIPPED_BAMBOO_BLOCK,block,easy,,
+STRIPPED_BIRCH_LOG,block,easy,,
+STRIPPED_BIRCH_WOOD,block,easy,,
+STRIPPED_CRIMSON_HYPHAE,block,easy,,
+STRIPPED_CRIMSON_STEM,block,easy,,
+STRIPPED_DARK_OAK_LOG,block,easy,,
+STRIPPED_DARK_OAK_WOOD,block,easy,,
+STRIPPED_JUNGLE_LOG,block,easy,,
+STRIPPED_JUNGLE_WOOD,block,easy,,
+STRIPPED_MANGROVE_LOG,block,easy,,
+STRIPPED_MANGROVE_WOOD,block,easy,,
+STRIPPED_OAK_LOG,block,easy,,
+STRIPPED_OAK_WOOD,block,easy,,
+STRIPPED_SPRUCE_LOG,block,easy,,
+STRIPPED_SPRUCE_WOOD,block,easy,,
+STRIPPED_WARPED_HYPHAE,block,easy,,
+STRIPPED_WARPED_STEM,block,easy,,
+SUNFLOWER,block,easy,,
+TERRACOTTA,block,easy,,
+TNT,block,easy,,
+TORCH,block,easy,,
+TRAPPED_CHEST,block,easy,,
+TRIPWIRE_HOOK,block,easy,,
+TUFF,block,easy,,
+WARPED_HANGING_SIGN,block,easy,,
+COPPER_BLOCK,block,easy,,
+CUT_COPPER,block,easy,,
+CUT_COPPER_SLAB,block,easy,,
+CUT_COPPER_STAIRS,block,easy,,
+CHISELED_COPPER,block,easy,,
+COPPER_BULB,block,easy,,
+COPPER_DOOR,block,easy,,
+COPPER_GRATE,block,easy,,
+COPPER_TRAPDOOR,block,easy,,
+LODESTONE,block,easy,,
+WILDFLOWERS,block,easy,,
+LEAF_LITTER,block,easy,,
+BUSH,block,easy,,
+FIREFLY_BUSH,block,easy,,
+COPPER_CHEST,block,easy,,
+COPPER_BARS,block,easy,,
+COPPER_CHAIN,block,easy,,
+COPPER_LANTERN,block,easy,,
+COPPER_TORCH,block,easy,,
+COPPER_GOLEM_STATUE,block,easy,,
+OAK_SHELF,block,easy,,
+SPRUCE_SHELF,block,easy,,
+BIRCH_SHELF,block,easy,,
+JUNGLE_SHELF,block,easy,,
+ACACIA_SHELF,block,easy,,
+DARK_OAK_SHELF,block,easy,,
+CHERRY_SHELF,block,easy,,
+BAMBOO_SHELF,block,easy,,
+POLISHED_DEEPSLATE,block,easy,,
+POLISHED_DEEPSLATE_SLAB,block,easy,,
+POLISHED_DEEPSLATE_STAIRS,block,easy,,
+POLISHED_DEEPSLATE_WALL,block,easy,,
+CRACKED_DEEPSLATE_BRICKS,block,easy,,
+CRACKED_DEEPSLATE_TILES,block,easy,,
+CRACKED_NETHER_BRICKS,block,easy,,
+CRACKED_STONE_BRICKS,block,easy,,
+DEEPSLATE_TILE_SLAB,block,easy,,
+DEEPSLATE_TILE_STAIRS,block,easy,,
+DEEPSLATE_TILE_WALL,block,easy,,
+DEEPSLATE_TILES,block,easy,,
+CHISELED_DEEPSLATE,block,easy,,
+CHISELED_SANDSTONE,block,easy,,
+KELP,block,easy,,
+GLOW_LICHEN,block,easy,,
+GLOW_INK_SAC,block,easy,,
+TARGET,block,easy,,
+HAY_BLOCK,block,easy,,
+RAW_COPPER_BLOCK,block,easy,,
+RAW_GOLD_BLOCK,block,easy,,
+GOLD_BLOCK,block,easy,,
+RAW_IRON_BLOCK,block,easy,,
+IRON_BLOCK,block,easy,,
+AMETHYST_BLOCK,block,easy,,
+EMERALD_BLOCK,block,easy,,
+LAPIS_BLOCK,block,easy,,
+REDSTONE_BLOCK,block,easy,,
+SUSPICIOUS_STEW,block,easy,,
+INK_SAC,block,easy,,
+CARROT_ON_A_STICK,block,easy,,
+WARPED_FUNGUS_ON_A_STICK,block,easy,,
+GLISTERING_MELON_SLICE,block,easy,,
+GOLDEN_APPLE,block,easy,,
+FERMENTED_SPIDER_EYE,block,easy,,
+MAGMA_CREAM,block,easy,,
+EGG,block,easy,,
+WRITABLE_BOOK,block,easy,,
+FEATHER,block,easy,,
+ANVIL,block,normal,,
+ARMADILLO_SCUTE,block,normal,,
+BEEHIVE,block,normal,,
+BEE_NEST,block,normal,,
+BLACKSTONE,block,normal,,
+BLACKSTONE_SLAB,block,normal,,
+BLACKSTONE_STAIRS,block,normal,,
+BLACKSTONE_WALL,block,normal,,
+BLUE_ICE,block,normal,,
+BOOKSHELF,block,normal,,
+CHIPPED_ANVIL,block,normal,,
+CHISELED_BOOKSHELF,block,normal,,
+CHISELED_NETHER_BRICKS,block,normal,,
+CHISELED_POLISHED_BLACKSTONE,block,normal,,
+CHISELED_QUARTZ_BLOCK,block,normal,,
+CRACKED_POLISHED_BLACKSTONE_BRICKS,block,normal,,
+CRIMSON_BUTTON,block,normal,,
+CRIMSON_DOOR,block,normal,,
+CRIMSON_FENCE,block,normal,,
+CRIMSON_FENCE_GATE,block,normal,,
+CRIMSON_FUNGUS,block,normal,,
+CRIMSON_HYPHAE,block,normal,,
+CRIMSON_NYLIUM,block,normal,,
+CRIMSON_PLANKS,block,normal,,
+CRIMSON_PRESSURE_PLATE,block,normal,,
+CRIMSON_ROOTS,block,normal,,
+CRIMSON_SIGN,block,normal,,
+CRIMSON_SLAB,block,normal,,
+CRIMSON_STAIRS,block,normal,,
+CRIMSON_STEM,block,normal,,
+CRIMSON_TRAPDOOR,block,normal,,
+CRYING_OBSIDIAN,block,normal,,
+DAMAGED_ANVIL,block,normal,,
+DARK_PRISMARINE,block,normal,,
+DARK_PRISMARINE_SLAB,block,normal,,
+DARK_PRISMARINE_STAIRS,block,normal,,
+DAYLIGHT_DETECTOR,block,normal,,
+DRIPSTONE_BLOCK,block,normal,,
+ENCHANTING_TABLE,block,normal,,
+ENDER_CHEST,block,normal,,
+ENDER_EYE,block,normal,,
+FERN,block,normal,,
+FLOWERING_AZALEA,block,normal,,
+FLOWERING_AZALEA_LEAVES,block,normal,,
+GHAST_TEAR,block,normal,,
+GILDED_BLACKSTONE,block,normal,,
+GLOWSTONE,block,normal,,
+HONEYCOMB_BLOCK,block,normal,,
+HONEY_BLOCK,block,normal,,
+ICE,block,normal,,
+LARGE_AMETHYST_BUD,block,normal,,
+MAGMA_BLOCK,block,normal,,
+MANGROVE_BUTTON,block,normal,,
+MANGROVE_DOOR,block,normal,,
+MANGROVE_FENCE,block,normal,,
+MANGROVE_FENCE_GATE,block,normal,,
+MANGROVE_LEAVES,block,normal,,
+MANGROVE_LOG,block,normal,,
+MANGROVE_PLANKS,block,normal,,
+MANGROVE_PRESSURE_PLATE,block,normal,,
+MANGROVE_PROPAGULE,block,normal,,
+MANGROVE_ROOTS,block,normal,,
+MANGROVE_SIGN,block,normal,,
+MANGROVE_SLAB,block,normal,,
+MANGROVE_STAIRS,block,normal,,
+MANGROVE_TRAPDOOR,block,normal,,
+MANGROVE_WOOD,block,normal,,
+MEDIUM_AMETHYST_BUD,block,normal,,
+MOSSY_COBBLESTONE,block,normal,,
+MOSSY_COBBLESTONE_SLAB,block,normal,,
+MOSSY_COBBLESTONE_STAIRS,block,normal,,
+MOSSY_COBBLESTONE_WALL,block,normal,,
+MOSSY_STONE_BRICKS,block,normal,,
+MOSSY_STONE_BRICK_SLAB,block,normal,,
+MOSSY_STONE_BRICK_STAIRS,block,normal,,
+MOSSY_STONE_BRICK_WALL,block,normal,,
+NETHER_BRICKS,block,normal,,
+NETHER_BRICK_FENCE,block,normal,,
+NETHER_BRICK_SLAB,block,normal,,
+NETHER_BRICK_STAIRS,block,normal,,
+NETHER_BRICK_WALL,block,normal,,
+NETHER_SPROUTS,block,normal,,
+NETHER_WART,block,normal,,
+NETHER_WART_BLOCK,block,normal,,
+OBSERVER,block,normal,,
+PACKED_ICE,block,normal,,
+POLISHED_BLACKSTONE,block,normal,,
+POLISHED_BLACKSTONE_BRICKS,block,normal,,
+POLISHED_BLACKSTONE_BRICK_SLAB,block,normal,,
+POLISHED_BLACKSTONE_BRICK_STAIRS,block,normal,,
+POLISHED_BLACKSTONE_BRICK_WALL,block,normal,,
+POLISHED_BLACKSTONE_BUTTON,block,normal,,
+POLISHED_BLACKSTONE_PRESSURE_PLATE,block,normal,,
+POLISHED_BLACKSTONE_SLAB,block,normal,,
+POLISHED_BLACKSTONE_STAIRS,block,normal,,
+POLISHED_BLACKSTONE_WALL,block,normal,,
+PRISMARINE,block,normal,,
+PRISMARINE_BRICKS,block,normal,,
+PRISMARINE_BRICK_SLAB,block,normal,,
+PRISMARINE_BRICK_STAIRS,block,normal,,
+PRISMARINE_SLAB,block,normal,,
+PRISMARINE_STAIRS,block,normal,,
+PRISMARINE_WALL,block,normal,,
+QUARTZ_BRICKS,block,normal,,
+QUARTZ_PILLAR,block,normal,,
+QUARTZ_SLAB,block,normal,,
+QUARTZ_STAIRS,block,normal,,
+RED_NETHER_BRICKS,block,normal,,
+RED_NETHER_BRICK_SLAB,block,normal,,
+RED_NETHER_BRICK_STAIRS,block,normal,,
+RED_NETHER_BRICK_WALL,block,normal,,
+RESPAWN_ANCHOR,block,normal,,
+SEA_LANTERN,block,normal,,
+SMALL_DRIPLEAF,block,normal,,
+SMOOTH_QUARTZ_SLAB,block,normal,,
+SMOOTH_QUARTZ_STAIRS,block,normal,,
+SOUL_CAMPFIRE,block,normal,,
+SOUL_LANTERN,block,normal,,
+SOUL_SAND,block,normal,,
+SOUL_SOIL,block,normal,,
+SOUL_TORCH,block,normal,,
+STRIPPED_CHERRY_LOG,block,normal,,
+STRIPPED_CHERRY_WOOD,block,normal,,
+TWISTING_VINES,block,normal,,
+WARPED_BUTTON,block,normal,,
+WARPED_DOOR,block,normal,,
+WARPED_FENCE,block,normal,,
+WARPED_FENCE_GATE,block,normal,,
+WARPED_FUNGUS,block,normal,,
+WARPED_HYPHAE,block,normal,,
+WARPED_NYLIUM,block,normal,,
+WARPED_PLANKS,block,normal,,
+WARPED_PRESSURE_PLATE,block,normal,,
+WARPED_ROOTS,block,normal,,
+WARPED_SIGN,block,normal,,
+WARPED_SLAB,block,normal,,
+WARPED_STAIRS,block,normal,,
+WARPED_STEM,block,normal,,
+WARPED_TRAPDOOR,block,normal,,
+WARPED_WART_BLOCK,block,normal,,
+CRAFTER,block,normal,,
+CHISELED_TUFF,block,normal,,
+CHISELED_TUFF_BRICKS,block,normal,,
+POLISHED_TUFF,block,normal,,
+POLISHED_TUFF_SLAB,block,normal,,
+POLISHED_TUFF_STAIRS,block,normal,,
+POLISHED_TUFF_WALL,block,normal,,
+TUFF_BRICK_SLAB,block,normal,,
+TUFF_BRICK_STAIRS,block,normal,,
+TUFF_BRICK_WALL,block,normal,,
+TUFF_BRICKS,block,normal,,
+TUFF_SLAB,block,normal,,
+TUFF_STAIRS,block,normal,,
+TUFF_WALL,block,normal,,
+EXPOSED_CHISELED_COPPER,block,normal,,
+EXPOSED_COPPER,block,normal,,
+EXPOSED_COPPER_BULB,block,normal,,
+EXPOSED_COPPER_DOOR,block,normal,,
+EXPOSED_COPPER_GRATE,block,normal,,
+EXPOSED_COPPER_TRAPDOOR,block,normal,,
+EXPOSED_CUT_COPPER,block,normal,,
+EXPOSED_CUT_COPPER_SLAB,block,normal,,
+EXPOSED_CUT_COPPER_STAIRS,block,normal,,
+WAXED_CHISELED_COPPER,block,normal,,
+WAXED_COPPER_BLOCK,block,normal,,
+WAXED_COPPER_BULB,block,normal,,
+WAXED_COPPER_DOOR,block,normal,,
+WAXED_COPPER_GRATE,block,normal,,
+WAXED_COPPER_TRAPDOOR,block,normal,,
+WAXED_CUT_COPPER,block,normal,,
+WAXED_CUT_COPPER_SLAB,block,normal,,
+WAXED_CUT_COPPER_STAIRS,block,normal,,
+CLOSED_EYEBLOSSOM,block,normal,,
+OPEN_EYEBLOSSOM,block,normal,,
+PALE_OAK_LEAVES,block,normal,,
+PALE_OAK_SAPLING,block,normal,,
+PALE_OAK_LOG,block,normal,,
+STRIPPED_PALE_OAK_LOG,block,normal,,
+PALE_OAK_WOOD,block,normal,,
+STRIPPED_PALE_OAK_WOOD,block,normal,,
+PALE_OAK_PLANKS,block,normal,,
+PALE_MOSS_BLOCK,block,normal,,
+PALE_MOSS_CARPET,block,normal,,
+PALE_HANGING_MOSS,block,normal,,
+PALE_OAK_BUTTON,block,normal,,
+PALE_OAK_DOOR,block,normal,,
+PALE_OAK_FENCE,block,normal,,
+PALE_OAK_FENCE_GATE,block,normal,,
+PALE_OAK_HANGING_SIGN,block,normal,,
+PALE_OAK_PRESSURE_PLATE,block,normal,,
+PALE_OAK_SIGN,block,normal,,
+PALE_OAK_SLAB,block,normal,,
+PALE_OAK_STAIRS,block,normal,,
+PALE_OAK_TRAPDOOR,block,normal,,
+SHORT_DRY_GRASS,block,normal,,
+TALL_DRY_GRASS,block,normal,,
+CACTUS_FLOWER,block,normal,,
+EXPOSED_COPPER_CHEST,block,normal,,
+WAXED_COPPER_CHEST,block,normal,,
+EXPOSED_COPPER_BARS,block,normal,,
+WAXED_COPPER_BARS,block,normal,,
+EXPOSED_COPPER_CHAIN,block,normal,,
+WAXED_COPPER_CHAIN,block,normal,,
+EXPOSED_COPPER_LANTERN,block,normal,,
+WAXED_COPPER_LANTERN,block,normal,,
+EXPOSED_LIGHTNING_ROD,block,normal,,
+WAXED_LIGHTNING_ROD,block,normal,,
+EXPOSED_COPPER_GOLEM_STATUE,block,normal,,
+WAXED_COPPER_GOLEM_STATUE,block,normal,,
+MANGROVE_SHELF,block,normal,,
+PALE_OAK_SHELF,block,normal,,
+CRIMSON_SHELF,block,normal,,
+WARPED_SHELF,block,normal,,
+CANDLE,block,normal,,
+BREEZE_ROD,block,normal,,
+DIAMOND_BLOCK,block,normal,,
+HEART_OF_THE_SEA,block,normal,,
+SCULK,block,normal,,
+SCULK_VEIN,block,normal,,
+SCULK_CATALYST,block,normal,,
+SCULK_SENSOR,block,normal,,
+SCULK_SHRIEKER,block,normal,,
+POWDER_SNOW_BUCKET,block,normal,,
+COD_BUCKET,block,normal,,
+SALMON_BUCKET,block,normal,,
+PUFFERFISH_BUCKET,block,normal,,
+TROPICAL_FISH_BUCKET,block,normal,,
+SPECTRAL_ARROW,block,normal,,
+TIPPED_ARROW,block,normal,,
+EXPERIENCE_BOTTLE,block,normal,,
+SPYGLASS,block,normal,,
+RABBIT_HIDE,block,normal,,
+RABBIT_STEW,block,normal,,
+NAME_TAG,block,normal,,
+POISONOUS_POTATO,block,normal,,
+FIRE_CHARGE,block,normal,,
+GOAT_HORN,block,normal,,
+BLUE_EGG,block,normal,,
+BROWN_EGG,block,normal,,
+BLACK_BED,block,normal,,
+BLACK_CARPET,block,normal,,
+BLACK_STAINED_GLASS,block,normal,,
+BLACK_TERRACOTTA,block,normal,,
+BLACK_WOOL,block,normal,,
+BLUE_BED,block,normal,,
+BLUE_CARPET,block,normal,,
+BLUE_STAINED_GLASS,block,normal,,
+BLUE_TERRACOTTA,block,normal,,
+BLUE_WOOL,block,normal,,
+BROWN_BED,block,normal,,
+BROWN_CARPET,block,normal,,
+BROWN_STAINED_GLASS,block,normal,,
+BROWN_WOOL,block,normal,,
+CYAN_BED,block,normal,,
+CYAN_CARPET,block,normal,,
+CYAN_CONCRETE,block,normal,,
+CYAN_STAINED_GLASS,block,normal,,
+CYAN_WOOL,block,normal,,
+GRAY_BED,block,normal,,
+GRAY_CARPET,block,normal,,
+GRAY_STAINED_GLASS,block,normal,,
+GRAY_WOOL,block,normal,,
+GREEN_BED,block,normal,,
+GREEN_CARPET,block,normal,,
+GREEN_STAINED_GLASS,block,normal,,
+GREEN_TERRACOTTA,block,normal,,
+GREEN_WOOL,block,normal,,
+LIGHT_BLUE_STAINED_GLASS,block,normal,,
+LIGHT_BLUE_STAINED_GLASS_PANE,block,normal,,
+LIGHT_BLUE_WOOL,block,normal,,
+LIME_BED,block,normal,,
+LIME_CARPET,block,normal,,
+LIME_STAINED_GLASS,block,normal,,
+LIME_WOOL,block,normal,,
+MAGENTA_BED,block,normal,,
+MAGENTA_CARPET,block,normal,,
+MAGENTA_GLAZED_TERRACOTTA,block,normal,,
+MAGENTA_STAINED_GLASS,block,normal,,
+MAGENTA_STAINED_GLASS_PANE,block,normal,,
+MAGENTA_TERRACOTTA,block,normal,,
+MAGENTA_WOOL,block,normal,,
+ORANGE_BED,block,normal,,
+ORANGE_CARPET,block,normal,,
+ORANGE_STAINED_GLASS,block,normal,,
+ORANGE_TERRACOTTA,block,normal,,
+ORANGE_WOOL,block,normal,,
+PURPLE_BED,block,normal,,
+PURPLE_CARPET,block,normal,,
+PURPLE_WOOL,block,normal,,
+RED_BED,block,normal,,
+RED_CARPET,block,normal,,
+RED_STAINED_GLASS,block,normal,,
+RED_STAINED_GLASS_PANE,block,normal,,
+RED_TERRACOTTA,block,normal,,
+RED_WOOL,block,normal,,
+WHITE_BED,block,normal,,
+WHITE_CARPET,block,normal,,
+WHITE_STAINED_GLASS,block,normal,,
+WHITE_STAINED_GLASS_PANE,block,normal,,
+WHITE_TERRACOTTA,block,normal,,
+WHITE_WOOL,block,normal,,
+YELLOW_BED,block,normal,,
+YELLOW_CARPET,block,normal,,
+YELLOW_CONCRETE,block,normal,,
+YELLOW_STAINED_GLASS,block,normal,,
+YELLOW_STAINED_GLASS_PANE,block,normal,,
+YELLOW_TERRACOTTA,block,normal,,
+YELLOW_WOOL,block,normal,,
+AMETHYST_CLUSTER,block,hard,,
+ANCIENT_DEBRIS,block,hard,,
+BRAIN_CORAL,block,hard,,
+BRAIN_CORAL_BLOCK,block,hard,,
+BRAIN_CORAL_FAN,block,hard,,
+CALIBRATED_SCULK_SENSOR,block,hard,,
+COAL_ORE,block,hard,,
+COPPER_ORE,block,hard,,
+DEAD_BRAIN_CORAL,block,hard,,
+DEAD_BRAIN_CORAL_BLOCK,block,hard,,
+DEAD_BRAIN_CORAL_FAN,block,hard,,
+DEEPSLATE_COPPER_ORE,block,hard,,
+DEEPSLATE_DIAMOND_ORE,block,hard,,
+DEEPSLATE_GOLD_ORE,block,hard,,
+DEEPSLATE_IRON_ORE,block,hard,,
+DEEPSLATE_REDSTONE_ORE,block,hard,,
+EMERALD_ORE,block,hard,,
+GOLD_ORE,block,hard,,
+GRASS_BLOCK,block,hard,,
+IRON_ORE,block,hard,,
+MUSHROOM_STEM,block,hard,,
+NETHER_GOLD_ORE,block,hard,,
+NETHER_QUARTZ_ORE,block,hard,,
+PODZOL,block,hard,,
+REDSTONE_ORE,block,hard,,
+SMALL_AMETHYST_BUD,block,hard,,
+SPONGE,block,hard,,
+TINTED_GLASS,block,hard,,
+TURTLE_EGG,block,hard,,
+WET_SPONGE,block,hard,,
+WAXED_EXPOSED_CHISELED_COPPER,block,hard,,
+WAXED_EXPOSED_COPPER,block,hard,,
+WAXED_EXPOSED_COPPER_BULB,block,hard,,
+WAXED_EXPOSED_COPPER_DOOR,block,hard,,
+WAXED_EXPOSED_COPPER_GRATE,block,hard,,
+WAXED_EXPOSED_COPPER_TRAPDOOR,block,hard,,
+WAXED_EXPOSED_CUT_COPPER,block,hard,,
+WAXED_EXPOSED_CUT_COPPER_SLAB,block,hard,,
+WAXED_EXPOSED_CUT_COPPER_STAIRS,block,hard,,
+CREAKING_HEART,block,hard,,
+RESIN_BLOCK,block,hard,,
+RESIN_BRICKS,block,hard,,
+CHISELED_RESIN_BRICKS,block,hard,,
+RESIN_BRICK_SLAB,block,hard,,
+RESIN_BRICK_STAIRS,block,hard,,
+RESIN_BRICK_WALL,block,hard,,
+DRIED_GHAST,block,hard,,
+WAXED_EXPOSED_COPPER_CHEST,block,hard,,
+WAXED_EXPOSED_COPPER_BARS,block,hard,,
+WAXED_EXPOSED_COPPER_CHAIN,block,hard,,
+WAXED_EXPOSED_COPPER_LANTERN,block,hard,,
+WAXED_EXPOSED_LIGHTNING_ROD,block,hard,,
+WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,hard,,
+LAPIS_ORE,block,hard,,
+DEEPSLATE_LAPIS_ORE,block,hard,,
+NAUTILUS_SHELL,block,hard,,
+WITHER_SKELETON_SKULL,block,hard,,
+OMINOUS_BOTTLE,block,hard,,
+ECHO_SHARD,block,hard,,
+RECOVERY_COMPASS,block,hard,,
+TOTEM_OF_UNDYING,block,hard,,
+NETHERITE_UPGRADE_SMITHING_TEMPLATE,block,hard,,
+NETHERITE_INGOT,block,hard,,
+RABBIT_FOOT,block,hard,,
+CHORUS_FLOWER,block,hard,,
+END_ROD,block,hard,,
+END_STONE,block,hard,,
+END_STONE_BRICK_SLAB,block,hard,,
+END_STONE_BRICK_STAIRS,block,hard,,
+END_STONE_BRICK_WALL,block,hard,,
+END_STONE_BRICKS,block,hard,,
+SHULKER_BOX,block,hard,,
+DRAGON_HEAD,block,hard,,
+DEEPSLATE_COAL_ORE,block,hard,,
+FROGSPAWN,block,hard,,
+OBTAIN_WOODEN_TOOLS,goal,normal,Obtain all Wooden Tools,"item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE"
+OBTAIN_STONE_TOOLS,goal,normal,Obtain all Stone Tools,"item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE"
+OBTAIN_IRON_TOOLS,goal,normal,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE"
+OBTAIN_GOLDEN_TOOLS,goal,normal,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE"
+OBTAIN_DIAMOND_TOOLS,goal,normal,Obtain all Diamond Tools,"item:DIAMOND_SWORD,DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE"
+OBTAIN_COPPER_TOOLS,goal,normal,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR"
+MINE_DIAMOND_ORE,goal,normal,Mine Diamond Ore,item:DIAMOND_ORE
+MINE_EMERALD_ORE,goal,normal,Mine Emerald Ore,item:EMERALD_ORE
+MINE_MOB_SPAWNER,goal,normal,Mine a Spawner,item:SPAWNER
+MINE_TURTLE_EGG,goal,normal,Mine Turtle Egg,item:TURTLE_EGG
+MINE_CRAFTER,goal,normal,Mine Crafter,item:CRAFTER
+WEAR_LEATHER_ARMOR,goal,normal,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS"
+WEAR_GOLDEN_ARMOR,goal,normal,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS"
+WEAR_CHAIN_ARMOR_PIECE,goal,normal,Wear a Chain Armor Piece,"equipment-any:CHAINMAIL_HELMET,CHAINMAIL_CHESTPLATE,CHAINMAIL_LEGGINGS,CHAINMAIL_BOOTS"
+WEAR_IRON_ARMOR,goal,normal,Wear Full Iron Armor,"equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS"
+WEAR_DIAMOND_ARMOR,goal,normal,Wear Full Diamond Armor,"equipment-all:DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS"
+WEAR_COPPER_ARMOR,goal,normal,Wear Full Copper Armor,"equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS"
+TAME_CAT,goal,normal,Tame a Cat,tame:CAT
+TAME_PARROT,goal,normal,Tame a Parrot,tame:PARROT
+TAME_HORSE,goal,normal,Tame a Horse,tame:HORSE
+TAME_WOLF,goal,normal,Tame a Wolf,tame:WOLF
+TAME_NAUTILUS,goal,normal,Tame a Nautilus,tame:NAUTILUS
+BREED_4_UNIQUE_ANIMALS,goal,normal,Breed 4 Unique Animals,breed-unique:4
+BREED_6_UNIQUE_ANIMALS,goal,normal,Breed 6 Unique Animals,breed-unique:6
+BREED_8_UNIQUE_ANIMALS,goal,normal,Breed 8 Unique Animals,breed-unique:8
+BREED_CHICKEN,goal,normal,Breed Chickens,breed:CHICKEN
+BREED_COW,goal,normal,Breed Cows,breed:COW
+BREED_HOGLIN,goal,normal,Breed Hoglins,breed:HOGLIN
+BREED_PIG,goal,normal,Breed Pigs,breed:PIG
+BREED_CAMEL,goal,normal,Breed Camels,breed:CAMEL
+BREED_ARMADILLO,goal,normal,Breed Armadillos,breed:ARMADILLO
+BREED_RABBIT,goal,normal,Breed Rabbits,breed:RABBIT
+BREED_FOX,goal,normal,Breed Foxes,breed:FOX
+BREED_SHEEP,goal,normal,Breed Sheep,breed:SHEEP
+BREED_STRIDER,goal,normal,Breed Striders,breed:STRIDER
+BREED_GOAT,goal,normal,Breed Goats,breed:GOAT
+BREED_FROGS,goal,normal,Breed Frogs,breed:FROG
+KILL_WITCH,goal,normal,Kill Witch,kill:WITCH
+KILL_BOGGED,goal,normal,Kill Bogged,kill:BOGGED
+KILL_PARCHED,goal,normal,Kill Parched,kill:PARCHED
+KILL_ZOMBIE_VILLAGER,goal,normal,Kill Zombie Villager,kill:ZOMBIE_VILLAGER
+KILL_STRAY,goal,normal,Kill Stray,kill:STRAY
+KILL_ZOGLIN,goal,normal,Kill Zoglin,kill:ZOGLIN
+KILL_SILVERFISH,goal,normal,Kill Silverfish,kill:SILVERFISH
+KILL_GUARDIAN,goal,normal,Kill Guardian,kill:GUARDIAN
+KILL_GHAST,goal,normal,Kill Ghast,kill:GHAST
+KILL_BAT,goal,normal,Kill Bat,kill:BAT
+KILL_SNOW_GOLEM,goal,normal,Kill Snow Golem,kill:SNOW_GOLEM
+KILL_ELDER_GUARDIAN,goal,normal,Kill Elder Guardian,kill:ELDER_GUARDIAN
+KILL_WARDEN,goal,normal,Kill Warden,kill:WARDEN
+KILL_7_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7
+KILL_10_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10
+KILL_13_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 13 Unique Hostile Mobs,kill-unique-hostile:13
+KILL_15_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 15 Unique Hostile Mobs,kill-unique-hostile:15
+KILL_30_UNDEAD_MOBS,goal,normal,Kill 30 Undead Mobs,kill-undead:30
+KILL_20_ARTHROPOD_MOBS,goal,normal,Kill 20 Arthropod Mobs,kill-arthropod:20
+KILL_100_MOBS,goal,normal,Kill 100 mobs,kill-total:100
+OBTAIN_ALL_FURNACES,goal,normal,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER"
+OBTAIN_ALL_MINECARTS,goal,normal,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART"
+OBTAIN_ALL_MUSHROOMS,goal,normal,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS"
+OBTAIN_ALL_PUMPKINS,goal,normal,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN"
+OBTAIN_ALL_TORCHES,goal,normal,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH"
+OBTAIN_ALL_RAW_ORE_BLOCKS,goal,normal,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK"
+OBTAIN_ALL_SOUPS,goal,normal,Obtain every type of Soup,"item:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW"
+OBTAIN_64_ARROWS,goal,normal,Obtain 64 Arrows,item:ARROW*64
+OBTAIN_64_COARSE_DIRT,goal,normal,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64
+OBTAIN_64_COLORED_WOOL,goal,normal,Obtain 64 Colored Wool,item:WHITE_WOOL*64
+OBTAIN_64_COLORED_CONCRETE,goal,normal,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64
+OBTAIN_6_UNIQUE_BUCKETS,goal,normal,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET"
+OBTAIN_4_UNIQUE_SAPLINGS,goal,normal,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING"
+OBTAIN_4_UNIQUE_SEEDS,goal,normal,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS"
+OBTAIN_6_UNIQUE_FLOWERS,goal,normal,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY"
+OBTAIN_7_UNIQUE_WORKSTATIONS,goal,normal,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE"
+OBTAIN_CLOCK,goal,normal,Obtain Clock,item:CLOCK
+OBTAIN_BELL,goal,normal,Obtain Bell,item:BELL
+OBTAIN_BOOKSHELF,goal,normal,Obtain Bookshelf,item:BOOKSHELF
+OBTAIN_COBWEB,goal,normal,Obtain Cobweb,item:COBWEB
+OBTAIN_DAYLIGHT_DETECTOR,goal,normal,Obtain Daylight Detector,item:DAYLIGHT_DETECTOR
+OBTAIN_DETECTOR_RAIL,goal,normal,Obtain Detector Rail,item:DETECTOR_RAIL
+OBTAIN_POWERED_RAIL,goal,normal,Obtain Powered Rail,item:POWERED_RAIL
+OBTAIN_ACTIVATOR_RAIL,goal,normal,Obtain Activator Rail,item:ACTIVATOR_RAIL
+OBTAIN_DISPENSER,goal,normal,Obtain Dispenser,item:DISPENSER
+OBTAIN_OBSERVER,goal,normal,Obtain Observer,item:OBSERVER
+OBTAIN_PISTON,goal,normal,Obtain Piston,item:PISTON
+OBTAIN_REDSTONE_LAMP,goal,normal,Obtain Redstone Lamp,item:REDSTONE_LAMP
+OBTAIN_REDSTONE_REPEATER,goal,normal,Obtain Redstone Repeater,item:REPEATER
+OBTAIN_REDSTONE_COMPARATOR,goal,normal,Obtain Redstone Comparator,item:COMPARATOR
+OBTAIN_TNT,goal,normal,Obtain TNT,item:TNT
+OBTAIN_SCAFFOLDING,goal,normal,Obtain Scaffolding,item:SCAFFOLDING
+OBTAIN_SOUL_CAMPFIRE,goal,normal,Obtain Soul Campfire,item:SOUL_CAMPFIRE
+OBTAIN_SOUL_LANTERN,goal,normal,Obtain Soul Lantern,item:SOUL_LANTERN
+OBTAIN_TINTED_GLASS,goal,normal,Obtain Tinted Glass,item:TINTED_GLASS
+OBTAIN_LODESTONE,goal,normal,Obtain Lodestone,item:LODESTONE
+OBTAIN_ENDER_CHEST,goal,normal,Obtain Ender Chest,item:ENDER_CHEST
+OBTAIN_END_ROD,goal,normal,Obtain End Rod,item:END_ROD
+OBTAIN_DRAGON_EGG,goal,normal,Obtain Dragon Egg,item:DRAGON_EGG
+OBTAIN_HEART_OF_THE_SEA,goal,normal,Obtain Heart of the Sea,item:HEART_OF_THE_SEA
+OBTAIN_ENCHANT_BOTTLE,goal,normal,Obtain Bottle o' Enchanting,item:EXPERIENCE_BOTTLE
+OBTAIN_POWDER_SNOW_BUCKET,goal,normal,Obtain Powder Snow Bucket,item:POWDER_SNOW_BUCKET
+OBTAIN_TROPICAL_FISH_BUCKET,goal,normal,Obtain Tropical Fish Bucket,item:TROPICAL_FISH_BUCKET
+OBTAIN_FLOWERING_AZALEA,goal,normal,Obtain Flowering Azalea,item:FLOWERING_AZALEA
+OBTAIN_GILDED_BLACKSTONE,goal,normal,Obtain Gilded Blackstone,item:GILDED_BLACKSTONE
+OBTAIN_ANCIENT_DEBRIS,goal,normal,Obtain Ancient Debris,item:ANCIENT_DEBRIS
+OBTAIN_SPONGE,goal,normal,Obtain Sponge,item:SPONGE
+OBTAIN_AMETHYST_BLOCK,goal,normal,Obtain Amethyst Block,item:AMETHYST_BLOCK
+OBTAIN_BONE_BLOCK,goal,normal,Obtain Bone Block,item:BONE_BLOCK
+OBTAIN_SMOOTH_BASALT,goal,normal,Obtain Smooth Basalt,item:SMOOTH_BASALT
+OBTAIN_DRIED_KELP_BLOCK,goal,normal,Obtain Dried Kelp Block,item:DRIED_KELP_BLOCK
+OBTAIN_DEAD_BUSH,goal,normal,Obtain Dead Bush,item:DEAD_BUSH
+OBTAIN_POTTERY_SHERD,goal,normal,Obtain Pottery Sherd,item:ANGLER_POTTERY_SHERD
+OBTAIN_SUSPICIOUS_BLOCK,goal,normal,Obtain Suspicious Sand/Gravel,item:SUSPICIOUS_SAND
+OBTAIN_BRICK_WALL,goal,normal,Obtain Brick Wall,item:BRICK_WALL
+OBTAIN_MOSSY_STONE_BRICK_WALL,goal,normal,Obtain Mossy Stone Brick Wall,item:MOSSY_STONE_BRICK_WALL
+OBTAIN_MUD_BRICK_WALL,goal,normal,Obtain Mud Brick Wall,item:MUD_BRICK_WALL
+OBTAIN_RED_NETHER_BRICK_STAIRS,goal,normal,Obtain Red Nether Brick Stairs,item:RED_NETHER_BRICK_STAIRS
+EAT_5_UNIQUE_FOOD,goal,normal,Eat 5 Unique Foods,consume-unique:5
+EAT_10_UNIQUE_FOOD,goal,normal,Eat 10 Unique Foods,consume-unique:10
+EAT_15_UNIQUE_FOOD,goal,normal,Eat 15 Unique Foods,consume-unique:15
+EAT_20_UNIQUE_FOOD,goal,normal,Eat 20 Unique Foods,consume-unique:20
+EAT_25_UNIQUE_FOOD,goal,normal,Eat 25 Unique Foods,consume-unique:25
+EAT_ALL_SOUPS,goal,normal,Eat every type of Soup,"consume-all:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW"
+EAT_BEETROOT_SOUP,goal,normal,Eat Beetroot Soup,consume:BEETROOT_SOUP
+EAT_CHORUS_FRUIT,goal,normal,Eat Chorus Fruit,consume:CHORUS_FRUIT
+EAT_COOKIE,goal,normal,Eat Cookie,consume:COOKIE
+EAT_GLOW_BERRY,goal,normal,Eat Glow Berry,consume:GLOW_BERRIES
+EAT_POISONOUS_POTATO,goal,normal,Eat Poisonous Potato,consume:POISONOUS_POTATO
+EAT_PUMPKIN_PIE,goal,normal,Eat Pumpkin Pie,consume:PUMPKIN_PIE
+EAT_RABBIT_STEW,goal,normal,Eat Rabbit Stew,consume:RABBIT_STEW
+EAT_SUSPICIOUS_STEW,goal,normal,Eat Suspicious Stew,consume:SUSPICIOUS_STEW
+DRINK_HONEY_BOTTLE,goal,normal,Drink Honey Bottle,consume:HONEY_BOTTLE
+DRINK_WATER_BOTTLE,goal,normal,Drink Water Bottle,consume-potion:WATER
+ENTER_NETHER,goal,normal,Enter Nether,advancement:story/enter_the_nether
+ENTER_END,goal,normal,Enter The End,advancement:end/root
+GET_EYE_SPY_ADVANCEMENT,goal,normal,Find a Stronghold,advancement:story/follow_ender_eye
+GET_WHAT_A_DEAL_ADVANCEMENT,goal,normal,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade
+GET_OH_SHINY_ADVANCEMENT,goal,normal,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin
+GET_SNIPER_DUEL_ADVANCEMENT,goal,normal,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel
+GET_BULLSEYE_ADVANCEMENT,goal,normal,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye
+GET_HIRED_HELP_ADVANCEMENT,goal,normal,Construct an Iron Golem,advancement:adventure/summon_iron_golem
+GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,normal,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider
+GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,normal,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor
+GET_ABSORPTION_STATUS_EFFECT,goal,normal,Get Absorption,effect:absorption
+GET_BAD_OMEN_STATUS_EFFECT,goal,normal,Get Bad Omen,effect:bad_omen
+GET_GLOWING_STATUS_EFFECT,goal,normal,Get Glowing,effect:glowing
+GET_JUMP_BOOST_STATUS_EFFECT,goal,normal,Get Jump Boost,effect:jump_boost
+GET_LEVITATION_STATUS_EFFECT,goal,normal,Get Levitation,effect:levitation
+GET_MINING_FATIGUE_STATUS_EFFECT,goal,normal,Get Mining Fatigue,effect:mining_fatigue
+GET_NAUSEA_STATUS_EFFECT,goal,normal,Get Nausea,effect:nausea
+GET_POISON_STATUS_EFFECT,goal,normal,Get Poison,effect:poison
+GET_WEAKNESS_STATUS_EFFECT,goal,normal,Get Weakness,effect:weakness
+REMOVE_STATUS_EFFECT_USING_MILK,goal,normal,Remove Effect using Milk Bucket,consume:MILK_BUCKET
+GET_10_ADVANCEMENTS,goal,normal,Get 10 Advancements,advancement-count:10
+GET_20_ADVANCEMENTS,goal,normal,Get 20 Advancements,advancement-count:20
+GET_30_ADVANCEMENTS,goal,normal,Get 30 Advancements,advancement-count:30
+REACH_EXP_LEVEL_10,goal,normal,Reach XP level 10,level:10
+REACH_EXP_LEVEL_20,goal,normal,Reach XP level 20,level:20
+REACH_HEIGHT_LIMIT,goal,normal,Reach height limit,location:height-limit
+REACH_BEDROCK,goal,normal,Reach Bedrock,location:bedrock
+REACH_NETHER_ROOF,goal,normal,Get on Nether Roof,location:nether-roof
+EMPTY_HUNGER_BAR,goal,normal,Empty Hunger Bar,hunger:empty
+USE_STONECUTTER,goal,normal,Use Stonecutter,use-block:STONECUTTER
+USE_ANVIL,goal,normal,Use Anvil,use-block:ANVIL
+USE_ENCHANTING_TABLE,goal,normal,Use Enchanting Table,use-block:ENCHANTING_TABLE
+USE_GRINDSTONE,goal,normal,Use Grindstone,use-block:GRINDSTONE
+USE_LOOM,goal,normal,Use Loom to design a Banner,use-block:LOOM
+USE_SMITHING_TABLE,goal,normal,Use Smithing Table,use-block:SMITHING_TABLE
+USE_CAULDRON,goal,normal,Use Cauldron to wash something,use-block:CAULDRON
+USE_COMPOSTER,goal,normal,Fill Composter and get Bone Meal,use-block:COMPOSTER
+USE_JUKEBOX,goal,normal,Play a Music Disc in Jukebox,use-block:JUKEBOX
+CRAFT_20_UNIQUE_ITEMS,goal,normal,Craft 20 Unique Items,craft-unique:20
+CRAFT_50_UNIQUE_ITEMS,goal,normal,Craft 50 Unique Items,craft-unique:50
+CRAFT_100_UNIQUE_ITEMS,goal,normal,Craft 100 Unique Items,craft-unique:100
+TAKE_200_DAMAGE,goal,normal,Take 200 damage,damage-taken:200
+DEAL_400_DAMAGE,goal,normal,Deal 400 damage,damage-dealt:400
+DIE_BY_DROWNING,goal,normal,Die by Drowning,death-cause:DROWNING
+DIE_BY_CACTUS,goal,normal,Die to Cactus,death-cause:CONTACT
+DIE_BY_MAGIC,goal,normal,Die by Magic,death-cause:MAGIC
+DIE_TO_VOID,goal,normal,Die by falling in Void,death-cause:VOID
+FREEZE_TO_DEATH,goal,normal,Die by Freezing,death-cause:FREEZE
+DIE_TO_POLAR_BEAR,goal,normal,Die to Polar Bear,death-attacker:POLAR_BEAR
+DIE_TO_PUFFERFISH,goal,normal,Die to Pufferfish,death-attacker:PUFFERFISH
+DIE_TO_WARDEN,goal,normal,Die to Warden,death-attacker:WARDEN
+WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,normal,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLACK,goal,normal,Wear Black Leather helmet,"equipment-colored:LEATHER_HELMET,BLACK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_WHITE,goal,normal,Wear White Leather helmet,"equipment-colored:LEATHER_HELMET,WHITE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GRAY,goal,normal,Wear Gray Leather helmet,"equipment-colored:LEATHER_HELMET,GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_GRAY,goal,normal,Wear Light gray Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLUE,goal,normal,Wear Blue Leather helmet,"equipment-colored:LEATHER_HELMET,BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_BLUE,goal,normal,Wear Light blue Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_ORANGE,goal,normal,Wear Orange Leather helmet,"equipment-colored:LEATHER_HELMET,ORANGE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_RED,goal,normal,Wear Red Leather helmet,"equipment-colored:LEATHER_HELMET,RED"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_YELLOW,goal,normal,Wear Yellow Leather helmet,"equipment-colored:LEATHER_HELMET,YELLOW"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_MAGENTA,goal,normal,Wear Magenta Leather helmet,"equipment-colored:LEATHER_HELMET,MAGENTA"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PINK,goal,normal,Wear Pink Leather helmet,"equipment-colored:LEATHER_HELMET,PINK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PURPLE,goal,normal,Wear Purple Leather helmet,"equipment-colored:LEATHER_HELMET,PURPLE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GREEN,goal,normal,Wear Green Leather helmet,"equipment-colored:LEATHER_HELMET,GREEN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIME,goal,normal,Wear Lime Leather helmet,"equipment-colored:LEATHER_HELMET,LIME"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_CYAN,goal,normal,Wear Cyan Leather helmet,"equipment-colored:LEATHER_HELMET,CYAN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BROWN,goal,normal,Wear Brown Leather helmet,"equipment-colored:LEATHER_HELMET,BROWN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLACK,goal,normal,Wear Black Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLACK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_WHITE,goal,normal,Wear White Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,WHITE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GRAY,goal,normal,Wear Gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_GRAY,goal,normal,Wear Light gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLUE,goal,normal,Wear Blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_BLUE,goal,normal,Wear Light blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_ORANGE,goal,normal,Wear Orange Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,ORANGE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_RED,goal,normal,Wear Red Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,RED"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_YELLOW,goal,normal,Wear Yellow Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,YELLOW"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_MAGENTA,goal,normal,Wear Magenta Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,MAGENTA"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PINK,goal,normal,Wear Pink Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PINK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PURPLE,goal,normal,Wear Purple Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PURPLE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GREEN,goal,normal,Wear Green Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GREEN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIME,goal,normal,Wear Lime Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIME"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_CYAN,goal,normal,Wear Cyan Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,CYAN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BROWN,goal,normal,Wear Brown Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BROWN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLACK,goal,normal,Wear Black Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLACK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_WHITE,goal,normal,Wear White Leather leggings,"equipment-colored:LEATHER_LEGGINGS,WHITE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GRAY,goal,normal,Wear Gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_GRAY,goal,normal,Wear Light gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLUE,goal,normal,Wear Blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_BLUE,goal,normal,Wear Light blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_ORANGE,goal,normal,Wear Orange Leather leggings,"equipment-colored:LEATHER_LEGGINGS,ORANGE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_RED,goal,normal,Wear Red Leather leggings,"equipment-colored:LEATHER_LEGGINGS,RED"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_YELLOW,goal,normal,Wear Yellow Leather leggings,"equipment-colored:LEATHER_LEGGINGS,YELLOW"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_MAGENTA,goal,normal,Wear Magenta Leather leggings,"equipment-colored:LEATHER_LEGGINGS,MAGENTA"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PINK,goal,normal,Wear Pink Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PINK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PURPLE,goal,normal,Wear Purple Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PURPLE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GREEN,goal,normal,Wear Green Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GREEN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIME,goal,normal,Wear Lime Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIME"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_CYAN,goal,normal,Wear Cyan Leather leggings,"equipment-colored:LEATHER_LEGGINGS,CYAN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BROWN,goal,normal,Wear Brown Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BROWN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLACK,goal,normal,Wear Black Leather boots,"equipment-colored:LEATHER_BOOTS,BLACK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_WHITE,goal,normal,Wear White Leather boots,"equipment-colored:LEATHER_BOOTS,WHITE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GRAY,goal,normal,Wear Gray Leather boots,"equipment-colored:LEATHER_BOOTS,GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_GRAY,goal,normal,Wear Light gray Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_GRAY"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLUE,goal,normal,Wear Blue Leather boots,"equipment-colored:LEATHER_BOOTS,BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_BLUE,goal,normal,Wear Light blue Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_BLUE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_ORANGE,goal,normal,Wear Orange Leather boots,"equipment-colored:LEATHER_BOOTS,ORANGE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_RED,goal,normal,Wear Red Leather boots,"equipment-colored:LEATHER_BOOTS,RED"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_YELLOW,goal,normal,Wear Yellow Leather boots,"equipment-colored:LEATHER_BOOTS,YELLOW"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_MAGENTA,goal,normal,Wear Magenta Leather boots,"equipment-colored:LEATHER_BOOTS,MAGENTA"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PINK,goal,normal,Wear Pink Leather boots,"equipment-colored:LEATHER_BOOTS,PINK"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PURPLE,goal,normal,Wear Purple Leather boots,"equipment-colored:LEATHER_BOOTS,PURPLE"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GREEN,goal,normal,Wear Green Leather boots,"equipment-colored:LEATHER_BOOTS,GREEN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIME,goal,normal,Wear Lime Leather boots,"equipment-colored:LEATHER_BOOTS,LIME"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_CYAN,goal,normal,Wear Cyan Leather boots,"equipment-colored:LEATHER_BOOTS,CYAN"
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BROWN,goal,normal,Wear Brown Leather boots,"equipment-colored:LEATHER_BOOTS,BROWN"

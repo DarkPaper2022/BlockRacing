@@ -18,10 +18,8 @@ scoreboard:
     speed: "&9Speed"
   blocks:
     easy: "&aEZ"
-    medium: "&eMID"
+    medium: "&eNORMAL"
     hard: "&cHARD"
-    dyed: "&dDYED"
-    end: "&eEND"
   pregame:
     title: "&b&lBlock Racing"
     slot11: "&a&lShift+F to open the menu"
@@ -44,10 +42,8 @@ scoreboard:
     bottom-slot: "&e&lEnjoy the game!"
     block-difficulty:
       easy: "&aEASY"
-      medium: "&eMID  "
+      medium: "&eNORMAL"
       hard: "&cHARD"
-      dyed: "&dDYED"
-      end: "&eEND  "
 
 # Team
 team:
@@ -76,10 +72,8 @@ menu:
     start-lore: "&9Click here to start the game"
     block-amount: "&eTarget Block Amount: "
     block-amount-lore: "&eClick here to change the target block amount"
-    medium-blocks: "&eMedium Blocks: "
-    hard-blocks: "&eHard Blocks: "
-    dyed-blocks: "&eDyed Blocks: "
-    end-blocks: "&eEnd Blocks: "
+    medium-blocks: "&eNormal Targets: "
+    hard-blocks: "&eHard Targets: "
     disabled: "&cDisabled"
     enabled: "&aEnabled"
     current-mode: "&aCurrent Mode: "

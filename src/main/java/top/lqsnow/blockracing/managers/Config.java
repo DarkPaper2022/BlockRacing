@@ -13,8 +13,6 @@ import top.lqsnow.blockracing.Main;
 public enum Config {
     MEDIUM_BLOCK("medium-block"),
     HARD_BLOCK("hard-block"),
-    DYED_BLOCK("dyed-block"),
-    END_BLOCK("end-block"),
     BLOCK_AMOUNT("block-amount"),
     AVAILABLE_TASK_AMOUNT("available-task-amount"),
     GAME_MODE("game-mode"),

@@ -23,8 +23,6 @@ public enum Message {
     SCOREBOARD_BLOCKS_EASY("scoreboard.blocks.easy"),
     SCOREBOARD_BLOCKS_MEDIUM("scoreboard.blocks.medium"),
     SCOREBOARD_BLOCKS_HARD("scoreboard.blocks.hard"),
-    SCOREBOARD_BLOCKS_DYED("scoreboard.blocks.dyed"),
-    SCOREBOARD_BLOCKS_END("scoreboard.blocks.end"),
     SCOREBOARD_PREGAME_TITLE("scoreboard.pregame.title"),
     SCOREBOARD_PREGAME_SLOT11("scoreboard.pregame.slot11"),
     SCOREBOARD_PREGAME_SLOT10("scoreboard.pregame.slot10"),
@@ -46,8 +44,6 @@ public enum Message {
     SCOREBOARD_BLOCK_DIFFICULTY_EASY("scoreboard.ingame.block-difficulty.easy"),
     SCOREBOARD_BLOCK_DIFFICULTY_MEDIUM("scoreboard.ingame.block-difficulty.medium"),
     SCOREBOARD_BLOCK_DIFFICULTY_HARD("scoreboard.ingame.block-difficulty.hard"),
-    SCOREBOARD_BLOCK_DIFFICULTY_DYED("scoreboard.ingame.block-difficulty.dyed"),
-    SCOREBOARD_BLOCK_DIFFICULTY_END("scoreboard.ingame.block-difficulty.end"),
 
     // team
     TEAM_RED_NAME("team.red.name"),
@@ -73,8 +69,6 @@ public enum Message {
     MENU_BLOCK_AMOUNT_LORE("menu.pregame-menu.block-amount-lore"),
     MENU_MEDIUM_BLOCKS("menu.pregame-menu.medium-blocks"),
     MENU_HARD_BLOCKS("menu.pregame-menu.hard-blocks"),
-    MENU_DYED_BLOCKS("menu.pregame-menu.dyed-blocks"),
-    MENU_END_BLOCKS("menu.pregame-menu.end-blocks"),
     MENU_DISABLED("menu.pregame-menu.disabled"),
     MENU_ENABLED("menu.pregame-menu.enabled"),
     MENU_CURRENT_MODE("menu.pregame-menu.current-mode"),

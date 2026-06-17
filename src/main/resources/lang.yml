@@ -22,10 +22,8 @@ scoreboard:
     speed: "&9极速模式"
   blocks:
     easy: "&a简单"
-    medium: "&e中等"
+    medium: "&e普通"
     hard: "&c困难"
-    dyed: "&d染色"
-    end: "&e末地"
   pregame:
     title: "&b&l方块竞速"
     slot11: ""
@@ -48,10 +46,8 @@ scoreboard:
     bottom-slot: "&e&lEnjoy the game!"
     block-difficulty:
       easy: "&a简单"
-      medium: "&e中等"
+      medium: "&e普通"
       hard: "&c困难"
-      dyed: "&d染色"
-      end: "&e末地"
 
 # 队伍
 team:
@@ -80,10 +76,8 @@ menu:
     start-lore: "&9点击此处开始游戏"
     block-amount: "&e目标方块数量："
     block-amount-lore: "&e点击此处更改目标方块数量"
-    medium-blocks: "&e中等方块："
+    medium-blocks: "&e普通目标："
     hard-blocks: "&e困难方块："
-    dyed-blocks: "&e染色方块："
-    end-blocks: "&e末地方块："
     disabled: "&c已禁用"
     enabled: "&a已启用"
     current-mode: "&a当前模式："

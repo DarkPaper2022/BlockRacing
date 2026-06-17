@@ -36,7 +36,7 @@ public class Scoreboard {
         }
 
         // Generate blocks
-        String blocks = String.format("%s%s%s%s%s", Message.SCOREBOARD_BLOCKS_EASY.getString(), (Setting.isEnableMediumBlock() ? " " + Message.SCOREBOARD_BLOCKS_MEDIUM.getString() : ""), (Setting.isEnableHardBlock() ? " " + Message.SCOREBOARD_BLOCKS_HARD.getString() : ""), (Setting.isEnableDyedBlock() ? " " + Message.SCOREBOARD_BLOCKS_DYED.getString() : ""), (Setting.isEnableEndBlock() ? " " + Message.SCOREBOARD_BLOCKS_END.getString() : ""));
+        String blocks = String.format("%s%s%s", Message.SCOREBOARD_BLOCKS_EASY.getString(), (Setting.isEnableMediumBlock() ? " " + Message.SCOREBOARD_BLOCKS_MEDIUM.getString() : ""), (Setting.isEnableHardBlock() ? " " + Message.SCOREBOARD_BLOCKS_HARD.getString() : ""));
 
         // Generate scoreboard
         setTitle(Message.SCOREBOARD_PREGAME_TITLE.getString());
@@ -92,14 +92,10 @@ public class Scoreboard {
     public static String getBlockDisplay(String block) {
         if (easyBlocks.contains(block)) {
             return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_EASY.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        } else if (mediumBlocks.contains(block) || draftoutGoals.contains(block)) {
+        } else if (mediumBlocks.contains(block)) {
             return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_MEDIUM.getString()).replace("%block%", Game.getTargetDisplayName(block)));
         } else if (hardBlocks.contains(block)) {
             return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_HARD.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        } else if (dyedBlocks.contains(block)) {
-            return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_DYED.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        } else if (endBlocks.contains(block)) {
-            return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_END.getString()).replace("%block%", Game.getTargetDisplayName(block)));
         }
         return null;
     }

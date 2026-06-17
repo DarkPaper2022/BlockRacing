@@ -6,11 +6,9 @@
 # Language
 lang: en_us
 
-# Settings for four additional block libraries, excluding the easy block
+# Additional target difficulty settings, excluding easy targets
 medium-block: true
 hard-block: true
-dyed-block: false
-end-block: false
 
 # Total number of blocks to be collected in one game
 block-amount: 64
