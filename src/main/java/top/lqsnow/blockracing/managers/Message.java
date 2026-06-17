@@ -93,6 +93,8 @@ public enum Message {
     MENU_GAME_TITLE("menu.game-menu.title"),
     MENU_TEAM_CHEST("menu.game-menu.team-chest"),
     MENU_TEAM_CHEST_LORE("menu.game-menu.team-chest-lore"),
+    MENU_TARGET_LIST("menu.game-menu.target-list"),
+    MENU_TARGET_LIST_LORE("menu.game-menu.target-list-lore"),
     MENU_ROLL("menu.game-menu.roll"),
     MENU_ROLL_LORE("menu.game-menu.roll-lore"),
     MENU_LOCATE("menu.game-menu.locate"),
@@ -110,6 +112,11 @@ public enum Message {
     MENU_WAYPOINT_EMPTY_LORE("menu.way-point.empty.lore"),
     MENU_WAYPOINT_FILLED("menu.way-point.filled.waypoint"),
     MENU_WAYPOINT_FILLED_LORE("menu.way-point.filled.lore"),
+    MENU_TARGET_LIST_TITLE("menu.target-list.title"),
+    MENU_TARGET_LIST_ITEM_LORE("menu.target-list.item-lore"),
+    MENU_TARGET_LIST_PREVIOUS("menu.target-list.previous"),
+    MENU_TARGET_LIST_NEXT("menu.target-list.next"),
+    MENU_TARGET_LIST_PAGE("menu.target-list.page"),
     MENU_ALL_RETURN_BACK("menu.all.return-back"),
 
     // notice

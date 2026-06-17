@@ -16,6 +16,7 @@ public enum Config {
     DYED_BLOCK("dyed-block"),
     END_BLOCK("end-block"),
     BLOCK_AMOUNT("block-amount"),
+    AVAILABLE_TASK_AMOUNT("available-task-amount"),
     GAME_MODE("game-mode"),
     SPEED_MODE("speed-mode"),
     CONFIG_VERSION("config-version"),

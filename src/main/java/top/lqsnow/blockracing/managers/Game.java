@@ -2,11 +2,9 @@ package top.lqsnow.blockracing.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -39,7 +37,6 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import top.lqsnow.blockracing.Main;
 import static top.lqsnow.blockracing.listeners.BasicListener.editAmountPlayer;
-import static top.lqsnow.blockracing.managers.Block.blocks;
 import static top.lqsnow.blockracing.managers.Block.blueTeamBlocks;
 import static top.lqsnow.blockracing.managers.Block.blueTeamRemainingBlocks;
 import static top.lqsnow.blockracing.managers.Block.checkBlock;
@@ -53,8 +50,6 @@ import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 import top.lqsnow.blockracing.utils.ColorUtil;
 import static top.lqsnow.blockracing.utils.ColorUtil.t;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
-import static top.lqsnow.blockracing.utils.CommandUtil.sendBlue;
-import static top.lqsnow.blockracing.utils.CommandUtil.sendRed;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
 public class Game {
@@ -216,6 +211,10 @@ public class Game {
         setCurrentGameState(GameState.INGAME);
         closeAllPlayersMenu();
         editAmountPlayer.clear();
+        redTeamRollCount = 0;
+        blueTeamRollCount = 0;
+        redRollPlayers.clear();
+        blueRollPlayers.clear();
         Goal.resetProgress();
         setupBlocks();
         redTeamTotalBlockAmount = redTeamBlocks.size();
@@ -313,31 +312,7 @@ public class Game {
 
     // Roll
     public static void roll(Player player) {
-        if (redTeamPlayers.contains(player.getName())) {
-            if (redTeamRollCount >= 3) {
-                player.sendMessage(Message.NOTICE_CANNOT_ROLL.getString());
-                return;
-            }
-            if (!redRollPlayers.contains(player.getName())) {
-                redRollPlayers.add(player.getName());
-                sendRed(Message.NOTICE_ROLL_REQUEST.getString().replace("%player%", player.getName()));
-            } else {
-                redRollPlayers.remove(player.getName());
-                sendRed(Message.NOTICE_ROLL_REQUEST_CANCEL.getString().replace("%player%", player.getName()));
-            }
-        } else if (blueTeamPlayers.contains(player.getName())) {
-            if (blueTeamRollCount >= 3) {
-                player.sendMessage(Message.NOTICE_CANNOT_ROLL.getString());
-                return;
-            }
-            if (!blueRollPlayers.contains(player.getName())) {
-                blueRollPlayers.add(player.getName());
-                sendBlue(Message.NOTICE_ROLL_REQUEST.getString().replace("%player%", player.getName()));
-            } else {
-                blueRollPlayers.remove(player.getName());
-                sendBlue(Message.NOTICE_ROLL_REQUEST_CANCEL.getString().replace("%player%", player.getName()));
-            }
-        }
+        player.sendMessage(Message.NOTICE_CANNOT_ROLL.getString());
     }
 
     public static void locate(Player player) {
@@ -516,12 +491,6 @@ public class Game {
                 return;
             }
 
-            // Roll check
-            if (!redRollPlayers.isEmpty())
-                checkRedRoll();
-            if (!blueRollPlayers.isEmpty())
-                checkBlueRoll();
-
         }
     }
 
@@ -540,42 +509,6 @@ public class Game {
                 sendAll(Message.NOTICE_RANKING_OFFLINE.getString().replace("%player%", entry.getKey())
                         .replace("%amount%", entry.getValue().toString()));
             }
-        }
-    }
-
-    private static void checkRedRoll() {
-        Set<String> redSet = new HashSet<>(redRollPlayers);
-        Set<String> redOnlineSet = new HashSet<>(getOnlineTeamPlayers("red"));
-        if (!getOnlineTeamPlayers("red").isEmpty() && redSet.containsAll(redOnlineSet)) {
-            List<String> b = new ArrayList<>(blocks);
-            b.removeAll(redTeamBlocks);
-            Random random = new Random();
-            int rollAmount = getCurrentBlocks("red").size();
-            for (int i = 0; i < rollAmount; i++) {
-                redTeamRemainingBlocks.set(i, b.get(random.nextInt(b.size())));
-            }
-            sendAll(Message.NOTICE_RED_ROLL_SUCCESS.getString());
-            redTeamRollCount += 1;
-            redRollPlayers.clear();
-            updateScoreboard();
-        }
-    }
-
-    private static void checkBlueRoll() {
-        Set<String> blueSet = new HashSet<>(blueRollPlayers);
-        Set<String> blueOnlineSet = new HashSet<>(getOnlineTeamPlayers("blue"));
-        if (!getOnlineTeamPlayers("blue").isEmpty() && blueSet.containsAll(blueOnlineSet)) {
-            List<String> b = new ArrayList<>(blocks);
-            b.removeAll(blueTeamBlocks);
-            Random random = new Random();
-            int rollAmount = getCurrentBlocks("blue").size();
-            for (int i = 0; i < rollAmount; i++) {
-                blueTeamRemainingBlocks.set(i, b.get(random.nextInt(b.size())));
-            }
-            sendAll(Message.NOTICE_BLUE_ROLL_SUCCESS.getString());
-            blueTeamRollCount += 1;
-            blueRollPlayers.clear();
-            updateScoreboard();
         }
     }
 
@@ -763,9 +696,10 @@ public class Game {
     }
 
     public static List<String> getCurrentBlocks(String team) {
+        int availableTaskAmount = Math.max(1, Setting.getAvailableTaskAmount());
         return switch (team) {
-            case "red" -> redTeamRemainingBlocks.subList(0, Math.min(redTeamRemainingBlocks.size(), 4));
-            case "blue" -> blueTeamRemainingBlocks.subList(0, Math.min(blueTeamRemainingBlocks.size(), 4));
+            case "red" -> redTeamRemainingBlocks.subList(0, Math.min(redTeamRemainingBlocks.size(), availableTaskAmount));
+            case "blue" -> blueTeamRemainingBlocks.subList(0, Math.min(blueTeamRemainingBlocks.size(), availableTaskAmount));
             default -> throw new IllegalStateException("Unexpected value: " + team);
         };
     }

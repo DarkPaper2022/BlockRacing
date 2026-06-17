@@ -12,6 +12,8 @@ import static top.lqsnow.blockracing.managers.Block.*;
 
 
 public class Scoreboard {
+    private static final int SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM = 4;
+
     public static org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
     public static Objective sidebar;
 
@@ -58,12 +60,13 @@ public class Scoreboard {
         // Set red team score display
         setSlot(12, Message.SCOREBOARD_RED_SCORE.getString().replace("%score%", String.valueOf(redTeamScore)).replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount)).replace("%total_block%", String.valueOf(redTeamTotalBlockAmount)));
         // Clean red team blocks display
-        for (int i = getCurrentBlocks("red").size(); i < 4; i++) {
+        int redDisplayAmount = Math.min(getCurrentBlocks("red").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
+        for (int i = redDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
             int slotIndex = 11 - i;
             setSlot(slotIndex, "");
         }
         // Set red team blocks display
-        for (int i = 0; i < getCurrentBlocks("red").size(); i++) {
+        for (int i = 0; i < redDisplayAmount; i++) {
             int slotIndex = 11 - i;
             setSlot(slotIndex, getBlockDisplay(redTeamRemainingBlocks.get(i)));
         }
@@ -72,12 +75,13 @@ public class Scoreboard {
         // Set blue team score display
         setSlot(6, Message.SCOREBOARD_BLUE_SCORE.getString().replace("%score%", String.valueOf(blueTeamScore)).replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount)).replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount)));
         // Clean blue team blocks display
-        for (int i = getCurrentBlocks("blue").size(); i < 4; i++) {
+        int blueDisplayAmount = Math.min(getCurrentBlocks("blue").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
+        for (int i = blueDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
             int slotIndex = 5 - i;
             setSlot(slotIndex, "");
         }
         // Set blue team blocks display
-        for (int i = 0; i < getCurrentBlocks("blue").size(); i++) {
+        for (int i = 0; i < blueDisplayAmount; i++) {
             int slotIndex = 5 - i;
             setSlot(slotIndex, getBlockDisplay(blueTeamRemainingBlocks.get(i)));
         }

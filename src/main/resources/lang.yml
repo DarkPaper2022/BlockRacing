@@ -113,8 +113,12 @@ menu:
     title: "&0主菜单"
     team-chest: "&a队伍箱子"
     team-chest-lore: "&b打开队伍箱子选择界面"
-    roll: "&e轮换"
-    roll-lore: "&b将当前目标方块全部替换成其他方块（每局每队仅限三次）"
+    target-list: "&e目标列表"
+    target-list-lore:
+      - "&b查看当前可完成的所有任务"
+      - "&7任务数量由服务器配置决定"
+    roll: "&e轮换已禁用"
+    roll-lore: "&c本服使用共享目标清单，不能轮换方块"
     locate: "&b定位"
     locate-lore:
       - "&b花费%score%积分获得一次locate命令使用权限"
@@ -129,7 +133,6 @@ menu:
       - "&b花费2积分在&l主世界&r&b随机传送，首次免费"
   team-chest-select-menu:
     title: "&0队伍箱子选择"
-    chest: "&g队伍箱子"
     chest: "&b队伍箱子"
   team-chest:
     red-chest: "&c红队队伍箱子"
@@ -147,6 +150,13 @@ menu:
         - "&a群系：%biome%"
         - "&b左键点击传送，右键点击删除"
         - "&b删除记录点需要在聊天框确认"
+  target-list:
+    title: "&0目标列表 %page%/%total_page%"
+    item-lore:
+      - "&7目标序号：&f%index%"
+    previous: "&e上一页"
+    next: "&e下一页"
+    page: "&a第 %page%/%total_page% 页 &7| &f%amount% &7个可做任务"
   all:
     return-back: "&c返回"
 
@@ -186,7 +196,7 @@ notice:
   tp-ocean: "&e检测您被传送到了海洋，正在重新传送"
   red-remove-waypoint: "&b玩家 &c%player% &b移除了传送点%index%！"
   blue-remove-waypoint: "&b玩家 &9%player% &b移除了传送点%index%！"
-  cannot-roll: "&c您的队伍已经轮换过3次方块了，本局不能再次轮换了！"
+  cannot-roll: "&c本局使用共享目标清单，不能轮换方块！"
   roll-request: "&b玩家 %player% 申请轮换方块！本队所有在线玩家同意即可轮换！"
   roll-request-cancel: "&c玩家 %player% 取消申请轮换方块！"
   red-roll-success: "&c红队&a轮换掉了方块！"

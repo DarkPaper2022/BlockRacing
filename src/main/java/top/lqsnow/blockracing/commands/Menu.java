@@ -82,6 +82,15 @@ public class Menu implements CommandExecutor, TabCompleter {
             }
         }
 
+        if (args[0].equalsIgnoreCase("targets")) {
+            if (Game.getCurrentGameState().equals(Game.GameState.PREGAME)) {
+                sender.sendMessage(Message.NOTICE_GAME_NOT_START.getString());
+                return true;
+            }
+            new GameMenu().new TargetListMenu(player, 0).displayTo(player);
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("roll")) {
             if (Game.getCurrentGameState().equals(Game.GameState.PREGAME)) {
                 sender.sendMessage(Message.NOTICE_GAME_NOT_START.getString());
@@ -141,6 +150,7 @@ public class Menu implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             completions.add("main");
             completions.add("chest");
+            completions.add("targets");
             completions.add("waypoints");
             completions.add("roll");
             completions.add("locate");

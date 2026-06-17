@@ -114,8 +114,12 @@ menu:
     title: "&0Main Menu"
     team-chest: "&aTeam Chest"
     team-chest-lore: "&bOpen the team chest selection menu"
-    roll: "&eRoll"
-    roll-lore: "&bReplace all current target blocks with other blocks"
+    target-list: "&eTarget List"
+    target-list-lore:
+      - "&bView all currently available tasks"
+      - "&7The amount is controlled by server config"
+    roll: "&eRoll Disabled"
+    roll-lore: "&cThis server uses a shared target list; rolling is disabled"
     locate: "&bLocate"
     locate-lore:
       - "&bSpend %score% points to gain permission"
@@ -151,6 +155,13 @@ menu:
         - "&aBiom: %biome%"
         - "&bLeft-click to teleport, right-click to delete"
         - "&bDeleting waypoints requires confirmation in the chat"
+  target-list:
+    title: "&0Target List %page%/%total_page%"
+    item-lore:
+      - "&7Target index: &f%index%"
+    previous: "&ePrevious Page"
+    next: "&eNext Page"
+    page: "&aPage %page%/%total_page% &7| &f%amount% &7available tasks"
   all:
     return-back: "&cReturn"
 
@@ -190,7 +201,7 @@ notice:
   tp-ocean: "&eDetected teleportation to ocean, reteleporting"
   red-remove-waypoint: "&bPlayer &c%player% &bremoved waypoint %index%!"
   blue-remove-waypoint: "&bPlayer &9%player% &bremoved waypoint %index%!"
-  cannot-roll: "&cYour team has already rolled blocks 3 times this game, cannot roll again!"
+  cannot-roll: "&cThis game uses a shared target list; rolling is disabled!"
   roll-request: "&bPlayer %player% requests to roll blocks! All online players in the team must agree to proceed!"
   roll-request-cancel: "&cPlayer %player% canceled the block roll request!"
   red-roll-success: "&cRed Team&a successfully rolled the blocks!"

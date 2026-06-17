@@ -44,7 +44,7 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (index < 1 || index > 4) {
+        if (index < 1) {
             player.sendMessage(t("&cMissing parameters"));
             return true;
         }
@@ -76,10 +76,15 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             completions.add("red");
             completions.add("blue");
         } else if (args.length == 2) {
-            completions.add("1");
-            completions.add("2");
-            completions.add("3");
-            completions.add("4");
+            int maxIndex = 0;
+            if (args[0].equalsIgnoreCase("red")) {
+                maxIndex = getCurrentBlocks("red").size();
+            } else if (args[0].equalsIgnoreCase("blue")) {
+                maxIndex = getCurrentBlocks("blue").size();
+            }
+            for (int i = 1; i <= maxIndex; i++) {
+                completions.add(String.valueOf(i));
+            }
         }
 
         String prefix = args[args.length - 1].toLowerCase();

@@ -7,18 +7,23 @@
 lang: zh_cn
 
 # 除去easy-block以外的四种额外方块库设置
-medium-block: false
-hard-block: false
+medium-block: true
+hard-block: true
 dyed-block: false
 end-block: false
 
 # 一局游戏需要收集的方块总数
-block-amount: 50
+block-amount: 64
+
+# 同时可做/可见的队首任务数量
+# 默认：64
+# 最大：128
+available-task-amount: 64
 
 # 游戏模式：
 # normal - 普通模式：两个队伍需要收集的方块及顺序完全随机，收集方块会将一组该方块给到对方的队伍箱子里
 # racing - 竞速模式：两个队伍需要收集的方块及顺序将完全相同，且收集方块将不会给予一组方块到对方队伍箱子里
-game-mode: normal
+game-mode: racing
 
 # 极速模式：
 # 开启极速模式后，开局时将会给予玩家部分道具和效果，且获得方块时加3分，以加快游戏进度

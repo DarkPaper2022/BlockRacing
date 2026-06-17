@@ -39,9 +39,13 @@ import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class GameMenu extends Menu {
+    private static final int TARGET_LIST_ITEMS_PER_PAGE = 45;
 
     @Position(0)
     private final Button teamChest;
+
+    @Position(1)
+    private final Button targetList;
 
     @Position(2)
     private final Button roll;
@@ -57,10 +61,23 @@ public class GameMenu extends Menu {
 
     public GameMenu() {
         setTitle(Message.MENU_GAME_TITLE.getString());
-        setSize(1 * 9);
+        setSize(2 * 9);
 
         // Open team chest menu
         this.teamChest = new ButtonMenu(new TeamChestSelectMenu(), ItemCreator.of(CompMaterial.CHEST, Message.MENU_TEAM_CHEST.getString(), Message.MENU_TEAM_CHEST_LORE.getStringList()).make());
+
+        // Open target list menu
+        this.targetList = new Button() {
+            @Override
+            public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                new TargetListMenu(player, 0).displayTo(player);
+            }
+
+            @Override
+            public ItemStack getItem() {
+                return ItemCreator.of(CompMaterial.WRITABLE_BOOK, Message.MENU_TARGET_LIST.getString(), Message.MENU_TARGET_LIST_LORE.getStringList()).make();
+            }
+        };
 
         // Roll
         this.roll = new Button() {
@@ -142,6 +159,116 @@ public class GameMenu extends Menu {
             }
         };
 
+    }
+
+    public class TargetListMenu extends Menu {
+        private final String team;
+        private final int page;
+
+        public TargetListMenu(Player player, int page) {
+            super(GameMenu.this);
+            this.team = redTeamPlayers.contains(player.getName()) ? "red"
+                    : (blueTeamPlayers.contains(player.getName()) ? "blue" : "");
+            List<String> targets = getTargets();
+            int maxPage = Math.max(0, (targets.size() - 1) / TARGET_LIST_ITEMS_PER_PAGE);
+            this.page = Math.max(0, Math.min(page, maxPage));
+
+            setTitle(Message.MENU_TARGET_LIST_TITLE.getString()
+                    .replace("%page%", String.valueOf(this.page + 1))
+                    .replace("%total_page%", String.valueOf(maxPage + 1)));
+            setSize(6 * 9);
+
+            int start = this.page * TARGET_LIST_ITEMS_PER_PAGE;
+            int end = Math.min(targets.size(), start + TARGET_LIST_ITEMS_PER_PAGE);
+            for (int i = start; i < end; i++) {
+                int slot = i - start;
+                String target = targets.get(i);
+                int index = i + 1;
+                Button button = new Button(slot) {
+                    @Override
+                    public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                    }
+
+                    @Override
+                    public ItemStack getItem() {
+                        return ItemCreator.of(getTargetIcon(target), "&e" + index + ". &f" + Game.getTargetDisplayName(target),
+                                replaceTargetPlaceholders(Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(), index, target)).make();
+                    }
+                };
+                this.registerButton(button);
+            }
+
+            Button previous = new Button(45) {
+                @Override
+                public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                    if (TargetListMenu.this.page > 0) {
+                        new TargetListMenu(player, TargetListMenu.this.page - 1).displayTo(player);
+                    }
+                }
+
+                @Override
+                public ItemStack getItem() {
+                    return ItemCreator.of(CompMaterial.ARROW, Message.MENU_TARGET_LIST_PREVIOUS.getString()).make();
+                }
+            };
+            this.registerButton(previous);
+
+            Button pageInfo = new Button(49) {
+                @Override
+                public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                }
+
+                @Override
+                public ItemStack getItem() {
+                    return ItemCreator.of(CompMaterial.PAPER, Message.MENU_TARGET_LIST_PAGE.getString()
+                            .replace("%page%", String.valueOf(TargetListMenu.this.page + 1))
+                            .replace("%total_page%", String.valueOf(maxPage + 1))
+                            .replace("%amount%", String.valueOf(targets.size()))).make();
+                }
+            };
+            this.registerButton(pageInfo);
+
+            Button next = new Button(53) {
+                @Override
+                public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                    if (TargetListMenu.this.page < maxPage) {
+                        new TargetListMenu(player, TargetListMenu.this.page + 1).displayTo(player);
+                    }
+                }
+
+                @Override
+                public ItemStack getItem() {
+                    return ItemCreator.of(CompMaterial.ARROW, Message.MENU_TARGET_LIST_NEXT.getString()).make();
+                }
+            };
+            this.registerButton(next);
+
+            Button back = new Button(48) {
+                @Override
+                public void onClickedInMenu(Player player, Menu menu, ClickType click) {
+                    new GameMenu().displayTo(player);
+                }
+
+                @Override
+                public ItemStack getItem() {
+                    return ItemCreator.of(CompMaterial.BARRIER, Message.MENU_ALL_RETURN_BACK.getString()).make();
+                }
+            };
+            this.registerButton(back);
+        }
+
+        private List<String> getTargets() {
+            return switch (team) {
+                case "red" -> Game.getCurrentBlocks("red");
+                case "blue" -> Game.getCurrentBlocks("blue");
+                default -> List.of();
+            };
+        }
+
+        @Override
+        protected boolean addReturnButton() {
+            return false;
+        }
     }
 
     // Team chest select menu
@@ -300,6 +427,31 @@ public class GameMenu extends Menu {
             modifiedLore.add(line);
         }
         return modifiedLore;
+    }
+
+    private Collection<String> replaceTargetPlaceholders(Collection<String> lore, int index, String target) {
+        List<String> modifiedLore = new ArrayList<>();
+
+        for (String line : lore) {
+            line = line
+                    .replace("%index%", String.valueOf(index))
+                    .replace("%target%", Game.getTargetDisplayName(target));
+
+            modifiedLore.add(line);
+        }
+        return modifiedLore;
+    }
+
+    private CompMaterial getTargetIcon(String target) {
+        if (target == null || target.startsWith("DRAFTOUT:")) {
+            return CompMaterial.WRITABLE_BOOK;
+        }
+
+        try {
+            return CompMaterial.fromMaterial(org.bukkit.Material.valueOf(target));
+        } catch (Exception exception) {
+            return CompMaterial.PAPER;
+        }
     }
 
 

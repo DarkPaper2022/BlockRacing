@@ -231,12 +231,13 @@ public class BasicListener implements Listener {
 
     public static void setBlockAmount(int blockAmount, Boolean sendMessage) {
         Block.addUpBlocks();
+        int maxAllowedBlockAmount = Math.min(maxBlockAmount, Setting.MAX_BLOCK_AMOUNT_LIMIT);
         if (blockAmount < 10) {
             if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + 10);
             blockAmount = 10;
-        } else if (blockAmount > maxBlockAmount) {
-            if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + maxBlockAmount);
-            blockAmount = maxBlockAmount;
+        } else if (blockAmount > maxAllowedBlockAmount) {
+            if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + maxAllowedBlockAmount);
+            blockAmount = maxAllowedBlockAmount;
         } else {
             if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + blockAmount);
         }

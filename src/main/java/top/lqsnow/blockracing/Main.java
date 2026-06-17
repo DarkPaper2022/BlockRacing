@@ -51,6 +51,7 @@ public class Main extends SimplePlugin {
                 "DyedBlocks.txt",
                 "EndBlocks.txt",
                 "DraftoutGoals.txt",
+                "DraftoutGoals_zh_cn.yml",
                 "zh_cn.json",
                 "en_us.json"
         );

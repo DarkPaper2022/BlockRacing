@@ -85,14 +85,12 @@ public class Block {
     }
 
     public static void setupBlocks() {
-        if (Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
-            redTeamBlocks = generateBlocks();
-            blueTeamBlocks = generateBlocks();
-        } else if (Setting.getCurrentGameMode().equals(Setting.GameMode.RACING)) {
-            List<String> blocks = generateBlocks();
-            redTeamBlocks = List.copyOf(blocks);
-            blueTeamBlocks = List.copyOf(blocks);
-        }
+        redTeamRemainingBlocks.clear();
+        blueTeamRemainingBlocks.clear();
+
+        List<String> sharedBlocks = generateBlocks();
+        redTeamBlocks = List.copyOf(sharedBlocks);
+        blueTeamBlocks = List.copyOf(sharedBlocks);
         redTeamRemainingBlocks.addAll(List.copyOf(redTeamBlocks));
         blueTeamRemainingBlocks.addAll(List.copyOf(blueTeamBlocks));
         Bukkit.getLogger().info("[BlockRacing] Blocks generate complete.");
