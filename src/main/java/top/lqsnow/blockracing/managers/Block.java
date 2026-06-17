@@ -350,6 +350,10 @@ public class Block {
             String displayName = row.size() >= 4 ? row.get(3).trim() : "";
             String requirement = row.size() >= 5 ? row.get(4).trim() : "";
 
+            if ("deprecated".equals(difficulty)) {
+                continue;
+            }
+
             if (id.isEmpty() || type.isEmpty() || difficulty.isEmpty()) {
                 Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
                 continue;
