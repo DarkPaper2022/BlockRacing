@@ -1,7 +1,6 @@
 package top.lqsnow.blockracing.managers;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -15,13 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import top.lqsnow.blockracing.Main;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -38,7 +31,6 @@ public class Goal {
     public static final String PREFIX = "DRAFTOUT:";
 
     private static final Map<String, Definition> DEFINITIONS = new HashMap<>();
-    private static final Map<String, String> DISPLAY_NAMES = new HashMap<>();
     private static final Map<String, Set<EntityType>> KILLED_ENTITY_TYPES = new HashMap<>();
     private static final Map<String, Integer> KILL_COUNTS = new HashMap<>();
     private static final Map<String, Integer> UNDEAD_KILL_COUNTS = new HashMap<>();
@@ -116,7 +108,6 @@ public class Goal {
 
     public static List<String> load(String[] lines) {
         DEFINITIONS.clear();
-        DISPLAY_NAMES.clear();
         List<String> goals = new ArrayList<>();
 
         if (lines == null) {
@@ -138,14 +129,12 @@ public class Goal {
             goals.add(encode(definition.id()));
         }
 
-        loadDisplayNames();
         Bukkit.getLogger().info("[BlockRacing] Loaded Draftout goals: " + goals.size());
         return List.copyOf(goals);
     }
 
     public static void clearDefinitions() {
         DEFINITIONS.clear();
-        DISPLAY_NAMES.clear();
     }
 
     public static String registerDefinition(String id, String label, String rawRequirement) {
@@ -163,12 +152,6 @@ public class Goal {
 
         DEFINITIONS.put(normalizedId, new Definition(normalizedId, normalizedLabel, requirement));
         return encode(normalizedId);
-    }
-
-    public static void loadRegisteredDisplayNames() {
-        DISPLAY_NAMES.clear();
-        loadDisplayNames();
-        Bukkit.getLogger().info("[BlockRacing] Loaded Draftout goals: " + DEFINITIONS.size());
     }
 
     public static void resetProgress() {
@@ -254,7 +237,7 @@ public class Goal {
         if (definition == null) {
             return target;
         }
-        return DISPLAY_NAMES.getOrDefault(definition.id(), definition.label());
+        return definition.label();
     }
 
     public static String findCompletionSource(String target, List<String> teamPlayers, List<Inventory> teamChests, String chestSource) {
@@ -804,45 +787,6 @@ public class Goal {
 
     private static String encode(String id) {
         return PREFIX + id;
-    }
-
-    private static void loadDisplayNames() {
-        String lang = Message.MESSAGE_LANG.getString();
-        if (lang == null || lang.isBlank()) {
-            return;
-        }
-
-        String normalizedLang = lang.trim().toLowerCase(Locale.ROOT);
-        if (!"zh_cn".equals(normalizedLang)) {
-            return;
-        }
-
-        String resourceName = "DraftoutGoals_" + normalizedLang + ".yml";
-        File file = new File(Main.getInstance().getDataFolder(), resourceName);
-        YamlConfiguration displayConfig = YamlConfiguration.loadConfiguration(file);
-
-        try (InputStream input = Main.getInstance().getResource(resourceName)) {
-            if (input != null) {
-                InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
-                YamlConfiguration defaults = YamlConfiguration.loadConfiguration(reader);
-                displayConfig.setDefaults(defaults);
-            }
-        } catch (IOException exception) {
-            Main.getInstance().getLogger().log(Level.WARNING,
-                    "[BlockRacing] Error reading Draftout goal display resource: " + resourceName, exception);
-        }
-
-        for (String id : DEFINITIONS.keySet()) {
-            String displayName = displayConfig.getString(id);
-            if (displayName != null && !displayName.isBlank()) {
-                DISPLAY_NAMES.put(id, displayName);
-            }
-        }
-
-        if (!DISPLAY_NAMES.isEmpty()) {
-            Bukkit.getLogger().info("[BlockRacing] Loaded Draftout goal display names for "
-                    + normalizedLang + ": " + DISPLAY_NAMES.size());
-        }
     }
 
     private static String decode(String target) {

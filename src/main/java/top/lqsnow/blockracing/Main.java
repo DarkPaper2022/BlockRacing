@@ -46,8 +46,6 @@ public class Main extends SimplePlugin {
         // Save resources
         saveIfAbsent(
                 "Targets.csv",
-                "DraftoutGoals_zh_cn.yml",
-                "zh_cn.json",
                 "en_us.json"
         );
 

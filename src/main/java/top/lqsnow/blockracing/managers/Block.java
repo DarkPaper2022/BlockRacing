@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.remain.CompMaterial;
 import top.lqsnow.blockracing.Main;
+import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,6 +57,7 @@ public class Block {
 
     public static List<String> easyBlocks, mediumBlocks, hardBlocks, blocks;
     public static List<String> allBlocks = new ArrayList<>();
+    private static final Map<String, String> chineseDisplayNames = new HashMap<>();
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
     public static List<String> blueTeamBlocks = new ArrayList<>();
@@ -309,7 +311,7 @@ public class Block {
             if (Goal.isKnownGoalId(str)) {
                 if (!Goal.isValid(str)) {
                     Bukkit.getLogger().severe("[BlockRacing] Invalid Draftout goal: " + str);
-                    sendAll(String.format(Message.NOTICE_ERROR_BLOCK.getString(), Goal.getDisplayName(str)));
+                    sendAll(String.format(Message.NOTICE_ERROR_BLOCK.getString(), getDisplayName(str)));
                     flag = false;
                 }
                 continue;
@@ -337,6 +339,7 @@ public class Block {
         List<String> loadedHardBlocks = new ArrayList<>();
 
         Goal.clearDefinitions();
+        chineseDisplayNames.clear();
 
         for (List<String> row : readCsvFile(TARGETS_FILE_NAME)) {
             if (row.size() < 3) {
@@ -349,6 +352,7 @@ public class Block {
             String difficulty = row.get(2).trim().toLowerCase(Locale.ROOT);
             String displayName = row.size() >= 4 ? row.get(3).trim() : "";
             String requirement = row.size() >= 5 ? row.get(4).trim() : "";
+            String chineseDisplayName = row.size() >= 6 ? row.get(5).trim() : "";
 
             if ("deprecated".equals(difficulty)) {
                 continue;
@@ -370,6 +374,10 @@ public class Block {
                 continue;
             }
 
+            if (!chineseDisplayName.isEmpty()) {
+                chineseDisplayNames.put(target, chineseDisplayName);
+            }
+
             switch (difficulty) {
                 case "easy" -> loadedEasyBlocks.add(target);
                 case "normal", "medium" -> loadedMediumBlocks.add(target);
@@ -381,9 +389,23 @@ public class Block {
         easyBlocks = List.copyOf(loadedEasyBlocks);
         mediumBlocks = List.copyOf(loadedMediumBlocks);
         hardBlocks = List.copyOf(loadedHardBlocks);
-        Goal.loadRegisteredDisplayNames();
         Bukkit.getLogger().info("[BlockRacing] Loaded targets: easy=" + easyBlocks.size()
                 + ", normal=" + mediumBlocks.size() + ", hard=" + hardBlocks.size());
+    }
+
+    public static String getDisplayName(String target) {
+        String lang = Message.MESSAGE_LANG.getString();
+        boolean chinese = lang != null && "zh_cn".equals(lang.trim().toLowerCase(Locale.ROOT));
+        if (chinese) {
+            String chineseDisplayName = chineseDisplayNames.get(target);
+            if (chineseDisplayName != null && !chineseDisplayName.isBlank()) {
+                return chineseDisplayName;
+            }
+
+            return Goal.isGoal(target) ? Goal.getDisplayName(target) : target;
+        }
+
+        return Goal.isGoal(target) ? Goal.getDisplayName(target) : TranslationUtil.getValue(target);
     }
 
     private static List<List<String>> readCsvFile(String fileName) {

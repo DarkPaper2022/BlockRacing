@@ -50,7 +50,6 @@ import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 import top.lqsnow.blockracing.utils.ColorUtil;
 import static top.lqsnow.blockracing.utils.ColorUtil.t;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
-import top.lqsnow.blockracing.utils.TranslationUtil;
 
 public class Game {
     public enum GameState {
@@ -705,7 +704,7 @@ public class Game {
     }
 
     public static String getTargetDisplayName(String target) {
-        return Goal.isGoal(target) ? Goal.getDisplayName(target) : TranslationUtil.getValue(target);
+        return Block.getDisplayName(target);
     }
 
     private static boolean skipMutualTask(List<String> opponentRemainingBlocks, String completedBlock) {
