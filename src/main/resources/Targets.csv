@@ -1,975 +1,975 @@
-id,type,difficulty,display_name,requirement,中文显示
-ACACIA_BUTTON,block,easy,,,金合欢木按钮
-ACACIA_DOOR,block,easy,,,金合欢木门
-ACACIA_FENCE,block,easy,,,金合欢木栅栏
-ACACIA_FENCE_GATE,block,easy,,,金合欢木栅栏门
-ACACIA_HANGING_SIGN,block,easy,,,悬挂式金合欢木告示牌
-ACACIA_LEAVES,block,easy,,,金合欢树叶
-ACACIA_LOG,block,easy,,,金合欢原木
-ACACIA_PLANKS,block,easy,,,金合欢木板
-ACACIA_PRESSURE_PLATE,block,easy,,,金合欢木压力板
-ACACIA_SAPLING,block,easy,,,金合欢树苗
-ACACIA_SIGN,block,easy,,,金合欢木告示牌
-ACACIA_SLAB,block,easy,,,金合欢木台阶
-ACACIA_STAIRS,block,easy,,,金合欢木楼梯
-ACACIA_TRAPDOOR,block,easy,,,金合欢木活板门
-ACACIA_WOOD,block,easy,,,金合欢木
-ACTIVATOR_RAIL,block,easy,,,激活铁轨
-ALLIUM,block,easy,,,绒球葱
-ANDESITE,block,easy,,,安山岩
-ANDESITE_SLAB,block,easy,,,安山岩台阶
-ANDESITE_STAIRS,block,easy,,,安山岩楼梯
-ANDESITE_WALL,block,easy,,,安山岩墙
-AZALEA,block,easy,,,杜鹃花丛
-AZALEA_LEAVES,block,easy,,,杜鹃树叶
-AZURE_BLUET,block,easy,,,蓝花美耳草
-BAMBOO_BLOCK,block,easy,,,竹块
-BAMBOO_BUTTON,block,easy,,,竹按钮
-BAMBOO_DOOR,block,easy,,,竹门
-BAMBOO_FENCE,block,easy,,,竹栅栏
-BAMBOO_FENCE_GATE,block,easy,,,竹栅栏门
-BAMBOO_HANGING_SIGN,block,easy,,,悬挂式竹告示牌
-BAMBOO_MOSAIC,block,easy,,,竹马赛克
-BAMBOO_MOSAIC_SLAB,block,easy,,,竹马赛克台阶
-BAMBOO_MOSAIC_STAIRS,block,easy,,,竹马赛克楼梯
-BAMBOO_PLANKS,block,easy,,,竹板
-BAMBOO_PRESSURE_PLATE,block,easy,,,竹压力板
-BAMBOO_SIGN,block,easy,,,竹告示牌
-BAMBOO_SLAB,block,easy,,,竹台阶
-BAMBOO_STAIRS,block,easy,,,竹楼梯
-BAMBOO_TRAPDOOR,block,easy,,,竹活板门
-BARREL,block,easy,,,木桶
-BASALT,block,easy,,,玄武岩
-BELL,block,easy,,,钟
-BIG_DRIPLEAF,block,easy,,,大型垂滴叶
-BIRCH_BUTTON,block,easy,,,白桦木按钮
-BIRCH_DOOR,block,easy,,,白桦木门
-BIRCH_FENCE,block,easy,,,白桦木栅栏
-BIRCH_FENCE_GATE,block,easy,,,白桦木栅栏门
-BIRCH_LEAVES,block,easy,,,白桦树叶
-BIRCH_LOG,block,easy,,,白桦原木
-BIRCH_PLANKS,block,easy,,,白桦木板
-BIRCH_PRESSURE_PLATE,block,easy,,,白桦木压力板
-BIRCH_SAPLING,block,easy,,,白桦树苗
-BIRCH_SIGN,block,easy,,,白桦木告示牌
-BIRCH_SLAB,block,easy,,,白桦木台阶
-BIRCH_STAIRS,block,easy,,,白桦木楼梯
-BIRCH_TRAPDOOR,block,easy,,,白桦木活板门
-BIRCH_WOOD,block,easy,,,白桦木
-BLAST_FURNACE,block,easy,,,高炉
-BONE_BLOCK,block,easy,,,骨块
-BREWING_STAND,block,easy,,,酿造台
-BRICKS,block,easy,,,红砖块
-BLUE_ORCHID,block,easy,,,兰花
-CACTUS,block,easy,,,仙人掌
-CAKE,block,easy,,,蛋糕
-CALCITE,block,easy,,,方解石
-CAMPFIRE,block,easy,,,营火
-CARTOGRAPHY_TABLE,block,easy,,,制图台
-CARVED_PUMPKIN,block,easy,,,雕刻南瓜
-CAULDRON,block,easy,,,炼药锅
-IRON_CHAIN,block,easy,,,铁链
-CHERRY_BUTTON,block,easy,,,樱花木按钮
-CHERRY_DOOR,block,easy,,,樱花木门
-CHERRY_FENCE,block,easy,,,樱花木栅栏
-CHERRY_FENCE_GATE,block,easy,,,樱花木栅栏门
-CHERRY_HANGING_SIGN,block,easy,,,悬挂式樱花木告示牌
-CHERRY_LEAVES,block,easy,,,樱花树叶
-CHERRY_LOG,block,easy,,,樱花原木
-CHERRY_PLANKS,block,easy,,,樱花木板
-CHERRY_PRESSURE_PLATE,block,easy,,,樱花木压力板
-CHERRY_SAPLING,block,easy,,,樱花树苗
-CHERRY_SIGN,block,easy,,,樱花木告示牌
-CHERRY_SLAB,block,easy,,,樱花木台阶
-CHERRY_STAIRS,block,easy,,,樱花木楼梯
-CHERRY_TRAPDOOR,block,easy,,,樱花木活板门
-CHERRY_WOOD,block,easy,,,樱花木
-CHEST,block,easy,,,箱子
-COARSE_DIRT,block,easy,,,砂土
-COBBLED_DEEPSLATE,block,easy,,,深板岩圆石
-COBBLED_DEEPSLATE_SLAB,block,easy,,,深板岩圆石台阶
-COBBLED_DEEPSLATE_STAIRS,block,easy,,,深板岩圆石楼梯
-COBBLED_DEEPSLATE_WALL,block,easy,,,深板岩圆石墙
-COBBLESTONE,block,easy,,,圆石
-COBBLESTONE_SLAB,block,easy,,,圆石台阶
-COBBLESTONE_STAIRS,block,easy,,,圆石楼梯
-COBBLESTONE_WALL,block,easy,,,圆石墙
-COBWEB,block,easy,,,蜘蛛网
-COCOA_BEANS,block,easy,,,可可豆
-COMPOSTER,block,easy,,,堆肥桶
-CORNFLOWER,block,easy,,,矢车菊
-CRAFTING_TABLE,block,easy,,,工作台
-CRIMSON_HANGING_SIGN,block,easy,,,悬挂式绯红木告示牌
-DANDELION,block,easy,,,蒲公英
-DARK_OAK_BUTTON,block,easy,,,深色橡木按钮
-DARK_OAK_DOOR,block,easy,,,深色橡木门
-DARK_OAK_FENCE,block,easy,,,深色橡木栅栏
-DARK_OAK_FENCE_GATE,block,easy,,,深色橡木栅栏门
-DARK_OAK_HANGING_SIGN,block,easy,,,悬挂式深色橡木告示牌
-DARK_OAK_LEAVES,block,easy,,,深色橡树树叶
-DARK_OAK_LOG,block,easy,,,深色橡木原木
-DARK_OAK_PLANKS,block,easy,,,深色橡木木板
-DARK_OAK_PRESSURE_PLATE,block,easy,,,深色橡木压力板
-DARK_OAK_SAPLING,block,easy,,,深色橡树树苗
-DARK_OAK_SIGN,block,easy,,,深色橡木告示牌
-DARK_OAK_SLAB,block,easy,,,深色橡木台阶
-DARK_OAK_STAIRS,block,easy,,,深色橡木楼梯
-DARK_OAK_TRAPDOOR,block,easy,,,深色橡木活板门
-DARK_OAK_WOOD,block,easy,,,深色橡木
-DEAD_BUSH,block,easy,,,枯萎的灌木
-DEEPSLATE,block,easy,,,深板岩
-DEEPSLATE_BRICKS,block,easy,,,深板岩砖
-DEEPSLATE_BRICK_SLAB,block,easy,,,深板岩砖台阶
-DEEPSLATE_BRICK_STAIRS,block,easy,,,深板岩砖楼梯
-DEEPSLATE_BRICK_WALL,block,easy,,,深板岩砖墙
-DETECTOR_RAIL,block,easy,,,探测铁轨
-DIORITE,block,easy,,,闪长岩
-DIORITE_SLAB,block,easy,,,闪长岩台阶
-DIORITE_STAIRS,block,easy,,,闪长岩楼梯
-DIORITE_WALL,block,easy,,,闪长岩墙
-DIRT,block,easy,,,泥土
-DISPENSER,block,easy,,,发射器
-DRIED_KELP_BLOCK,block,easy,,,干海带块
-DROPPER,block,easy,,,投掷器
-FLETCHING_TABLE,block,easy,,,制箭台
-FLOWER_POT,block,easy,,,花盆
-FURNACE,block,easy,,,熔炉
-GLASS,block,easy,,,玻璃
-GLASS_PANE,block,easy,,,玻璃板
-GRANITE,block,easy,,,花岗岩
-GRANITE_SLAB,block,easy,,,花岗岩台阶
-GRANITE_STAIRS,block,easy,,,花岗岩楼梯
-GRANITE_WALL,block,easy,,,花岗岩墙
-GRAVEL,block,easy,,,沙砾
-GRINDSTONE,block,easy,,,砂轮
-HEAVY_WEIGHTED_PRESSURE_PLATE,block,easy,,,重质测重压力板
-HOPPER,block,easy,,,漏斗
-IRON_BARS,block,easy,,,铁栏杆
-IRON_DOOR,block,easy,,,铁门
-IRON_TRAPDOOR,block,easy,,,铁活板门
-JUKEBOX,block,easy,,,唱片机
-JUNGLE_BUTTON,block,easy,,,丛林木按钮
-JUNGLE_DOOR,block,easy,,,丛林木门
-JUNGLE_FENCE,block,easy,,,丛林木栅栏
-JUNGLE_FENCE_GATE,block,easy,,,丛林木栅栏门
-JUNGLE_HANGING_SIGN,block,easy,,,悬挂式丛林木告示牌
-JUNGLE_LEAVES,block,easy,,,丛林树叶
-JUNGLE_LOG,block,easy,,,丛林原木
-JUNGLE_PLANKS,block,easy,,,丛林木板
-JUNGLE_PRESSURE_PLATE,block,easy,,,丛林木压力板
-JUNGLE_SAPLING,block,easy,,,丛林树苗
-JUNGLE_SIGN,block,easy,,,丛林木告示牌
-JUNGLE_SLAB,block,easy,,,丛林木台阶
-JUNGLE_STAIRS,block,easy,,,丛林木楼梯
-JUNGLE_TRAPDOOR,block,easy,,,丛林木活板门
-JUNGLE_WOOD,block,easy,,,丛林木
-LADDER,block,easy,,,梯子
-LANTERN,block,easy,,,灯笼
-LECTERN,block,easy,,,讲台
-LEVER,block,easy,,,拉杆
-LIGHTNING_ROD,block,easy,,,避雷针
-LIGHT_WEIGHTED_PRESSURE_PLATE,block,easy,,,轻质测重压力板
-LILAC,block,easy,,,丁香
-LILY_OF_THE_VALLEY,block,easy,,,铃兰
-LILY_PAD,block,easy,,,睡莲
-LOOM,block,easy,,,织布机
-MANGROVE_HANGING_SIGN,block,easy,,,悬挂式红树木告示牌
-MELON,block,easy,,,西瓜
-MUD,block,easy,,,泥巴
-NETHERRACK,block,easy,,,下界岩
-NOTE_BLOCK,block,easy,,,音符盒
-OAK_BUTTON,block,easy,,,橡木按钮
-OAK_DOOR,block,easy,,,橡木门
-OAK_FENCE,block,easy,,,橡木栅栏
-OAK_FENCE_GATE,block,easy,,,橡木栅栏门
-OAK_HANGING_SIGN,block,easy,,,悬挂式橡木告示牌
-OAK_LEAVES,block,easy,,,橡树树叶
-OAK_LOG,block,easy,,,橡木原木
-OAK_PLANKS,block,easy,,,橡木木板
-OAK_PRESSURE_PLATE,block,easy,,,橡木压力板
-OAK_SAPLING,block,easy,,,橡树树苗
-OAK_SIGN,block,easy,,,橡木告示牌
-OAK_SLAB,block,easy,,,橡木台阶
-OAK_STAIRS,block,easy,,,橡木楼梯
-OAK_TRAPDOOR,block,easy,,,橡木活板门
-OAK_WOOD,block,easy,,,橡木
-OBSIDIAN,block,easy,,,黑曜石
-OXEYE_DAISY,block,easy,,,滨菊
-PACKED_MUD,block,easy,,,泥坯
-PEONY,block,easy,,,牡丹
-PINK_PETALS,block,easy,,,粉红色花簇
-PISTON,block,easy,,,活塞
-POINTED_DRIPSTONE,block,easy,,,滴水石锥
-POLISHED_ANDESITE,block,easy,,,磨制安山岩
-POLISHED_DIORITE,block,easy,,,磨制闪长岩
-POLISHED_GRANITE,block,easy,,,磨制花岗岩
-POPPY,block,easy,,,虞美人
-POWERED_RAIL,block,easy,,,动力铁轨
-PUMPKIN,block,easy,,,南瓜
-RAIL,block,easy,,,铁轨
-REDSTONE_LAMP,block,easy,,,红石灯
-REDSTONE_TORCH,block,easy,,,红石火把
-RED_MUSHROOM,block,easy,,,红色蘑菇
-BROWN_MUSHROOM,block,easy,,,棕色蘑菇
-RED_SAND,block,easy,,,红沙
-RED_SANDSTONE,block,easy,,,红砂岩
-RED_TULIP,block,easy,,,红色郁金香
-ORANGE_TULIP,block,easy,,,橙色郁金香
-WHITE_TULIP,block,easy,,,白色郁金香
-ROSE_BUSH,block,easy,,,玫瑰丛
-SAND,block,easy,,,沙子
-SANDSTONE,block,easy,,,砂岩
-SCAFFOLDING,block,easy,,,脚手架
-SEA_PICKLE,block,easy,,,海泡菜
-SHROOMLIGHT,block,easy,,,菌光体
-SMITHING_TABLE,block,easy,,,锻造台
-SMOKER,block,easy,,,烟熏炉
-SMOOTH_STONE,block,easy,,,平滑石头
-SNOW_BLOCK,block,easy,,,雪块
-SPORE_BLOSSOM,block,easy,,,孢子花
-SPRUCE_BUTTON,block,easy,,,云杉木按钮
-SPRUCE_DOOR,block,easy,,,云杉木门
-SPRUCE_FENCE,block,easy,,,云杉木栅栏
-SPRUCE_FENCE_GATE,block,easy,,,云杉木栅栏门
-SPRUCE_HANGING_SIGN,block,easy,,,悬挂式云杉木告示牌
-SPRUCE_LEAVES,block,easy,,,云杉树叶
-SPRUCE_LOG,block,easy,,,云杉原木
-SPRUCE_PLANKS,block,easy,,,云杉木板
-SPRUCE_PRESSURE_PLATE,block,easy,,,云杉木压力板
-SPRUCE_SAPLING,block,easy,,,云杉树苗
-SPRUCE_SIGN,block,easy,,,云杉木告示牌
-SPRUCE_SLAB,block,easy,,,云杉木台阶
-SPRUCE_STAIRS,block,easy,,,云杉木楼梯
-SPRUCE_TRAPDOOR,block,easy,,,云杉木活板门
-SPRUCE_WOOD,block,easy,,,云杉木
-STICKY_PISTON,block,easy,,,黏性活塞
-STONE,block,easy,,,石头
-STONECUTTER,block,easy,,,切石机
-STONE_BRICKS,block,easy,,,石砖
-STONE_BUTTON,block,easy,,,石头按钮
-STONE_PRESSURE_PLATE,block,easy,,,石头压力板
-STONE_SLAB,block,easy,,,石头台阶
-STONE_STAIRS,block,easy,,,石头楼梯
-STRIPPED_ACACIA_WOOD,block,easy,,,去皮金合欢木
-STRIPPED_BAMBOO_BLOCK,block,easy,,,去皮竹块
-STRIPPED_BIRCH_LOG,block,easy,,,去皮白桦原木
-STRIPPED_BIRCH_WOOD,block,easy,,,去皮白桦木
-STRIPPED_CRIMSON_HYPHAE,block,easy,,,去皮绯红菌核
-STRIPPED_CRIMSON_STEM,block,easy,,,去皮绯红菌柄
-STRIPPED_DARK_OAK_LOG,block,easy,,,去皮深色橡木原木
-STRIPPED_DARK_OAK_WOOD,block,easy,,,去皮深色橡木
-STRIPPED_JUNGLE_LOG,block,easy,,,去皮丛林原木
-STRIPPED_JUNGLE_WOOD,block,easy,,,去皮丛林木
-STRIPPED_MANGROVE_LOG,block,easy,,,去皮红树原木
-STRIPPED_MANGROVE_WOOD,block,easy,,,去皮红树木
-STRIPPED_OAK_LOG,block,easy,,,去皮橡木原木
-STRIPPED_OAK_WOOD,block,easy,,,去皮橡木
-STRIPPED_SPRUCE_LOG,block,easy,,,去皮云杉原木
-STRIPPED_SPRUCE_WOOD,block,easy,,,去皮云杉木
-STRIPPED_WARPED_HYPHAE,block,easy,,,去皮诡异菌核
-STRIPPED_WARPED_STEM,block,easy,,,去皮诡异菌柄
-SUNFLOWER,block,easy,,,向日葵
-TERRACOTTA,block,easy,,,陶瓦
-TNT,block,easy,,,TNT
-TORCH,block,easy,,,火把
-TRAPPED_CHEST,block,easy,,,陷阱箱
-TRIPWIRE_HOOK,block,easy,,,绊线钩
-TUFF,block,easy,,,凝灰岩
-WARPED_HANGING_SIGN,block,easy,,,悬挂式诡异木告示牌
-COPPER_BLOCK,block,easy,,,铜块
-CUT_COPPER,block,easy,,,切制铜块
-CUT_COPPER_SLAB,block,easy,,,切制铜台阶
-CUT_COPPER_STAIRS,block,easy,,,切制铜楼梯
-CHISELED_COPPER,block,easy,,,雕纹铜块
-COPPER_BULB,block,easy,,,铜灯
-COPPER_DOOR,block,easy,,,铜门
-COPPER_GRATE,block,easy,,,铜格栅
-COPPER_TRAPDOOR,block,easy,,,铜活板门
-LODESTONE,block,easy,,,磁石
-WILDFLOWERS,block,easy,,,野花簇
-LEAF_LITTER,block,easy,,,枯叶堆
-BUSH,block,easy,,,灌木丛
-FIREFLY_BUSH,block,easy,,,萤火虫灌木丛
-COPPER_CHEST,block,easy,,,铜箱子
-COPPER_BARS,block,easy,,,铜栏杆
-COPPER_CHAIN,block,easy,,,铜链
-COPPER_LANTERN,block,easy,,,铜灯笼
-COPPER_TORCH,block,easy,,,铜火把
-COPPER_GOLEM_STATUE,block,easy,,,铜傀儡像
-OAK_SHELF,block,easy,,,橡木展示架
-SPRUCE_SHELF,block,easy,,,云杉木展示架
-BIRCH_SHELF,block,easy,,,白桦木展示架
-JUNGLE_SHELF,block,easy,,,丛林木展示架
-ACACIA_SHELF,block,easy,,,金合欢木展示架
-DARK_OAK_SHELF,block,easy,,,深色橡木展示架
-CHERRY_SHELF,block,easy,,,樱花木展示架
-BAMBOO_SHELF,block,easy,,,竹展示架
-POLISHED_DEEPSLATE,block,easy,,,磨制深板岩
-POLISHED_DEEPSLATE_SLAB,block,easy,,,磨制深板岩台阶
-POLISHED_DEEPSLATE_STAIRS,block,easy,,,磨制深板岩楼梯
-POLISHED_DEEPSLATE_WALL,block,easy,,,磨制深板岩墙
-CRACKED_DEEPSLATE_BRICKS,block,easy,,,裂纹深板岩砖
-CRACKED_DEEPSLATE_TILES,block,easy,,,裂纹深板岩瓦
-CRACKED_NETHER_BRICKS,block,easy,,,裂纹下界砖块
-CRACKED_STONE_BRICKS,block,easy,,,裂纹石砖
-DEEPSLATE_TILE_SLAB,block,easy,,,深板岩瓦台阶
-DEEPSLATE_TILE_STAIRS,block,easy,,,深板岩瓦楼梯
-DEEPSLATE_TILE_WALL,block,easy,,,深板岩瓦墙
-DEEPSLATE_TILES,block,easy,,,深板岩瓦
-CHISELED_DEEPSLATE,block,easy,,,雕纹深板岩
-CHISELED_SANDSTONE,block,easy,,,雕纹砂岩
-KELP,block,easy,,,海带
-GLOW_LICHEN,block,easy,,,发光地衣
-GLOW_INK_SAC,block,easy,,,荧光墨囊
-TARGET,block,easy,,,标靶
-HAY_BLOCK,block,easy,,,干草捆
-RAW_COPPER_BLOCK,block,easy,,,粗铜块
-RAW_GOLD_BLOCK,block,easy,,,粗金块
-GOLD_BLOCK,block,easy,,,金块
-RAW_IRON_BLOCK,block,easy,,,粗铁块
-IRON_BLOCK,block,easy,,,铁块
-AMETHYST_BLOCK,block,easy,,,紫水晶块
-EMERALD_BLOCK,block,easy,,,绿宝石块
-LAPIS_BLOCK,block,easy,,,青金石块
-REDSTONE_BLOCK,block,easy,,,红石块
-SUSPICIOUS_STEW,block,easy,,,谜之炖菜
-INK_SAC,block,easy,,,墨囊
-CARROT_ON_A_STICK,block,easy,,,胡萝卜钓竿
-WARPED_FUNGUS_ON_A_STICK,block,easy,,,诡异菌钓竿
-GLISTERING_MELON_SLICE,block,easy,,,金西瓜片
-GOLDEN_APPLE,block,easy,,,金苹果
-FERMENTED_SPIDER_EYE,block,easy,,,发酵蛛眼
-MAGMA_CREAM,block,easy,,,岩浆膏
-EGG,block,easy,,,鸡蛋
-WRITABLE_BOOK,block,easy,,,书与笔
-FEATHER,block,easy,,,羽毛
-ANVIL,block,normal,,,铁砧
-ARMADILLO_SCUTE,block,normal,,,犰狳鳞甲
-BEEHIVE,block,normal,,,蜂箱
-BEE_NEST,block,normal,,,蜂巢
-BLACKSTONE,block,normal,,,黑石
-BLACKSTONE_SLAB,block,normal,,,黑石台阶
-BLACKSTONE_STAIRS,block,normal,,,黑石楼梯
-BLACKSTONE_WALL,block,normal,,,黑石墙
-BLUE_ICE,block,normal,,,蓝冰
-BOOKSHELF,block,normal,,,书架
-CHIPPED_ANVIL,block,normal,,,开裂的铁砧
-CHISELED_BOOKSHELF,block,normal,,,雕纹书架
-CHISELED_NETHER_BRICKS,block,normal,,,雕纹下界砖块
-CHISELED_POLISHED_BLACKSTONE,block,normal,,,雕纹磨制黑石
-CHISELED_QUARTZ_BLOCK,block,normal,,,雕纹石英块
-CRACKED_POLISHED_BLACKSTONE_BRICKS,block,normal,,,裂纹磨制黑石砖
-CRIMSON_BUTTON,block,normal,,,绯红木按钮
-CRIMSON_DOOR,block,normal,,,绯红木门
-CRIMSON_FENCE,block,normal,,,绯红木栅栏
-CRIMSON_FENCE_GATE,block,normal,,,绯红木栅栏门
-CRIMSON_FUNGUS,block,normal,,,绯红菌
-CRIMSON_HYPHAE,block,normal,,,绯红菌核
-CRIMSON_NYLIUM,block,normal,,,绯红菌岩
-CRIMSON_PLANKS,block,normal,,,绯红木板
-CRIMSON_PRESSURE_PLATE,block,normal,,,绯红木压力板
-CRIMSON_ROOTS,block,normal,,,绯红菌索
-CRIMSON_SIGN,block,normal,,,绯红木告示牌
-CRIMSON_SLAB,block,normal,,,绯红木台阶
-CRIMSON_STAIRS,block,normal,,,绯红木楼梯
-CRIMSON_STEM,block,normal,,,绯红菌柄
-CRIMSON_TRAPDOOR,block,normal,,,绯红木活板门
-CRYING_OBSIDIAN,block,normal,,,哭泣的黑曜石
-DAMAGED_ANVIL,block,normal,,,损坏的铁砧
-DARK_PRISMARINE,block,normal,,,暗海晶石
-DARK_PRISMARINE_SLAB,block,normal,,,暗海晶石台阶
-DARK_PRISMARINE_STAIRS,block,normal,,,暗海晶石楼梯
-DAYLIGHT_DETECTOR,block,normal,,,阳光探测器
-DRIPSTONE_BLOCK,block,normal,,,滴水石块
-ENCHANTING_TABLE,block,normal,,,附魔台
-ENDER_CHEST,block,normal,,,末影箱
-ENDER_EYE,block,normal,,,末影之眼
-FERN,block,normal,,,蕨
-FLOWERING_AZALEA,block,normal,,,盛开的杜鹃花丛
-FLOWERING_AZALEA_LEAVES,block,normal,,,盛开的杜鹃树叶
-GHAST_TEAR,block,normal,,,恶魂之泪
-GILDED_BLACKSTONE,block,normal,,,镶金黑石
-GLOWSTONE,block,normal,,,荧石
-HONEYCOMB_BLOCK,block,normal,,,蜜脾块
-HONEY_BLOCK,block,normal,,,蜂蜜块
-ICE,block,normal,,,冰
-LARGE_AMETHYST_BUD,block,normal,,,大型紫晶芽
-MAGMA_BLOCK,block,normal,,,岩浆块
-MANGROVE_BUTTON,block,normal,,,红树木按钮
-MANGROVE_DOOR,block,normal,,,红树木门
-MANGROVE_FENCE,block,normal,,,红树木栅栏
-MANGROVE_FENCE_GATE,block,normal,,,红树木栅栏门
-MANGROVE_LEAVES,block,normal,,,红树树叶
-MANGROVE_LOG,block,normal,,,红树原木
-MANGROVE_PLANKS,block,normal,,,红树木板
-MANGROVE_PRESSURE_PLATE,block,normal,,,红树木压力板
-MANGROVE_PROPAGULE,block,normal,,,红树胎生苗
-MANGROVE_ROOTS,block,normal,,,红树根
-MANGROVE_SIGN,block,normal,,,红树木告示牌
-MANGROVE_SLAB,block,normal,,,红树木台阶
-MANGROVE_STAIRS,block,normal,,,红树木楼梯
-MANGROVE_TRAPDOOR,block,normal,,,红树木活板门
-MANGROVE_WOOD,block,normal,,,红树木
-MEDIUM_AMETHYST_BUD,block,normal,,,中型紫晶芽
-MOSSY_COBBLESTONE,block,normal,,,苔石
-MOSSY_COBBLESTONE_SLAB,block,normal,,,苔石台阶
-MOSSY_COBBLESTONE_STAIRS,block,normal,,,苔石楼梯
-MOSSY_COBBLESTONE_WALL,block,normal,,,苔石墙
-MOSSY_STONE_BRICKS,block,normal,,,苔石砖
-MOSSY_STONE_BRICK_SLAB,block,normal,,,苔石砖台阶
-MOSSY_STONE_BRICK_STAIRS,block,normal,,,苔石砖楼梯
-MOSSY_STONE_BRICK_WALL,block,normal,,,苔石砖墙
-NETHER_BRICKS,block,normal,,,下界砖块
-NETHER_BRICK_FENCE,block,normal,,,下界砖栅栏
-NETHER_BRICK_SLAB,block,normal,,,下界砖台阶
-NETHER_BRICK_STAIRS,block,normal,,,下界砖楼梯
-NETHER_BRICK_WALL,block,normal,,,下界砖墙
-NETHER_SPROUTS,block,normal,,,下界苗
-NETHER_WART,block,normal,,,下界疣
-NETHER_WART_BLOCK,block,normal,,,下界疣块
-OBSERVER,block,normal,,,侦测器
-PACKED_ICE,block,normal,,,浮冰
-POLISHED_BLACKSTONE,block,normal,,,磨制黑石
-POLISHED_BLACKSTONE_BRICKS,block,normal,,,磨制黑石砖
-POLISHED_BLACKSTONE_BRICK_SLAB,block,normal,,,磨制黑石砖台阶
-POLISHED_BLACKSTONE_BRICK_STAIRS,block,normal,,,磨制黑石砖楼梯
-POLISHED_BLACKSTONE_BRICK_WALL,block,normal,,,磨制黑石砖墙
-POLISHED_BLACKSTONE_BUTTON,block,normal,,,磨制黑石按钮
-POLISHED_BLACKSTONE_PRESSURE_PLATE,block,normal,,,磨制黑石压力板
-POLISHED_BLACKSTONE_SLAB,block,normal,,,磨制黑石台阶
-POLISHED_BLACKSTONE_STAIRS,block,normal,,,磨制黑石楼梯
-POLISHED_BLACKSTONE_WALL,block,normal,,,磨制黑石墙
-PRISMARINE,block,normal,,,海晶石
-PRISMARINE_BRICKS,block,normal,,,海晶石砖
-PRISMARINE_BRICK_SLAB,block,normal,,,海晶石砖台阶
-PRISMARINE_BRICK_STAIRS,block,normal,,,海晶石砖楼梯
-PRISMARINE_SLAB,block,normal,,,海晶石台阶
-PRISMARINE_STAIRS,block,normal,,,海晶石楼梯
-PRISMARINE_WALL,block,normal,,,海晶石墙
-QUARTZ_BRICKS,block,normal,,,石英砖
-QUARTZ_PILLAR,block,normal,,,石英柱
-QUARTZ_SLAB,block,normal,,,石英台阶
-QUARTZ_STAIRS,block,normal,,,石英楼梯
-RED_NETHER_BRICKS,block,normal,,,红色下界砖块
-RED_NETHER_BRICK_SLAB,block,normal,,,红色下界砖台阶
-RED_NETHER_BRICK_STAIRS,block,normal,,,红色下界砖楼梯
-RED_NETHER_BRICK_WALL,block,normal,,,红色下界砖墙
-RESPAWN_ANCHOR,block,normal,,,重生锚
-SEA_LANTERN,block,normal,,,海晶灯
-SMALL_DRIPLEAF,block,normal,,,小型垂滴叶
-SMOOTH_QUARTZ_SLAB,block,normal,,,平滑石英台阶
-SMOOTH_QUARTZ_STAIRS,block,normal,,,平滑石英楼梯
-SOUL_CAMPFIRE,block,normal,,,灵魂营火
-SOUL_LANTERN,block,normal,,,灵魂灯笼
-SOUL_SAND,block,normal,,,灵魂沙
-SOUL_SOIL,block,normal,,,灵魂土
-SOUL_TORCH,block,normal,,,灵魂火把
-STRIPPED_CHERRY_LOG,block,normal,,,去皮樱花原木
-STRIPPED_CHERRY_WOOD,block,normal,,,去皮樱花木
-TWISTING_VINES,block,normal,,,缠怨藤
-WARPED_BUTTON,block,normal,,,诡异木按钮
-WARPED_DOOR,block,normal,,,诡异木门
-WARPED_FENCE,block,normal,,,诡异木栅栏
-WARPED_FENCE_GATE,block,normal,,,诡异木栅栏门
-WARPED_FUNGUS,block,normal,,,诡异菌
-WARPED_HYPHAE,block,normal,,,诡异菌核
-WARPED_NYLIUM,block,normal,,,诡异菌岩
-WARPED_PLANKS,block,normal,,,诡异木板
-WARPED_PRESSURE_PLATE,block,normal,,,诡异木压力板
-WARPED_ROOTS,block,normal,,,诡异菌索
-WARPED_SIGN,block,normal,,,诡异木告示牌
-WARPED_SLAB,block,normal,,,诡异木台阶
-WARPED_STAIRS,block,normal,,,诡异木楼梯
-WARPED_STEM,block,normal,,,诡异菌柄
-WARPED_TRAPDOOR,block,normal,,,诡异木活板门
-WARPED_WART_BLOCK,block,normal,,,诡异疣块
-CRAFTER,block,normal,,,合成器
-CHISELED_TUFF,block,normal,,,雕纹凝灰岩
-CHISELED_TUFF_BRICKS,block,normal,,,雕纹凝灰岩砖
-POLISHED_TUFF,block,normal,,,磨制凝灰岩
-POLISHED_TUFF_SLAB,block,normal,,,磨制凝灰岩台阶
-POLISHED_TUFF_STAIRS,block,normal,,,磨制凝灰岩楼梯
-POLISHED_TUFF_WALL,block,normal,,,磨制凝灰岩墙
-TUFF_BRICK_SLAB,block,normal,,,凝灰岩砖台阶
-TUFF_BRICK_STAIRS,block,normal,,,凝灰岩砖楼梯
-TUFF_BRICK_WALL,block,normal,,,凝灰岩砖墙
-TUFF_BRICKS,block,normal,,,凝灰岩砖
-TUFF_SLAB,block,normal,,,凝灰岩台阶
-TUFF_STAIRS,block,normal,,,凝灰岩楼梯
-TUFF_WALL,block,normal,,,凝灰岩墙
-EXPOSED_CHISELED_COPPER,block,normal,,,斑驳的雕纹铜块
-EXPOSED_COPPER,block,normal,,,斑驳的铜块
-EXPOSED_COPPER_BULB,block,normal,,,斑驳的铜灯
-EXPOSED_COPPER_DOOR,block,normal,,,斑驳的铜门
-EXPOSED_COPPER_GRATE,block,normal,,,斑驳的铜格栅
-EXPOSED_COPPER_TRAPDOOR,block,normal,,,斑驳的铜活板门
-EXPOSED_CUT_COPPER,block,normal,,,斑驳的切制铜块
-EXPOSED_CUT_COPPER_SLAB,block,normal,,,斑驳的切制铜台阶
-EXPOSED_CUT_COPPER_STAIRS,block,normal,,,斑驳的切制铜楼梯
-WAXED_CHISELED_COPPER,block,normal,,,涂蜡的雕纹铜块
-WAXED_COPPER_BLOCK,block,normal,,,涂蜡的铜块
-WAXED_COPPER_BULB,block,normal,,,涂蜡的铜灯
-WAXED_COPPER_DOOR,block,normal,,,涂蜡的铜门
-WAXED_COPPER_GRATE,block,normal,,,涂蜡的铜格栅
-WAXED_COPPER_TRAPDOOR,block,normal,,,涂蜡的铜活板门
-WAXED_CUT_COPPER,block,normal,,,涂蜡的切制铜块
-WAXED_CUT_COPPER_SLAB,block,normal,,,涂蜡的切制铜台阶
-WAXED_CUT_COPPER_STAIRS,block,normal,,,涂蜡的切制铜楼梯
-CLOSED_EYEBLOSSOM,block,normal,,,闭合的眼眸花
-OPEN_EYEBLOSSOM,block,normal,,,张开的眼眸花
-PALE_OAK_LEAVES,block,normal,,,苍白橡树树叶
-PALE_OAK_SAPLING,block,normal,,,苍白橡树树苗
-PALE_OAK_LOG,block,normal,,,苍白橡木原木
-STRIPPED_PALE_OAK_LOG,block,normal,,,去皮苍白橡木原木
-PALE_OAK_WOOD,block,normal,,,苍白橡木
-STRIPPED_PALE_OAK_WOOD,block,normal,,,去皮苍白橡木
-PALE_OAK_PLANKS,block,normal,,,苍白橡木木板
-PALE_MOSS_BLOCK,block,normal,,,苍白苔藓块
-PALE_MOSS_CARPET,block,normal,,,苍白覆地苔藓
-PALE_HANGING_MOSS,block,normal,,,苍白垂须
-PALE_OAK_BUTTON,block,normal,,,苍白橡木按钮
-PALE_OAK_DOOR,block,normal,,,苍白橡木门
-PALE_OAK_FENCE,block,normal,,,苍白橡木栅栏
-PALE_OAK_FENCE_GATE,block,normal,,,苍白橡木栅栏门
-PALE_OAK_HANGING_SIGN,block,normal,,,悬挂式苍白橡木告示牌
-PALE_OAK_PRESSURE_PLATE,block,normal,,,苍白橡木压力板
-PALE_OAK_SIGN,block,normal,,,苍白橡木告示牌
-PALE_OAK_SLAB,block,normal,,,苍白橡木台阶
-PALE_OAK_STAIRS,block,normal,,,苍白橡木楼梯
-PALE_OAK_TRAPDOOR,block,normal,,,苍白橡木活板门
-SHORT_DRY_GRASS,block,normal,,,矮枯草丛
-TALL_DRY_GRASS,block,normal,,,高枯草丛
-CACTUS_FLOWER,block,normal,,,仙人掌花
-EXPOSED_COPPER_CHEST,block,normal,,,斑驳的铜箱子
-WAXED_COPPER_CHEST,block,normal,,,涂蜡的铜箱子
-EXPOSED_COPPER_BARS,block,normal,,,斑驳的铜栏杆
-WAXED_COPPER_BARS,block,normal,,,涂蜡的铜栏杆
-EXPOSED_COPPER_CHAIN,block,normal,,,斑驳的铜链
-WAXED_COPPER_CHAIN,block,normal,,,涂蜡的铜链
-EXPOSED_COPPER_LANTERN,block,normal,,,斑驳的铜灯笼
-WAXED_COPPER_LANTERN,block,normal,,,涂蜡的铜灯笼
-EXPOSED_LIGHTNING_ROD,block,normal,,,斑驳的避雷针
-WAXED_LIGHTNING_ROD,block,normal,,,涂蜡的避雷针
-EXPOSED_COPPER_GOLEM_STATUE,block,normal,,,斑驳的铜傀儡像
-WAXED_COPPER_GOLEM_STATUE,block,normal,,,涂蜡的铜傀儡像
-MANGROVE_SHELF,block,normal,,,红树木展示架
-PALE_OAK_SHELF,block,normal,,,苍白橡木展示架
-CRIMSON_SHELF,block,normal,,,绯红木展示架
-WARPED_SHELF,block,normal,,,诡异木展示架
-CANDLE,block,normal,,,蜡烛
-BREEZE_ROD,block,normal,,,旋风棒
-DIAMOND_BLOCK,block,normal,,,钻石块
-HEART_OF_THE_SEA,block,normal,,,海洋之心
-SCULK,block,normal,,,幽匿块
-SCULK_VEIN,block,normal,,,幽匿脉络
-SCULK_CATALYST,block,normal,,,幽匿催发体
-SCULK_SENSOR,block,normal,,,幽匿感测体
-SCULK_SHRIEKER,block,normal,,,幽匿尖啸体
-POWDER_SNOW_BUCKET,block,normal,,,细雪桶
-COD_BUCKET,block,normal,,,鳕鱼桶
-SALMON_BUCKET,block,normal,,,鲑鱼桶
-PUFFERFISH_BUCKET,block,normal,,,河豚桶
-TROPICAL_FISH_BUCKET,block,normal,,,热带鱼桶
-SPECTRAL_ARROW,block,normal,,,光灵箭
-TIPPED_ARROW,block,normal,,,药水箭
-EXPERIENCE_BOTTLE,block,normal,,,附魔之瓶
-SPYGLASS,block,normal,,,望远镜
-RABBIT_HIDE,block,normal,,,兔子皮
-RABBIT_STEW,block,normal,,,兔肉煲
-NAME_TAG,block,normal,,,命名牌
-POISONOUS_POTATO,block,normal,,,毒马铃薯
-FIRE_CHARGE,block,normal,,,火焰弹
-GOAT_HORN,block,normal,,,山羊角
-BLUE_EGG,block,normal,,,寒带鸡蛋
-BROWN_EGG,block,normal,,,热带鸡蛋
-BLACK_BED,block,normal,,,黑色床
-BLACK_CARPET,block,normal,,,黑色地毯
-BLACK_STAINED_GLASS,block,normal,,,黑色染色玻璃
-BLACK_TERRACOTTA,block,normal,,,黑色陶瓦
-BLACK_WOOL,block,normal,,,黑色羊毛
-BLUE_BED,block,normal,,,蓝色床
-BLUE_CARPET,block,normal,,,蓝色地毯
-BLUE_STAINED_GLASS,block,normal,,,蓝色染色玻璃
-BLUE_TERRACOTTA,block,normal,,,蓝色陶瓦
-BLUE_WOOL,block,normal,,,蓝色羊毛
-BROWN_BED,block,normal,,,棕色床
-BROWN_CARPET,block,normal,,,棕色地毯
-BROWN_STAINED_GLASS,block,normal,,,棕色染色玻璃
-BROWN_WOOL,block,normal,,,棕色羊毛
-CYAN_BED,block,normal,,,青色床
-CYAN_CARPET,block,normal,,,青色地毯
-CYAN_CONCRETE,block,normal,,,青色混凝土
-CYAN_STAINED_GLASS,block,normal,,,青色染色玻璃
-CYAN_WOOL,block,normal,,,青色羊毛
-GRAY_BED,block,normal,,,灰色床
-GRAY_CARPET,block,normal,,,灰色地毯
-GRAY_STAINED_GLASS,block,normal,,,灰色染色玻璃
-GRAY_WOOL,block,normal,,,灰色羊毛
-GREEN_BED,block,normal,,,绿色床
-GREEN_CARPET,block,normal,,,绿色地毯
-GREEN_STAINED_GLASS,block,normal,,,绿色染色玻璃
-GREEN_TERRACOTTA,block,normal,,,绿色陶瓦
-GREEN_WOOL,block,normal,,,绿色羊毛
-LIGHT_BLUE_STAINED_GLASS,block,normal,,,淡蓝色染色玻璃
-LIGHT_BLUE_STAINED_GLASS_PANE,block,normal,,,淡蓝色染色玻璃板
-LIGHT_BLUE_WOOL,block,normal,,,淡蓝色羊毛
-LIME_BED,block,normal,,,黄绿色床
-LIME_CARPET,block,normal,,,黄绿色地毯
-LIME_STAINED_GLASS,block,normal,,,黄绿色染色玻璃
-LIME_WOOL,block,normal,,,黄绿色羊毛
-MAGENTA_BED,block,normal,,,品红色床
-MAGENTA_CARPET,block,normal,,,品红色地毯
-MAGENTA_GLAZED_TERRACOTTA,block,normal,,,品红色带釉陶瓦
-MAGENTA_STAINED_GLASS,block,normal,,,品红色染色玻璃
-MAGENTA_STAINED_GLASS_PANE,block,normal,,,品红色染色玻璃板
-MAGENTA_TERRACOTTA,block,normal,,,品红色陶瓦
-MAGENTA_WOOL,block,normal,,,品红色羊毛
-ORANGE_BED,block,normal,,,橙色床
-ORANGE_CARPET,block,normal,,,橙色地毯
-ORANGE_STAINED_GLASS,block,normal,,,橙色染色玻璃
-ORANGE_TERRACOTTA,block,normal,,,橙色陶瓦
-ORANGE_WOOL,block,normal,,,橙色羊毛
-PURPLE_BED,block,normal,,,紫色床
-PURPLE_CARPET,block,normal,,,紫色地毯
-PURPLE_WOOL,block,normal,,,紫色羊毛
-RED_BED,block,normal,,,红色床
-RED_CARPET,block,normal,,,红色地毯
-RED_STAINED_GLASS,block,normal,,,红色染色玻璃
-RED_STAINED_GLASS_PANE,block,normal,,,红色染色玻璃板
-RED_TERRACOTTA,block,normal,,,红色陶瓦
-RED_WOOL,block,normal,,,红色羊毛
-WHITE_BED,block,normal,,,白色床
-WHITE_CARPET,block,normal,,,白色地毯
-WHITE_STAINED_GLASS,block,normal,,,白色染色玻璃
-WHITE_STAINED_GLASS_PANE,block,normal,,,白色染色玻璃板
-WHITE_TERRACOTTA,block,normal,,,白色陶瓦
-WHITE_WOOL,block,normal,,,白色羊毛
-YELLOW_BED,block,normal,,,黄色床
-YELLOW_CARPET,block,normal,,,黄色地毯
-YELLOW_CONCRETE,block,normal,,,黄色混凝土
-YELLOW_STAINED_GLASS,block,normal,,,黄色染色玻璃
-YELLOW_STAINED_GLASS_PANE,block,normal,,,黄色染色玻璃板
-YELLOW_TERRACOTTA,block,normal,,,黄色陶瓦
-YELLOW_WOOL,block,normal,,,黄色羊毛
-AMETHYST_CLUSTER,block,hard,,,紫水晶簇
-ANCIENT_DEBRIS,block,hard,,,远古残骸
-BRAIN_CORAL,block,hard,,,脑纹珊瑚
-BRAIN_CORAL_BLOCK,block,hard,,,脑纹珊瑚块
-BRAIN_CORAL_FAN,block,hard,,,脑纹珊瑚扇
-CALIBRATED_SCULK_SENSOR,block,hard,,,校频幽匿感测体
-COAL_ORE,block,hard,,,煤矿石
-COPPER_ORE,block,hard,,,铜矿石
-DEAD_BRAIN_CORAL,block,hard,,,失活的脑纹珊瑚
-DEAD_BRAIN_CORAL_BLOCK,block,hard,,,失活的脑纹珊瑚块
-DEAD_BRAIN_CORAL_FAN,block,hard,,,失活的脑纹珊瑚扇
-DEEPSLATE_COPPER_ORE,block,hard,,,深层铜矿石
-DEEPSLATE_DIAMOND_ORE,block,hard,,,深层钻石矿石
-DEEPSLATE_GOLD_ORE,block,hard,,,深层金矿石
-DEEPSLATE_IRON_ORE,block,hard,,,深层铁矿石
-DEEPSLATE_REDSTONE_ORE,block,hard,,,深层红石矿石
-EMERALD_ORE,block,hard,,,绿宝石矿石
-GOLD_ORE,block,hard,,,金矿石
-GRASS_BLOCK,block,hard,,,草方块
-IRON_ORE,block,hard,,,铁矿石
-MUSHROOM_STEM,block,hard,,,蘑菇柄
-NETHER_GOLD_ORE,block,hard,,,下界金矿石
-NETHER_QUARTZ_ORE,block,hard,,,下界石英矿石
-PODZOL,block,hard,,,灰化土
-REDSTONE_ORE,block,hard,,,红石矿石
-SMALL_AMETHYST_BUD,block,hard,,,小型紫晶芽
-SPONGE,block,hard,,,海绵
-TINTED_GLASS,block,hard,,,遮光玻璃
-TURTLE_EGG,block,hard,,,海龟蛋
-WET_SPONGE,block,hard,,,湿海绵
-WAXED_EXPOSED_CHISELED_COPPER,block,hard,,,涂蜡的斑驳雕纹铜块
-WAXED_EXPOSED_COPPER,block,hard,,,涂蜡的斑驳铜块
-WAXED_EXPOSED_COPPER_BULB,block,hard,,,涂蜡的斑驳铜灯
-WAXED_EXPOSED_COPPER_DOOR,block,hard,,,涂蜡的斑驳铜门
-WAXED_EXPOSED_COPPER_GRATE,block,hard,,,涂蜡的斑驳铜格栅
-WAXED_EXPOSED_COPPER_TRAPDOOR,block,hard,,,涂蜡的斑驳铜活板门
-WAXED_EXPOSED_CUT_COPPER,block,hard,,,涂蜡的斑驳切制铜块
-WAXED_EXPOSED_CUT_COPPER_SLAB,block,hard,,,涂蜡的斑驳切制铜台阶
-WAXED_EXPOSED_CUT_COPPER_STAIRS,block,hard,,,涂蜡的斑驳切制铜楼梯
-CREAKING_HEART,block,hard,,,嘎枝之心
-RESIN_BLOCK,block,hard,,,树脂块
-RESIN_BRICKS,block,hard,,,树脂砖块
-CHISELED_RESIN_BRICKS,block,hard,,,雕纹树脂砖块
-RESIN_BRICK_SLAB,block,hard,,,树脂砖台阶
-RESIN_BRICK_STAIRS,block,hard,,,树脂砖楼梯
-RESIN_BRICK_WALL,block,hard,,,树脂砖墙
-DRIED_GHAST,block,hard,,,失水恶魂
-WAXED_EXPOSED_COPPER_CHEST,block,hard,,,涂蜡的斑驳铜箱子
-WAXED_EXPOSED_COPPER_BARS,block,hard,,,涂蜡的斑驳铜栏杆
-WAXED_EXPOSED_COPPER_CHAIN,block,hard,,,涂蜡的斑驳铜链
-WAXED_EXPOSED_COPPER_LANTERN,block,hard,,,涂蜡的斑驳铜灯笼
-WAXED_EXPOSED_LIGHTNING_ROD,block,hard,,,涂蜡的斑驳避雷针
-WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,hard,,,涂蜡的斑驳铜傀儡像
-LAPIS_ORE,block,hard,,,青金石矿石
-DEEPSLATE_LAPIS_ORE,block,hard,,,深层青金石矿石
-NAUTILUS_SHELL,block,hard,,,鹦鹉螺壳
-WITHER_SKELETON_SKULL,block,hard,,,凋灵骷髅头颅
-OMINOUS_BOTTLE,block,hard,,,灾厄之瓶
-ECHO_SHARD,block,hard,,,回响碎片
-RECOVERY_COMPASS,block,hard,,,追溯指针
-TOTEM_OF_UNDYING,block,hard,,,不死图腾
-NETHERITE_UPGRADE_SMITHING_TEMPLATE,block,hard,,,下界合金升级锻造模板
-NETHERITE_INGOT,block,hard,,,下界合金锭
-RABBIT_FOOT,block,hard,,,兔子脚
-CHORUS_FLOWER,block,hard,,,紫颂花
-END_ROD,block,hard,,,末地烛
-END_STONE,block,hard,,,末地石
-END_STONE_BRICK_SLAB,block,hard,,,末地石砖台阶
-END_STONE_BRICK_STAIRS,block,hard,,,末地石砖楼梯
-END_STONE_BRICK_WALL,block,hard,,,末地石砖墙
-END_STONE_BRICKS,block,hard,,,末地石砖
-SHULKER_BOX,block,hard,,,潜影盒
-DRAGON_HEAD,block,hard,,,龙首
-DEEPSLATE_COAL_ORE,block,hard,,,深层煤矿石
-FROGSPAWN,block,hard,,,青蛙卵
-OBTAIN_WOODEN_TOOLS,goal,normal,Obtain all Wooden Tools,"item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE",获得全套木质工具
-OBTAIN_STONE_TOOLS,goal,normal,Obtain all Stone Tools,"item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE",获得全套石质工具
-OBTAIN_IRON_TOOLS,goal,normal,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE",获得全套铁质工具
-OBTAIN_GOLDEN_TOOLS,goal,normal,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE",获得全套金质工具
-OBTAIN_DIAMOND_TOOLS,goal,normal,Obtain all Diamond Tools,"item:DIAMOND_SWORD,DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE",获得全套钻石工具
-OBTAIN_COPPER_TOOLS,goal,normal,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR",获得全套铜质工具
-MINE_DIAMOND_ORE,goal,normal,Mine Diamond Ore,item:DIAMOND_ORE,挖掘钻石矿石
-MINE_EMERALD_ORE,goal,normal,Mine Emerald Ore,item:EMERALD_ORE,挖掘绿宝石矿石
-MINE_MOB_SPAWNER,goal,normal,Mine a Spawner,item:SPAWNER,挖掘刷怪笼
-MINE_TURTLE_EGG,goal,normal,Mine Turtle Egg,item:TURTLE_EGG,挖掘海龟蛋
-MINE_CRAFTER,goal,normal,Mine Crafter,item:CRAFTER,挖掘合成器
-WEAR_LEATHER_ARMOR,goal,normal,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS",穿上全套皮革盔甲
-WEAR_GOLDEN_ARMOR,goal,normal,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS",穿上全套金质盔甲
-WEAR_CHAIN_ARMOR_PIECE,goal,normal,Wear a Chain Armor Piece,"equipment-any:CHAINMAIL_HELMET,CHAINMAIL_CHESTPLATE,CHAINMAIL_LEGGINGS,CHAINMAIL_BOOTS",穿上一件锁链盔甲
-WEAR_IRON_ARMOR,goal,normal,Wear Full Iron Armor,"equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS",穿上全套铁质盔甲
-WEAR_DIAMOND_ARMOR,goal,normal,Wear Full Diamond Armor,"equipment-all:DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS",穿上全套钻石盔甲
-WEAR_COPPER_ARMOR,goal,normal,Wear Full Copper Armor,"equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS",穿上全套铜质盔甲
-TAME_CAT,goal,normal,Tame a Cat,tame:CAT,驯服一只猫
-TAME_PARROT,goal,normal,Tame a Parrot,tame:PARROT,驯服一只鹦鹉
-TAME_HORSE,goal,normal,Tame a Horse,tame:HORSE,驯服一匹马
-TAME_WOLF,goal,normal,Tame a Wolf,tame:WOLF,驯服一只狼
-TAME_NAUTILUS,goal,normal,Tame a Nautilus,tame:NAUTILUS,驯服一只鹦鹉螺
-BREED_4_UNIQUE_ANIMALS,goal,normal,Breed 4 Unique Animals,breed-unique:4,繁殖 4 种不同动物
-BREED_6_UNIQUE_ANIMALS,goal,normal,Breed 6 Unique Animals,breed-unique:6,繁殖 6 种不同动物
-BREED_8_UNIQUE_ANIMALS,goal,normal,Breed 8 Unique Animals,breed-unique:8,繁殖 8 种不同动物
-BREED_CHICKEN,goal,normal,Breed Chickens,breed:CHICKEN,繁殖鸡
-BREED_COW,goal,normal,Breed Cows,breed:COW,繁殖牛
-BREED_HOGLIN,goal,normal,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
-BREED_PIG,goal,normal,Breed Pigs,breed:PIG,繁殖猪
-BREED_CAMEL,goal,normal,Breed Camels,breed:CAMEL,繁殖骆驼
-BREED_ARMADILLO,goal,normal,Breed Armadillos,breed:ARMADILLO,繁殖犰狳
-BREED_RABBIT,goal,normal,Breed Rabbits,breed:RABBIT,繁殖兔子
-BREED_FOX,goal,normal,Breed Foxes,breed:FOX,繁殖狐狸
-BREED_SHEEP,goal,normal,Breed Sheep,breed:SHEEP,繁殖羊
-BREED_STRIDER,goal,normal,Breed Striders,breed:STRIDER,繁殖炽足兽
-BREED_GOAT,goal,normal,Breed Goats,breed:GOAT,繁殖山羊
-BREED_FROGS,goal,normal,Breed Frogs,breed:FROG,繁殖青蛙
-KILL_WITCH,goal,normal,Kill Witch,kill:WITCH,击杀女巫
-KILL_BOGGED,goal,normal,Kill Bogged,kill:BOGGED,击杀沼骸
-KILL_PARCHED,goal,normal,Kill Parched,kill:PARCHED,击杀干尸
-KILL_ZOMBIE_VILLAGER,goal,normal,Kill Zombie Villager,kill:ZOMBIE_VILLAGER,击杀僵尸村民
-KILL_STRAY,goal,normal,Kill Stray,kill:STRAY,击杀流浪者
-KILL_ZOGLIN,goal,normal,Kill Zoglin,kill:ZOGLIN,击杀僵尸疣猪兽
-KILL_SILVERFISH,goal,normal,Kill Silverfish,kill:SILVERFISH,击杀蠹虫
-KILL_GUARDIAN,goal,normal,Kill Guardian,kill:GUARDIAN,击杀守卫者
-KILL_GHAST,goal,normal,Kill Ghast,kill:GHAST,击杀恶魂
-KILL_BAT,goal,normal,Kill Bat,kill:BAT,击杀蝙蝠
-KILL_SNOW_GOLEM,goal,normal,Kill Snow Golem,kill:SNOW_GOLEM,击杀雪傀儡
-KILL_ELDER_GUARDIAN,goal,normal,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
-KILL_WARDEN,goal,normal,Kill Warden,kill:WARDEN,击杀监守者
-KILL_7_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7,击杀 7 种不同敌对生物
-KILL_10_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10,击杀 10 种不同敌对生物
-KILL_13_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 13 Unique Hostile Mobs,kill-unique-hostile:13,击杀 13 种不同敌对生物
-KILL_15_UNIQUE_HOSTILE_MOBS,goal,normal,Kill 15 Unique Hostile Mobs,kill-unique-hostile:15,击杀 15 种不同敌对生物
-KILL_30_UNDEAD_MOBS,goal,normal,Kill 30 Undead Mobs,kill-undead:30,击杀 30 只亡灵生物
-KILL_20_ARTHROPOD_MOBS,goal,normal,Kill 20 Arthropod Mobs,kill-arthropod:20,击杀 20 只节肢生物
-KILL_100_MOBS,goal,normal,Kill 100 mobs,kill-total:100,击杀 100 只生物
-OBTAIN_ALL_FURNACES,goal,normal,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER",获得所有熔炉类方块
-OBTAIN_ALL_MINECARTS,goal,normal,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART",获得所有矿车类型
-OBTAIN_ALL_MUSHROOMS,goal,normal,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS",获得所有蘑菇和菌类
-OBTAIN_ALL_PUMPKINS,goal,normal,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN",获得所有南瓜类物品
-OBTAIN_ALL_TORCHES,goal,normal,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH",获得所有火把类物品
-OBTAIN_ALL_RAW_ORE_BLOCKS,goal,normal,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK",获得所有粗矿块
-OBTAIN_ALL_SOUPS,goal,normal,Obtain every type of Soup,"item:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",获得所有汤类食物
-OBTAIN_64_ARROWS,goal,normal,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
-OBTAIN_64_COARSE_DIRT,goal,normal,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
-OBTAIN_64_COLORED_WOOL,goal,normal,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
-OBTAIN_64_COLORED_CONCRETE,goal,normal,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64,获得 64 个彩色混凝土
-OBTAIN_6_UNIQUE_BUCKETS,goal,normal,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
-OBTAIN_4_UNIQUE_SAPLINGS,goal,normal,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING",获得 4 种不同树苗
-OBTAIN_4_UNIQUE_SEEDS,goal,normal,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
-OBTAIN_6_UNIQUE_FLOWERS,goal,normal,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
-OBTAIN_7_UNIQUE_WORKSTATIONS,goal,normal,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
-OBTAIN_CLOCK,goal,normal,Obtain Clock,item:CLOCK,获得时钟
-OBTAIN_BELL,goal,normal,Obtain Bell,item:BELL,获得钟
-OBTAIN_BOOKSHELF,goal,normal,Obtain Bookshelf,item:BOOKSHELF,获得书架
-OBTAIN_COBWEB,goal,normal,Obtain Cobweb,item:COBWEB,获得蜘蛛网
-OBTAIN_DAYLIGHT_DETECTOR,goal,normal,Obtain Daylight Detector,item:DAYLIGHT_DETECTOR,获得阳光探测器
-OBTAIN_DETECTOR_RAIL,goal,normal,Obtain Detector Rail,item:DETECTOR_RAIL,获得探测铁轨
-OBTAIN_POWERED_RAIL,goal,normal,Obtain Powered Rail,item:POWERED_RAIL,获得动力铁轨
-OBTAIN_ACTIVATOR_RAIL,goal,normal,Obtain Activator Rail,item:ACTIVATOR_RAIL,获得激活铁轨
-OBTAIN_DISPENSER,goal,normal,Obtain Dispenser,item:DISPENSER,获得发射器
-OBTAIN_OBSERVER,goal,normal,Obtain Observer,item:OBSERVER,获得侦测器
-OBTAIN_PISTON,goal,normal,Obtain Piston,item:PISTON,获得活塞
-OBTAIN_REDSTONE_LAMP,goal,normal,Obtain Redstone Lamp,item:REDSTONE_LAMP,获得红石灯
-OBTAIN_REDSTONE_REPEATER,goal,normal,Obtain Redstone Repeater,item:REPEATER,获得红石中继器
-OBTAIN_REDSTONE_COMPARATOR,goal,normal,Obtain Redstone Comparator,item:COMPARATOR,获得红石比较器
-OBTAIN_TNT,goal,normal,Obtain TNT,item:TNT,获得 TNT
-OBTAIN_SCAFFOLDING,goal,normal,Obtain Scaffolding,item:SCAFFOLDING,获得脚手架
-OBTAIN_SOUL_CAMPFIRE,goal,normal,Obtain Soul Campfire,item:SOUL_CAMPFIRE,获得灵魂营火
-OBTAIN_SOUL_LANTERN,goal,normal,Obtain Soul Lantern,item:SOUL_LANTERN,获得灵魂灯笼
-OBTAIN_TINTED_GLASS,goal,normal,Obtain Tinted Glass,item:TINTED_GLASS,获得遮光玻璃
-OBTAIN_LODESTONE,goal,normal,Obtain Lodestone,item:LODESTONE,获得磁石
-OBTAIN_ENDER_CHEST,goal,normal,Obtain Ender Chest,item:ENDER_CHEST,获得末影箱
-OBTAIN_END_ROD,goal,normal,Obtain End Rod,item:END_ROD,获得末地烛
-OBTAIN_DRAGON_EGG,goal,normal,Obtain Dragon Egg,item:DRAGON_EGG,获得龙蛋
-OBTAIN_HEART_OF_THE_SEA,goal,normal,Obtain Heart of the Sea,item:HEART_OF_THE_SEA,获得海洋之心
-OBTAIN_ENCHANT_BOTTLE,goal,normal,Obtain Bottle o' Enchanting,item:EXPERIENCE_BOTTLE,获得附魔之瓶
-OBTAIN_POWDER_SNOW_BUCKET,goal,normal,Obtain Powder Snow Bucket,item:POWDER_SNOW_BUCKET,获得细雪桶
-OBTAIN_TROPICAL_FISH_BUCKET,goal,normal,Obtain Tropical Fish Bucket,item:TROPICAL_FISH_BUCKET,获得热带鱼桶
-OBTAIN_FLOWERING_AZALEA,goal,normal,Obtain Flowering Azalea,item:FLOWERING_AZALEA,获得盛开的杜鹃花丛
-OBTAIN_GILDED_BLACKSTONE,goal,normal,Obtain Gilded Blackstone,item:GILDED_BLACKSTONE,获得镶金黑石
-OBTAIN_ANCIENT_DEBRIS,goal,normal,Obtain Ancient Debris,item:ANCIENT_DEBRIS,获得远古残骸
-OBTAIN_SPONGE,goal,normal,Obtain Sponge,item:SPONGE,获得海绵
-OBTAIN_AMETHYST_BLOCK,goal,normal,Obtain Amethyst Block,item:AMETHYST_BLOCK,获得紫水晶块
-OBTAIN_BONE_BLOCK,goal,normal,Obtain Bone Block,item:BONE_BLOCK,获得骨块
-OBTAIN_SMOOTH_BASALT,goal,normal,Obtain Smooth Basalt,item:SMOOTH_BASALT,获得平滑玄武岩
-OBTAIN_DRIED_KELP_BLOCK,goal,normal,Obtain Dried Kelp Block,item:DRIED_KELP_BLOCK,获得干海带块
-OBTAIN_DEAD_BUSH,goal,normal,Obtain Dead Bush,item:DEAD_BUSH,获得枯萎的灌木
-OBTAIN_POTTERY_SHERD,goal,normal,Obtain Pottery Sherd,item:ANGLER_POTTERY_SHERD,获得陶片
-OBTAIN_SUSPICIOUS_BLOCK,goal,normal,Obtain Suspicious Sand/Gravel,item:SUSPICIOUS_SAND,获得可疑的沙子或沙砾
-OBTAIN_BRICK_WALL,goal,normal,Obtain Brick Wall,item:BRICK_WALL,获得砖墙
-OBTAIN_MOSSY_STONE_BRICK_WALL,goal,normal,Obtain Mossy Stone Brick Wall,item:MOSSY_STONE_BRICK_WALL,获得苔石砖墙
-OBTAIN_MUD_BRICK_WALL,goal,normal,Obtain Mud Brick Wall,item:MUD_BRICK_WALL,获得泥砖墙
-OBTAIN_RED_NETHER_BRICK_STAIRS,goal,normal,Obtain Red Nether Brick Stairs,item:RED_NETHER_BRICK_STAIRS,获得红色下界砖楼梯
-EAT_5_UNIQUE_FOOD,goal,normal,Eat 5 Unique Foods,consume-unique:5,吃下 5 种不同食物
-EAT_10_UNIQUE_FOOD,goal,normal,Eat 10 Unique Foods,consume-unique:10,吃下 10 种不同食物
-EAT_15_UNIQUE_FOOD,goal,normal,Eat 15 Unique Foods,consume-unique:15,吃下 15 种不同食物
-EAT_20_UNIQUE_FOOD,goal,normal,Eat 20 Unique Foods,consume-unique:20,吃下 20 种不同食物
-EAT_25_UNIQUE_FOOD,goal,normal,Eat 25 Unique Foods,consume-unique:25,吃下 25 种不同食物
-EAT_ALL_SOUPS,goal,normal,Eat every type of Soup,"consume-all:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",喝下所有汤类食物
-EAT_BEETROOT_SOUP,goal,normal,Eat Beetroot Soup,consume:BEETROOT_SOUP,喝下甜菜汤
-EAT_CHORUS_FRUIT,goal,normal,Eat Chorus Fruit,consume:CHORUS_FRUIT,吃下紫颂果
-EAT_COOKIE,goal,normal,Eat Cookie,consume:COOKIE,吃下曲奇
-EAT_GLOW_BERRY,goal,normal,Eat Glow Berry,consume:GLOW_BERRIES,吃下发光浆果
-EAT_POISONOUS_POTATO,goal,normal,Eat Poisonous Potato,consume:POISONOUS_POTATO,吃下毒马铃薯
-EAT_PUMPKIN_PIE,goal,normal,Eat Pumpkin Pie,consume:PUMPKIN_PIE,吃下南瓜派
-EAT_RABBIT_STEW,goal,normal,Eat Rabbit Stew,consume:RABBIT_STEW,喝下兔肉煲
-EAT_SUSPICIOUS_STEW,goal,normal,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜之炖菜
-DRINK_HONEY_BOTTLE,goal,normal,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
-DRINK_WATER_BOTTLE,goal,normal,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
-ENTER_NETHER,goal,normal,Enter Nether,advancement:story/enter_the_nether,进入下界
-ENTER_END,goal,normal,Enter The End,advancement:end/root,进入末地
-GET_EYE_SPY_ADVANCEMENT,goal,normal,Find a Stronghold,advancement:story/follow_ender_eye,找到要塞
-GET_WHAT_A_DEAL_ADVANCEMENT,goal,normal,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得「真划算！」进度
-GET_OH_SHINY_ADVANCEMENT,goal,normal,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得「闪闪发亮！」进度
-GET_SNIPER_DUEL_ADVANCEMENT,goal,normal,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel,获得「神射手对决」进度
-GET_BULLSEYE_ADVANCEMENT,goal,normal,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye,获得「百发百中」进度
-GET_HIRED_HELP_ADVANCEMENT,goal,normal,Construct an Iron Golem,advancement:adventure/summon_iron_golem,获得「雇佣帮手」进度
-GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,normal,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,获得「这船有腿」进度
-GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,normal,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,获得「差点九条命」进度
-GET_ABSORPTION_STATUS_EFFECT,goal,normal,Get Absorption,effect:absorption,获得伤害吸收
-GET_BAD_OMEN_STATUS_EFFECT,goal,normal,Get Bad Omen,effect:bad_omen,获得不祥之兆
-GET_GLOWING_STATUS_EFFECT,goal,normal,Get Glowing,effect:glowing,获得发光
-GET_JUMP_BOOST_STATUS_EFFECT,goal,normal,Get Jump Boost,effect:jump_boost,获得跳跃提升
-GET_LEVITATION_STATUS_EFFECT,goal,normal,Get Levitation,effect:levitation,获得飘浮
-GET_MINING_FATIGUE_STATUS_EFFECT,goal,normal,Get Mining Fatigue,effect:mining_fatigue,获得挖掘疲劳
-GET_NAUSEA_STATUS_EFFECT,goal,normal,Get Nausea,effect:nausea,获得反胃
-GET_POISON_STATUS_EFFECT,goal,normal,Get Poison,effect:poison,获得中毒
-GET_WEAKNESS_STATUS_EFFECT,goal,normal,Get Weakness,effect:weakness,获得虚弱
-REMOVE_STATUS_EFFECT_USING_MILK,goal,normal,Remove Effect using Milk Bucket,consume:MILK_BUCKET,使用牛奶桶清除状态效果
-GET_10_ADVANCEMENTS,goal,normal,Get 10 Advancements,advancement-count:10,获得 10 个进度
-GET_20_ADVANCEMENTS,goal,normal,Get 20 Advancements,advancement-count:20,获得 20 个进度
-GET_30_ADVANCEMENTS,goal,normal,Get 30 Advancements,advancement-count:30,获得 30 个进度
-REACH_EXP_LEVEL_10,goal,normal,Reach XP level 10,level:10,达到 10 级经验等级
-REACH_EXP_LEVEL_20,goal,normal,Reach XP level 20,level:20,达到 20 级经验等级
-REACH_HEIGHT_LIMIT,goal,normal,Reach height limit,location:height-limit,到达高度上限
-REACH_BEDROCK,goal,normal,Reach Bedrock,location:bedrock,到达基岩层
-REACH_NETHER_ROOF,goal,normal,Get on Nether Roof,location:nether-roof,到达下界顶部
-EMPTY_HUNGER_BAR,goal,normal,Empty Hunger Bar,hunger:empty,清空饥饿条
-USE_STONECUTTER,goal,normal,Use Stonecutter,use-block:STONECUTTER,使用切石机
-USE_ANVIL,goal,normal,Use Anvil,use-block:ANVIL,使用铁砧
-USE_ENCHANTING_TABLE,goal,normal,Use Enchanting Table,use-block:ENCHANTING_TABLE,使用附魔台
-USE_GRINDSTONE,goal,normal,Use Grindstone,use-block:GRINDSTONE,使用砂轮
-USE_LOOM,goal,normal,Use Loom to design a Banner,use-block:LOOM,使用织布机设计旗帜
-USE_SMITHING_TABLE,goal,normal,Use Smithing Table,use-block:SMITHING_TABLE,使用锻造台
-USE_CAULDRON,goal,normal,Use Cauldron to wash something,use-block:CAULDRON,使用炼药锅清洗物品
-USE_COMPOSTER,goal,normal,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
-USE_JUKEBOX,goal,normal,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片机播放唱片
-CRAFT_20_UNIQUE_ITEMS,goal,normal,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
-CRAFT_50_UNIQUE_ITEMS,goal,normal,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
-CRAFT_100_UNIQUE_ITEMS,goal,normal,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
-TAKE_200_DAMAGE,goal,normal,Take 200 damage,damage-taken:200,承受 200 点伤害
-DEAL_400_DAMAGE,goal,normal,Deal 400 damage,damage-dealt:400,造成 400 点伤害
-DIE_BY_DROWNING,goal,normal,Die by Drowning,death-cause:DROWNING,溺水身亡
-DIE_BY_CACTUS,goal,normal,Die to Cactus,death-cause:CONTACT,被仙人掌刺死
-DIE_BY_MAGIC,goal,normal,Die by Magic,death-cause:MAGIC,死于魔法伤害
-DIE_TO_VOID,goal,normal,Die by falling in Void,death-cause:VOID,跌入虚空死亡
-FREEZE_TO_DEATH,goal,normal,Die by Freezing,death-cause:FREEZE,冻死
-DIE_TO_POLAR_BEAR,goal,normal,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
-DIE_TO_PUFFERFISH,goal,normal,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
-DIE_TO_WARDEN,goal,normal,Die to Warden,death-attacker:WARDEN,死于监守者
-WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,normal,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLACK,goal,normal,Wear Black Leather helmet,"equipment-colored:LEATHER_HELMET,BLACK",穿上黑色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_WHITE,goal,normal,Wear White Leather helmet,"equipment-colored:LEATHER_HELMET,WHITE",穿上白色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GRAY,goal,normal,Wear Gray Leather helmet,"equipment-colored:LEATHER_HELMET,GRAY",穿上灰色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_GRAY,goal,normal,Wear Light gray Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_GRAY",穿上淡灰色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLUE,goal,normal,Wear Blue Leather helmet,"equipment-colored:LEATHER_HELMET,BLUE",穿上蓝色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_BLUE,goal,normal,Wear Light blue Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_BLUE",穿上淡蓝色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_ORANGE,goal,normal,Wear Orange Leather helmet,"equipment-colored:LEATHER_HELMET,ORANGE",穿上橙色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_RED,goal,normal,Wear Red Leather helmet,"equipment-colored:LEATHER_HELMET,RED",穿上红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_YELLOW,goal,normal,Wear Yellow Leather helmet,"equipment-colored:LEATHER_HELMET,YELLOW",穿上黄色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_MAGENTA,goal,normal,Wear Magenta Leather helmet,"equipment-colored:LEATHER_HELMET,MAGENTA",穿上品红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PINK,goal,normal,Wear Pink Leather helmet,"equipment-colored:LEATHER_HELMET,PINK",穿上粉红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PURPLE,goal,normal,Wear Purple Leather helmet,"equipment-colored:LEATHER_HELMET,PURPLE",穿上紫色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GREEN,goal,normal,Wear Green Leather helmet,"equipment-colored:LEATHER_HELMET,GREEN",穿上绿色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIME,goal,normal,Wear Lime Leather helmet,"equipment-colored:LEATHER_HELMET,LIME",穿上黄绿色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_CYAN,goal,normal,Wear Cyan Leather helmet,"equipment-colored:LEATHER_HELMET,CYAN",穿上青色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BROWN,goal,normal,Wear Brown Leather helmet,"equipment-colored:LEATHER_HELMET,BROWN",穿上棕色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLACK,goal,normal,Wear Black Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLACK",穿上黑色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_WHITE,goal,normal,Wear White Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,WHITE",穿上白色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GRAY,goal,normal,Wear Gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GRAY",穿上灰色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_GRAY,goal,normal,Wear Light gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_GRAY",穿上淡灰色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLUE,goal,normal,Wear Blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLUE",穿上蓝色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_BLUE,goal,normal,Wear Light blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_BLUE",穿上淡蓝色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_ORANGE,goal,normal,Wear Orange Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,ORANGE",穿上橙色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_RED,goal,normal,Wear Red Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,RED",穿上红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_YELLOW,goal,normal,Wear Yellow Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,YELLOW",穿上黄色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_MAGENTA,goal,normal,Wear Magenta Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,MAGENTA",穿上品红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PINK,goal,normal,Wear Pink Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PINK",穿上粉红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PURPLE,goal,normal,Wear Purple Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PURPLE",穿上紫色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GREEN,goal,normal,Wear Green Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GREEN",穿上绿色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIME,goal,normal,Wear Lime Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIME",穿上黄绿色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_CYAN,goal,normal,Wear Cyan Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,CYAN",穿上青色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BROWN,goal,normal,Wear Brown Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BROWN",穿上棕色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLACK,goal,normal,Wear Black Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLACK",穿上黑色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_WHITE,goal,normal,Wear White Leather leggings,"equipment-colored:LEATHER_LEGGINGS,WHITE",穿上白色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GRAY,goal,normal,Wear Gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GRAY",穿上灰色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_GRAY,goal,normal,Wear Light gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_GRAY",穿上淡灰色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLUE,goal,normal,Wear Blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLUE",穿上蓝色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_BLUE,goal,normal,Wear Light blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_BLUE",穿上淡蓝色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_ORANGE,goal,normal,Wear Orange Leather leggings,"equipment-colored:LEATHER_LEGGINGS,ORANGE",穿上橙色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_RED,goal,normal,Wear Red Leather leggings,"equipment-colored:LEATHER_LEGGINGS,RED",穿上红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_YELLOW,goal,normal,Wear Yellow Leather leggings,"equipment-colored:LEATHER_LEGGINGS,YELLOW",穿上黄色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_MAGENTA,goal,normal,Wear Magenta Leather leggings,"equipment-colored:LEATHER_LEGGINGS,MAGENTA",穿上品红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PINK,goal,normal,Wear Pink Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PINK",穿上粉红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PURPLE,goal,normal,Wear Purple Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PURPLE",穿上紫色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GREEN,goal,normal,Wear Green Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GREEN",穿上绿色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIME,goal,normal,Wear Lime Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIME",穿上黄绿色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_CYAN,goal,normal,Wear Cyan Leather leggings,"equipment-colored:LEATHER_LEGGINGS,CYAN",穿上青色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BROWN,goal,normal,Wear Brown Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BROWN",穿上棕色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLACK,goal,normal,Wear Black Leather boots,"equipment-colored:LEATHER_BOOTS,BLACK",穿上黑色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_WHITE,goal,normal,Wear White Leather boots,"equipment-colored:LEATHER_BOOTS,WHITE",穿上白色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GRAY,goal,normal,Wear Gray Leather boots,"equipment-colored:LEATHER_BOOTS,GRAY",穿上灰色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_GRAY,goal,normal,Wear Light gray Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_GRAY",穿上淡灰色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLUE,goal,normal,Wear Blue Leather boots,"equipment-colored:LEATHER_BOOTS,BLUE",穿上蓝色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_BLUE,goal,normal,Wear Light blue Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_BLUE",穿上淡蓝色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_ORANGE,goal,normal,Wear Orange Leather boots,"equipment-colored:LEATHER_BOOTS,ORANGE",穿上橙色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_RED,goal,normal,Wear Red Leather boots,"equipment-colored:LEATHER_BOOTS,RED",穿上红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_YELLOW,goal,normal,Wear Yellow Leather boots,"equipment-colored:LEATHER_BOOTS,YELLOW",穿上黄色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_MAGENTA,goal,normal,Wear Magenta Leather boots,"equipment-colored:LEATHER_BOOTS,MAGENTA",穿上品红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PINK,goal,normal,Wear Pink Leather boots,"equipment-colored:LEATHER_BOOTS,PINK",穿上粉红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PURPLE,goal,normal,Wear Purple Leather boots,"equipment-colored:LEATHER_BOOTS,PURPLE",穿上紫色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GREEN,goal,normal,Wear Green Leather boots,"equipment-colored:LEATHER_BOOTS,GREEN",穿上绿色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIME,goal,normal,Wear Lime Leather boots,"equipment-colored:LEATHER_BOOTS,LIME",穿上黄绿色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_CYAN,goal,normal,Wear Cyan Leather boots,"equipment-colored:LEATHER_BOOTS,CYAN",穿上青色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BROWN,goal,normal,Wear Brown Leather boots,"equipment-colored:LEATHER_BOOTS,BROWN",穿上棕色皮革靴子
+id,type,score,display_name,requirement,中文显示
+ACACIA_BUTTON,block,1,,,金合欢木按钮
+ACACIA_DOOR,block,1,,,金合欢木门
+ACACIA_FENCE,block,1,,,金合欢木栅栏
+ACACIA_FENCE_GATE,block,1,,,金合欢木栅栏门
+ACACIA_HANGING_SIGN,block,1,,,悬挂式金合欢木告示牌
+ACACIA_LEAVES,block,1,,,金合欢树叶
+ACACIA_LOG,block,1,,,金合欢原木
+ACACIA_PLANKS,block,1,,,金合欢木板
+ACACIA_PRESSURE_PLATE,block,1,,,金合欢木压力板
+ACACIA_SAPLING,block,1,,,金合欢树苗
+ACACIA_SIGN,block,1,,,金合欢木告示牌
+ACACIA_SLAB,block,1,,,金合欢木台阶
+ACACIA_STAIRS,block,1,,,金合欢木楼梯
+ACACIA_TRAPDOOR,block,1,,,金合欢木活板门
+ACACIA_WOOD,block,1,,,金合欢木
+ACTIVATOR_RAIL,block,1,,,激活铁轨
+ALLIUM,block,1,,,绒球葱
+ANDESITE,block,1,,,安山岩
+ANDESITE_SLAB,block,1,,,安山岩台阶
+ANDESITE_STAIRS,block,1,,,安山岩楼梯
+ANDESITE_WALL,block,1,,,安山岩墙
+AZALEA,block,1,,,杜鹃花丛
+AZALEA_LEAVES,block,1,,,杜鹃树叶
+AZURE_BLUET,block,1,,,蓝花美耳草
+BAMBOO_BLOCK,block,1,,,竹块
+BAMBOO_BUTTON,block,1,,,竹按钮
+BAMBOO_DOOR,block,1,,,竹门
+BAMBOO_FENCE,block,1,,,竹栅栏
+BAMBOO_FENCE_GATE,block,1,,,竹栅栏门
+BAMBOO_HANGING_SIGN,block,1,,,悬挂式竹告示牌
+BAMBOO_MOSAIC,block,1,,,竹马赛克
+BAMBOO_MOSAIC_SLAB,block,1,,,竹马赛克台阶
+BAMBOO_MOSAIC_STAIRS,block,1,,,竹马赛克楼梯
+BAMBOO_PLANKS,block,1,,,竹板
+BAMBOO_PRESSURE_PLATE,block,1,,,竹压力板
+BAMBOO_SIGN,block,1,,,竹告示牌
+BAMBOO_SLAB,block,1,,,竹台阶
+BAMBOO_STAIRS,block,1,,,竹楼梯
+BAMBOO_TRAPDOOR,block,1,,,竹活板门
+BARREL,block,1,,,木桶
+BASALT,block,1,,,玄武岩
+BELL,block,1,,,钟
+BIG_DRIPLEAF,block,1,,,大型垂滴叶
+BIRCH_BUTTON,block,1,,,白桦木按钮
+BIRCH_DOOR,block,1,,,白桦木门
+BIRCH_FENCE,block,1,,,白桦木栅栏
+BIRCH_FENCE_GATE,block,1,,,白桦木栅栏门
+BIRCH_LEAVES,block,1,,,白桦树叶
+BIRCH_LOG,block,1,,,白桦原木
+BIRCH_PLANKS,block,1,,,白桦木板
+BIRCH_PRESSURE_PLATE,block,1,,,白桦木压力板
+BIRCH_SAPLING,block,1,,,白桦树苗
+BIRCH_SIGN,block,1,,,白桦木告示牌
+BIRCH_SLAB,block,1,,,白桦木台阶
+BIRCH_STAIRS,block,1,,,白桦木楼梯
+BIRCH_TRAPDOOR,block,1,,,白桦木活板门
+BIRCH_WOOD,block,1,,,白桦木
+BLAST_FURNACE,block,1,,,高炉
+BONE_BLOCK,block,1,,,骨块
+BREWING_STAND,block,1,,,酿造台
+BRICKS,block,1,,,红砖块
+BLUE_ORCHID,block,1,,,兰花
+CACTUS,block,1,,,仙人掌
+CAKE,block,1,,,蛋糕
+CALCITE,block,1,,,方解石
+CAMPFIRE,block,1,,,营火
+CARTOGRAPHY_TABLE,block,1,,,制图台
+CARVED_PUMPKIN,block,1,,,雕刻南瓜
+CAULDRON,block,1,,,炼药锅
+IRON_CHAIN,block,1,,,铁链
+CHERRY_BUTTON,block,1,,,樱花木按钮
+CHERRY_DOOR,block,1,,,樱花木门
+CHERRY_FENCE,block,1,,,樱花木栅栏
+CHERRY_FENCE_GATE,block,1,,,樱花木栅栏门
+CHERRY_HANGING_SIGN,block,1,,,悬挂式樱花木告示牌
+CHERRY_LEAVES,block,1,,,樱花树叶
+CHERRY_LOG,block,1,,,樱花原木
+CHERRY_PLANKS,block,1,,,樱花木板
+CHERRY_PRESSURE_PLATE,block,1,,,樱花木压力板
+CHERRY_SAPLING,block,1,,,樱花树苗
+CHERRY_SIGN,block,1,,,樱花木告示牌
+CHERRY_SLAB,block,1,,,樱花木台阶
+CHERRY_STAIRS,block,1,,,樱花木楼梯
+CHERRY_TRAPDOOR,block,1,,,樱花木活板门
+CHERRY_WOOD,block,1,,,樱花木
+CHEST,block,1,,,箱子
+COARSE_DIRT,block,1,,,砂土
+COBBLED_DEEPSLATE,block,1,,,深板岩圆石
+COBBLED_DEEPSLATE_SLAB,block,1,,,深板岩圆石台阶
+COBBLED_DEEPSLATE_STAIRS,block,1,,,深板岩圆石楼梯
+COBBLED_DEEPSLATE_WALL,block,1,,,深板岩圆石墙
+COBBLESTONE,block,1,,,圆石
+COBBLESTONE_SLAB,block,1,,,圆石台阶
+COBBLESTONE_STAIRS,block,1,,,圆石楼梯
+COBBLESTONE_WALL,block,1,,,圆石墙
+COBWEB,block,1,,,蜘蛛网
+COCOA_BEANS,block,1,,,可可豆
+COMPOSTER,block,1,,,堆肥桶
+CORNFLOWER,block,1,,,矢车菊
+CRAFTING_TABLE,block,1,,,工作台
+CRIMSON_HANGING_SIGN,block,1,,,悬挂式绯红木告示牌
+DANDELION,block,1,,,蒲公英
+DARK_OAK_BUTTON,block,1,,,深色橡木按钮
+DARK_OAK_DOOR,block,1,,,深色橡木门
+DARK_OAK_FENCE,block,1,,,深色橡木栅栏
+DARK_OAK_FENCE_GATE,block,1,,,深色橡木栅栏门
+DARK_OAK_HANGING_SIGN,block,1,,,悬挂式深色橡木告示牌
+DARK_OAK_LEAVES,block,1,,,深色橡树树叶
+DARK_OAK_LOG,block,1,,,深色橡木原木
+DARK_OAK_PLANKS,block,1,,,深色橡木木板
+DARK_OAK_PRESSURE_PLATE,block,1,,,深色橡木压力板
+DARK_OAK_SAPLING,block,1,,,深色橡树树苗
+DARK_OAK_SIGN,block,1,,,深色橡木告示牌
+DARK_OAK_SLAB,block,1,,,深色橡木台阶
+DARK_OAK_STAIRS,block,1,,,深色橡木楼梯
+DARK_OAK_TRAPDOOR,block,1,,,深色橡木活板门
+DARK_OAK_WOOD,block,1,,,深色橡木
+DEAD_BUSH,block,1,,,枯萎的灌木
+DEEPSLATE,block,1,,,深板岩
+DEEPSLATE_BRICKS,block,1,,,深板岩砖
+DEEPSLATE_BRICK_SLAB,block,1,,,深板岩砖台阶
+DEEPSLATE_BRICK_STAIRS,block,1,,,深板岩砖楼梯
+DEEPSLATE_BRICK_WALL,block,1,,,深板岩砖墙
+DETECTOR_RAIL,block,1,,,探测铁轨
+DIORITE,block,1,,,闪长岩
+DIORITE_SLAB,block,1,,,闪长岩台阶
+DIORITE_STAIRS,block,1,,,闪长岩楼梯
+DIORITE_WALL,block,1,,,闪长岩墙
+DIRT,block,1,,,泥土
+DISPENSER,block,1,,,发射器
+DRIED_KELP_BLOCK,block,1,,,干海带块
+DROPPER,block,1,,,投掷器
+FLETCHING_TABLE,block,1,,,制箭台
+FLOWER_POT,block,1,,,花盆
+FURNACE,block,1,,,熔炉
+GLASS,block,1,,,玻璃
+GLASS_PANE,block,1,,,玻璃板
+GRANITE,block,1,,,花岗岩
+GRANITE_SLAB,block,1,,,花岗岩台阶
+GRANITE_STAIRS,block,1,,,花岗岩楼梯
+GRANITE_WALL,block,1,,,花岗岩墙
+GRAVEL,block,1,,,沙砾
+GRINDSTONE,block,1,,,砂轮
+HEAVY_WEIGHTED_PRESSURE_PLATE,block,1,,,重质测重压力板
+HOPPER,block,1,,,漏斗
+IRON_BARS,block,1,,,铁栏杆
+IRON_DOOR,block,1,,,铁门
+IRON_TRAPDOOR,block,1,,,铁活板门
+JUKEBOX,block,1,,,唱片机
+JUNGLE_BUTTON,block,1,,,丛林木按钮
+JUNGLE_DOOR,block,1,,,丛林木门
+JUNGLE_FENCE,block,1,,,丛林木栅栏
+JUNGLE_FENCE_GATE,block,1,,,丛林木栅栏门
+JUNGLE_HANGING_SIGN,block,1,,,悬挂式丛林木告示牌
+JUNGLE_LEAVES,block,1,,,丛林树叶
+JUNGLE_LOG,block,1,,,丛林原木
+JUNGLE_PLANKS,block,1,,,丛林木板
+JUNGLE_PRESSURE_PLATE,block,1,,,丛林木压力板
+JUNGLE_SAPLING,block,1,,,丛林树苗
+JUNGLE_SIGN,block,1,,,丛林木告示牌
+JUNGLE_SLAB,block,1,,,丛林木台阶
+JUNGLE_STAIRS,block,1,,,丛林木楼梯
+JUNGLE_TRAPDOOR,block,1,,,丛林木活板门
+JUNGLE_WOOD,block,1,,,丛林木
+LADDER,block,1,,,梯子
+LANTERN,block,1,,,灯笼
+LECTERN,block,1,,,讲台
+LEVER,block,1,,,拉杆
+LIGHTNING_ROD,block,1,,,避雷针
+LIGHT_WEIGHTED_PRESSURE_PLATE,block,1,,,轻质测重压力板
+LILAC,block,1,,,丁香
+LILY_OF_THE_VALLEY,block,1,,,铃兰
+LILY_PAD,block,1,,,睡莲
+LOOM,block,1,,,织布机
+MANGROVE_HANGING_SIGN,block,1,,,悬挂式红树木告示牌
+MELON,block,1,,,西瓜
+MUD,block,1,,,泥巴
+NETHERRACK,block,1,,,下界岩
+NOTE_BLOCK,block,1,,,音符盒
+OAK_BUTTON,block,1,,,橡木按钮
+OAK_DOOR,block,1,,,橡木门
+OAK_FENCE,block,1,,,橡木栅栏
+OAK_FENCE_GATE,block,1,,,橡木栅栏门
+OAK_HANGING_SIGN,block,1,,,悬挂式橡木告示牌
+OAK_LEAVES,block,1,,,橡树树叶
+OAK_LOG,block,1,,,橡木原木
+OAK_PLANKS,block,1,,,橡木木板
+OAK_PRESSURE_PLATE,block,1,,,橡木压力板
+OAK_SAPLING,block,1,,,橡树树苗
+OAK_SIGN,block,1,,,橡木告示牌
+OAK_SLAB,block,1,,,橡木台阶
+OAK_STAIRS,block,1,,,橡木楼梯
+OAK_TRAPDOOR,block,1,,,橡木活板门
+OAK_WOOD,block,1,,,橡木
+OBSIDIAN,block,1,,,黑曜石
+OXEYE_DAISY,block,1,,,滨菊
+PACKED_MUD,block,1,,,泥坯
+PEONY,block,1,,,牡丹
+PINK_PETALS,block,1,,,粉红色花簇
+PISTON,block,1,,,活塞
+POINTED_DRIPSTONE,block,1,,,滴水石锥
+POLISHED_ANDESITE,block,1,,,磨制安山岩
+POLISHED_DIORITE,block,1,,,磨制闪长岩
+POLISHED_GRANITE,block,1,,,磨制花岗岩
+POPPY,block,1,,,虞美人
+POWERED_RAIL,block,1,,,动力铁轨
+PUMPKIN,block,1,,,南瓜
+RAIL,block,1,,,铁轨
+REDSTONE_LAMP,block,1,,,红石灯
+REDSTONE_TORCH,block,1,,,红石火把
+RED_MUSHROOM,block,1,,,红色蘑菇
+BROWN_MUSHROOM,block,1,,,棕色蘑菇
+RED_SAND,block,1,,,红沙
+RED_SANDSTONE,block,1,,,红砂岩
+RED_TULIP,block,1,,,红色郁金香
+ORANGE_TULIP,block,1,,,橙色郁金香
+WHITE_TULIP,block,1,,,白色郁金香
+ROSE_BUSH,block,1,,,玫瑰丛
+SAND,block,1,,,沙子
+SANDSTONE,block,1,,,砂岩
+SCAFFOLDING,block,1,,,脚手架
+SEA_PICKLE,block,1,,,海泡菜
+SHROOMLIGHT,block,1,,,菌光体
+SMITHING_TABLE,block,1,,,锻造台
+SMOKER,block,1,,,烟熏炉
+SMOOTH_STONE,block,1,,,平滑石头
+SNOW_BLOCK,block,1,,,雪块
+SPORE_BLOSSOM,block,1,,,孢子花
+SPRUCE_BUTTON,block,1,,,云杉木按钮
+SPRUCE_DOOR,block,1,,,云杉木门
+SPRUCE_FENCE,block,1,,,云杉木栅栏
+SPRUCE_FENCE_GATE,block,1,,,云杉木栅栏门
+SPRUCE_HANGING_SIGN,block,1,,,悬挂式云杉木告示牌
+SPRUCE_LEAVES,block,1,,,云杉树叶
+SPRUCE_LOG,block,1,,,云杉原木
+SPRUCE_PLANKS,block,1,,,云杉木板
+SPRUCE_PRESSURE_PLATE,block,1,,,云杉木压力板
+SPRUCE_SAPLING,block,1,,,云杉树苗
+SPRUCE_SIGN,block,1,,,云杉木告示牌
+SPRUCE_SLAB,block,1,,,云杉木台阶
+SPRUCE_STAIRS,block,1,,,云杉木楼梯
+SPRUCE_TRAPDOOR,block,1,,,云杉木活板门
+SPRUCE_WOOD,block,1,,,云杉木
+STICKY_PISTON,block,1,,,黏性活塞
+STONE,block,1,,,石头
+STONECUTTER,block,1,,,切石机
+STONE_BRICKS,block,1,,,石砖
+STONE_BUTTON,block,1,,,石头按钮
+STONE_PRESSURE_PLATE,block,1,,,石头压力板
+STONE_SLAB,block,1,,,石头台阶
+STONE_STAIRS,block,1,,,石头楼梯
+STRIPPED_ACACIA_WOOD,block,1,,,去皮金合欢木
+STRIPPED_BAMBOO_BLOCK,block,1,,,去皮竹块
+STRIPPED_BIRCH_LOG,block,1,,,去皮白桦原木
+STRIPPED_BIRCH_WOOD,block,1,,,去皮白桦木
+STRIPPED_CRIMSON_HYPHAE,block,1,,,去皮绯红菌核
+STRIPPED_CRIMSON_STEM,block,1,,,去皮绯红菌柄
+STRIPPED_DARK_OAK_LOG,block,1,,,去皮深色橡木原木
+STRIPPED_DARK_OAK_WOOD,block,1,,,去皮深色橡木
+STRIPPED_JUNGLE_LOG,block,1,,,去皮丛林原木
+STRIPPED_JUNGLE_WOOD,block,1,,,去皮丛林木
+STRIPPED_MANGROVE_LOG,block,1,,,去皮红树原木
+STRIPPED_MANGROVE_WOOD,block,1,,,去皮红树木
+STRIPPED_OAK_LOG,block,1,,,去皮橡木原木
+STRIPPED_OAK_WOOD,block,1,,,去皮橡木
+STRIPPED_SPRUCE_LOG,block,1,,,去皮云杉原木
+STRIPPED_SPRUCE_WOOD,block,1,,,去皮云杉木
+STRIPPED_WARPED_HYPHAE,block,1,,,去皮诡异菌核
+STRIPPED_WARPED_STEM,block,1,,,去皮诡异菌柄
+SUNFLOWER,block,1,,,向日葵
+TERRACOTTA,block,1,,,陶瓦
+TNT,block,1,,,TNT
+TORCH,block,1,,,火把
+TRAPPED_CHEST,block,1,,,陷阱箱
+TRIPWIRE_HOOK,block,1,,,绊线钩
+TUFF,block,1,,,凝灰岩
+WARPED_HANGING_SIGN,block,1,,,悬挂式诡异木告示牌
+COPPER_BLOCK,block,1,,,铜块
+CUT_COPPER,block,1,,,切制铜块
+CUT_COPPER_SLAB,block,1,,,切制铜台阶
+CUT_COPPER_STAIRS,block,1,,,切制铜楼梯
+CHISELED_COPPER,block,1,,,雕纹铜块
+COPPER_BULB,block,1,,,铜灯
+COPPER_DOOR,block,1,,,铜门
+COPPER_GRATE,block,1,,,铜格栅
+COPPER_TRAPDOOR,block,1,,,铜活板门
+LODESTONE,block,1,,,磁石
+WILDFLOWERS,block,1,,,野花簇
+LEAF_LITTER,block,1,,,枯叶堆
+BUSH,block,1,,,灌木丛
+FIREFLY_BUSH,block,1,,,萤火虫灌木丛
+COPPER_CHEST,block,1,,,铜箱子
+COPPER_BARS,block,1,,,铜栏杆
+COPPER_CHAIN,block,1,,,铜链
+COPPER_LANTERN,block,1,,,铜灯笼
+COPPER_TORCH,block,1,,,铜火把
+COPPER_GOLEM_STATUE,block,1,,,铜傀儡像
+OAK_SHELF,block,1,,,橡木展示架
+SPRUCE_SHELF,block,1,,,云杉木展示架
+BIRCH_SHELF,block,1,,,白桦木展示架
+JUNGLE_SHELF,block,1,,,丛林木展示架
+ACACIA_SHELF,block,1,,,金合欢木展示架
+DARK_OAK_SHELF,block,1,,,深色橡木展示架
+CHERRY_SHELF,block,1,,,樱花木展示架
+BAMBOO_SHELF,block,1,,,竹展示架
+POLISHED_DEEPSLATE,block,1,,,磨制深板岩
+POLISHED_DEEPSLATE_SLAB,block,1,,,磨制深板岩台阶
+POLISHED_DEEPSLATE_STAIRS,block,1,,,磨制深板岩楼梯
+POLISHED_DEEPSLATE_WALL,block,1,,,磨制深板岩墙
+CRACKED_DEEPSLATE_BRICKS,block,1,,,裂纹深板岩砖
+CRACKED_DEEPSLATE_TILES,block,1,,,裂纹深板岩瓦
+CRACKED_NETHER_BRICKS,block,1,,,裂纹下界砖块
+CRACKED_STONE_BRICKS,block,1,,,裂纹石砖
+DEEPSLATE_TILE_SLAB,block,1,,,深板岩瓦台阶
+DEEPSLATE_TILE_STAIRS,block,1,,,深板岩瓦楼梯
+DEEPSLATE_TILE_WALL,block,1,,,深板岩瓦墙
+DEEPSLATE_TILES,block,1,,,深板岩瓦
+CHISELED_DEEPSLATE,block,1,,,雕纹深板岩
+CHISELED_SANDSTONE,block,1,,,雕纹砂岩
+KELP,block,1,,,海带
+GLOW_LICHEN,block,1,,,发光地衣
+GLOW_INK_SAC,block,1,,,荧光墨囊
+TARGET,block,1,,,标靶
+HAY_BLOCK,block,1,,,干草捆
+RAW_COPPER_BLOCK,block,1,,,粗铜块
+RAW_GOLD_BLOCK,block,1,,,粗金块
+GOLD_BLOCK,block,1,,,金块
+RAW_IRON_BLOCK,block,1,,,粗铁块
+IRON_BLOCK,block,1,,,铁块
+AMETHYST_BLOCK,block,1,,,紫水晶块
+EMERALD_BLOCK,block,1,,,绿宝石块
+LAPIS_BLOCK,block,1,,,青金石块
+REDSTONE_BLOCK,block,1,,,红石块
+SUSPICIOUS_STEW,block,1,,,谜之炖菜
+INK_SAC,block,1,,,墨囊
+CARROT_ON_A_STICK,block,1,,,胡萝卜钓竿
+WARPED_FUNGUS_ON_A_STICK,block,1,,,诡异菌钓竿
+GLISTERING_MELON_SLICE,block,1,,,金西瓜片
+GOLDEN_APPLE,block,1,,,金苹果
+FERMENTED_SPIDER_EYE,block,1,,,发酵蛛眼
+MAGMA_CREAM,block,1,,,岩浆膏
+EGG,block,1,,,鸡蛋
+WRITABLE_BOOK,block,1,,,书与笔
+FEATHER,block,1,,,羽毛
+ANVIL,block,2,,,铁砧
+ARMADILLO_SCUTE,block,2,,,犰狳鳞甲
+BEEHIVE,block,2,,,蜂箱
+BEE_NEST,block,2,,,蜂巢
+BLACKSTONE,block,2,,,黑石
+BLACKSTONE_SLAB,block,2,,,黑石台阶
+BLACKSTONE_STAIRS,block,2,,,黑石楼梯
+BLACKSTONE_WALL,block,2,,,黑石墙
+BLUE_ICE,block,2,,,蓝冰
+BOOKSHELF,block,2,,,书架
+CHIPPED_ANVIL,block,2,,,开裂的铁砧
+CHISELED_BOOKSHELF,block,2,,,雕纹书架
+CHISELED_NETHER_BRICKS,block,2,,,雕纹下界砖块
+CHISELED_POLISHED_BLACKSTONE,block,2,,,雕纹磨制黑石
+CHISELED_QUARTZ_BLOCK,block,2,,,雕纹石英块
+CRACKED_POLISHED_BLACKSTONE_BRICKS,block,2,,,裂纹磨制黑石砖
+CRIMSON_BUTTON,block,2,,,绯红木按钮
+CRIMSON_DOOR,block,2,,,绯红木门
+CRIMSON_FENCE,block,2,,,绯红木栅栏
+CRIMSON_FENCE_GATE,block,2,,,绯红木栅栏门
+CRIMSON_FUNGUS,block,2,,,绯红菌
+CRIMSON_HYPHAE,block,2,,,绯红菌核
+CRIMSON_NYLIUM,block,2,,,绯红菌岩
+CRIMSON_PLANKS,block,2,,,绯红木板
+CRIMSON_PRESSURE_PLATE,block,2,,,绯红木压力板
+CRIMSON_ROOTS,block,2,,,绯红菌索
+CRIMSON_SIGN,block,2,,,绯红木告示牌
+CRIMSON_SLAB,block,2,,,绯红木台阶
+CRIMSON_STAIRS,block,2,,,绯红木楼梯
+CRIMSON_STEM,block,2,,,绯红菌柄
+CRIMSON_TRAPDOOR,block,2,,,绯红木活板门
+CRYING_OBSIDIAN,block,2,,,哭泣的黑曜石
+DAMAGED_ANVIL,block,2,,,损坏的铁砧
+DARK_PRISMARINE,block,2,,,暗海晶石
+DARK_PRISMARINE_SLAB,block,2,,,暗海晶石台阶
+DARK_PRISMARINE_STAIRS,block,2,,,暗海晶石楼梯
+DAYLIGHT_DETECTOR,block,2,,,阳光探测器
+DRIPSTONE_BLOCK,block,2,,,滴水石块
+ENCHANTING_TABLE,block,2,,,附魔台
+ENDER_CHEST,block,2,,,末影箱
+ENDER_EYE,block,2,,,末影之眼
+FERN,block,2,,,蕨
+FLOWERING_AZALEA,block,2,,,盛开的杜鹃花丛
+FLOWERING_AZALEA_LEAVES,block,2,,,盛开的杜鹃树叶
+GHAST_TEAR,block,2,,,恶魂之泪
+GILDED_BLACKSTONE,block,2,,,镶金黑石
+GLOWSTONE,block,2,,,荧石
+HONEYCOMB_BLOCK,block,2,,,蜜脾块
+HONEY_BLOCK,block,2,,,蜂蜜块
+ICE,block,2,,,冰
+LARGE_AMETHYST_BUD,block,2,,,大型紫晶芽
+MAGMA_BLOCK,block,2,,,岩浆块
+MANGROVE_BUTTON,block,2,,,红树木按钮
+MANGROVE_DOOR,block,2,,,红树木门
+MANGROVE_FENCE,block,2,,,红树木栅栏
+MANGROVE_FENCE_GATE,block,2,,,红树木栅栏门
+MANGROVE_LEAVES,block,2,,,红树树叶
+MANGROVE_LOG,block,2,,,红树原木
+MANGROVE_PLANKS,block,2,,,红树木板
+MANGROVE_PRESSURE_PLATE,block,2,,,红树木压力板
+MANGROVE_PROPAGULE,block,2,,,红树胎生苗
+MANGROVE_ROOTS,block,2,,,红树根
+MANGROVE_SIGN,block,2,,,红树木告示牌
+MANGROVE_SLAB,block,2,,,红树木台阶
+MANGROVE_STAIRS,block,2,,,红树木楼梯
+MANGROVE_TRAPDOOR,block,2,,,红树木活板门
+MANGROVE_WOOD,block,2,,,红树木
+MEDIUM_AMETHYST_BUD,block,2,,,中型紫晶芽
+MOSSY_COBBLESTONE,block,2,,,苔石
+MOSSY_COBBLESTONE_SLAB,block,2,,,苔石台阶
+MOSSY_COBBLESTONE_STAIRS,block,2,,,苔石楼梯
+MOSSY_COBBLESTONE_WALL,block,2,,,苔石墙
+MOSSY_STONE_BRICKS,block,2,,,苔石砖
+MOSSY_STONE_BRICK_SLAB,block,2,,,苔石砖台阶
+MOSSY_STONE_BRICK_STAIRS,block,2,,,苔石砖楼梯
+MOSSY_STONE_BRICK_WALL,block,2,,,苔石砖墙
+NETHER_BRICKS,block,2,,,下界砖块
+NETHER_BRICK_FENCE,block,2,,,下界砖栅栏
+NETHER_BRICK_SLAB,block,2,,,下界砖台阶
+NETHER_BRICK_STAIRS,block,2,,,下界砖楼梯
+NETHER_BRICK_WALL,block,2,,,下界砖墙
+NETHER_SPROUTS,block,2,,,下界苗
+NETHER_WART,block,2,,,下界疣
+NETHER_WART_BLOCK,block,2,,,下界疣块
+OBSERVER,block,2,,,侦测器
+PACKED_ICE,block,2,,,浮冰
+POLISHED_BLACKSTONE,block,2,,,磨制黑石
+POLISHED_BLACKSTONE_BRICKS,block,2,,,磨制黑石砖
+POLISHED_BLACKSTONE_BRICK_SLAB,block,2,,,磨制黑石砖台阶
+POLISHED_BLACKSTONE_BRICK_STAIRS,block,2,,,磨制黑石砖楼梯
+POLISHED_BLACKSTONE_BRICK_WALL,block,2,,,磨制黑石砖墙
+POLISHED_BLACKSTONE_BUTTON,block,2,,,磨制黑石按钮
+POLISHED_BLACKSTONE_PRESSURE_PLATE,block,2,,,磨制黑石压力板
+POLISHED_BLACKSTONE_SLAB,block,2,,,磨制黑石台阶
+POLISHED_BLACKSTONE_STAIRS,block,2,,,磨制黑石楼梯
+POLISHED_BLACKSTONE_WALL,block,2,,,磨制黑石墙
+PRISMARINE,block,2,,,海晶石
+PRISMARINE_BRICKS,block,2,,,海晶石砖
+PRISMARINE_BRICK_SLAB,block,2,,,海晶石砖台阶
+PRISMARINE_BRICK_STAIRS,block,2,,,海晶石砖楼梯
+PRISMARINE_SLAB,block,2,,,海晶石台阶
+PRISMARINE_STAIRS,block,2,,,海晶石楼梯
+PRISMARINE_WALL,block,2,,,海晶石墙
+QUARTZ_BRICKS,block,2,,,石英砖
+QUARTZ_PILLAR,block,2,,,石英柱
+QUARTZ_SLAB,block,2,,,石英台阶
+QUARTZ_STAIRS,block,2,,,石英楼梯
+RED_NETHER_BRICKS,block,2,,,红色下界砖块
+RED_NETHER_BRICK_SLAB,block,2,,,红色下界砖台阶
+RED_NETHER_BRICK_STAIRS,block,2,,,红色下界砖楼梯
+RED_NETHER_BRICK_WALL,block,2,,,红色下界砖墙
+RESPAWN_ANCHOR,block,2,,,重生锚
+SEA_LANTERN,block,2,,,海晶灯
+SMALL_DRIPLEAF,block,2,,,小型垂滴叶
+SMOOTH_QUARTZ_SLAB,block,2,,,平滑石英台阶
+SMOOTH_QUARTZ_STAIRS,block,2,,,平滑石英楼梯
+SOUL_CAMPFIRE,block,2,,,灵魂营火
+SOUL_LANTERN,block,2,,,灵魂灯笼
+SOUL_SAND,block,2,,,灵魂沙
+SOUL_SOIL,block,2,,,灵魂土
+SOUL_TORCH,block,2,,,灵魂火把
+STRIPPED_CHERRY_LOG,block,2,,,去皮樱花原木
+STRIPPED_CHERRY_WOOD,block,2,,,去皮樱花木
+TWISTING_VINES,block,2,,,缠怨藤
+WARPED_BUTTON,block,2,,,诡异木按钮
+WARPED_DOOR,block,2,,,诡异木门
+WARPED_FENCE,block,2,,,诡异木栅栏
+WARPED_FENCE_GATE,block,2,,,诡异木栅栏门
+WARPED_FUNGUS,block,2,,,诡异菌
+WARPED_HYPHAE,block,2,,,诡异菌核
+WARPED_NYLIUM,block,2,,,诡异菌岩
+WARPED_PLANKS,block,2,,,诡异木板
+WARPED_PRESSURE_PLATE,block,2,,,诡异木压力板
+WARPED_ROOTS,block,2,,,诡异菌索
+WARPED_SIGN,block,2,,,诡异木告示牌
+WARPED_SLAB,block,2,,,诡异木台阶
+WARPED_STAIRS,block,2,,,诡异木楼梯
+WARPED_STEM,block,2,,,诡异菌柄
+WARPED_TRAPDOOR,block,2,,,诡异木活板门
+WARPED_WART_BLOCK,block,2,,,诡异疣块
+CRAFTER,block,2,,,合成器
+CHISELED_TUFF,block,2,,,雕纹凝灰岩
+CHISELED_TUFF_BRICKS,block,2,,,雕纹凝灰岩砖
+POLISHED_TUFF,block,2,,,磨制凝灰岩
+POLISHED_TUFF_SLAB,block,2,,,磨制凝灰岩台阶
+POLISHED_TUFF_STAIRS,block,2,,,磨制凝灰岩楼梯
+POLISHED_TUFF_WALL,block,2,,,磨制凝灰岩墙
+TUFF_BRICK_SLAB,block,2,,,凝灰岩砖台阶
+TUFF_BRICK_STAIRS,block,2,,,凝灰岩砖楼梯
+TUFF_BRICK_WALL,block,2,,,凝灰岩砖墙
+TUFF_BRICKS,block,2,,,凝灰岩砖
+TUFF_SLAB,block,2,,,凝灰岩台阶
+TUFF_STAIRS,block,2,,,凝灰岩楼梯
+TUFF_WALL,block,2,,,凝灰岩墙
+EXPOSED_CHISELED_COPPER,block,2,,,斑驳的雕纹铜块
+EXPOSED_COPPER,block,2,,,斑驳的铜块
+EXPOSED_COPPER_BULB,block,2,,,斑驳的铜灯
+EXPOSED_COPPER_DOOR,block,2,,,斑驳的铜门
+EXPOSED_COPPER_GRATE,block,2,,,斑驳的铜格栅
+EXPOSED_COPPER_TRAPDOOR,block,2,,,斑驳的铜活板门
+EXPOSED_CUT_COPPER,block,2,,,斑驳的切制铜块
+EXPOSED_CUT_COPPER_SLAB,block,2,,,斑驳的切制铜台阶
+EXPOSED_CUT_COPPER_STAIRS,block,2,,,斑驳的切制铜楼梯
+WAXED_CHISELED_COPPER,block,2,,,涂蜡的雕纹铜块
+WAXED_COPPER_BLOCK,block,2,,,涂蜡的铜块
+WAXED_COPPER_BULB,block,2,,,涂蜡的铜灯
+WAXED_COPPER_DOOR,block,2,,,涂蜡的铜门
+WAXED_COPPER_GRATE,block,2,,,涂蜡的铜格栅
+WAXED_COPPER_TRAPDOOR,block,2,,,涂蜡的铜活板门
+WAXED_CUT_COPPER,block,2,,,涂蜡的切制铜块
+WAXED_CUT_COPPER_SLAB,block,2,,,涂蜡的切制铜台阶
+WAXED_CUT_COPPER_STAIRS,block,2,,,涂蜡的切制铜楼梯
+CLOSED_EYEBLOSSOM,block,2,,,闭合的眼眸花
+OPEN_EYEBLOSSOM,block,2,,,张开的眼眸花
+PALE_OAK_LEAVES,block,2,,,苍白橡树树叶
+PALE_OAK_SAPLING,block,2,,,苍白橡树树苗
+PALE_OAK_LOG,block,2,,,苍白橡木原木
+STRIPPED_PALE_OAK_LOG,block,2,,,去皮苍白橡木原木
+PALE_OAK_WOOD,block,2,,,苍白橡木
+STRIPPED_PALE_OAK_WOOD,block,2,,,去皮苍白橡木
+PALE_OAK_PLANKS,block,2,,,苍白橡木木板
+PALE_MOSS_BLOCK,block,2,,,苍白苔藓块
+PALE_MOSS_CARPET,block,2,,,苍白覆地苔藓
+PALE_HANGING_MOSS,block,2,,,苍白垂须
+PALE_OAK_BUTTON,block,2,,,苍白橡木按钮
+PALE_OAK_DOOR,block,2,,,苍白橡木门
+PALE_OAK_FENCE,block,2,,,苍白橡木栅栏
+PALE_OAK_FENCE_GATE,block,2,,,苍白橡木栅栏门
+PALE_OAK_HANGING_SIGN,block,2,,,悬挂式苍白橡木告示牌
+PALE_OAK_PRESSURE_PLATE,block,2,,,苍白橡木压力板
+PALE_OAK_SIGN,block,2,,,苍白橡木告示牌
+PALE_OAK_SLAB,block,2,,,苍白橡木台阶
+PALE_OAK_STAIRS,block,2,,,苍白橡木楼梯
+PALE_OAK_TRAPDOOR,block,2,,,苍白橡木活板门
+SHORT_DRY_GRASS,block,2,,,矮枯草丛
+TALL_DRY_GRASS,block,2,,,高枯草丛
+CACTUS_FLOWER,block,2,,,仙人掌花
+EXPOSED_COPPER_CHEST,block,2,,,斑驳的铜箱子
+WAXED_COPPER_CHEST,block,2,,,涂蜡的铜箱子
+EXPOSED_COPPER_BARS,block,2,,,斑驳的铜栏杆
+WAXED_COPPER_BARS,block,2,,,涂蜡的铜栏杆
+EXPOSED_COPPER_CHAIN,block,2,,,斑驳的铜链
+WAXED_COPPER_CHAIN,block,2,,,涂蜡的铜链
+EXPOSED_COPPER_LANTERN,block,2,,,斑驳的铜灯笼
+WAXED_COPPER_LANTERN,block,2,,,涂蜡的铜灯笼
+EXPOSED_LIGHTNING_ROD,block,2,,,斑驳的避雷针
+WAXED_LIGHTNING_ROD,block,2,,,涂蜡的避雷针
+EXPOSED_COPPER_GOLEM_STATUE,block,2,,,斑驳的铜傀儡像
+WAXED_COPPER_GOLEM_STATUE,block,2,,,涂蜡的铜傀儡像
+MANGROVE_SHELF,block,2,,,红树木展示架
+PALE_OAK_SHELF,block,2,,,苍白橡木展示架
+CRIMSON_SHELF,block,2,,,绯红木展示架
+WARPED_SHELF,block,2,,,诡异木展示架
+CANDLE,block,2,,,蜡烛
+BREEZE_ROD,block,2,,,旋风棒
+DIAMOND_BLOCK,block,2,,,钻石块
+HEART_OF_THE_SEA,block,2,,,海洋之心
+SCULK,block,2,,,幽匿块
+SCULK_VEIN,block,2,,,幽匿脉络
+SCULK_CATALYST,block,2,,,幽匿催发体
+SCULK_SENSOR,block,2,,,幽匿感测体
+SCULK_SHRIEKER,block,2,,,幽匿尖啸体
+POWDER_SNOW_BUCKET,block,2,,,细雪桶
+COD_BUCKET,block,2,,,鳕鱼桶
+SALMON_BUCKET,block,2,,,鲑鱼桶
+PUFFERFISH_BUCKET,block,2,,,河豚桶
+TROPICAL_FISH_BUCKET,block,2,,,热带鱼桶
+SPECTRAL_ARROW,block,2,,,光灵箭
+TIPPED_ARROW,block,2,,,药水箭
+EXPERIENCE_BOTTLE,block,2,,,附魔之瓶
+SPYGLASS,block,2,,,望远镜
+RABBIT_HIDE,block,2,,,兔子皮
+RABBIT_STEW,block,2,,,兔肉煲
+NAME_TAG,block,2,,,命名牌
+POISONOUS_POTATO,block,2,,,毒马铃薯
+FIRE_CHARGE,block,2,,,火焰弹
+GOAT_HORN,block,2,,,山羊角
+BLUE_EGG,block,2,,,寒带鸡蛋
+BROWN_EGG,block,2,,,热带鸡蛋
+BLACK_BED,block,2,,,黑色床
+BLACK_CARPET,block,2,,,黑色地毯
+BLACK_STAINED_GLASS,block,2,,,黑色染色玻璃
+BLACK_TERRACOTTA,block,2,,,黑色陶瓦
+BLACK_WOOL,block,2,,,黑色羊毛
+BLUE_BED,block,2,,,蓝色床
+BLUE_CARPET,block,2,,,蓝色地毯
+BLUE_STAINED_GLASS,block,2,,,蓝色染色玻璃
+BLUE_TERRACOTTA,block,2,,,蓝色陶瓦
+BLUE_WOOL,block,2,,,蓝色羊毛
+BROWN_BED,block,2,,,棕色床
+BROWN_CARPET,block,2,,,棕色地毯
+BROWN_STAINED_GLASS,block,2,,,棕色染色玻璃
+BROWN_WOOL,block,2,,,棕色羊毛
+CYAN_BED,block,2,,,青色床
+CYAN_CARPET,block,2,,,青色地毯
+CYAN_CONCRETE,block,2,,,青色混凝土
+CYAN_STAINED_GLASS,block,2,,,青色染色玻璃
+CYAN_WOOL,block,2,,,青色羊毛
+GRAY_BED,block,2,,,灰色床
+GRAY_CARPET,block,2,,,灰色地毯
+GRAY_STAINED_GLASS,block,2,,,灰色染色玻璃
+GRAY_WOOL,block,2,,,灰色羊毛
+GREEN_BED,block,2,,,绿色床
+GREEN_CARPET,block,2,,,绿色地毯
+GREEN_STAINED_GLASS,block,2,,,绿色染色玻璃
+GREEN_TERRACOTTA,block,2,,,绿色陶瓦
+GREEN_WOOL,block,2,,,绿色羊毛
+LIGHT_BLUE_STAINED_GLASS,block,2,,,淡蓝色染色玻璃
+LIGHT_BLUE_STAINED_GLASS_PANE,block,2,,,淡蓝色染色玻璃板
+LIGHT_BLUE_WOOL,block,2,,,淡蓝色羊毛
+LIME_BED,block,2,,,黄绿色床
+LIME_CARPET,block,2,,,黄绿色地毯
+LIME_STAINED_GLASS,block,2,,,黄绿色染色玻璃
+LIME_WOOL,block,2,,,黄绿色羊毛
+MAGENTA_BED,block,2,,,品红色床
+MAGENTA_CARPET,block,2,,,品红色地毯
+MAGENTA_GLAZED_TERRACOTTA,block,2,,,品红色带釉陶瓦
+MAGENTA_STAINED_GLASS,block,2,,,品红色染色玻璃
+MAGENTA_STAINED_GLASS_PANE,block,2,,,品红色染色玻璃板
+MAGENTA_TERRACOTTA,block,2,,,品红色陶瓦
+MAGENTA_WOOL,block,2,,,品红色羊毛
+ORANGE_BED,block,2,,,橙色床
+ORANGE_CARPET,block,2,,,橙色地毯
+ORANGE_STAINED_GLASS,block,2,,,橙色染色玻璃
+ORANGE_TERRACOTTA,block,2,,,橙色陶瓦
+ORANGE_WOOL,block,2,,,橙色羊毛
+PURPLE_BED,block,2,,,紫色床
+PURPLE_CARPET,block,2,,,紫色地毯
+PURPLE_WOOL,block,2,,,紫色羊毛
+RED_BED,block,2,,,红色床
+RED_CARPET,block,2,,,红色地毯
+RED_STAINED_GLASS,block,2,,,红色染色玻璃
+RED_STAINED_GLASS_PANE,block,2,,,红色染色玻璃板
+RED_TERRACOTTA,block,2,,,红色陶瓦
+RED_WOOL,block,2,,,红色羊毛
+WHITE_BED,block,2,,,白色床
+WHITE_CARPET,block,2,,,白色地毯
+WHITE_STAINED_GLASS,block,2,,,白色染色玻璃
+WHITE_STAINED_GLASS_PANE,block,2,,,白色染色玻璃板
+WHITE_TERRACOTTA,block,2,,,白色陶瓦
+WHITE_WOOL,block,2,,,白色羊毛
+YELLOW_BED,block,2,,,黄色床
+YELLOW_CARPET,block,2,,,黄色地毯
+YELLOW_CONCRETE,block,2,,,黄色混凝土
+YELLOW_STAINED_GLASS,block,2,,,黄色染色玻璃
+YELLOW_STAINED_GLASS_PANE,block,2,,,黄色染色玻璃板
+YELLOW_TERRACOTTA,block,2,,,黄色陶瓦
+YELLOW_WOOL,block,2,,,黄色羊毛
+AMETHYST_CLUSTER,block,3,,,紫水晶簇
+ANCIENT_DEBRIS,block,5,,,远古残骸
+BRAIN_CORAL,block,3,,,脑纹珊瑚
+BRAIN_CORAL_BLOCK,block,3,,,脑纹珊瑚块
+BRAIN_CORAL_FAN,block,3,,,脑纹珊瑚扇
+CALIBRATED_SCULK_SENSOR,block,3,,,校频幽匿感测体
+COAL_ORE,block,3,,,煤矿石
+COPPER_ORE,block,3,,,铜矿石
+DEAD_BRAIN_CORAL,block,3,,,失活的脑纹珊瑚
+DEAD_BRAIN_CORAL_BLOCK,block,3,,,失活的脑纹珊瑚块
+DEAD_BRAIN_CORAL_FAN,block,3,,,失活的脑纹珊瑚扇
+DEEPSLATE_COPPER_ORE,block,3,,,深层铜矿石
+DEEPSLATE_DIAMOND_ORE,block,3,,,深层钻石矿石
+DEEPSLATE_GOLD_ORE,block,3,,,深层金矿石
+DEEPSLATE_IRON_ORE,block,3,,,深层铁矿石
+DEEPSLATE_REDSTONE_ORE,block,3,,,深层红石矿石
+EMERALD_ORE,block,3,,,绿宝石矿石
+GOLD_ORE,block,3,,,金矿石
+GRASS_BLOCK,block,3,,,草方块
+IRON_ORE,block,3,,,铁矿石
+MUSHROOM_STEM,block,3,,,蘑菇柄
+NETHER_GOLD_ORE,block,3,,,下界金矿石
+NETHER_QUARTZ_ORE,block,3,,,下界石英矿石
+PODZOL,block,3,,,灰化土
+REDSTONE_ORE,block,3,,,红石矿石
+SMALL_AMETHYST_BUD,block,3,,,小型紫晶芽
+SPONGE,block,5,,,海绵
+TINTED_GLASS,block,3,,,遮光玻璃
+TURTLE_EGG,block,3,,,海龟蛋
+WET_SPONGE,block,5,,,湿海绵
+WAXED_EXPOSED_CHISELED_COPPER,block,3,,,涂蜡的斑驳雕纹铜块
+WAXED_EXPOSED_COPPER,block,3,,,涂蜡的斑驳铜块
+WAXED_EXPOSED_COPPER_BULB,block,3,,,涂蜡的斑驳铜灯
+WAXED_EXPOSED_COPPER_DOOR,block,3,,,涂蜡的斑驳铜门
+WAXED_EXPOSED_COPPER_GRATE,block,3,,,涂蜡的斑驳铜格栅
+WAXED_EXPOSED_COPPER_TRAPDOOR,block,3,,,涂蜡的斑驳铜活板门
+WAXED_EXPOSED_CUT_COPPER,block,3,,,涂蜡的斑驳切制铜块
+WAXED_EXPOSED_CUT_COPPER_SLAB,block,3,,,涂蜡的斑驳切制铜台阶
+WAXED_EXPOSED_CUT_COPPER_STAIRS,block,3,,,涂蜡的斑驳切制铜楼梯
+CREAKING_HEART,block,3,,,嘎枝之心
+RESIN_BLOCK,block,3,,,树脂块
+RESIN_BRICKS,block,3,,,树脂砖块
+CHISELED_RESIN_BRICKS,block,3,,,雕纹树脂砖块
+RESIN_BRICK_SLAB,block,3,,,树脂砖台阶
+RESIN_BRICK_STAIRS,block,3,,,树脂砖楼梯
+RESIN_BRICK_WALL,block,3,,,树脂砖墙
+DRIED_GHAST,block,3,,,失水恶魂
+WAXED_EXPOSED_COPPER_CHEST,block,3,,,涂蜡的斑驳铜箱子
+WAXED_EXPOSED_COPPER_BARS,block,3,,,涂蜡的斑驳铜栏杆
+WAXED_EXPOSED_COPPER_CHAIN,block,3,,,涂蜡的斑驳铜链
+WAXED_EXPOSED_COPPER_LANTERN,block,3,,,涂蜡的斑驳铜灯笼
+WAXED_EXPOSED_LIGHTNING_ROD,block,3,,,涂蜡的斑驳避雷针
+WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,3,,,涂蜡的斑驳铜傀儡像
+LAPIS_ORE,block,3,,,青金石矿石
+DEEPSLATE_LAPIS_ORE,block,3,,,深层青金石矿石
+NAUTILUS_SHELL,block,3,,,鹦鹉螺壳
+WITHER_SKELETON_SKULL,block,7,,,凋灵骷髅头颅
+OMINOUS_BOTTLE,block,3,,,灾厄之瓶
+ECHO_SHARD,block,3,,,回响碎片
+RECOVERY_COMPASS,block,3,,,追溯指针
+TOTEM_OF_UNDYING,block,3,,,不死图腾
+NETHERITE_UPGRADE_SMITHING_TEMPLATE,block,7,,,下界合金升级锻造模板
+NETHERITE_INGOT,block,7,,,下界合金锭
+RABBIT_FOOT,block,3,,,兔子脚
+CHORUS_FLOWER,block,3,,,紫颂花
+END_ROD,block,5,,,末地烛
+END_STONE,block,3,,,末地石
+END_STONE_BRICK_SLAB,block,3,,,末地石砖台阶
+END_STONE_BRICK_STAIRS,block,3,,,末地石砖楼梯
+END_STONE_BRICK_WALL,block,3,,,末地石砖墙
+END_STONE_BRICKS,block,3,,,末地石砖
+SHULKER_BOX,block,3,,,潜影盒
+DRAGON_HEAD,block,7,,,龙首
+DEEPSLATE_COAL_ORE,block,3,,,深层煤矿石
+FROGSPAWN,block,3,,,青蛙卵
+OBTAIN_WOODEN_TOOLS,goal,2,Obtain all Wooden Tools,"item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE",获得全套木质工具
+OBTAIN_STONE_TOOLS,goal,2,Obtain all Stone Tools,"item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE",获得全套石质工具
+OBTAIN_IRON_TOOLS,goal,2,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE",获得全套铁质工具
+OBTAIN_GOLDEN_TOOLS,goal,2,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE",获得全套金质工具
+OBTAIN_DIAMOND_TOOLS,goal,2,Obtain all Diamond Tools,"item:DIAMOND_SWORD,DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE",获得全套钻石工具
+OBTAIN_COPPER_TOOLS,goal,2,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR",获得全套铜质工具
+MINE_DIAMOND_ORE,goal,2,Mine Diamond Ore,item:DIAMOND_ORE,挖掘钻石矿石
+MINE_EMERALD_ORE,goal,2,Mine Emerald Ore,item:EMERALD_ORE,挖掘绿宝石矿石
+MINE_MOB_SPAWNER,goal,2,Mine a Spawner,item:SPAWNER,挖掘刷怪笼
+MINE_TURTLE_EGG,goal,2,Mine Turtle Egg,item:TURTLE_EGG,挖掘海龟蛋
+MINE_CRAFTER,goal,2,Mine Crafter,item:CRAFTER,挖掘合成器
+WEAR_LEATHER_ARMOR,goal,2,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS",穿上全套皮革盔甲
+WEAR_GOLDEN_ARMOR,goal,2,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS",穿上全套金质盔甲
+WEAR_CHAIN_ARMOR_PIECE,goal,2,Wear a Chain Armor Piece,"equipment-any:CHAINMAIL_HELMET,CHAINMAIL_CHESTPLATE,CHAINMAIL_LEGGINGS,CHAINMAIL_BOOTS",穿上一件锁链盔甲
+WEAR_IRON_ARMOR,goal,2,Wear Full Iron Armor,"equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS",穿上全套铁质盔甲
+WEAR_DIAMOND_ARMOR,goal,2,Wear Full Diamond Armor,"equipment-all:DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS",穿上全套钻石盔甲
+WEAR_COPPER_ARMOR,goal,2,Wear Full Copper Armor,"equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS",穿上全套铜质盔甲
+TAME_CAT,goal,2,Tame a Cat,tame:CAT,驯服一只猫
+TAME_PARROT,goal,2,Tame a Parrot,tame:PARROT,驯服一只鹦鹉
+TAME_HORSE,goal,2,Tame a Horse,tame:HORSE,驯服一匹马
+TAME_WOLF,goal,2,Tame a Wolf,tame:WOLF,驯服一只狼
+TAME_NAUTILUS,goal,2,Tame a Nautilus,tame:NAUTILUS,驯服一只鹦鹉螺
+BREED_4_UNIQUE_ANIMALS,goal,2,Breed 4 Unique Animals,breed-unique:4,繁殖 4 种不同动物
+BREED_6_UNIQUE_ANIMALS,goal,2,Breed 6 Unique Animals,breed-unique:6,繁殖 6 种不同动物
+BREED_8_UNIQUE_ANIMALS,goal,2,Breed 8 Unique Animals,breed-unique:8,繁殖 8 种不同动物
+BREED_CHICKEN,goal,2,Breed Chickens,breed:CHICKEN,繁殖鸡
+BREED_COW,goal,2,Breed Cows,breed:COW,繁殖牛
+BREED_HOGLIN,goal,2,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
+BREED_PIG,goal,2,Breed Pigs,breed:PIG,繁殖猪
+BREED_CAMEL,goal,2,Breed Camels,breed:CAMEL,繁殖骆驼
+BREED_ARMADILLO,goal,2,Breed Armadillos,breed:ARMADILLO,繁殖犰狳
+BREED_RABBIT,goal,2,Breed Rabbits,breed:RABBIT,繁殖兔子
+BREED_FOX,goal,2,Breed Foxes,breed:FOX,繁殖狐狸
+BREED_SHEEP,goal,2,Breed Sheep,breed:SHEEP,繁殖羊
+BREED_STRIDER,goal,2,Breed Striders,breed:STRIDER,繁殖炽足兽
+BREED_GOAT,goal,2,Breed Goats,breed:GOAT,繁殖山羊
+BREED_FROGS,goal,2,Breed Frogs,breed:FROG,繁殖青蛙
+KILL_WITCH,goal,2,Kill Witch,kill:WITCH,击杀女巫
+KILL_BOGGED,goal,2,Kill Bogged,kill:BOGGED,击杀沼骸
+KILL_PARCHED,goal,2,Kill Parched,kill:PARCHED,击杀干尸
+KILL_ZOMBIE_VILLAGER,goal,2,Kill Zombie Villager,kill:ZOMBIE_VILLAGER,击杀僵尸村民
+KILL_STRAY,goal,2,Kill Stray,kill:STRAY,击杀流浪者
+KILL_ZOGLIN,goal,2,Kill Zoglin,kill:ZOGLIN,击杀僵尸疣猪兽
+KILL_SILVERFISH,goal,2,Kill Silverfish,kill:SILVERFISH,击杀蠹虫
+KILL_GUARDIAN,goal,2,Kill Guardian,kill:GUARDIAN,击杀守卫者
+KILL_GHAST,goal,2,Kill Ghast,kill:GHAST,击杀恶魂
+KILL_BAT,goal,2,Kill Bat,kill:BAT,击杀蝙蝠
+KILL_SNOW_GOLEM,goal,2,Kill Snow Golem,kill:SNOW_GOLEM,击杀雪傀儡
+KILL_ELDER_GUARDIAN,goal,2,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
+KILL_WARDEN,goal,2,Kill Warden,kill:WARDEN,击杀监守者
+KILL_7_UNIQUE_HOSTILE_MOBS,goal,2,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7,击杀 7 种不同敌对生物
+KILL_10_UNIQUE_HOSTILE_MOBS,goal,2,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10,击杀 10 种不同敌对生物
+KILL_13_UNIQUE_HOSTILE_MOBS,goal,2,Kill 13 Unique Hostile Mobs,kill-unique-hostile:13,击杀 13 种不同敌对生物
+KILL_15_UNIQUE_HOSTILE_MOBS,goal,2,Kill 15 Unique Hostile Mobs,kill-unique-hostile:15,击杀 15 种不同敌对生物
+KILL_30_UNDEAD_MOBS,goal,2,Kill 30 Undead Mobs,kill-undead:30,击杀 30 只亡灵生物
+KILL_20_ARTHROPOD_MOBS,goal,2,Kill 20 Arthropod Mobs,kill-arthropod:20,击杀 20 只节肢生物
+KILL_100_MOBS,goal,2,Kill 100 mobs,kill-total:100,击杀 100 只生物
+OBTAIN_ALL_FURNACES,goal,2,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER",获得所有熔炉类方块
+OBTAIN_ALL_MINECARTS,goal,2,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART",获得所有矿车类型
+OBTAIN_ALL_MUSHROOMS,goal,2,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS",获得所有蘑菇和菌类
+OBTAIN_ALL_PUMPKINS,goal,2,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN",获得所有南瓜类物品
+OBTAIN_ALL_TORCHES,goal,2,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH",获得所有火把类物品
+OBTAIN_ALL_RAW_ORE_BLOCKS,goal,2,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK",获得所有粗矿块
+OBTAIN_ALL_SOUPS,goal,2,Obtain every type of Soup,"item:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",获得所有汤类食物
+OBTAIN_64_ARROWS,goal,2,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
+OBTAIN_64_COARSE_DIRT,goal,2,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
+OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
+OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64,获得 64 个彩色混凝土
+OBTAIN_6_UNIQUE_BUCKETS,goal,2,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
+OBTAIN_4_UNIQUE_SAPLINGS,goal,2,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING",获得 4 种不同树苗
+OBTAIN_4_UNIQUE_SEEDS,goal,2,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
+OBTAIN_6_UNIQUE_FLOWERS,goal,2,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
+OBTAIN_7_UNIQUE_WORKSTATIONS,goal,2,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
+OBTAIN_CLOCK,goal,2,Obtain Clock,item:CLOCK,获得时钟
+OBTAIN_BELL,goal,2,Obtain Bell,item:BELL,获得钟
+OBTAIN_BOOKSHELF,goal,2,Obtain Bookshelf,item:BOOKSHELF,获得书架
+OBTAIN_COBWEB,goal,2,Obtain Cobweb,item:COBWEB,获得蜘蛛网
+OBTAIN_DAYLIGHT_DETECTOR,goal,2,Obtain Daylight Detector,item:DAYLIGHT_DETECTOR,获得阳光探测器
+OBTAIN_DETECTOR_RAIL,goal,2,Obtain Detector Rail,item:DETECTOR_RAIL,获得探测铁轨
+OBTAIN_POWERED_RAIL,goal,2,Obtain Powered Rail,item:POWERED_RAIL,获得动力铁轨
+OBTAIN_ACTIVATOR_RAIL,goal,2,Obtain Activator Rail,item:ACTIVATOR_RAIL,获得激活铁轨
+OBTAIN_DISPENSER,goal,2,Obtain Dispenser,item:DISPENSER,获得发射器
+OBTAIN_OBSERVER,goal,2,Obtain Observer,item:OBSERVER,获得侦测器
+OBTAIN_PISTON,goal,2,Obtain Piston,item:PISTON,获得活塞
+OBTAIN_REDSTONE_LAMP,goal,2,Obtain Redstone Lamp,item:REDSTONE_LAMP,获得红石灯
+OBTAIN_REDSTONE_REPEATER,goal,2,Obtain Redstone Repeater,item:REPEATER,获得红石中继器
+OBTAIN_REDSTONE_COMPARATOR,goal,2,Obtain Redstone Comparator,item:COMPARATOR,获得红石比较器
+OBTAIN_TNT,goal,2,Obtain TNT,item:TNT,获得 TNT
+OBTAIN_SCAFFOLDING,goal,2,Obtain Scaffolding,item:SCAFFOLDING,获得脚手架
+OBTAIN_SOUL_CAMPFIRE,goal,2,Obtain Soul Campfire,item:SOUL_CAMPFIRE,获得灵魂营火
+OBTAIN_SOUL_LANTERN,goal,2,Obtain Soul Lantern,item:SOUL_LANTERN,获得灵魂灯笼
+OBTAIN_TINTED_GLASS,goal,2,Obtain Tinted Glass,item:TINTED_GLASS,获得遮光玻璃
+OBTAIN_LODESTONE,goal,2,Obtain Lodestone,item:LODESTONE,获得磁石
+OBTAIN_ENDER_CHEST,goal,2,Obtain Ender Chest,item:ENDER_CHEST,获得末影箱
+OBTAIN_END_ROD,goal,2,Obtain End Rod,item:END_ROD,获得末地烛
+OBTAIN_DRAGON_EGG,goal,2,Obtain Dragon Egg,item:DRAGON_EGG,获得龙蛋
+OBTAIN_HEART_OF_THE_SEA,goal,2,Obtain Heart of the Sea,item:HEART_OF_THE_SEA,获得海洋之心
+OBTAIN_ENCHANT_BOTTLE,goal,2,Obtain Bottle o' Enchanting,item:EXPERIENCE_BOTTLE,获得附魔之瓶
+OBTAIN_POWDER_SNOW_BUCKET,goal,2,Obtain Powder Snow Bucket,item:POWDER_SNOW_BUCKET,获得细雪桶
+OBTAIN_TROPICAL_FISH_BUCKET,goal,2,Obtain Tropical Fish Bucket,item:TROPICAL_FISH_BUCKET,获得热带鱼桶
+OBTAIN_FLOWERING_AZALEA,goal,2,Obtain Flowering Azalea,item:FLOWERING_AZALEA,获得盛开的杜鹃花丛
+OBTAIN_GILDED_BLACKSTONE,goal,2,Obtain Gilded Blackstone,item:GILDED_BLACKSTONE,获得镶金黑石
+OBTAIN_ANCIENT_DEBRIS,goal,2,Obtain Ancient Debris,item:ANCIENT_DEBRIS,获得远古残骸
+OBTAIN_SPONGE,goal,2,Obtain Sponge,item:SPONGE,获得海绵
+OBTAIN_AMETHYST_BLOCK,goal,2,Obtain Amethyst Block,item:AMETHYST_BLOCK,获得紫水晶块
+OBTAIN_BONE_BLOCK,goal,2,Obtain Bone Block,item:BONE_BLOCK,获得骨块
+OBTAIN_SMOOTH_BASALT,goal,2,Obtain Smooth Basalt,item:SMOOTH_BASALT,获得平滑玄武岩
+OBTAIN_DRIED_KELP_BLOCK,goal,2,Obtain Dried Kelp Block,item:DRIED_KELP_BLOCK,获得干海带块
+OBTAIN_DEAD_BUSH,goal,2,Obtain Dead Bush,item:DEAD_BUSH,获得枯萎的灌木
+OBTAIN_POTTERY_SHERD,goal,2,Obtain Pottery Sherd,item:ANGLER_POTTERY_SHERD,获得陶片
+OBTAIN_SUSPICIOUS_BLOCK,goal,2,Obtain Suspicious Sand/Gravel,item:SUSPICIOUS_SAND,获得可疑的沙子或沙砾
+OBTAIN_BRICK_WALL,goal,2,Obtain Brick Wall,item:BRICK_WALL,获得砖墙
+OBTAIN_MOSSY_STONE_BRICK_WALL,goal,2,Obtain Mossy Stone Brick Wall,item:MOSSY_STONE_BRICK_WALL,获得苔石砖墙
+OBTAIN_MUD_BRICK_WALL,goal,2,Obtain Mud Brick Wall,item:MUD_BRICK_WALL,获得泥砖墙
+OBTAIN_RED_NETHER_BRICK_STAIRS,goal,2,Obtain Red Nether Brick Stairs,item:RED_NETHER_BRICK_STAIRS,获得红色下界砖楼梯
+EAT_5_UNIQUE_FOOD,goal,2,Eat 5 Unique Foods,consume-unique:5,吃下 5 种不同食物
+EAT_10_UNIQUE_FOOD,goal,2,Eat 10 Unique Foods,consume-unique:10,吃下 10 种不同食物
+EAT_15_UNIQUE_FOOD,goal,2,Eat 15 Unique Foods,consume-unique:15,吃下 15 种不同食物
+EAT_20_UNIQUE_FOOD,goal,2,Eat 20 Unique Foods,consume-unique:20,吃下 20 种不同食物
+EAT_25_UNIQUE_FOOD,goal,2,Eat 25 Unique Foods,consume-unique:25,吃下 25 种不同食物
+EAT_ALL_SOUPS,goal,2,Eat every type of Soup,"consume-all:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",喝下所有汤类食物
+EAT_BEETROOT_SOUP,goal,2,Eat Beetroot Soup,consume:BEETROOT_SOUP,喝下甜菜汤
+EAT_CHORUS_FRUIT,goal,2,Eat Chorus Fruit,consume:CHORUS_FRUIT,吃下紫颂果
+EAT_COOKIE,goal,2,Eat Cookie,consume:COOKIE,吃下曲奇
+EAT_GLOW_BERRY,goal,2,Eat Glow Berry,consume:GLOW_BERRIES,吃下发光浆果
+EAT_POISONOUS_POTATO,goal,2,Eat Poisonous Potato,consume:POISONOUS_POTATO,吃下毒马铃薯
+EAT_PUMPKIN_PIE,goal,2,Eat Pumpkin Pie,consume:PUMPKIN_PIE,吃下南瓜派
+EAT_RABBIT_STEW,goal,2,Eat Rabbit Stew,consume:RABBIT_STEW,喝下兔肉煲
+EAT_SUSPICIOUS_STEW,goal,2,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜之炖菜
+DRINK_HONEY_BOTTLE,goal,2,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
+DRINK_WATER_BOTTLE,goal,2,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
+ENTER_NETHER,goal,2,Enter Nether,advancement:story/enter_the_nether,进入下界
+ENTER_END,goal,2,Enter The End,advancement:end/root,进入末地
+GET_EYE_SPY_ADVANCEMENT,goal,2,Find a Stronghold,advancement:story/follow_ender_eye,找到要塞
+GET_WHAT_A_DEAL_ADVANCEMENT,goal,2,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得「真划算！」进度
+GET_OH_SHINY_ADVANCEMENT,goal,2,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得「闪闪发亮！」进度
+GET_SNIPER_DUEL_ADVANCEMENT,goal,2,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel,获得「神射手对决」进度
+GET_BULLSEYE_ADVANCEMENT,goal,2,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye,获得「百发百中」进度
+GET_HIRED_HELP_ADVANCEMENT,goal,2,Construct an Iron Golem,advancement:adventure/summon_iron_golem,获得「雇佣帮手」进度
+GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,2,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,获得「这船有腿」进度
+GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,2,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,获得「差点九条命」进度
+GET_ABSORPTION_STATUS_EFFECT,goal,2,Get Absorption,effect:absorption,获得伤害吸收
+GET_BAD_OMEN_STATUS_EFFECT,goal,2,Get Bad Omen,effect:bad_omen,获得不祥之兆
+GET_GLOWING_STATUS_EFFECT,goal,2,Get Glowing,effect:glowing,获得发光
+GET_JUMP_BOOST_STATUS_EFFECT,goal,2,Get Jump Boost,effect:jump_boost,获得跳跃提升
+GET_LEVITATION_STATUS_EFFECT,goal,2,Get Levitation,effect:levitation,获得飘浮
+GET_MINING_FATIGUE_STATUS_EFFECT,goal,2,Get Mining Fatigue,effect:mining_fatigue,获得挖掘疲劳
+GET_NAUSEA_STATUS_EFFECT,goal,2,Get Nausea,effect:nausea,获得反胃
+GET_POISON_STATUS_EFFECT,goal,2,Get Poison,effect:poison,获得中毒
+GET_WEAKNESS_STATUS_EFFECT,goal,2,Get Weakness,effect:weakness,获得虚弱
+REMOVE_STATUS_EFFECT_USING_MILK,goal,2,Remove Effect using Milk Bucket,consume:MILK_BUCKET,使用牛奶桶清除状态效果
+GET_10_ADVANCEMENTS,goal,2,Get 10 Advancements,advancement-count:10,获得 10 个进度
+GET_20_ADVANCEMENTS,goal,2,Get 20 Advancements,advancement-count:20,获得 20 个进度
+GET_30_ADVANCEMENTS,goal,2,Get 30 Advancements,advancement-count:30,获得 30 个进度
+REACH_EXP_LEVEL_10,goal,2,Reach XP level 10,level:10,达到 10 级经验等级
+REACH_EXP_LEVEL_20,goal,2,Reach XP level 20,level:20,达到 20 级经验等级
+REACH_HEIGHT_LIMIT,goal,2,Reach height limit,location:height-limit,到达高度上限
+REACH_BEDROCK,goal,2,Reach Bedrock,location:bedrock,到达基岩层
+REACH_NETHER_ROOF,goal,2,Get on Nether Roof,location:nether-roof,到达下界顶部
+EMPTY_HUNGER_BAR,goal,2,Empty Hunger Bar,hunger:empty,清空饥饿条
+USE_STONECUTTER,goal,2,Use Stonecutter,use-block:STONECUTTER,使用切石机
+USE_ANVIL,goal,2,Use Anvil,use-block:ANVIL,使用铁砧
+USE_ENCHANTING_TABLE,goal,2,Use Enchanting Table,use-block:ENCHANTING_TABLE,使用附魔台
+USE_GRINDSTONE,goal,2,Use Grindstone,use-block:GRINDSTONE,使用砂轮
+USE_LOOM,goal,2,Use Loom to design a Banner,use-block:LOOM,使用织布机设计旗帜
+USE_SMITHING_TABLE,goal,2,Use Smithing Table,use-block:SMITHING_TABLE,使用锻造台
+USE_CAULDRON,goal,2,Use Cauldron to wash something,use-block:CAULDRON,使用炼药锅清洗物品
+USE_COMPOSTER,goal,2,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
+USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片机播放唱片
+CRAFT_20_UNIQUE_ITEMS,goal,2,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
+CRAFT_50_UNIQUE_ITEMS,goal,2,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
+CRAFT_100_UNIQUE_ITEMS,goal,2,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
+TAKE_200_DAMAGE,goal,2,Take 200 damage,damage-taken:200,承受 200 点伤害
+DEAL_400_DAMAGE,goal,2,Deal 400 damage,damage-dealt:400,造成 400 点伤害
+DIE_BY_DROWNING,goal,2,Die by Drowning,death-cause:DROWNING,溺水身亡
+DIE_BY_CACTUS,goal,2,Die to Cactus,death-cause:CONTACT,被仙人掌刺死
+DIE_BY_MAGIC,goal,2,Die by Magic,death-cause:MAGIC,死于魔法伤害
+DIE_TO_VOID,goal,2,Die by falling in Void,death-cause:VOID,跌入虚空死亡
+FREEZE_TO_DEATH,goal,2,Die by Freezing,death-cause:FREEZE,冻死
+DIE_TO_POLAR_BEAR,goal,2,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
+DIE_TO_PUFFERFISH,goal,2,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
+DIE_TO_WARDEN,goal,2,Die to Warden,death-attacker:WARDEN,死于监守者
+WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,2,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLACK,goal,2,Wear Black Leather helmet,"equipment-colored:LEATHER_HELMET,BLACK",穿上黑色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_WHITE,goal,2,Wear White Leather helmet,"equipment-colored:LEATHER_HELMET,WHITE",穿上白色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GRAY,goal,2,Wear Gray Leather helmet,"equipment-colored:LEATHER_HELMET,GRAY",穿上灰色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_GRAY,goal,2,Wear Light gray Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_GRAY",穿上淡灰色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLUE,goal,2,Wear Blue Leather helmet,"equipment-colored:LEATHER_HELMET,BLUE",穿上蓝色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_BLUE,goal,2,Wear Light blue Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_BLUE",穿上淡蓝色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_ORANGE,goal,2,Wear Orange Leather helmet,"equipment-colored:LEATHER_HELMET,ORANGE",穿上橙色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_RED,goal,2,Wear Red Leather helmet,"equipment-colored:LEATHER_HELMET,RED",穿上红色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_YELLOW,goal,2,Wear Yellow Leather helmet,"equipment-colored:LEATHER_HELMET,YELLOW",穿上黄色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_MAGENTA,goal,2,Wear Magenta Leather helmet,"equipment-colored:LEATHER_HELMET,MAGENTA",穿上品红色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PINK,goal,2,Wear Pink Leather helmet,"equipment-colored:LEATHER_HELMET,PINK",穿上粉红色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PURPLE,goal,2,Wear Purple Leather helmet,"equipment-colored:LEATHER_HELMET,PURPLE",穿上紫色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GREEN,goal,2,Wear Green Leather helmet,"equipment-colored:LEATHER_HELMET,GREEN",穿上绿色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIME,goal,2,Wear Lime Leather helmet,"equipment-colored:LEATHER_HELMET,LIME",穿上黄绿色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_CYAN,goal,2,Wear Cyan Leather helmet,"equipment-colored:LEATHER_HELMET,CYAN",穿上青色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BROWN,goal,2,Wear Brown Leather helmet,"equipment-colored:LEATHER_HELMET,BROWN",穿上棕色皮革头盔
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLACK,goal,2,Wear Black Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLACK",穿上黑色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_WHITE,goal,2,Wear White Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,WHITE",穿上白色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GRAY,goal,2,Wear Gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GRAY",穿上灰色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_GRAY,goal,2,Wear Light gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_GRAY",穿上淡灰色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLUE,goal,2,Wear Blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLUE",穿上蓝色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_BLUE,goal,2,Wear Light blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_BLUE",穿上淡蓝色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_ORANGE,goal,2,Wear Orange Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,ORANGE",穿上橙色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_RED,goal,2,Wear Red Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,RED",穿上红色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_YELLOW,goal,2,Wear Yellow Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,YELLOW",穿上黄色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_MAGENTA,goal,2,Wear Magenta Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,MAGENTA",穿上品红色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PINK,goal,2,Wear Pink Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PINK",穿上粉红色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PURPLE,goal,2,Wear Purple Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PURPLE",穿上紫色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GREEN,goal,2,Wear Green Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GREEN",穿上绿色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIME,goal,2,Wear Lime Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIME",穿上黄绿色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_CYAN,goal,2,Wear Cyan Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,CYAN",穿上青色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BROWN,goal,2,Wear Brown Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BROWN",穿上棕色皮革胸甲
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLACK,goal,2,Wear Black Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLACK",穿上黑色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_WHITE,goal,2,Wear White Leather leggings,"equipment-colored:LEATHER_LEGGINGS,WHITE",穿上白色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GRAY,goal,2,Wear Gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GRAY",穿上灰色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_GRAY,goal,2,Wear Light gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_GRAY",穿上淡灰色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLUE,goal,2,Wear Blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLUE",穿上蓝色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_BLUE,goal,2,Wear Light blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_BLUE",穿上淡蓝色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_ORANGE,goal,2,Wear Orange Leather leggings,"equipment-colored:LEATHER_LEGGINGS,ORANGE",穿上橙色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_RED,goal,2,Wear Red Leather leggings,"equipment-colored:LEATHER_LEGGINGS,RED",穿上红色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_YELLOW,goal,2,Wear Yellow Leather leggings,"equipment-colored:LEATHER_LEGGINGS,YELLOW",穿上黄色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_MAGENTA,goal,2,Wear Magenta Leather leggings,"equipment-colored:LEATHER_LEGGINGS,MAGENTA",穿上品红色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PINK,goal,2,Wear Pink Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PINK",穿上粉红色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PURPLE,goal,2,Wear Purple Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PURPLE",穿上紫色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GREEN,goal,2,Wear Green Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GREEN",穿上绿色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIME,goal,2,Wear Lime Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIME",穿上黄绿色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_CYAN,goal,2,Wear Cyan Leather leggings,"equipment-colored:LEATHER_LEGGINGS,CYAN",穿上青色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BROWN,goal,2,Wear Brown Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BROWN",穿上棕色皮革护腿
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLACK,goal,2,Wear Black Leather boots,"equipment-colored:LEATHER_BOOTS,BLACK",穿上黑色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_WHITE,goal,2,Wear White Leather boots,"equipment-colored:LEATHER_BOOTS,WHITE",穿上白色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GRAY,goal,2,Wear Gray Leather boots,"equipment-colored:LEATHER_BOOTS,GRAY",穿上灰色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_GRAY,goal,2,Wear Light gray Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_GRAY",穿上淡灰色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLUE,goal,2,Wear Blue Leather boots,"equipment-colored:LEATHER_BOOTS,BLUE",穿上蓝色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_BLUE,goal,2,Wear Light blue Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_BLUE",穿上淡蓝色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_ORANGE,goal,2,Wear Orange Leather boots,"equipment-colored:LEATHER_BOOTS,ORANGE",穿上橙色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_RED,goal,2,Wear Red Leather boots,"equipment-colored:LEATHER_BOOTS,RED",穿上红色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_YELLOW,goal,2,Wear Yellow Leather boots,"equipment-colored:LEATHER_BOOTS,YELLOW",穿上黄色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_MAGENTA,goal,2,Wear Magenta Leather boots,"equipment-colored:LEATHER_BOOTS,MAGENTA",穿上品红色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PINK,goal,2,Wear Pink Leather boots,"equipment-colored:LEATHER_BOOTS,PINK",穿上粉红色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PURPLE,goal,2,Wear Purple Leather boots,"equipment-colored:LEATHER_BOOTS,PURPLE",穿上紫色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GREEN,goal,2,Wear Green Leather boots,"equipment-colored:LEATHER_BOOTS,GREEN",穿上绿色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIME,goal,2,Wear Lime Leather boots,"equipment-colored:LEATHER_BOOTS,LIME",穿上黄绿色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_CYAN,goal,2,Wear Cyan Leather boots,"equipment-colored:LEATHER_BOOTS,CYAN",穿上青色皮革靴子
+WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BROWN,goal,2,Wear Brown Leather boots,"equipment-colored:LEATHER_BOOTS,BROWN",穿上棕色皮革靴子

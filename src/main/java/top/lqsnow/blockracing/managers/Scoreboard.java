@@ -58,7 +58,12 @@ public class Scoreboard {
         // Set title
         setTitle(Message.SCOREBOARD_INGAME_TITLE.getString());
         // Set red team score display
-        setSlot(12, Message.SCOREBOARD_RED_SCORE.getString().replace("%score%", String.valueOf(redTeamScore)).replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount)).replace("%total_block%", String.valueOf(redTeamTotalBlockAmount)));
+        setSlot(12, Message.SCOREBOARD_RED_SCORE.getString()
+                .replace("%score%", String.valueOf(redTeamScore))
+                .replace("%progress_score%", String.valueOf(redTeamProgressScore))
+                .replace("%win_score%", String.valueOf(redTeamWinScore))
+                .replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount))
+                .replace("%total_block%", String.valueOf(redTeamTotalBlockAmount)));
         // Clean red team blocks display
         int redDisplayAmount = Math.min(getCurrentBlocks("red").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
         for (int i = redDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
@@ -73,7 +78,12 @@ public class Scoreboard {
         // Set dividing line
         setSlot(7, Message.SCOREBOARD_DIVIDING_LINE.getString());
         // Set blue team score display
-        setSlot(6, Message.SCOREBOARD_BLUE_SCORE.getString().replace("%score%", String.valueOf(blueTeamScore)).replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount)).replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount)));
+        setSlot(6, Message.SCOREBOARD_BLUE_SCORE.getString()
+                .replace("%score%", String.valueOf(blueTeamScore))
+                .replace("%progress_score%", String.valueOf(blueTeamProgressScore))
+                .replace("%win_score%", String.valueOf(blueTeamWinScore))
+                .replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount))
+                .replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount)));
         // Clean blue team blocks display
         int blueDisplayAmount = Math.min(getCurrentBlocks("blue").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
         for (int i = blueDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
@@ -90,14 +100,9 @@ public class Scoreboard {
     }
 
     public static String getBlockDisplay(String block) {
-        if (easyBlocks.contains(block)) {
-            return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_EASY.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        } else if (mediumBlocks.contains(block)) {
-            return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_MEDIUM.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        } else if (hardBlocks.contains(block)) {
-            return String.format(Message.SCOREBOARD_BLOCK_FORMAT.getString().replace("%difficulty%", Message.SCOREBOARD_BLOCK_DIFFICULTY_HARD.getString()).replace("%block%", Game.getTargetDisplayName(block)));
-        }
-        return null;
+        return Message.SCOREBOARD_BLOCK_FORMAT.getString()
+                .replace("%score%", String.valueOf(Block.getTargetScore(block)))
+                .replace("%block%", Game.getTargetDisplayName(block));
     }
 
     public static void showScoreboard(Player player) {

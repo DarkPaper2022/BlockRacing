@@ -17,9 +17,9 @@ scoreboard:
     racing: "&3Racing"
     speed: "&9Speed"
   blocks:
-    easy: "&aEZ"
-    medium: "&eNORMAL"
-    hard: "&cHARD"
+    easy: "&a1pt"
+    medium: "&e2pt"
+    hard: "&c3+pt"
   pregame:
     title: "&b&lBlock Racing"
     slot11: "&a&lShift+F to open the menu"
@@ -29,21 +29,17 @@ scoreboard:
     slot7: " "
     slot6: "&bCurrent mode: &e%game_mode%"
     slot5: "&bBlock amount: &e%block_amount%"
-    slot4: "&bBlocks: "
+    slot4: "&bTarget scores: "
     slot3: "%blocks%"
     slot2: " "
     slot1: "&e&lEnjoy the game!"
   ingame:
     title: "&b&lBlock Racing"
-    red-score: "&cRed：&e%score% Points  &b(%current_block%/%total_block%)"
-    blue-score: "&9Blue：&e%score% Points  &b(%current_block%/%total_block%)"
-    block-format: "%difficulty% | %block%"
+    red-score: "&cRed: &e%progress_score%/%win_score% prog &6%score% spend"
+    blue-score: "&9Blue: &e%progress_score%/%win_score% prog &6%score% spend"
+    block-format: "&e%score% pts &7| &f%block%"
     dividing-line: "----------------"
     bottom-slot: "&e&lEnjoy the game!"
-    block-difficulty:
-      easy: "&aEASY"
-      medium: "&eNORMAL"
-      hard: "&cHARD"
 
 # Team
 team:
@@ -95,8 +91,7 @@ menu:
     speed-mode-lore:
       - "&aAfter enabling Speed Mode, players will be"
       - "&e&lgiven certain items and effects&e at the start,"
-      - "&eand gaining blocks will earn 3 points, "
-      - "&espeeding up the game progress."
+      - "&ecompleted tasks grant more spendable points."
       - "&bItems: Silk Touch Iron Pickaxe, Cooked Beef, "
       - "&b       Damaged Elytra, Enchanted Book of Mending"
       - "&bEffects: Haste V"

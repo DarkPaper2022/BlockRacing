@@ -41,10 +41,6 @@ public enum Message {
     SCOREBOARD_BLOCK_FORMAT("scoreboard.ingame.block-format"),
     SCOREBOARD_DIVIDING_LINE("scoreboard.ingame.dividing-line"),
     SCOREBOARD_BOTTOM_SLOT("scoreboard.ingame.bottom-slot"),
-    SCOREBOARD_BLOCK_DIFFICULTY_EASY("scoreboard.ingame.block-difficulty.easy"),
-    SCOREBOARD_BLOCK_DIFFICULTY_MEDIUM("scoreboard.ingame.block-difficulty.medium"),
-    SCOREBOARD_BLOCK_DIFFICULTY_HARD("scoreboard.ingame.block-difficulty.hard"),
-
     // team
     TEAM_RED_NAME("team.red.name"),
     TEAM_RED_PREFIX("team.red.prefix"),

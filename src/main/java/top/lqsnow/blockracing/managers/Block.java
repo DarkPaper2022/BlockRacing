@@ -21,16 +21,11 @@ import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class Block {
     private static final Random RANDOM = new Random();
-    private static final float EASY_DISABLE_PROGRESS = 0.68f;
-    private static final int EASY_START_WEIGHT = 90;
-    private static final int MEDIUM_EARLY_START_WEIGHT = 30;
-    private static final int MEDIUM_MID_WEIGHT = 70;
-    private static final int MEDIUM_LATE_WEIGHT = 84;
-    private static final float MEDIUM_WEIGHT_TURNING_POINT = 0.35f;
-    private static final int HARD_EARLY_START_WEIGHT = 1;
-    private static final int HARD_MID_WEIGHT = 30;
-    private static final int HARD_LATE_WEIGHT = 90;
-    private static final float HARD_WEIGHT_TURNING_POINT = 0.5f;
+    private static final int EASY_SCORE = 1;
+    private static final int NORMAL_SCORE = 2;
+    private static final int MIN_HARD_SCORE = 3;
+    private static final int MAX_HARD_SCORE = 10;
+    private static final int MAX_EASY_TARGETS_PER_GAME = 8;
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
     private static final double MINIMUM_SELECTION_WEIGHT = 0.01D;
     private static final String STRIPPED_PREFIX = "STRIPPED_";
@@ -55,8 +50,9 @@ public class Block {
     private static final Map<String, Set<String>> WOOD_CATEGORY_GROUPS = createWoodCategoryGroups();
     private static final Map<String, Set<String>> RELATED_BLOCK_TAG_CACHE = new HashMap<>();
 
-    public static List<String> easyBlocks, mediumBlocks, hardBlocks, blocks;
+    public static List<String> blocks;
     public static List<String> allBlocks = new ArrayList<>();
+    public static Map<String, Integer> targetScores = new HashMap<>();
     private static final Map<String, String> chineseDisplayNames = new HashMap<>();
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
@@ -71,11 +67,13 @@ public class Block {
 
     public static void addUpBlocks() {
         allBlocks.clear();
-        allBlocks.addAll(List.copyOf(easyBlocks));
-        if (Setting.isEnableMediumBlock()) {
-            allBlocks.addAll(List.copyOf(mediumBlocks));
+        for (String target : targetScores.keySet()) {
+            int score = getTargetScore(target);
+            if (score == EASY_SCORE || (score == NORMAL_SCORE && Setting.isEnableMediumBlock())
+                    || (score >= MIN_HARD_SCORE && Setting.isEnableHardBlock())) {
+                allBlocks.add(target);
+            }
         }
-        if (Setting.isEnableHardBlock()) allBlocks.addAll(List.copyOf(hardBlocks));
         blocks = List.copyOf(allBlocks);
         maxBlockAmount = blocks.size();
     }
@@ -105,74 +103,41 @@ public class Block {
     private static List<String> generateBlocks(int blockAmount) {
         addUpBlocks();
 
-        List<String> easyTemp = new ArrayList<>(easyBlocks);
-        List<String> mediumTemp = new ArrayList<>(mediumBlocks);
-        List<String> hardTemp = new ArrayList<>(hardBlocks);
-        List<String> targetBlocks = new ArrayList<>();
-        Set<String> suppressedRelatedTags = new HashSet<>();
-
-        for (int i = 0; i < blockAmount; i++) {
-            // Calculate weights for each difficulty
-            int easyWeight = 0;
-            int mediumWeight = 0;
-            int hardWeight = 0;
-
-            if (easyTemp.size() != 0) easyWeight = calculateEasyBlocksWeight((float) i / blockAmount);
-
-            if (mediumTemp.size() != 0)
-                mediumWeight = Setting.isEnableMediumBlock() ? calculateMediumBlocksWeight((float) i / blockAmount) : 0;
-
-            if (hardTemp.size() != 0)
-                hardWeight = Setting.isEnableHardBlock() ? calculateHardBlocksWeight((float) i / blockAmount) : 0;
-
-            // Choose difficulty based on weights
-            String difficulty = chooseDifficulty(easyWeight, mediumWeight, hardWeight);
-
-            // Select a block from the corresponding difficulty list
-            String selectedBlock = selectBlock(difficulty, easyTemp, mediumTemp, hardTemp, suppressedRelatedTags);
-
-            // Add the selected block to targetBlocks
-            targetBlocks.add(selectedBlock);
-            suppressedRelatedTags.addAll(getRelatedBlockTags(selectedBlock));
-
-            // Remove the selected block from the corresponding difficulty list
-            switch (difficulty) {
-                case "easy" -> easyTemp.remove(selectedBlock);
-                case "medium" -> mediumTemp.remove(selectedBlock);
-                case "hard" -> hardTemp.remove(selectedBlock);
-                default -> throw new IllegalArgumentException("Invalid difficulty");
+        List<String> onePointTargets = new ArrayList<>();
+        List<String> scoredTargets = new ArrayList<>();
+        for (String target : blocks) {
+            if (getTargetScore(target) == EASY_SCORE) {
+                onePointTargets.add(target);
+            } else {
+                scoredTargets.add(target);
             }
         }
 
+        List<String> targetBlocks = new ArrayList<>();
+        Set<String> suppressedRelatedTags = new HashSet<>();
+        int easyTargetAmount = Math.min(Math.min(MAX_EASY_TARGETS_PER_GAME, onePointTargets.size()), blockAmount);
+
+        for (int i = 0; i < easyTargetAmount; i++) {
+            addSelectedTarget(targetBlocks, onePointTargets, suppressedRelatedTags);
+        }
+
+        int scoredTargetAmount = Math.min(blockAmount - targetBlocks.size(), scoredTargets.size());
+        for (int i = 0; i < scoredTargetAmount; i++) {
+            addSelectedTarget(targetBlocks, scoredTargets, suppressedRelatedTags);
+        }
+
+        Collections.shuffle(targetBlocks, RANDOM);
+        Bukkit.getLogger().info("[BlockRacing] Generated targets: amount=" + targetBlocks.size()
+                + ", one-point=" + countTargetsByScore(targetBlocks, EASY_SCORE)
+                + ", total-score=" + getTotalScore(targetBlocks));
         return targetBlocks;
     }
 
-    // Method to choose difficulty based on weights
-    private static String chooseDifficulty(int easyWeight, int mediumWeight, int hardWeight) {
-        int totalWeight = easyWeight + mediumWeight + hardWeight;
-        if (totalWeight <= 0) {
-            throw new IllegalStateException("No block pools are available for selection.");
-        }
-        int randomNumber = RANDOM.nextInt(totalWeight);
-
-        if (randomNumber < easyWeight) {
-            return "easy";
-        } else if (randomNumber < easyWeight + mediumWeight) {
-            return "medium";
-        } else {
-            return "hard";
-        }
-    }
-
-    // Method to select a block from the corresponding difficulty list
-    private static String selectBlock(String difficulty, List<String> easyTemp, List<String> mediumTemp,
-                                      List<String> hardTemp, Set<String> suppressedRelatedTags) {
-        return switch (difficulty) {
-            case "easy" -> selectWeightedBlockFromList(easyTemp, suppressedRelatedTags);
-            case "medium" -> selectWeightedBlockFromList(mediumTemp, suppressedRelatedTags);
-            case "hard" -> selectWeightedBlockFromList(hardTemp, suppressedRelatedTags);
-            default -> throw new IllegalArgumentException("Invalid difficulty");
-        };
+    private static void addSelectedTarget(List<String> targetBlocks, List<String> targetPool, Set<String> suppressedRelatedTags) {
+        String selectedBlock = selectWeightedBlockFromList(targetPool, suppressedRelatedTags);
+        targetBlocks.add(selectedBlock);
+        suppressedRelatedTags.addAll(getRelatedBlockTags(selectedBlock));
+        targetPool.remove(selectedBlock);
     }
 
     // Method to select a weighted block from a list.
@@ -268,42 +233,6 @@ public class Block {
         return Collections.unmodifiableMap(categoryGroups);
     }
 
-    // Calculate weight for easy blocks
-    // Weight decreases through the game but keeps a minimum fallback weight of 1.
-    public static int calculateEasyBlocksWeight(float progress) {
-        if (progress >= EASY_DISABLE_PROGRESS) {
-            return 1;
-        }
-
-        return Math.max(1, (int) (EASY_START_WEIGHT - EASY_START_WEIGHT * progress / EASY_DISABLE_PROGRESS));
-    }
-
-    // Calculate weight for medium blocks
-    // Weight ramps up early, then keeps growing in the late game.
-    public static int calculateMediumBlocksWeight(float progress) {
-        if (progress <= MEDIUM_WEIGHT_TURNING_POINT) {
-            return (int) (MEDIUM_EARLY_START_WEIGHT
-                    + (MEDIUM_MID_WEIGHT - MEDIUM_EARLY_START_WEIGHT) * progress / MEDIUM_WEIGHT_TURNING_POINT);
-        } else {
-            return (int) (MEDIUM_MID_WEIGHT
-                    + (MEDIUM_LATE_WEIGHT - MEDIUM_MID_WEIGHT)
-                    * (progress - MEDIUM_WEIGHT_TURNING_POINT) / (1 - MEDIUM_WEIGHT_TURNING_POINT));
-        }
-    }
-
-    // Calculate weight for hard blocks
-    // Weight grows throughout the game and becomes dominant late.
-    public static int calculateHardBlocksWeight(float progress) {
-        if (progress <= HARD_WEIGHT_TURNING_POINT) {
-            return (int) (HARD_EARLY_START_WEIGHT
-                    + (HARD_MID_WEIGHT - HARD_EARLY_START_WEIGHT) * progress / HARD_WEIGHT_TURNING_POINT);
-        } else {
-            return (int) (HARD_MID_WEIGHT
-                    + (HARD_LATE_WEIGHT - HARD_MID_WEIGHT)
-                    * (progress - HARD_WEIGHT_TURNING_POINT) / (1 - HARD_WEIGHT_TURNING_POINT));
-        }
-    }
-
     // Check if there are any problems with the blocks imported from the file
     public static boolean checkBlock() {
         boolean flag = true;
@@ -334,9 +263,7 @@ public class Block {
     }
 
     private static void loadTargets() {
-        List<String> loadedEasyBlocks = new ArrayList<>();
-        List<String> loadedMediumBlocks = new ArrayList<>();
-        List<String> loadedHardBlocks = new ArrayList<>();
+        Map<String, Integer> loadedTargetScores = new HashMap<>();
 
         Goal.clearDefinitions();
         chineseDisplayNames.clear();
@@ -349,17 +276,30 @@ public class Block {
 
             String id = row.get(0).trim();
             String type = row.get(1).trim().toLowerCase(Locale.ROOT);
-            String difficulty = row.get(2).trim().toLowerCase(Locale.ROOT);
+            String rawScore = row.get(2).trim().toLowerCase(Locale.ROOT);
             String displayName = row.size() >= 4 ? row.get(3).trim() : "";
             String requirement = row.size() >= 5 ? row.get(4).trim() : "";
             String chineseDisplayName = row.size() >= 6 ? row.get(5).trim() : "";
 
-            if ("deprecated".equals(difficulty)) {
+            if ("deprecated".equals(rawScore)) {
                 continue;
             }
 
-            if (id.isEmpty() || type.isEmpty() || difficulty.isEmpty()) {
+            if (id.isEmpty() || type.isEmpty() || rawScore.isEmpty()) {
                 Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                continue;
+            }
+
+            int score;
+            try {
+                score = Integer.parseInt(rawScore);
+            } catch (NumberFormatException exception) {
+                Bukkit.getLogger().warning("[BlockRacing] Invalid target score: " + rawScore + " in " + row);
+                continue;
+            }
+
+            if (score < EASY_SCORE || score > MAX_HARD_SCORE) {
+                Bukkit.getLogger().warning("[BlockRacing] Target score out of range: " + score + " in " + row);
                 continue;
             }
 
@@ -378,19 +318,33 @@ public class Block {
                 chineseDisplayNames.put(target, chineseDisplayName);
             }
 
-            switch (difficulty) {
-                case "easy" -> loadedEasyBlocks.add(target);
-                case "normal", "medium" -> loadedMediumBlocks.add(target);
-                case "hard" -> loadedHardBlocks.add(target);
-                default -> Bukkit.getLogger().warning("[BlockRacing] Invalid target difficulty: " + difficulty + " in " + row);
-            }
+            loadedTargetScores.put(target, score);
         }
 
-        easyBlocks = List.copyOf(loadedEasyBlocks);
-        mediumBlocks = List.copyOf(loadedMediumBlocks);
-        hardBlocks = List.copyOf(loadedHardBlocks);
-        Bukkit.getLogger().info("[BlockRacing] Loaded targets: easy=" + easyBlocks.size()
-                + ", normal=" + mediumBlocks.size() + ", hard=" + hardBlocks.size());
+        targetScores = Map.copyOf(loadedTargetScores);
+        Bukkit.getLogger().info("[BlockRacing] Loaded targets: " + targetScores.size());
+    }
+
+    public static int getTargetScore(String target) {
+        return targetScores.getOrDefault(target, EASY_SCORE);
+    }
+
+    public static int getTotalScore(List<String> targets) {
+        int totalScore = 0;
+        for (String target : targets) {
+            totalScore += getTargetScore(target);
+        }
+        return totalScore;
+    }
+
+    private static int countTargetsByScore(List<String> targets, int score) {
+        int count = 0;
+        for (String target : targets) {
+            if (getTargetScore(target) == score) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     public static String getDisplayName(String target) {

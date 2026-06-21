@@ -6,11 +6,11 @@
 # Language
 lang: en_us
 
-# Additional target difficulty settings, excluding easy targets
+# Additional progress-score band settings, excluding 1-point targets
 medium-block: true
 hard-block: true
 
-# Total number of blocks to be collected in one game
+# Number of targets sampled from the full target pool per game
 block-amount: 64
 
 # Number of leading tasks that are available/visible at the same time
@@ -24,7 +24,7 @@ available-task-amount: 64
 game-mode: racing
 
 # Speed mode:
-# When speed mode is enabled, players will be given certain items and effects at the start, and gaining blocks will earn 3 points to accelerate game progress
+# When speed mode is enabled, players will be given certain items and effects at the start
 # Items: Silk Touch Iron Pickaxe, Cooked Beef, Damaged Elytra, Experience Repair Enchantment Book
 # Effects: Haste V
 speed-mode: false

@@ -60,10 +60,16 @@ public class Game {
     public static List<String> readyPlayers = new ArrayList<>();
     public static int redTeamScore = 0;
     public static int blueTeamScore = 0;
+    public static int redTeamProgressScore = 0;
+    public static int blueTeamProgressScore = 0;
     public static int redTeamCurrentBlockAmount = 0;
     public static int blueTeamCurrentBlockAmount = 0;
     public static int redTeamTotalBlockAmount = 0;
     public static int blueTeamTotalBlockAmount = 0;
+    public static int redTeamTotalScore = 0;
+    public static int blueTeamTotalScore = 0;
+    public static int redTeamWinScore = 0;
+    public static int blueTeamWinScore = 0;
     public static List<String> freeRandomTPList = new ArrayList<>();
 
     public static ArrayList<Inventory> redTeamChest = new ArrayList<>();
@@ -214,10 +220,22 @@ public class Game {
         blueTeamRollCount = 0;
         redRollPlayers.clear();
         blueRollPlayers.clear();
+        redTeamScore = 0;
+        blueTeamScore = 0;
+        redTeamCurrentBlockAmount = 0;
+        blueTeamCurrentBlockAmount = 0;
+        collectAmount.clear();
+        freeRandomTPList.clear();
         Goal.resetProgress();
         setupBlocks();
         redTeamTotalBlockAmount = redTeamBlocks.size();
         blueTeamTotalBlockAmount = blueTeamBlocks.size();
+        redTeamProgressScore = 0;
+        blueTeamProgressScore = 0;
+        redTeamTotalScore = Block.getTotalScore(redTeamBlocks);
+        blueTeamTotalScore = Block.getTotalScore(blueTeamBlocks);
+        redTeamWinScore = getWinScore(redTeamTotalScore);
+        blueTeamWinScore = getWinScore(blueTeamTotalScore);
         setLocateScore();
         updateScoreboard();
         Bukkit.getOnlinePlayers().forEach((Player player) -> freeRandomTPList.add(player.getName()));
@@ -606,6 +624,7 @@ public class Game {
         if (skipMutualTask(blueTeamRemainingBlocks, block)) {
             blueTeamTotalBlockAmount -= 1;
         }
+        redTeamProgressScore += Block.getTargetScore(block);
         if (Setting.isSpeedMode())
             redTeamScore += 3;
         else
@@ -613,7 +632,7 @@ public class Game {
         redTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
-        if (redTeamCurrentBlockAmount >= redTeamTotalBlockAmount) {
+        if (redTeamProgressScore >= redTeamWinScore) {
             redWin();
             showRanking();
             return;
@@ -644,6 +663,7 @@ public class Game {
         if (skipMutualTask(redTeamRemainingBlocks, block)) {
             redTeamTotalBlockAmount -= 1;
         }
+        blueTeamProgressScore += Block.getTargetScore(block);
         if (Setting.isSpeedMode())
             blueTeamScore += 3;
         else
@@ -651,7 +671,7 @@ public class Game {
         blueTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
-        if (blueTeamCurrentBlockAmount >= blueTeamTotalBlockAmount) {
+        if (blueTeamProgressScore >= blueTeamWinScore) {
             blueWin();
             showRanking();
             return;
@@ -705,6 +725,10 @@ public class Game {
 
     public static String getTargetDisplayName(String target) {
         return Block.getDisplayName(target);
+    }
+
+    private static int getWinScore(int totalScore) {
+        return Math.max(1, (totalScore + 1) / 2);
     }
 
     private static boolean skipMutualTask(List<String> opponentRemainingBlocks, String completedBlock) {
