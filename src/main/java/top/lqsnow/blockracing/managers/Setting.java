@@ -7,6 +7,8 @@ public class Setting {
     public static final int MAX_BLOCK_AMOUNT_LIMIT = 128;
     public static final int MIN_AVAILABLE_TASK_AMOUNT = 1;
     public static final int MAX_AVAILABLE_TASK_AMOUNT = 128;
+    public static final int MIN_EASY_TARGETS_PER_GAME = 0;
+    public static final int MAX_EASY_TARGETS_PER_GAME = 128;
 
     @Getter
     private static boolean enableMediumBlock;
@@ -14,6 +16,8 @@ public class Setting {
     private static boolean enableHardBlock;
     @Getter
     private static int blockAmount;
+    @Getter
+    private static int maxEasyTargetsPerGame;
     @Getter
     private static int availableTaskAmount;
     @Getter
@@ -31,6 +35,7 @@ public class Setting {
         enableMediumBlock = Config.MEDIUM_BLOCK.getBoolean();
         enableHardBlock = Config.HARD_BLOCK.getBoolean();
         blockAmount = clamp(Config.BLOCK_AMOUNT.getInt(), 10, MAX_BLOCK_AMOUNT_LIMIT);
+        maxEasyTargetsPerGame = clamp(Config.MAX_EASY_TARGETS_PER_GAME.getInt(), MIN_EASY_TARGETS_PER_GAME, MAX_EASY_TARGETS_PER_GAME);
         availableTaskAmount = clamp(Config.AVAILABLE_TASK_AMOUNT.getInt(), MIN_AVAILABLE_TASK_AMOUNT, MAX_AVAILABLE_TASK_AMOUNT);
         speedMode = Config.SPEED_MODE.getBoolean();
         maxTeamChestNum = Config.MAX_TEAM_CHEST_NUM.getInt();
@@ -51,6 +56,11 @@ public class Setting {
     public static void setBlockAmount(int blockAmount) {
         Setting.blockAmount = clamp(blockAmount, 10, MAX_BLOCK_AMOUNT_LIMIT);
         Config.BLOCK_AMOUNT.setInt(Setting.blockAmount);
+    }
+
+    public static void setMaxEasyTargetsPerGame(int maxEasyTargetsPerGame) {
+        Setting.maxEasyTargetsPerGame = clamp(maxEasyTargetsPerGame, MIN_EASY_TARGETS_PER_GAME, MAX_EASY_TARGETS_PER_GAME);
+        Config.MAX_EASY_TARGETS_PER_GAME.setInt(Setting.maxEasyTargetsPerGame);
     }
 
     public static void setAvailableTaskAmount(int availableTaskAmount) {

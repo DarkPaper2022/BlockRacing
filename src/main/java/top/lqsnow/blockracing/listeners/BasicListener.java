@@ -3,8 +3,10 @@ package top.lqsnow.blockracing.listeners;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -15,8 +17,10 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
@@ -149,6 +153,16 @@ public class BasicListener implements Listener {
     }
 
     @EventHandler
+    private void onPlayerFish(PlayerFishEvent event) {
+        if (!isInGame() || !event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
+            return;
+        }
+        if (event.getCaught() instanceof Item item && isTreasureFishingLoot(item.getItemStack().getType())) {
+            Goal.recordFishTreasure(event.getPlayer());
+        }
+    }
+
+    @EventHandler
     private void onCraftItem(CraftItemEvent event) {
         if (!isInGame() || !(event.getWhoClicked() instanceof Player player)) {
             return;
@@ -160,6 +174,22 @@ public class BasicListener implements Listener {
         if (result != null && !result.getType().equals(Material.AIR)) {
             Goal.recordCraft(player, result.getType());
         }
+    }
+
+    @EventHandler
+    private void onInventoryClick(InventoryClickEvent event) {
+        if (!isInGame() || !(event.getWhoClicked() instanceof Player player)
+                || !(event.getView().getTopInventory() instanceof MerchantInventory merchantInventory)
+                || !(merchantInventory.getMerchant() instanceof Villager villager)) {
+            return;
+        }
+
+        boolean wasMaster = villager.getVillagerLevel() >= 5;
+        Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+            if (!wasMaster && villager.isValid() && villager.getVillagerLevel() >= 5) {
+                Goal.recordMaxLevelVillager(player);
+            }
+        });
     }
 
     @EventHandler
@@ -205,11 +235,21 @@ public class BasicListener implements Listener {
         Entity attacker = null;
         if (damageEvent instanceof EntityDamageByEntityEvent damageByEntityEvent) {
             attacker = damageByEntityEvent.getDamager();
-            if (attacker instanceof Projectile projectile && projectile.getShooter() instanceof Entity shooter) {
-                attacker = shooter;
+            if (attacker instanceof Projectile projectile) {
+                Goal.recordDeathProjectile(event.getEntity(), projectile.getType());
+                if (projectile.getShooter() instanceof Entity shooter) {
+                    attacker = shooter;
+                }
             }
         }
         Goal.recordDeath(event.getEntity(), damageEvent == null ? null : damageEvent.getCause(), attacker == null ? null : attacker.getType());
+    }
+
+    private static boolean isTreasureFishingLoot(Material material) {
+        return switch (material) {
+            case BOW, ENCHANTED_BOOK, FISHING_ROD, NAME_TAG, NAUTILUS_SHELL, SADDLE -> true;
+            default -> false;
+        };
     }
 
     private static Player getPlayerDamager(Entity damager) {

@@ -25,7 +25,6 @@ public class Block {
     private static final int NORMAL_SCORE = 2;
     private static final int MIN_HARD_SCORE = 3;
     private static final int MAX_HARD_SCORE = 10;
-    private static final int MAX_EASY_TARGETS_PER_GAME = 8;
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
     private static final double MINIMUM_SELECTION_WEIGHT = 0.01D;
     private static final String STRIPPED_PREFIX = "STRIPPED_";
@@ -115,7 +114,7 @@ public class Block {
 
         List<String> targetBlocks = new ArrayList<>();
         Set<String> suppressedRelatedTags = new HashSet<>();
-        int easyTargetAmount = Math.min(Math.min(MAX_EASY_TARGETS_PER_GAME, onePointTargets.size()), blockAmount);
+        int easyTargetAmount = Math.min(Math.min(Setting.getMaxEasyTargetsPerGame(), onePointTargets.size()), blockAmount);
 
         for (int i = 0; i < easyTargetAmount; i++) {
             addSelectedTarget(targetBlocks, onePointTargets, suppressedRelatedTags);

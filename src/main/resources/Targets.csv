@@ -513,12 +513,12 @@ RESIN_BRICK_SLAB,block,2,,,树脂砖台阶
 RESIN_BRICK_STAIRS,block,2,,,树脂砖楼梯
 RESIN_BRICK_WALL,block,2,,,树脂砖墙
 DRIED_GHAST,block,2,,,失水恶魂
-WAXED_EXPOSED_COPPER_CHEST,block,2,,,涂蜡的斑驳铜箱子
+WAXED_EXPOSED_COPPER_CHEST,block,1,,,涂蜡的斑驳铜箱子
 WAXED_EXPOSED_COPPER_BARS,block,2,,,涂蜡的斑驳铜栏杆
 WAXED_EXPOSED_COPPER_CHAIN,block,2,,,涂蜡的斑驳铜链
 WAXED_EXPOSED_COPPER_LANTERN,block,2,,,涂蜡的斑驳铜灯笼
 WAXED_EXPOSED_LIGHTNING_ROD,block,2,,,涂蜡的斑驳避雷针
-WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,2,,,涂蜡的斑驳铜傀儡像
+WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,1,,,涂蜡的斑驳铜傀儡像
 LAPIS_ORE,block,1,,,青金石矿石
 DEEPSLATE_LAPIS_ORE,block,1,,,深层青金石矿石
 NAUTILUS_SHELL,block,3,,,鹦鹉螺壳
@@ -529,6 +529,10 @@ RECOVERY_COMPASS,block,3,,,追溯指针
 TOTEM_OF_UNDYING,block,7,,,不死图腾
 NETHERITE_UPGRADE_SMITHING_TEMPLATE,block,3,,,下界合金升级锻造模板
 NETHERITE_INGOT,block,4,,,下界合金锭
+NETHERITE_BLOCK,block,10,,,下界合金块
+TRIDENT,block,7,,,三叉戟
+MACE,block,20,,,重锤
+SNIFFER_EGG,block,5,,,嗅探兽蛋
 RABBIT_FOOT,block,3,,,兔子脚
 CHORUS_FLOWER,block,-1,,,紫颂花
 END_ROD,block,-1,,,末地烛
@@ -568,7 +572,7 @@ BREED_8_UNIQUE_ANIMALS,goal,2,Breed 8 Unique Animals,breed-unique:8,繁殖 8 种
 BREED_CHICKEN,goal,1,Breed Chickens,breed:CHICKEN,繁殖鸡
 BREED_COW,goal,1,Breed Cows,breed:COW,繁殖牛
 BREED_HOGLIN,goal,1,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
-BREED_PIG,goal,2,Breed Pigs,breed:PIG,繁殖猪
+BREED_PIG,goal,1,Breed Pigs,breed:PIG,繁殖猪
 BREED_CAMEL,goal,3,Breed Camels,breed:CAMEL,繁殖骆驼
 BREED_ARMADILLO,goal,1,Breed Armadillos,breed:ARMADILLO,繁殖犰狳
 BREED_RABBIT,goal,1,Breed Rabbits,breed:RABBIT,繁殖兔子
@@ -577,6 +581,7 @@ BREED_SHEEP,goal,1,Breed Sheep,breed:SHEEP,繁殖羊
 BREED_STRIDER,goal,2,Breed Striders,breed:STRIDER,繁殖炽足兽
 BREED_GOAT,goal,2,Breed Goats,breed:GOAT,繁殖山羊
 BREED_FROGS,goal,2,Breed Frogs,breed:FROG,繁殖青蛙
+BREED_SNIFFER,goal,10,Breed Sniffers,breed:SNIFFER,繁殖嗅探兽
 KILL_WITCH,goal,1,Kill Witch,kill:WITCH,击杀女巫
 KILL_BOGGED,goal,1,Kill Bogged,kill:BOGGED,击杀沼骸
 KILL_PARCHED,goal,1,Kill Parched,kill:PARCHED,击杀干尸
@@ -588,7 +593,7 @@ KILL_GUARDIAN,goal,1,Kill Guardian,kill:GUARDIAN,击杀守卫者
 KILL_GHAST,goal,1,Kill Ghast,kill:GHAST,击杀恶魂
 KILL_BAT,goal,2,Kill Bat,kill:BAT,击杀蝙蝠
 KILL_SNOW_GOLEM,goal,1,Kill Snow Golem,kill:SNOW_GOLEM,击杀雪傀儡
-KILL_ELDER_GUARDIAN,goal,1,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
+KILL_ELDER_GUARDIAN,goal,2,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
 KILL_WARDEN,goal,3,Kill Warden,kill:WARDEN,击杀监守者
 KILL_7_UNIQUE_HOSTILE_MOBS,goal,1,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7,击杀 7 种不同敌对生物
 KILL_10_UNIQUE_HOSTILE_MOBS,goal,1,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10,击杀 10 种不同敌对生物
@@ -596,7 +601,7 @@ KILL_13_UNIQUE_HOSTILE_MOBS,goal,2,Kill 13 Unique Hostile Mobs,kill-unique-hosti
 KILL_15_UNIQUE_HOSTILE_MOBS,goal,2,Kill 15 Unique Hostile Mobs,kill-unique-hostile:15,击杀 15 种不同敌对生物
 KILL_30_UNDEAD_MOBS,goal,2,Kill 30 Undead Mobs,kill-undead:30,击杀 30 只亡灵生物
 KILL_20_ARTHROPOD_MOBS,goal,2,Kill 20 Arthropod Mobs,kill-arthropod:20,击杀 20 只节肢生物
-KILL_100_MOBS,goal,5,Kill 100 mobs,kill-total:100,击杀 100 只生物
+KILL_100_MOBS,goal,3,Kill 100 mobs,kill-total:100,击杀 100 只生物
 OBTAIN_ALL_FURNACES,goal,1,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER",获得所有熔炉类方块
 OBTAIN_ALL_MINECARTS,goal,1,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART",获得所有矿车类型
 OBTAIN_ALL_MUSHROOMS,goal,1,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS",获得所有蘑菇和菌类
@@ -611,8 +616,10 @@ OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Colored Concrete,item:WHITE_CONCRETE
 OBTAIN_6_UNIQUE_BUCKETS,goal,1,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
 OBTAIN_4_UNIQUE_SAPLINGS,goal,1,Obtain 4 Unique Saplings,"item-unique:4:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING,ACACIA_SAPLING,DARK_OAK_SAPLING,MANGROVE_PROPAGULE,CHERRY_SAPLING,PALE_OAK_SAPLING",获得 4 种不同树苗
 OBTAIN_4_UNIQUE_SEEDS,goal,2,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
-OBTAIN_6_UNIQUE_FLOWERS,goal,2,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
+OBTAIN_6_UNIQUE_FLOWERS,goal,-1,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
 OBTAIN_7_UNIQUE_WORKSTATIONS,goal,1,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
+OBTAIN_ANY_FROGLIGHT,goal,10,Obtain Any Froglight,"item-any:OCHRE_FROGLIGHT,PEARLESCENT_FROGLIGHT,VERDANT_FROGLIGHT",获得任意一种蛙鸣灯
+OBTAIN_PERFECT_DIAMOND_PICKAXE,goal,10,Obtain Perfect Diamond Pickaxe,"enchanted-item:DIAMOND_PICKAXE:fortune*3,mending*1,unbreaking*3,efficiency*5",获得时运 III、经验修补、耐久 III、效率 V 的钻石镐
 EAT_5_UNIQUE_FOOD,goal,1,Eat 5 Unique Foods,consume-unique:5,吃下 5 种不同食物
 EAT_10_UNIQUE_FOOD,goal,1,Eat 10 Unique Foods,consume-unique:10,吃下 10 种不同食物
 EAT_15_UNIQUE_FOOD,goal,2,Eat 15 Unique Foods,consume-unique:15,吃下 15 种不同食物
@@ -630,7 +637,7 @@ EAT_SUSPICIOUS_STEW,goal,1,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜
 DRINK_HONEY_BOTTLE,goal,1,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
 DRINK_WATER_BOTTLE,goal,1,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
 ENTER_NETHER,goal,2,Enter Nether,advancement:story/enter_the_nether,进入下界
-ENTER_END,goal,5,Enter The End,advancement:end/root,进入末地
+ENTER_END,goal,3,Enter The End,advancement:end/root,进入末地
 GET_EYE_SPY_ADVANCEMENT,goal,2,Find a Stronghold,advancement:story/follow_ender_eye,找到要塞
 GET_WHAT_A_DEAL_ADVANCEMENT,goal,1,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得「真划算！」进度
 GET_OH_SHINY_ADVANCEMENT,goal,1,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得「闪闪发亮！」进度
@@ -639,11 +646,19 @@ GET_BULLSEYE_ADVANCEMENT,goal,2,"Obtain ""Bullseye"" Advancement",advancement:ad
 GET_HIRED_HELP_ADVANCEMENT,goal,2,Construct an Iron Golem,advancement:adventure/summon_iron_golem,获得「雇佣帮手」进度
 GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,2,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,获得「这船有腿」进度
 GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,2,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,获得「差点九条命」进度
+GET_A_COMPLETE_CATALOGUE_ADVANCEMENT,goal,20,"Obtain ""A Complete Catalogue"" Advancement",advancement:husbandry/complete_catalogue,获得「猫科全书」进度
+GET_THE_WHOLE_PACKAGE_ADVANCEMENT,goal,30,"Obtain ""The Whole Package"" Advancement",advancement:husbandry/whole_pack,获得「全套狼群」进度
+GET_WITH_OUR_POWERS_COMBINED_ADVANCEMENT,goal,20,"Obtain ""With Our Powers Combined!"" Advancement",advancement:husbandry/froglights,获得「集结超蛙战队！」进度
+GET_BEACONATOR_ADVANCEMENT,goal,30,"Obtain ""Beaconator"" Advancement",advancement:nether/create_full_beacon,获得「信标工程师」进度
+GET_FEELS_LIKE_HOME_ADVANCEMENT,goal,3,"Obtain ""Feels Like Home"" Advancement",advancement:nether/ride_strider_in_overworld_lava,获得「炙足家园」进度
+GET_COVER_ME_IN_DEBRIS_ADVANCEMENT,goal,10,"Obtain ""Cover Me in Debris"" Advancement",advancement:nether/netherite_armor,获得「残骸裹身」进度
+GET_ZOMBIE_DOCTOR_ADVANCEMENT,goal,3,"Obtain ""Zombie Doctor"" Advancement",advancement:story/cure_zombie_villager,获得「僵尸科医生」进度
+GET_STAR_TRADER_ADVANCEMENT,goal,3,"Obtain ""Star Trader"" Advancement",advancement:adventure/trade_at_world_height,获得「星际商人」进度
 GET_ABSORPTION_STATUS_EFFECT,goal,-1,Get Absorption,effect:absorption,获得伤害吸收
 GET_BAD_OMEN_STATUS_EFFECT,goal,-1,Get Bad Omen,effect:bad_omen,获得不祥之兆
 GET_GLOWING_STATUS_EFFECT,goal,2,Get Glowing,effect:glowing,获得发光
 GET_JUMP_BOOST_STATUS_EFFECT,goal,-1,Get Jump Boost,effect:jump_boost,获得跳跃提升
-GET_LEVITATION_STATUS_EFFECT,goal,2,Get Levitation,effect:levitation,获得飘浮
+GET_LEVITATION_STATUS_EFFECT,goal,3,Get Levitation,effect:levitation,获得飘浮
 GET_MINING_FATIGUE_STATUS_EFFECT,goal,1,Get Mining Fatigue,effect:mining_fatigue,获得挖掘疲劳
 GET_NAUSEA_STATUS_EFFECT,goal,1,Get Nausea,effect:nausea,获得反胃
 GET_POISON_STATUS_EFFECT,goal,1,Get Poison,effect:poison,获得中毒
@@ -670,6 +685,10 @@ USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片�
 CRAFT_20_UNIQUE_ITEMS,goal,1,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
 CRAFT_50_UNIQUE_ITEMS,goal,2,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
 CRAFT_100_UNIQUE_ITEMS,goal,3,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
+FISH_TREASURE,goal,2,Fish up Treasure Loot,fish-treasure,钓鱼获得一件宝藏物品
+SPY_ON_20_UNIQUE_MOBS,goal,5,Spy on 20 Unique Mobs,spy-unique:20,用望远镜观察 20 种不同生物
+WEAR_CARVED_PUMPKIN_5_MINUTES,goal,3,Wear Carved Pumpkin for 5 Minutes,wear-continuous:CARVED_PUMPKIN:300,连续戴南瓜头 5 分钟
+LEVEL_UP_VILLAGER_TO_MASTER,goal,3,Level a Villager to Master,villager-max-level,将一个村民升到满级
 TAKE_200_DAMAGE,goal,1,Take 200 damage,damage-taken:200,承受 200 点伤害
 DEAL_400_DAMAGE,goal,2,Deal 400 damage,damage-dealt:400,造成 400 点伤害
 DIE_BY_DROWNING,goal,1,Die by Drowning,death-cause:DROWNING,溺水身亡
@@ -680,4 +699,5 @@ FREEZE_TO_DEATH,goal,2,Die by Freezing,death-cause:FREEZE,冻死
 DIE_TO_POLAR_BEAR,goal,1,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
 DIE_TO_PUFFERFISH,goal,1,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
 DIE_TO_WARDEN,goal,2,Die to Warden,death-attacker:WARDEN,死于监守者
-WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,1,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
+DEATH_BY_TRIDENT,goal,2,Die to Trident,death-projectile:TRIDENT,死于三叉戟
+WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,2,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲

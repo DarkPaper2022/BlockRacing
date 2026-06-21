@@ -13,6 +13,9 @@ hard-block: true
 # 每局从总池子抽取的目标数量
 block-amount: 64
 
+# 每局最多抽取多少个 1 分目标
+max-easy-targets-per-game: 8
+
 # 同时可做/可见的队首任务数量
 # 默认：64
 # 最大：128

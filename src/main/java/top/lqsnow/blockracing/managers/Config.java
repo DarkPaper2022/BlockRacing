@@ -14,6 +14,7 @@ public enum Config {
     MEDIUM_BLOCK("medium-block"),
     HARD_BLOCK("hard-block"),
     BLOCK_AMOUNT("block-amount"),
+    MAX_EASY_TARGETS_PER_GAME("max-easy-targets-per-game"),
     AVAILABLE_TASK_AMOUNT("available-task-amount"),
     GAME_MODE("game-mode"),
     SPEED_MODE("speed-mode"),

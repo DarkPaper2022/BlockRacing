@@ -2,18 +2,23 @@ package top.lqsnow.blockracing.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.util.RayTraceResult;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
@@ -48,6 +53,11 @@ public class Goal {
     private static final Map<String, Double> DAMAGE_TAKEN = new HashMap<>();
     private static final Map<String, Set<EntityDamageEvent.DamageCause>> DEATH_CAUSES = new HashMap<>();
     private static final Map<String, Set<EntityType>> DEATH_ATTACKERS = new HashMap<>();
+    private static final Map<String, Set<EntityType>> DEATH_PROJECTILES = new HashMap<>();
+    private static final Set<String> FISHED_TREASURE_PLAYERS = new HashSet<>();
+    private static final Set<String> MAX_LEVEL_VILLAGER_PLAYERS = new HashSet<>();
+    private static final Map<String, Set<EntityType>> SPIED_ENTITY_TYPES = new HashMap<>();
+    private static final Map<String, Integer> CONTINUOUS_WEAR_TICKS = new HashMap<>();
     private static final Set<EntityType> HOSTILE_ENTITY_TYPES = EnumSet.of(
             EntityType.BLAZE,
             EntityType.BOGGED,
@@ -172,6 +182,11 @@ public class Goal {
         DAMAGE_TAKEN.clear();
         DEATH_CAUSES.clear();
         DEATH_ATTACKERS.clear();
+        DEATH_PROJECTILES.clear();
+        FISHED_TREASURE_PLAYERS.clear();
+        MAX_LEVEL_VILLAGER_PLAYERS.clear();
+        SPIED_ENTITY_TYPES.clear();
+        CONTINUOUS_WEAR_TICKS.clear();
     }
 
     public static void recordKill(Player player, EntityType entityType) {
@@ -224,6 +239,48 @@ public class Goal {
         }
         if (attackerType != null) {
             DEATH_ATTACKERS.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(attackerType);
+        }
+    }
+
+    public static void recordDeathProjectile(Player player, EntityType projectileType) {
+        if (projectileType != null) {
+            DEATH_PROJECTILES.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(projectileType);
+        }
+    }
+
+    public static void recordFishTreasure(Player player) {
+        FISHED_TREASURE_PLAYERS.add(player.getName());
+    }
+
+    public static void recordMaxLevelVillager(Player player) {
+        MAX_LEVEL_VILLAGER_PLAYERS.add(player.getName());
+    }
+
+    public static void recordSpiedEntity(Player player, EntityType entityType) {
+        SPIED_ENTITY_TYPES.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(entityType);
+    }
+
+    public static void recordContinuousWearTick(Player player, Material material, int ticks) {
+        String key = wearProgressKey(player.getName(), material);
+        ItemStack helmet = player.getInventory().getHelmet();
+        if (helmet != null && helmet.getType().equals(material)) {
+            CONTINUOUS_WEAR_TICKS.merge(key, ticks, Integer::sum);
+        } else {
+            CONTINUOUS_WEAR_TICKS.remove(key);
+        }
+    }
+
+    public static void recordSpyglassTarget(Player player) {
+        ItemStack itemInUse = player.getItemInUse();
+        if (itemInUse == null || !itemInUse.getType().equals(Material.SPYGLASS)) {
+            return;
+        }
+
+        RayTraceResult result = player.getWorld().rayTrace(player.getEyeLocation(), player.getEyeLocation().getDirection(), 64D,
+                FluidCollisionMode.NEVER, true, 0.1D, entity -> entity instanceof LivingEntity && !entity.equals(player));
+        Entity hitEntity = result == null ? null : result.getHitEntity();
+        if (hitEntity != null) {
+            recordSpiedEntity(player, hitEntity.getType());
         }
     }
 
@@ -292,6 +349,14 @@ public class Goal {
             }
         }
 
+        if (definition.requirement() instanceof EnchantedItemRequirement enchantedItemRequirement) {
+            for (Inventory chest : teamChests) {
+                if (inventoryContainsEnchantedItem(chest, enchantedItemRequirement)) {
+                    return chestSource;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -313,6 +378,11 @@ public class Goal {
                     .map(ItemTarget::material)
                     .allMatch(Objects::nonNull)
                     && countUniqueMaterials(itemUniqueRequirement.items()) >= itemUniqueRequirement.amount();
+        }
+
+        if (requirement instanceof EnchantedItemRequirement enchantedItemRequirement) {
+            return enchantedItemRequirement.material() != null && enchantedItemRequirement.enchantments().stream()
+                    .allMatch(enchantmentTarget -> enchantmentTarget.enchantment() != null);
         }
 
         if (requirement instanceof EquipmentRequirement equipmentRequirement) {
@@ -341,6 +411,10 @@ public class Goal {
 
         if (requirement instanceof ItemUniqueRequirement itemUniqueRequirement) {
             return inventoryContainsUnique(player.getInventory(), itemUniqueRequirement.items(), itemUniqueRequirement.amount());
+        }
+
+        if (requirement instanceof EnchantedItemRequirement enchantedItemRequirement) {
+            return inventoryContainsEnchantedItem(player.getInventory(), enchantedItemRequirement);
         }
 
         if (requirement instanceof EquipmentRequirement equipmentRequirement) {
@@ -464,6 +538,26 @@ public class Goal {
             return DEATH_ATTACKERS.getOrDefault(player.getName(), Set.of()).contains(deathAttackerRequirement.entityType());
         }
 
+        if (requirement instanceof DeathProjectileRequirement deathProjectileRequirement) {
+            return DEATH_PROJECTILES.getOrDefault(player.getName(), Set.of()).contains(deathProjectileRequirement.entityType());
+        }
+
+        if (requirement instanceof FishTreasureRequirement) {
+            return FISHED_TREASURE_PLAYERS.contains(player.getName());
+        }
+
+        if (requirement instanceof VillagerMaxLevelRequirement) {
+            return MAX_LEVEL_VILLAGER_PLAYERS.contains(player.getName());
+        }
+
+        if (requirement instanceof SpyUniqueRequirement spyUniqueRequirement) {
+            return SPIED_ENTITY_TYPES.getOrDefault(player.getName(), Set.of()).size() >= spyUniqueRequirement.amount();
+        }
+
+        if (requirement instanceof WearContinuousRequirement wearContinuousRequirement) {
+            return CONTINUOUS_WEAR_TICKS.getOrDefault(wearProgressKey(player.getName(), wearContinuousRequirement.material()), 0) >= wearContinuousRequirement.ticks();
+        }
+
         return false;
     }
 
@@ -476,6 +570,14 @@ public class Goal {
 
         if (requirement instanceof ItemUniqueRequirement itemUniqueRequirement) {
             return itemUniqueProgress(player.getInventory(), itemUniqueRequirement.items(), itemUniqueRequirement.amount());
+        }
+
+        if (requirement instanceof EnchantedItemRequirement enchantedItemRequirement) {
+            String itemName = displayEnchantedItemRequirement(enchantedItemRequirement);
+            if (inventoryContainsEnchantedItem(player.getInventory(), enchantedItemRequirement)) {
+                return new Progress(1, 1, List.of(itemName), List.of());
+            }
+            return new Progress(0, 1, List.of(), List.of(itemName));
         }
 
         if (requirement instanceof AdvancementCountRequirement advancementCountRequirement) {
@@ -554,6 +656,26 @@ public class Goal {
         if (requirement instanceof DamageRequirement damageRequirement) {
             Map<String, Double> damageMap = damageRequirement.kind().equals(DamageRequirement.Kind.DEALT) ? DAMAGE_DEALT : DAMAGE_TAKEN;
             return countProgress((int) Math.floor(damageMap.getOrDefault(playerName, 0D)), damageRequirement.amount());
+        }
+
+        if (requirement instanceof FishTreasureRequirement) {
+            return countProgress(FISHED_TREASURE_PLAYERS.contains(playerName) ? 1 : 0, 1);
+        }
+
+        if (requirement instanceof VillagerMaxLevelRequirement) {
+            return countProgress(MAX_LEVEL_VILLAGER_PLAYERS.contains(playerName) ? 1 : 0, 1);
+        }
+
+        if (requirement instanceof SpyUniqueRequirement spyUniqueRequirement) {
+            List<String> spiedEntities = SPIED_ENTITY_TYPES.getOrDefault(playerName, Set.of()).stream()
+                    .map(Goal::displayEntity)
+                    .sorted()
+                    .toList();
+            return new Progress(spiedEntities.size(), spyUniqueRequirement.amount(), spiedEntities, List.of());
+        }
+
+        if (requirement instanceof WearContinuousRequirement wearContinuousRequirement) {
+            return countProgress(CONTINUOUS_WEAR_TICKS.getOrDefault(wearProgressKey(playerName, wearContinuousRequirement.material()), 0) / 20, wearContinuousRequirement.ticks() / 20);
         }
 
         return null;
@@ -687,6 +809,24 @@ public class Goal {
         return matchedItems.size() >= amount;
     }
 
+    private static boolean inventoryContainsEnchantedItem(Inventory inventory, EnchantedItemRequirement requirement) {
+        for (ItemStack item : inventory.getContents()) {
+            if (item != null && item.getType().equals(requirement.material()) && itemMatchesEnchantments(item, requirement.enchantments())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean itemMatchesEnchantments(ItemStack item, List<EnchantmentTarget> enchantments) {
+        for (EnchantmentTarget enchantmentTarget : enchantments) {
+            if (item.getEnchantmentLevel(enchantmentTarget.enchantment()) < enchantmentTarget.level()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static Progress itemUniqueProgress(Inventory inventory, List<ItemTarget> items, int amount) {
         List<String> completed = new ArrayList<>();
         List<String> missing = new ArrayList<>();
@@ -741,6 +881,11 @@ public class Goal {
             return parseItemUniqueRequirement(rawRequirement.substring("item-unique:".length()));
         }
 
+        if (rawRequirement.startsWith("item-any:")) {
+            List<ItemTarget> items = parseItems(rawRequirement.substring("item-any:".length()));
+            return items.isEmpty() ? null : new ItemUniqueRequirement(1, List.copyOf(items));
+        }
+
         if (rawRequirement.startsWith("item:")) {
             List<ItemTarget> items = new ArrayList<>();
             for (String rawItem : rawRequirement.substring("item:".length()).split(",")) {
@@ -751,6 +896,10 @@ public class Goal {
                 items.add(item);
             }
             return items.isEmpty() ? null : new ItemRequirement(List.copyOf(items));
+        }
+
+        if (rawRequirement.startsWith("enchanted-item:")) {
+            return parseEnchantedItemRequirement(rawRequirement.substring("enchanted-item:".length()));
         }
 
         if (rawRequirement.startsWith("advancement:")) {
@@ -865,6 +1014,23 @@ public class Goal {
                     .map(CraftUniqueRequirement::new);
         }
 
+        if (rawRequirement.equals("fish-treasure")) {
+            return new FishTreasureRequirement();
+        }
+
+        if (rawRequirement.startsWith("spy-unique:")) {
+            return parsePositiveInt(rawRequirement.substring("spy-unique:".length()))
+                    .map(SpyUniqueRequirement::new);
+        }
+
+        if (rawRequirement.startsWith("wear-continuous:")) {
+            return parseWearContinuousRequirement(rawRequirement.substring("wear-continuous:".length()));
+        }
+
+        if (rawRequirement.equals("villager-max-level")) {
+            return new VillagerMaxLevelRequirement();
+        }
+
         if (rawRequirement.startsWith("use-block:")) {
             Material material = Material.getMaterial(rawRequirement.substring("use-block:".length()).trim());
             return material == null ? null : new UseBlockRequirement(material);
@@ -892,6 +1058,10 @@ public class Goal {
             return parseEntityRequirement(rawRequirement.substring("death-attacker:".length()), DeathAttackerRequirement::new);
         }
 
+        if (rawRequirement.startsWith("death-projectile:")) {
+            return parseEntityRequirement(rawRequirement.substring("death-projectile:".length()), DeathProjectileRequirement::new);
+        }
+
         return null;
     }
 
@@ -912,6 +1082,54 @@ public class Goal {
         }
 
         return new ItemUniqueRequirement(amount.value(), List.copyOf(items));
+    }
+
+    private static Requirement parseEnchantedItemRequirement(String rawRequirement) {
+        String[] parts = rawRequirement.split(":", 2);
+        if (parts.length != 2) {
+            return null;
+        }
+
+        Material material = Material.getMaterial(parts[0].trim());
+        if (material == null) {
+            return null;
+        }
+
+        List<EnchantmentTarget> enchantments = new ArrayList<>();
+        for (String rawEnchantment : parts[1].split(",")) {
+            EnchantmentTarget enchantmentTarget = parseEnchantmentTarget(rawEnchantment.trim());
+            if (enchantmentTarget == null) {
+                return null;
+            }
+            enchantments.add(enchantmentTarget);
+        }
+        return enchantments.isEmpty() ? null : new EnchantedItemRequirement(material, List.copyOf(enchantments));
+    }
+
+    private static EnchantmentTarget parseEnchantmentTarget(String rawEnchantment) {
+        String[] parts = rawEnchantment.split("\\*", 2);
+        if (parts.length != 2) {
+            return null;
+        }
+
+        Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(parts[0].trim().toLowerCase(Locale.ROOT)));
+        int level = parsePositiveInt(parts[1]).orElse(-1);
+        return enchantment == null || level <= 0 ? null : new EnchantmentTarget(enchantment, level);
+    }
+
+    private static Requirement parseWearContinuousRequirement(String rawRequirement) {
+        String[] parts = rawRequirement.split(":", 2);
+        if (parts.length != 2) {
+            return null;
+        }
+
+        Material material = Material.getMaterial(parts[0].trim());
+        PositiveInt seconds = parsePositiveInt(parts[1]);
+        if (material == null || seconds.value() == null) {
+            return null;
+        }
+
+        return new WearContinuousRequirement(material, seconds.value() * 20);
     }
 
     private static long countUniqueMaterials(List<ItemTarget> items) {
@@ -943,6 +1161,13 @@ public class Goal {
         return item.amount() == 1 ? displayName : displayName + "*" + item.amount();
     }
 
+    private static String displayEnchantedItemRequirement(EnchantedItemRequirement requirement) {
+        List<String> enchantments = requirement.enchantments().stream()
+                .map(enchantmentTarget -> formatKey(enchantmentTarget.enchantment().getKey().getKey()) + " " + enchantmentTarget.level())
+                .toList();
+        return displayMaterial(requirement.material()) + " (" + String.join(", ", enchantments) + ")";
+    }
+
     private static String displayMaterial(Material material) {
         String translatedName = TranslationUtil.getValue(material.name());
         return translatedName == null || translatedName.isBlank() ? formatKey(material.name()) : translatedName;
@@ -950,6 +1175,10 @@ public class Goal {
 
     private static String displayEntity(EntityType entityType) {
         return formatKey(entityType.name());
+    }
+
+    private static String wearProgressKey(String playerName, Material material) {
+        return playerName + "|" + material.name();
     }
 
     private static String formatKey(String key) {
@@ -1058,13 +1287,16 @@ public class Goal {
     private record Progress(int current, int required, List<String> completed, List<String> missing) {
     }
 
-    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement {
+    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EnchantedItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, FishTreasureRequirement, SpyUniqueRequirement, WearContinuousRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement, DeathProjectileRequirement, VillagerMaxLevelRequirement {
     }
 
     private record ItemRequirement(List<ItemTarget> items) implements Requirement {
     }
 
     private record ItemUniqueRequirement(int amount, List<ItemTarget> items) implements Requirement {
+    }
+
+    private record EnchantedItemRequirement(Material material, List<EnchantmentTarget> enchantments) implements Requirement {
     }
 
     private record EquipmentRequirement(List<ItemTarget> items, boolean requireAll) implements Requirement {
@@ -1138,6 +1370,15 @@ public class Goal {
     private record CraftUniqueRequirement(int amount) implements Requirement {
     }
 
+    private record FishTreasureRequirement() implements Requirement {
+    }
+
+    private record SpyUniqueRequirement(int amount) implements Requirement {
+    }
+
+    private record WearContinuousRequirement(Material material, int ticks) implements Requirement {
+    }
+
     private record UseBlockRequirement(Material material) implements Requirement {
     }
 
@@ -1152,6 +1393,12 @@ public class Goal {
     }
 
     private record DeathAttackerRequirement(EntityType entityType) implements Requirement {
+    }
+
+    private record DeathProjectileRequirement(EntityType entityType) implements Requirement {
+    }
+
+    private record VillagerMaxLevelRequirement() implements Requirement {
     }
 
     private enum EntityCategory {
@@ -1178,6 +1425,9 @@ public class Goal {
     }
 
     private record ItemTarget(Material material, int amount) {
+    }
+
+    private record EnchantmentTarget(Enchantment enchantment, int level) {
     }
 
     private record PositiveInt(Integer value) {

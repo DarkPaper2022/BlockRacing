@@ -497,6 +497,7 @@ public class Game {
             }
 
             // Inventory check
+            updateTimedGoalProgress();
             checkRedInventory();
             if (!getCurrentGameState().equals(GameState.INGAME)) {
                 this.cancel();
@@ -508,6 +509,16 @@ public class Game {
                 return;
             }
 
+        }
+    }
+
+    private static void updateTimedGoalProgress() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!redTeamPlayers.contains(player.getName()) && !blueTeamPlayers.contains(player.getName())) {
+                continue;
+            }
+            Goal.recordContinuousWearTick(player, Material.CARVED_PUMPKIN, 5);
+            Goal.recordSpyglassTarget(player);
         }
     }
 
