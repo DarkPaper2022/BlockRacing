@@ -468,7 +468,7 @@ GOAT_HORN,block,3,,,山羊角
 BLUE_EGG,block,2,,,寒带鸡蛋
 BROWN_EGG,block,2,,,热带鸡蛋
 AMETHYST_CLUSTER,block,1,,,紫水晶簇
-ANCIENT_DEBRIS,block,5,,,远古残骸
+ANCIENT_DEBRIS,block,3,,,远古残骸
 BRAIN_CORAL,block,2,,,脑纹珊瑚
 BRAIN_CORAL_BLOCK,block,2,,,脑纹珊瑚块
 BRAIN_CORAL_FAN,block,2,,,脑纹珊瑚扇
@@ -494,7 +494,7 @@ PODZOL,block,1,,,灰化土
 REDSTONE_ORE,block,1,,,红石矿石
 SMALL_AMETHYST_BUD,block,1,,,小型紫晶芽
 SPONGE,block,2,,,海绵
-TURTLE_EGG,block,3,,,海龟蛋
+TURTLE_EGG,block,2,,,海龟蛋
 WET_SPONGE,block,2,,,湿海绵
 WAXED_EXPOSED_CHISELED_COPPER,block,1,,,涂蜡的斑驳雕纹铜块
 WAXED_EXPOSED_COPPER,block,1,,,涂蜡的斑驳铜块
@@ -699,5 +699,5 @@ FREEZE_TO_DEATH,goal,2,Die by Freezing,death-cause:FREEZE,冻死
 DIE_TO_POLAR_BEAR,goal,1,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
 DIE_TO_PUFFERFISH,goal,1,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
 DIE_TO_WARDEN,goal,2,Die to Warden,death-attacker:WARDEN,死于监守者
-DEATH_BY_TRIDENT,goal,2,Die to Trident,death-projectile:TRIDENT,死于三叉戟
+DEATH_BY_TRIDENT,goal,3,Die to Trident,death-projectile:TRIDENT,死于三叉戟
 WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,2,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
