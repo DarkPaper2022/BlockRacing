@@ -668,8 +668,8 @@ USE_CAULDRON,goal,1,Use Cauldron to wash something,use-block:CAULDRON,使用炼�
 USE_COMPOSTER,goal,1,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
 USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片机播放唱片
 CRAFT_20_UNIQUE_ITEMS,goal,1,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
-CRAFT_50_UNIQUE_ITEMS,goal,1,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
-CRAFT_100_UNIQUE_ITEMS,goal,2,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
+CRAFT_50_UNIQUE_ITEMS,goal,2,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
+CRAFT_100_UNIQUE_ITEMS,goal,3,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
 TAKE_200_DAMAGE,goal,1,Take 200 damage,damage-taken:200,承受 200 点伤害
 DEAL_400_DAMAGE,goal,2,Deal 400 damage,damage-dealt:400,造成 400 点伤害
 DIE_BY_DROWNING,goal,1,Die by Drowning,death-cause:DROWNING,溺水身亡
