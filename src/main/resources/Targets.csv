@@ -418,13 +418,6 @@ WAXED_CUT_COPPER,block,2,,,涂蜡的切制铜块
 WAXED_CUT_COPPER_SLAB,block,2,,,涂蜡的切制铜台阶
 WAXED_CUT_COPPER_STAIRS,block,2,,,涂蜡的切制铜楼梯
 CLOSED_EYEBLOSSOM,block,2,,,闭合的眼眸花
-OPEN_EYEBLOSSOM,block,2,,,张开的眼眸花
-PALE_OAK_LEAVES,block,2,,,苍白橡树树叶
-PALE_OAK_SAPLING,block,2,,,苍白橡树树苗
-PALE_OAK_LOG,block,2,,,苍白橡木原木
-STRIPPED_PALE_OAK_LOG,block,2,,,去皮苍白橡木原木
-PALE_OAK_WOOD,block,2,,,苍白橡木
-STRIPPED_PALE_OAK_WOOD,block,2,,,去皮苍白橡木
 PALE_OAK_PLANKS,block,2,,,苍白橡木木板
 SHORT_DRY_GRASS,block,1,,,矮枯草丛
 TALL_DRY_GRASS,block,1,,,高枯草丛
@@ -446,9 +439,6 @@ BREEZE_ROD,block,2,,,旋风棒
 DIAMOND_BLOCK,block,2,,,钻石块
 HEART_OF_THE_SEA,block,2,,,海洋之心
 SCULK,block,2,,,幽匿块
-SCULK_VEIN,block,2,,,幽匿脉络
-SCULK_CATALYST,block,2,,,幽匿催发体
-SCULK_SENSOR,block,2,,,幽匿感测体
 SCULK_SHRIEKER,block,2,,,幽匿尖啸体
 POWDER_SNOW_BUCKET,block,2,,,细雪桶
 COD_BUCKET,block,1,,,鳕鱼桶
@@ -507,11 +497,6 @@ WAXED_EXPOSED_CUT_COPPER_SLAB,block,1,,,涂蜡的斑驳切制铜台阶
 WAXED_EXPOSED_CUT_COPPER_STAIRS,block,1,,,涂蜡的斑驳切制铜楼梯
 CREAKING_HEART,block,2,,,嘎枝之心
 RESIN_BLOCK,block,2,,,树脂块
-RESIN_BRICKS,block,2,,,树脂砖块
-CHISELED_RESIN_BRICKS,block,2,,,雕纹树脂砖块
-RESIN_BRICK_SLAB,block,2,,,树脂砖台阶
-RESIN_BRICK_STAIRS,block,2,,,树脂砖楼梯
-RESIN_BRICK_WALL,block,2,,,树脂砖墙
 DRIED_GHAST,block,2,,,失水恶魂
 WAXED_EXPOSED_COPPER_CHEST,block,1,,,涂蜡的斑驳铜箱子
 WAXED_EXPOSED_COPPER_BARS,block,2,,,涂蜡的斑驳铜栏杆
