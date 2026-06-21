@@ -531,44 +531,43 @@ NETHERITE_UPGRADE_SMITHING_TEMPLATE,block,3,,,下界合金升级锻造模板
 NETHERITE_INGOT,block,4,,,下界合金锭
 RABBIT_FOOT,block,3,,,兔子脚
 CHORUS_FLOWER,block,-1,,,紫颂花
-END_ROD,block,5,,,末地烛
-END_STONE,block,3,,,末地石
-END_STONE_BRICK_SLAB,block,3,,,末地石砖台阶
-END_STONE_BRICK_STAIRS,block,3,,,末地石砖楼梯
-END_STONE_BRICK_WALL,block,3,,,末地石砖墙
-END_STONE_BRICKS,block,3,,,末地石砖
-SHULKER_BOX,block,3,,,潜影盒
-DRAGON_HEAD,block,7,,,龙首
+END_ROD,block,-1,,,末地烛
+END_STONE,block,-1,,,末地石
+END_STONE_BRICK_SLAB,block,-1,,,末地石砖台阶
+END_STONE_BRICK_STAIRS,block,-1,,,末地石砖楼梯
+END_STONE_BRICK_WALL,block,-1,,,末地石砖墙
+END_STONE_BRICKS,block,-1,,,末地石砖
+SHULKER_BOX,block,-1,,,潜影盒
+DRAGON_HEAD,block,-1,,,龙首
 DEEPSLATE_COAL_ORE,block,3,,,深层煤矿石
-FROGSPAWN,block,3,,,青蛙卵
-OBTAIN_WOODEN_TOOLS,goal,2,Obtain all Wooden Tools,"item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE",获得全套木质工具
-OBTAIN_STONE_TOOLS,goal,2,Obtain all Stone Tools,"item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE",获得全套石质工具
-OBTAIN_IRON_TOOLS,goal,2,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE",获得全套铁质工具
-OBTAIN_GOLDEN_TOOLS,goal,2,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE",获得全套金质工具
+OBTAIN_WOODEN_TOOLS,goal,1,Obtain all Wooden Tools,"item:WOODEN_SWORD,WOODEN_PICKAXE,WOODEN_AXE,WOODEN_SHOVEL,WOODEN_HOE",获得全套木质工具
+OBTAIN_STONE_TOOLS,goal,1,Obtain all Stone Tools,"item:STONE_SWORD,STONE_PICKAXE,STONE_AXE,STONE_SHOVEL,STONE_HOE",获得全套石质工具
+OBTAIN_IRON_TOOLS,goal,1,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRON_AXE,IRON_SHOVEL,IRON_HOE",获得全套铁质工具
+OBTAIN_GOLDEN_TOOLS,goal,1,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE",获得全套金质工具
 OBTAIN_DIAMOND_TOOLS,goal,2,Obtain all Diamond Tools,"item:DIAMOND_SWORD,DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE",获得全套钻石工具
-OBTAIN_COPPER_TOOLS,goal,2,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR",获得全套铜质工具
-MINE_DIAMOND_ORE,goal,2,Mine Diamond Ore,item:DIAMOND_ORE,挖掘钻石矿石
+OBTAIN_COPPER_TOOLS,goal,1,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR",获得全套铜质工具
+MINE_DIAMOND_ORE,goal,1,Mine Diamond Ore,item:DIAMOND_ORE,挖掘钻石矿石
 MINE_EMERALD_ORE,goal,2,Mine Emerald Ore,item:EMERALD_ORE,挖掘绿宝石矿石
-MINE_MOB_SPAWNER,goal,2,Mine a Spawner,item:SPAWNER,挖掘刷怪笼
+MINE_MOB_SPAWNER,goal,1,Mine a Spawner,item:SPAWNER,挖掘刷怪笼
 MINE_TURTLE_EGG,goal,2,Mine Turtle Egg,item:TURTLE_EGG,挖掘海龟蛋
-MINE_CRAFTER,goal,2,Mine Crafter,item:CRAFTER,挖掘合成器
+MINE_CRAFTER,goal,1,Mine Crafter,item:CRAFTER,挖掘合成器
 WEAR_LEATHER_ARMOR,goal,2,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS",穿上全套皮革盔甲
-WEAR_GOLDEN_ARMOR,goal,2,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS",穿上全套金质盔甲
+WEAR_GOLDEN_ARMOR,goal,1,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS",穿上全套金质盔甲
 WEAR_CHAIN_ARMOR_PIECE,goal,2,Wear a Chain Armor Piece,"equipment-any:CHAINMAIL_HELMET,CHAINMAIL_CHESTPLATE,CHAINMAIL_LEGGINGS,CHAINMAIL_BOOTS",穿上一件锁链盔甲
-WEAR_IRON_ARMOR,goal,2,Wear Full Iron Armor,"equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS",穿上全套铁质盔甲
+WEAR_IRON_ARMOR,goal,1,Wear Full Iron Armor,"equipment-all:IRON_HELMET,IRON_CHESTPLATE,IRON_LEGGINGS,IRON_BOOTS",穿上全套铁质盔甲
 WEAR_DIAMOND_ARMOR,goal,2,Wear Full Diamond Armor,"equipment-all:DIAMOND_HELMET,DIAMOND_CHESTPLATE,DIAMOND_LEGGINGS,DIAMOND_BOOTS",穿上全套钻石盔甲
-WEAR_COPPER_ARMOR,goal,2,Wear Full Copper Armor,"equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS",穿上全套铜质盔甲
-TAME_CAT,goal,2,Tame a Cat,tame:CAT,驯服一只猫
+WEAR_COPPER_ARMOR,goal,1,Wear Full Copper Armor,"equipment-all:COPPER_HELMET,COPPER_CHESTPLATE,COPPER_LEGGINGS,COPPER_BOOTS",穿上全套铜质盔甲
+TAME_CAT,goal,1,Tame a Cat,tame:CAT,驯服一只猫
 TAME_PARROT,goal,2,Tame a Parrot,tame:PARROT,驯服一只鹦鹉
-TAME_HORSE,goal,2,Tame a Horse,tame:HORSE,驯服一匹马
-TAME_WOLF,goal,2,Tame a Wolf,tame:WOLF,驯服一只狼
+TAME_HORSE,goal,1,Tame a Horse,tame:HORSE,驯服一匹马
+TAME_WOLF,goal,1,Tame a Wolf,tame:WOLF,驯服一只狼
 TAME_NAUTILUS,goal,2,Tame a Nautilus,tame:NAUTILUS,驯服一只鹦鹉螺
-BREED_4_UNIQUE_ANIMALS,goal,2,Breed 4 Unique Animals,breed-unique:4,繁殖 4 种不同动物
-BREED_6_UNIQUE_ANIMALS,goal,2,Breed 6 Unique Animals,breed-unique:6,繁殖 6 种不同动物
+BREED_4_UNIQUE_ANIMALS,goal,1,Breed 4 Unique Animals,breed-unique:4,繁殖 4 种不同动物
+BREED_6_UNIQUE_ANIMALS,goal,1,Breed 6 Unique Animals,breed-unique:6,繁殖 6 种不同动物
 BREED_8_UNIQUE_ANIMALS,goal,2,Breed 8 Unique Animals,breed-unique:8,繁殖 8 种不同动物
-BREED_CHICKEN,goal,2,Breed Chickens,breed:CHICKEN,繁殖鸡
-BREED_COW,goal,2,Breed Cows,breed:COW,繁殖牛
-BREED_HOGLIN,goal,2,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
+BREED_CHICKEN,goal,1,Breed Chickens,breed:CHICKEN,繁殖鸡
+BREED_COW,goal,1,Breed Cows,breed:COW,繁殖牛
+BREED_HOGLIN,goal,1,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
 BREED_PIG,goal,2,Breed Pigs,breed:PIG,繁殖猪
 BREED_CAMEL,goal,2,Breed Camels,breed:CAMEL,繁殖骆驼
 BREED_ARMADILLO,goal,2,Breed Armadillos,breed:ARMADILLO,繁殖犰狳

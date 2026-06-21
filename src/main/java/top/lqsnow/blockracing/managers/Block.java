@@ -281,7 +281,7 @@ public class Block {
             String requirement = row.size() >= 5 ? row.get(4).trim() : "";
             String chineseDisplayName = row.size() >= 6 ? row.get(5).trim() : "";
 
-            if ("deprecated".equals(rawScore)) {
+            if ("-1".equals(rawScore)) {
                 continue;
             }
 
