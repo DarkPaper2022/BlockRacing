@@ -569,47 +569,47 @@ BREED_CHICKEN,goal,1,Breed Chickens,breed:CHICKEN,繁殖鸡
 BREED_COW,goal,1,Breed Cows,breed:COW,繁殖牛
 BREED_HOGLIN,goal,1,Breed Hoglins,breed:HOGLIN,繁殖疣猪兽
 BREED_PIG,goal,2,Breed Pigs,breed:PIG,繁殖猪
-BREED_CAMEL,goal,2,Breed Camels,breed:CAMEL,繁殖骆驼
-BREED_ARMADILLO,goal,2,Breed Armadillos,breed:ARMADILLO,繁殖犰狳
-BREED_RABBIT,goal,2,Breed Rabbits,breed:RABBIT,繁殖兔子
-BREED_FOX,goal,2,Breed Foxes,breed:FOX,繁殖狐狸
-BREED_SHEEP,goal,2,Breed Sheep,breed:SHEEP,繁殖羊
+BREED_CAMEL,goal,3,Breed Camels,breed:CAMEL,繁殖骆驼
+BREED_ARMADILLO,goal,1,Breed Armadillos,breed:ARMADILLO,繁殖犰狳
+BREED_RABBIT,goal,1,Breed Rabbits,breed:RABBIT,繁殖兔子
+BREED_FOX,goal,1,Breed Foxes,breed:FOX,繁殖狐狸
+BREED_SHEEP,goal,1,Breed Sheep,breed:SHEEP,繁殖羊
 BREED_STRIDER,goal,2,Breed Striders,breed:STRIDER,繁殖炽足兽
 BREED_GOAT,goal,2,Breed Goats,breed:GOAT,繁殖山羊
 BREED_FROGS,goal,2,Breed Frogs,breed:FROG,繁殖青蛙
-KILL_WITCH,goal,2,Kill Witch,kill:WITCH,击杀女巫
-KILL_BOGGED,goal,2,Kill Bogged,kill:BOGGED,击杀沼骸
-KILL_PARCHED,goal,2,Kill Parched,kill:PARCHED,击杀干尸
+KILL_WITCH,goal,1,Kill Witch,kill:WITCH,击杀女巫
+KILL_BOGGED,goal,1,Kill Bogged,kill:BOGGED,击杀沼骸
+KILL_PARCHED,goal,1,Kill Parched,kill:PARCHED,击杀干尸
 KILL_ZOMBIE_VILLAGER,goal,2,Kill Zombie Villager,kill:ZOMBIE_VILLAGER,击杀僵尸村民
-KILL_STRAY,goal,2,Kill Stray,kill:STRAY,击杀流浪者
+KILL_STRAY,goal,1,Kill Stray,kill:STRAY,击杀流浪者
 KILL_ZOGLIN,goal,2,Kill Zoglin,kill:ZOGLIN,击杀僵尸疣猪兽
 KILL_SILVERFISH,goal,2,Kill Silverfish,kill:SILVERFISH,击杀蠹虫
-KILL_GUARDIAN,goal,2,Kill Guardian,kill:GUARDIAN,击杀守卫者
-KILL_GHAST,goal,2,Kill Ghast,kill:GHAST,击杀恶魂
+KILL_GUARDIAN,goal,1,Kill Guardian,kill:GUARDIAN,击杀守卫者
+KILL_GHAST,goal,1,Kill Ghast,kill:GHAST,击杀恶魂
 KILL_BAT,goal,2,Kill Bat,kill:BAT,击杀蝙蝠
-KILL_SNOW_GOLEM,goal,2,Kill Snow Golem,kill:SNOW_GOLEM,击杀雪傀儡
-KILL_ELDER_GUARDIAN,goal,2,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
-KILL_WARDEN,goal,2,Kill Warden,kill:WARDEN,击杀监守者
-KILL_7_UNIQUE_HOSTILE_MOBS,goal,2,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7,击杀 7 种不同敌对生物
-KILL_10_UNIQUE_HOSTILE_MOBS,goal,2,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10,击杀 10 种不同敌对生物
+KILL_SNOW_GOLEM,goal,1,Kill Snow Golem,kill:SNOW_GOLEM,击杀雪傀儡
+KILL_ELDER_GUARDIAN,goal,1,Kill Elder Guardian,kill:ELDER_GUARDIAN,击杀远古守卫者
+KILL_WARDEN,goal,3,Kill Warden,kill:WARDEN,击杀监守者
+KILL_7_UNIQUE_HOSTILE_MOBS,goal,1,Kill 7 Unique Hostile Mobs,kill-unique-hostile:7,击杀 7 种不同敌对生物
+KILL_10_UNIQUE_HOSTILE_MOBS,goal,1,Kill 10 Unique Hostile Mobs,kill-unique-hostile:10,击杀 10 种不同敌对生物
 KILL_13_UNIQUE_HOSTILE_MOBS,goal,2,Kill 13 Unique Hostile Mobs,kill-unique-hostile:13,击杀 13 种不同敌对生物
 KILL_15_UNIQUE_HOSTILE_MOBS,goal,2,Kill 15 Unique Hostile Mobs,kill-unique-hostile:15,击杀 15 种不同敌对生物
 KILL_30_UNDEAD_MOBS,goal,2,Kill 30 Undead Mobs,kill-undead:30,击杀 30 只亡灵生物
 KILL_20_ARTHROPOD_MOBS,goal,2,Kill 20 Arthropod Mobs,kill-arthropod:20,击杀 20 只节肢生物
-KILL_100_MOBS,goal,2,Kill 100 mobs,kill-total:100,击杀 100 只生物
-OBTAIN_ALL_FURNACES,goal,2,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER",获得所有熔炉类方块
-OBTAIN_ALL_MINECARTS,goal,2,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART",获得所有矿车类型
-OBTAIN_ALL_MUSHROOMS,goal,2,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS",获得所有蘑菇和菌类
-OBTAIN_ALL_PUMPKINS,goal,2,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN",获得所有南瓜类物品
-OBTAIN_ALL_TORCHES,goal,2,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH",获得所有火把类物品
+KILL_100_MOBS,goal,5,Kill 100 mobs,kill-total:100,击杀 100 只生物
+OBTAIN_ALL_FURNACES,goal,1,Obtain every type of Furnace,"item:FURNACE,BLAST_FURNACE,SMOKER",获得所有熔炉类方块
+OBTAIN_ALL_MINECARTS,goal,1,Obtain every type of Minecart,"item:MINECART,CHEST_MINECART,FURNACE_MINECART,HOPPER_MINECART,TNT_MINECART",获得所有矿车类型
+OBTAIN_ALL_MUSHROOMS,goal,1,Obtain every type of Mushroom,"item:RED_MUSHROOM,BROWN_MUSHROOM,CRIMSON_FUNGUS,WARPED_FUNGUS",获得所有蘑菇和菌类
+OBTAIN_ALL_PUMPKINS,goal,1,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN",获得所有南瓜类物品
+OBTAIN_ALL_TORCHES,goal,1,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH",获得所有火把类物品
 OBTAIN_ALL_RAW_ORE_BLOCKS,goal,2,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK",获得所有粗矿块
 OBTAIN_ALL_SOUPS,goal,2,Obtain every type of Soup,"item:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",获得所有汤类食物
-OBTAIN_64_ARROWS,goal,2,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
-OBTAIN_64_COARSE_DIRT,goal,2,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
+OBTAIN_64_ARROWS,goal,1,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
+OBTAIN_64_COARSE_DIRT,goal,1,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
 OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
 OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64,获得 64 个彩色混凝土
-OBTAIN_6_UNIQUE_BUCKETS,goal,2,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
-OBTAIN_4_UNIQUE_SAPLINGS,goal,2,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING",获得 4 种不同树苗
+OBTAIN_6_UNIQUE_BUCKETS,goal,1,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
+OBTAIN_4_UNIQUE_SAPLINGS,goal,1,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING",获得 4 种不同树苗
 OBTAIN_4_UNIQUE_SEEDS,goal,2,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
 OBTAIN_6_UNIQUE_FLOWERS,goal,2,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
 OBTAIN_7_UNIQUE_WORKSTATIONS,goal,2,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
