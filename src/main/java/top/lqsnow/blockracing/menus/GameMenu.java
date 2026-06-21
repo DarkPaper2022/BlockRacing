@@ -34,6 +34,7 @@ import static top.lqsnow.blockracing.managers.Gui.updateMenu;
 import top.lqsnow.blockracing.managers.Message;
 import top.lqsnow.blockracing.managers.Scoreboard;
 import top.lqsnow.blockracing.managers.Setting;
+import top.lqsnow.blockracing.managers.Goal;
 import static top.lqsnow.blockracing.managers.Team.blueTeamPlayers;
 import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
@@ -192,7 +193,7 @@ public class GameMenu extends Menu {
                     @Override
                     public ItemStack getItem() {
                         return ItemCreator.of(getTargetIcon(target), "&e" + index + ". &f" + Game.getTargetDisplayName(target),
-                                replaceTargetPlaceholders(Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(), index, target)).make();
+                                getTargetLore(player, index, target)).make();
                     }
                 };
                 this.registerButton(button);
@@ -440,6 +441,12 @@ public class GameMenu extends Menu {
             modifiedLore.add(line);
         }
         return modifiedLore;
+    }
+
+    private Collection<String> getTargetLore(Player player, int index, String target) {
+        List<String> lore = new ArrayList<>(replaceTargetPlaceholders(Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(), index, target));
+        lore.addAll(Goal.getProgressLore(target, player));
+        return lore;
     }
 
     private CompMaterial getTargetIcon(String target) {

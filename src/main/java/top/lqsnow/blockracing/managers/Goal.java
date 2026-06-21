@@ -14,6 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -29,6 +30,8 @@ import java.util.logging.Level;
 
 public class Goal {
     public static final String PREFIX = "DRAFTOUT:";
+    private static final int PROGRESS_DETAIL_LIMIT = 30;
+    private static final int PROGRESS_ITEMS_PER_LINE = 6;
 
     private static final Map<String, Definition> DEFINITIONS = new HashMap<>();
     private static final Map<String, Set<EntityType>> KILLED_ENTITY_TYPES = new HashMap<>();
@@ -240,6 +243,26 @@ public class Goal {
         return definition.label();
     }
 
+    public static List<String> getProgressLore(String target, Player player) {
+        Definition definition = DEFINITIONS.get(decode(target));
+        if (definition == null || player == null) {
+            return List.of();
+        }
+
+        Progress progress = getProgress(definition.requirement(), player);
+        if (progress == null) {
+            return List.of();
+        }
+
+        List<String> lore = new ArrayList<>();
+        lore.add(Message.MENU_TARGET_LIST_PROGRESS_LINE.getString()
+                .replace("%current%", String.valueOf(Math.min(progress.current(), progress.required())))
+                .replace("%required%", String.valueOf(progress.required())));
+        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_DONE_LINE.getString(), progress.completed());
+        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_MISSING_LINE.getString(), progress.missing());
+        return lore;
+    }
+
     public static String findCompletionSource(String target, List<String> teamPlayers, List<Inventory> teamChests, String chestSource) {
         Definition definition = DEFINITIONS.get(decode(target));
         if (definition == null) {
@@ -444,6 +467,102 @@ public class Goal {
         return false;
     }
 
+    private static Progress getProgress(Requirement requirement, Player player) {
+        String playerName = player.getName();
+
+        if (requirement instanceof ItemRequirement itemRequirement) {
+            return itemProgress(player.getInventory(), itemRequirement.items());
+        }
+
+        if (requirement instanceof ItemUniqueRequirement itemUniqueRequirement) {
+            return itemUniqueProgress(player.getInventory(), itemUniqueRequirement.items(), itemUniqueRequirement.amount());
+        }
+
+        if (requirement instanceof AdvancementCountRequirement advancementCountRequirement) {
+            return countProgress(countCompletedAdvancements(player), advancementCountRequirement.amount());
+        }
+
+        if (requirement instanceof EffectCountRequirement effectCountRequirement) {
+            List<String> activeEffects = player.getActivePotionEffects().stream()
+                    .map(effect -> formatKey(effect.getType().getKey().getKey()))
+                    .sorted()
+                    .toList();
+            return new Progress(activeEffects.size(), effectCountRequirement.amount(), activeEffects, List.of());
+        }
+
+        if (requirement instanceof KillCountRequirement killCountRequirement) {
+            return countProgress(KILL_COUNTS.getOrDefault(playerName, 0), killCountRequirement.amount());
+        }
+
+        if (requirement instanceof KillUniqueRequirement killUniqueRequirement) {
+            if (killUniqueRequirement.category().equals(EntityCategory.UNDEAD_WITH_REPETITION)) {
+                return countProgress(UNDEAD_KILL_COUNTS.getOrDefault(playerName, 0), killUniqueRequirement.amount());
+            }
+            if (killUniqueRequirement.category().equals(EntityCategory.ARTHROPOD_WITH_REPETITION)) {
+                return countProgress(ARTHROPOD_KILL_COUNTS.getOrDefault(playerName, 0), killUniqueRequirement.amount());
+            }
+            List<String> killedEntities = KILLED_ENTITY_TYPES.getOrDefault(playerName, Set.of()).stream()
+                    .filter(killUniqueRequirement.category()::contains)
+                    .map(Goal::displayEntity)
+                    .sorted()
+                    .toList();
+            return new Progress(killedEntities.size(), killUniqueRequirement.amount(), killedEntities, List.of());
+        }
+
+        if (requirement instanceof BreedUniqueRequirement breedUniqueRequirement) {
+            List<String> bredEntities = BRED_ENTITY_TYPES.getOrDefault(playerName, Set.of()).stream()
+                    .map(Goal::displayEntity)
+                    .sorted()
+                    .toList();
+            return new Progress(bredEntities.size(), breedUniqueRequirement.amount(), bredEntities, List.of());
+        }
+
+        if (requirement instanceof ConsumeAllRequirement consumeAllRequirement) {
+            Set<Material> consumedItems = CONSUMED_ITEMS.getOrDefault(playerName, Set.of());
+            List<String> completed = consumeAllRequirement.items().stream()
+                    .map(ItemTarget::material)
+                    .filter(consumedItems::contains)
+                    .map(Goal::displayMaterial)
+                    .sorted()
+                    .toList();
+            List<String> missing = consumeAllRequirement.items().stream()
+                    .map(ItemTarget::material)
+                    .filter(material -> !consumedItems.contains(material))
+                    .map(Goal::displayMaterial)
+                    .sorted()
+                    .toList();
+            return new Progress(completed.size(), consumeAllRequirement.items().size(), completed, missing);
+        }
+
+        if (requirement instanceof ConsumeUniqueRequirement consumeUniqueRequirement) {
+            List<String> consumedFoods = CONSUMED_ITEMS.getOrDefault(playerName, Set.of()).stream()
+                    .filter(Material::isEdible)
+                    .map(Goal::displayMaterial)
+                    .sorted()
+                    .toList();
+            return new Progress(consumedFoods.size(), consumeUniqueRequirement.amount(), consumedFoods, List.of());
+        }
+
+        if (requirement instanceof CraftUniqueRequirement craftUniqueRequirement) {
+            List<String> craftedItems = CRAFTED_ITEMS.getOrDefault(playerName, Set.of()).stream()
+                    .map(Goal::displayMaterial)
+                    .sorted()
+                    .toList();
+            return new Progress(craftedItems.size(), craftUniqueRequirement.amount(), craftedItems, List.of());
+        }
+
+        if (requirement instanceof DamageRequirement damageRequirement) {
+            Map<String, Double> damageMap = damageRequirement.kind().equals(DamageRequirement.Kind.DEALT) ? DAMAGE_DEALT : DAMAGE_TAKEN;
+            return countProgress((int) Math.floor(damageMap.getOrDefault(playerName, 0D)), damageRequirement.amount());
+        }
+
+        return null;
+    }
+
+    private static Progress countProgress(int current, int required) {
+        return new Progress(current, required, List.of(), List.of());
+    }
+
     private static long countMatchingEntityTypes(Set<EntityType> entityTypes, EntityCategory category) {
         return entityTypes.stream().filter(category::contains).count();
     }
@@ -542,6 +661,22 @@ public class Goal {
         return true;
     }
 
+    private static Progress itemProgress(Inventory inventory, List<ItemTarget> items) {
+        List<String> completed = new ArrayList<>();
+        List<String> missing = new ArrayList<>();
+        for (ItemTarget item : items) {
+            String displayName = displayItemTarget(item);
+            if (count(inventory, item.material()) >= item.amount()) {
+                completed.add(displayName);
+            } else {
+                missing.add(displayName);
+            }
+        }
+        completed.sort(String::compareTo);
+        missing.sort(String::compareTo);
+        return new Progress(completed.size(), items.size(), completed, missing);
+    }
+
     private static boolean inventoryContainsUnique(Inventory inventory, List<ItemTarget> items, int amount) {
         Set<Material> matchedItems = new HashSet<>();
         for (ItemTarget item : items) {
@@ -550,6 +685,28 @@ public class Goal {
             }
         }
         return matchedItems.size() >= amount;
+    }
+
+    private static Progress itemUniqueProgress(Inventory inventory, List<ItemTarget> items, int amount) {
+        List<String> completed = new ArrayList<>();
+        List<String> missing = new ArrayList<>();
+        Set<Material> completedMaterials = new HashSet<>();
+        Set<Material> missingMaterials = new HashSet<>();
+
+        for (ItemTarget item : items) {
+            if (count(inventory, item.material()) >= item.amount()) {
+                if (completedMaterials.add(item.material())) {
+                    completed.add(displayItemTarget(item));
+                }
+                missingMaterials.remove(item.material());
+            } else if (!completedMaterials.contains(item.material()) && missingMaterials.add(item.material())) {
+                missing.add(displayItemTarget(item));
+            }
+        }
+
+        completed.sort(String::compareTo);
+        missing.sort(String::compareTo);
+        return new Progress(completed.size(), amount, completed, missing);
     }
 
     private static int count(Inventory inventory, Material material) {
@@ -764,6 +921,49 @@ public class Goal {
                 .count();
     }
 
+    private static void addDetailLore(List<String> lore, String template, List<String> items) {
+        if (items.isEmpty()) {
+            return;
+        }
+
+        int displayAmount = Math.min(items.size(), PROGRESS_DETAIL_LIMIT);
+        for (int start = 0; start < displayAmount; start += PROGRESS_ITEMS_PER_LINE) {
+            int end = Math.min(displayAmount, start + PROGRESS_ITEMS_PER_LINE);
+            String line = String.join("、", items.subList(start, end));
+            lore.add(start == 0 ? template.replace("%items%", line) : "§f" + line);
+        }
+        if (items.size() > displayAmount) {
+            lore.add(Message.MENU_TARGET_LIST_PROGRESS_MORE_LINE.getString()
+                    .replace("%amount%", String.valueOf(items.size() - displayAmount)));
+        }
+    }
+
+    private static String displayItemTarget(ItemTarget item) {
+        String displayName = displayMaterial(item.material());
+        return item.amount() == 1 ? displayName : displayName + "*" + item.amount();
+    }
+
+    private static String displayMaterial(Material material) {
+        String translatedName = TranslationUtil.getValue(material.name());
+        return translatedName == null || translatedName.isBlank() ? formatKey(material.name()) : translatedName;
+    }
+
+    private static String displayEntity(EntityType entityType) {
+        return formatKey(entityType.name());
+    }
+
+    private static String formatKey(String key) {
+        String[] parts = key.toLowerCase(Locale.ROOT).split("[_\\-]");
+        List<String> words = new ArrayList<>();
+        for (String part : parts) {
+            if (part.isBlank()) {
+                continue;
+            }
+            words.add(part.substring(0, 1).toUpperCase(Locale.ROOT) + part.substring(1));
+        }
+        return String.join(" ", words);
+    }
+
     private static Requirement parseEntityRequirement(String rawEntityType, java.util.function.Function<EntityType, Requirement> factory) {
         try {
             return factory.apply(EntityType.valueOf(rawEntityType.trim()));
@@ -853,6 +1053,9 @@ public class Goal {
     }
 
     private record Definition(String id, String label, Requirement requirement) {
+    }
+
+    private record Progress(int current, int required, List<String> completed, List<String> missing) {
     }
 
     private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement {

@@ -144,6 +144,10 @@ menu:
     title: "&0目标列表 %page%/%total_page%"
     item-lore:
       - "&7目标序号：&f%index%"
+    progress-line: "&7我的进度：&f%current%/%required%"
+    progress-done-line: "&a已完成：&f%items%"
+    progress-missing-line: "&c还缺少：&f%items%"
+    progress-more-line: "&7等 %amount% 项"
     previous: "&e上一页"
     next: "&e下一页"
     page: "&a第 %page%/%total_page% 页 &7| &f%amount% &7个可做任务"
