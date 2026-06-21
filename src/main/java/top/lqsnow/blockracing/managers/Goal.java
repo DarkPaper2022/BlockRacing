@@ -261,6 +261,14 @@ public class Goal {
             }
         }
 
+        if (definition.requirement() instanceof ItemUniqueRequirement itemUniqueRequirement) {
+            for (Inventory chest : teamChests) {
+                if (inventoryContainsUnique(chest, itemUniqueRequirement.items(), itemUniqueRequirement.amount())) {
+                    return chestSource;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -275,6 +283,13 @@ public class Goal {
             return itemRequirement.items().stream()
                     .map(ItemTarget::material)
                     .allMatch(Objects::nonNull);
+        }
+
+        if (requirement instanceof ItemUniqueRequirement itemUniqueRequirement) {
+            return itemUniqueRequirement.items().stream()
+                    .map(ItemTarget::material)
+                    .allMatch(Objects::nonNull)
+                    && countUniqueMaterials(itemUniqueRequirement.items()) >= itemUniqueRequirement.amount();
         }
 
         if (requirement instanceof EquipmentRequirement equipmentRequirement) {
@@ -299,6 +314,10 @@ public class Goal {
 
         if (requirement instanceof ItemRequirement itemRequirement) {
             return inventoryContainsAll(player.getInventory(), itemRequirement.items());
+        }
+
+        if (requirement instanceof ItemUniqueRequirement itemUniqueRequirement) {
+            return inventoryContainsUnique(player.getInventory(), itemUniqueRequirement.items(), itemUniqueRequirement.amount());
         }
 
         if (requirement instanceof EquipmentRequirement equipmentRequirement) {
@@ -523,6 +542,16 @@ public class Goal {
         return true;
     }
 
+    private static boolean inventoryContainsUnique(Inventory inventory, List<ItemTarget> items, int amount) {
+        Set<Material> matchedItems = new HashSet<>();
+        for (ItemTarget item : items) {
+            if (count(inventory, item.material()) >= item.amount()) {
+                matchedItems.add(item.material());
+            }
+        }
+        return matchedItems.size() >= amount;
+    }
+
     private static int count(Inventory inventory, Material material) {
         int amount = 0;
         for (ItemStack item : inventory.getContents()) {
@@ -551,6 +580,10 @@ public class Goal {
     }
 
     private static Requirement parseRequirement(String rawRequirement) {
+        if (rawRequirement.startsWith("item-unique:")) {
+            return parseItemUniqueRequirement(rawRequirement.substring("item-unique:".length()));
+        }
+
         if (rawRequirement.startsWith("item:")) {
             List<ItemTarget> items = new ArrayList<>();
             for (String rawItem : rawRequirement.substring("item:".length()).split(",")) {
@@ -705,6 +738,32 @@ public class Goal {
         return null;
     }
 
+    private static Requirement parseItemUniqueRequirement(String rawRequirement) {
+        String[] parts = rawRequirement.split(":", 2);
+        if (parts.length != 2) {
+            return null;
+        }
+
+        PositiveInt amount = parsePositiveInt(parts[0]);
+        if (amount.value() == null) {
+            return null;
+        }
+
+        List<ItemTarget> items = parseItems(parts[1]);
+        if (items.isEmpty() || countUniqueMaterials(items) < amount.value()) {
+            return null;
+        }
+
+        return new ItemUniqueRequirement(amount.value(), List.copyOf(items));
+    }
+
+    private static long countUniqueMaterials(List<ItemTarget> items) {
+        return items.stream()
+                .map(ItemTarget::material)
+                .distinct()
+                .count();
+    }
+
     private static Requirement parseEntityRequirement(String rawEntityType, java.util.function.Function<EntityType, Requirement> factory) {
         try {
             return factory.apply(EntityType.valueOf(rawEntityType.trim()));
@@ -796,10 +855,13 @@ public class Goal {
     private record Definition(String id, String label, Requirement requirement) {
     }
 
-    private sealed interface Requirement permits ItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement {
+    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement {
     }
 
     private record ItemRequirement(List<ItemTarget> items) implements Requirement {
+    }
+
+    private record ItemUniqueRequirement(int amount, List<ItemTarget> items) implements Requirement {
     }
 
     private record EquipmentRequirement(List<ItemTarget> items, boolean requireAll) implements Requirement {
