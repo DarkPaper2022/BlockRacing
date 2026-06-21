@@ -609,181 +609,75 @@ OBTAIN_64_COARSE_DIRT,goal,1,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64
 OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
 OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64,获得 64 个彩色混凝土
 OBTAIN_6_UNIQUE_BUCKETS,goal,1,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
-OBTAIN_4_UNIQUE_SAPLINGS,goal,1,Obtain 4 Unique Saplings,"item:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING",获得 4 种不同树苗
+OBTAIN_4_UNIQUE_SAPLINGS,goal,1,Obtain 4 Unique Saplings,"item-unique:4:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING,ACACIA_SAPLING,DARK_OAK_SAPLING,MANGROVE_PROPAGULE,CHERRY_SAPLING,PALE_OAK_SAPLING",获得 4 种不同树苗
 OBTAIN_4_UNIQUE_SEEDS,goal,2,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
 OBTAIN_6_UNIQUE_FLOWERS,goal,2,Obtain 6 Unique Flowers,"item:DANDELION,POPPY,BLUE_ORCHID,ALLIUM,AZURE_BLUET,OXEYE_DAISY",获得 6 种不同花朵
-OBTAIN_7_UNIQUE_WORKSTATIONS,goal,2,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
-OBTAIN_CLOCK,goal,2,Obtain Clock,item:CLOCK,获得时钟
-OBTAIN_BELL,goal,2,Obtain Bell,item:BELL,获得钟
-OBTAIN_BOOKSHELF,goal,2,Obtain Bookshelf,item:BOOKSHELF,获得书架
-OBTAIN_COBWEB,goal,2,Obtain Cobweb,item:COBWEB,获得蜘蛛网
-OBTAIN_DAYLIGHT_DETECTOR,goal,2,Obtain Daylight Detector,item:DAYLIGHT_DETECTOR,获得阳光探测器
-OBTAIN_DETECTOR_RAIL,goal,2,Obtain Detector Rail,item:DETECTOR_RAIL,获得探测铁轨
-OBTAIN_POWERED_RAIL,goal,2,Obtain Powered Rail,item:POWERED_RAIL,获得动力铁轨
-OBTAIN_ACTIVATOR_RAIL,goal,2,Obtain Activator Rail,item:ACTIVATOR_RAIL,获得激活铁轨
-OBTAIN_DISPENSER,goal,2,Obtain Dispenser,item:DISPENSER,获得发射器
-OBTAIN_OBSERVER,goal,2,Obtain Observer,item:OBSERVER,获得侦测器
-OBTAIN_PISTON,goal,2,Obtain Piston,item:PISTON,获得活塞
-OBTAIN_REDSTONE_LAMP,goal,2,Obtain Redstone Lamp,item:REDSTONE_LAMP,获得红石灯
-OBTAIN_REDSTONE_REPEATER,goal,2,Obtain Redstone Repeater,item:REPEATER,获得红石中继器
-OBTAIN_REDSTONE_COMPARATOR,goal,2,Obtain Redstone Comparator,item:COMPARATOR,获得红石比较器
-OBTAIN_TNT,goal,2,Obtain TNT,item:TNT,获得 TNT
-OBTAIN_SCAFFOLDING,goal,2,Obtain Scaffolding,item:SCAFFOLDING,获得脚手架
-OBTAIN_SOUL_CAMPFIRE,goal,2,Obtain Soul Campfire,item:SOUL_CAMPFIRE,获得灵魂营火
-OBTAIN_SOUL_LANTERN,goal,2,Obtain Soul Lantern,item:SOUL_LANTERN,获得灵魂灯笼
-OBTAIN_TINTED_GLASS,goal,2,Obtain Tinted Glass,item:TINTED_GLASS,获得遮光玻璃
-OBTAIN_LODESTONE,goal,2,Obtain Lodestone,item:LODESTONE,获得磁石
-OBTAIN_ENDER_CHEST,goal,2,Obtain Ender Chest,item:ENDER_CHEST,获得末影箱
-OBTAIN_END_ROD,goal,2,Obtain End Rod,item:END_ROD,获得末地烛
-OBTAIN_DRAGON_EGG,goal,2,Obtain Dragon Egg,item:DRAGON_EGG,获得龙蛋
-OBTAIN_HEART_OF_THE_SEA,goal,2,Obtain Heart of the Sea,item:HEART_OF_THE_SEA,获得海洋之心
-OBTAIN_ENCHANT_BOTTLE,goal,2,Obtain Bottle o' Enchanting,item:EXPERIENCE_BOTTLE,获得附魔之瓶
-OBTAIN_POWDER_SNOW_BUCKET,goal,2,Obtain Powder Snow Bucket,item:POWDER_SNOW_BUCKET,获得细雪桶
-OBTAIN_TROPICAL_FISH_BUCKET,goal,2,Obtain Tropical Fish Bucket,item:TROPICAL_FISH_BUCKET,获得热带鱼桶
-OBTAIN_FLOWERING_AZALEA,goal,2,Obtain Flowering Azalea,item:FLOWERING_AZALEA,获得盛开的杜鹃花丛
-OBTAIN_GILDED_BLACKSTONE,goal,2,Obtain Gilded Blackstone,item:GILDED_BLACKSTONE,获得镶金黑石
-OBTAIN_ANCIENT_DEBRIS,goal,2,Obtain Ancient Debris,item:ANCIENT_DEBRIS,获得远古残骸
-OBTAIN_SPONGE,goal,2,Obtain Sponge,item:SPONGE,获得海绵
-OBTAIN_AMETHYST_BLOCK,goal,2,Obtain Amethyst Block,item:AMETHYST_BLOCK,获得紫水晶块
-OBTAIN_BONE_BLOCK,goal,2,Obtain Bone Block,item:BONE_BLOCK,获得骨块
-OBTAIN_SMOOTH_BASALT,goal,2,Obtain Smooth Basalt,item:SMOOTH_BASALT,获得平滑玄武岩
-OBTAIN_DRIED_KELP_BLOCK,goal,2,Obtain Dried Kelp Block,item:DRIED_KELP_BLOCK,获得干海带块
-OBTAIN_DEAD_BUSH,goal,2,Obtain Dead Bush,item:DEAD_BUSH,获得枯萎的灌木
-OBTAIN_POTTERY_SHERD,goal,2,Obtain Pottery Sherd,item:ANGLER_POTTERY_SHERD,获得陶片
-OBTAIN_SUSPICIOUS_BLOCK,goal,2,Obtain Suspicious Sand/Gravel,item:SUSPICIOUS_SAND,获得可疑的沙子或沙砾
-OBTAIN_BRICK_WALL,goal,2,Obtain Brick Wall,item:BRICK_WALL,获得砖墙
-OBTAIN_MOSSY_STONE_BRICK_WALL,goal,2,Obtain Mossy Stone Brick Wall,item:MOSSY_STONE_BRICK_WALL,获得苔石砖墙
-OBTAIN_MUD_BRICK_WALL,goal,2,Obtain Mud Brick Wall,item:MUD_BRICK_WALL,获得泥砖墙
-OBTAIN_RED_NETHER_BRICK_STAIRS,goal,2,Obtain Red Nether Brick Stairs,item:RED_NETHER_BRICK_STAIRS,获得红色下界砖楼梯
-EAT_5_UNIQUE_FOOD,goal,2,Eat 5 Unique Foods,consume-unique:5,吃下 5 种不同食物
-EAT_10_UNIQUE_FOOD,goal,2,Eat 10 Unique Foods,consume-unique:10,吃下 10 种不同食物
+OBTAIN_7_UNIQUE_WORKSTATIONS,goal,1,Obtain 7 Unique Workstations,"item:CRAFTING_TABLE,FURNACE,BLAST_FURNACE,SMOKER,LOOM,STONECUTTER,CARTOGRAPHY_TABLE",获得 7 种不同工作站方块
+EAT_5_UNIQUE_FOOD,goal,1,Eat 5 Unique Foods,consume-unique:5,吃下 5 种不同食物
+EAT_10_UNIQUE_FOOD,goal,1,Eat 10 Unique Foods,consume-unique:10,吃下 10 种不同食物
 EAT_15_UNIQUE_FOOD,goal,2,Eat 15 Unique Foods,consume-unique:15,吃下 15 种不同食物
-EAT_20_UNIQUE_FOOD,goal,2,Eat 20 Unique Foods,consume-unique:20,吃下 20 种不同食物
-EAT_25_UNIQUE_FOOD,goal,2,Eat 25 Unique Foods,consume-unique:25,吃下 25 种不同食物
+EAT_20_UNIQUE_FOOD,goal,3,Eat 20 Unique Foods,consume-unique:20,吃下 20 种不同食物
+EAT_25_UNIQUE_FOOD,goal,4,Eat 25 Unique Foods,consume-unique:25,吃下 25 种不同食物
 EAT_ALL_SOUPS,goal,2,Eat every type of Soup,"consume-all:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",喝下所有汤类食物
-EAT_BEETROOT_SOUP,goal,2,Eat Beetroot Soup,consume:BEETROOT_SOUP,喝下甜菜汤
-EAT_CHORUS_FRUIT,goal,2,Eat Chorus Fruit,consume:CHORUS_FRUIT,吃下紫颂果
-EAT_COOKIE,goal,2,Eat Cookie,consume:COOKIE,吃下曲奇
-EAT_GLOW_BERRY,goal,2,Eat Glow Berry,consume:GLOW_BERRIES,吃下发光浆果
-EAT_POISONOUS_POTATO,goal,2,Eat Poisonous Potato,consume:POISONOUS_POTATO,吃下毒马铃薯
+EAT_BEETROOT_SOUP,goal,1,Eat Beetroot Soup,consume:BEETROOT_SOUP,喝下甜菜汤
+EAT_CHORUS_FRUIT,goal,-1,Eat Chorus Fruit,consume:CHORUS_FRUIT,吃下紫颂果
+EAT_COOKIE,goal,-1,Eat Cookie,consume:COOKIE,吃下曲奇
+EAT_GLOW_BERRY,goal,1,Eat Glow Berry,consume:GLOW_BERRIES,吃下发光浆果
+EAT_POISONOUS_POTATO,goal,-1,Eat Poisonous Potato,consume:POISONOUS_POTATO,吃下毒马铃薯
 EAT_PUMPKIN_PIE,goal,2,Eat Pumpkin Pie,consume:PUMPKIN_PIE,吃下南瓜派
-EAT_RABBIT_STEW,goal,2,Eat Rabbit Stew,consume:RABBIT_STEW,喝下兔肉煲
-EAT_SUSPICIOUS_STEW,goal,2,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜之炖菜
-DRINK_HONEY_BOTTLE,goal,2,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
-DRINK_WATER_BOTTLE,goal,2,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
+EAT_RABBIT_STEW,goal,1,Eat Rabbit Stew,consume:RABBIT_STEW,喝下兔肉煲
+EAT_SUSPICIOUS_STEW,goal,1,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜之炖菜
+DRINK_HONEY_BOTTLE,goal,1,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
+DRINK_WATER_BOTTLE,goal,1,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
 ENTER_NETHER,goal,2,Enter Nether,advancement:story/enter_the_nether,进入下界
-ENTER_END,goal,2,Enter The End,advancement:end/root,进入末地
+ENTER_END,goal,5,Enter The End,advancement:end/root,进入末地
 GET_EYE_SPY_ADVANCEMENT,goal,2,Find a Stronghold,advancement:story/follow_ender_eye,找到要塞
-GET_WHAT_A_DEAL_ADVANCEMENT,goal,2,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得「真划算！」进度
-GET_OH_SHINY_ADVANCEMENT,goal,2,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得「闪闪发亮！」进度
+GET_WHAT_A_DEAL_ADVANCEMENT,goal,1,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得「真划算！」进度
+GET_OH_SHINY_ADVANCEMENT,goal,1,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得「闪闪发亮！」进度
 GET_SNIPER_DUEL_ADVANCEMENT,goal,2,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel,获得「神射手对决」进度
 GET_BULLSEYE_ADVANCEMENT,goal,2,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye,获得「百发百中」进度
 GET_HIRED_HELP_ADVANCEMENT,goal,2,Construct an Iron Golem,advancement:adventure/summon_iron_golem,获得「雇佣帮手」进度
 GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,2,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,获得「这船有腿」进度
 GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,2,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,获得「差点九条命」进度
-GET_ABSORPTION_STATUS_EFFECT,goal,2,Get Absorption,effect:absorption,获得伤害吸收
-GET_BAD_OMEN_STATUS_EFFECT,goal,2,Get Bad Omen,effect:bad_omen,获得不祥之兆
+GET_ABSORPTION_STATUS_EFFECT,goal,-1,Get Absorption,effect:absorption,获得伤害吸收
+GET_BAD_OMEN_STATUS_EFFECT,goal,-1,Get Bad Omen,effect:bad_omen,获得不祥之兆
 GET_GLOWING_STATUS_EFFECT,goal,2,Get Glowing,effect:glowing,获得发光
-GET_JUMP_BOOST_STATUS_EFFECT,goal,2,Get Jump Boost,effect:jump_boost,获得跳跃提升
+GET_JUMP_BOOST_STATUS_EFFECT,goal,-1,Get Jump Boost,effect:jump_boost,获得跳跃提升
 GET_LEVITATION_STATUS_EFFECT,goal,2,Get Levitation,effect:levitation,获得飘浮
-GET_MINING_FATIGUE_STATUS_EFFECT,goal,2,Get Mining Fatigue,effect:mining_fatigue,获得挖掘疲劳
-GET_NAUSEA_STATUS_EFFECT,goal,2,Get Nausea,effect:nausea,获得反胃
-GET_POISON_STATUS_EFFECT,goal,2,Get Poison,effect:poison,获得中毒
-GET_WEAKNESS_STATUS_EFFECT,goal,2,Get Weakness,effect:weakness,获得虚弱
-REMOVE_STATUS_EFFECT_USING_MILK,goal,2,Remove Effect using Milk Bucket,consume:MILK_BUCKET,使用牛奶桶清除状态效果
-GET_10_ADVANCEMENTS,goal,2,Get 10 Advancements,advancement-count:10,获得 10 个进度
-GET_20_ADVANCEMENTS,goal,2,Get 20 Advancements,advancement-count:20,获得 20 个进度
+GET_MINING_FATIGUE_STATUS_EFFECT,goal,1,Get Mining Fatigue,effect:mining_fatigue,获得挖掘疲劳
+GET_NAUSEA_STATUS_EFFECT,goal,1,Get Nausea,effect:nausea,获得反胃
+GET_POISON_STATUS_EFFECT,goal,1,Get Poison,effect:poison,获得中毒
+GET_WEAKNESS_STATUS_EFFECT,goal,1,Get Weakness,effect:weakness,获得虚弱
+REMOVE_STATUS_EFFECT_USING_MILK,goal,1,Remove Effect using Milk Bucket,consume:MILK_BUCKET,使用牛奶桶清除状态效果
+GET_10_ADVANCEMENTS,goal,1,Get 10 Advancements,advancement-count:10,获得 10 个进度
+GET_20_ADVANCEMENTS,goal,1,Get 20 Advancements,advancement-count:20,获得 20 个进度
 GET_30_ADVANCEMENTS,goal,2,Get 30 Advancements,advancement-count:30,获得 30 个进度
-REACH_EXP_LEVEL_10,goal,2,Reach XP level 10,level:10,达到 10 级经验等级
-REACH_EXP_LEVEL_20,goal,2,Reach XP level 20,level:20,达到 20 级经验等级
+REACH_EXP_LEVEL_10,goal,1,Reach XP level 10,level:10,达到 10 级经验等级
+REACH_EXP_LEVEL_20,goal,1,Reach XP level 20,level:20,达到 20 级经验等级
 REACH_HEIGHT_LIMIT,goal,2,Reach height limit,location:height-limit,到达高度上限
-REACH_BEDROCK,goal,2,Reach Bedrock,location:bedrock,到达基岩层
+REACH_BEDROCK,goal,1,Reach Bedrock,location:bedrock,到达基岩层
 REACH_NETHER_ROOF,goal,2,Get on Nether Roof,location:nether-roof,到达下界顶部
 EMPTY_HUNGER_BAR,goal,2,Empty Hunger Bar,hunger:empty,清空饥饿条
-USE_STONECUTTER,goal,2,Use Stonecutter,use-block:STONECUTTER,使用切石机
-USE_ANVIL,goal,2,Use Anvil,use-block:ANVIL,使用铁砧
+USE_STONECUTTER,goal,1,Use Stonecutter,use-block:STONECUTTER,使用切石机
+USE_ANVIL,goal,-1,Use Anvil,use-block:ANVIL,使用铁砧
 USE_ENCHANTING_TABLE,goal,2,Use Enchanting Table,use-block:ENCHANTING_TABLE,使用附魔台
-USE_GRINDSTONE,goal,2,Use Grindstone,use-block:GRINDSTONE,使用砂轮
-USE_LOOM,goal,2,Use Loom to design a Banner,use-block:LOOM,使用织布机设计旗帜
+USE_GRINDSTONE,goal,-1,Use Grindstone,use-block:GRINDSTONE,使用砂轮
+USE_LOOM,goal,1,Use Loom to design a Banner,use-block:LOOM,使用织布机设计旗帜
 USE_SMITHING_TABLE,goal,2,Use Smithing Table,use-block:SMITHING_TABLE,使用锻造台
-USE_CAULDRON,goal,2,Use Cauldron to wash something,use-block:CAULDRON,使用炼药锅清洗物品
-USE_COMPOSTER,goal,2,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
+USE_CAULDRON,goal,1,Use Cauldron to wash something,use-block:CAULDRON,使用炼药锅清洗物品
+USE_COMPOSTER,goal,1,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
 USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片机播放唱片
-CRAFT_20_UNIQUE_ITEMS,goal,2,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
-CRAFT_50_UNIQUE_ITEMS,goal,2,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
+CRAFT_20_UNIQUE_ITEMS,goal,1,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
+CRAFT_50_UNIQUE_ITEMS,goal,1,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
 CRAFT_100_UNIQUE_ITEMS,goal,2,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品
-TAKE_200_DAMAGE,goal,2,Take 200 damage,damage-taken:200,承受 200 点伤害
+TAKE_200_DAMAGE,goal,1,Take 200 damage,damage-taken:200,承受 200 点伤害
 DEAL_400_DAMAGE,goal,2,Deal 400 damage,damage-dealt:400,造成 400 点伤害
-DIE_BY_DROWNING,goal,2,Die by Drowning,death-cause:DROWNING,溺水身亡
-DIE_BY_CACTUS,goal,2,Die to Cactus,death-cause:CONTACT,被仙人掌刺死
+DIE_BY_DROWNING,goal,1,Die by Drowning,death-cause:DROWNING,溺水身亡
+DIE_BY_CACTUS,goal,1,Die to Cactus,death-cause:CONTACT,被仙人掌刺死
 DIE_BY_MAGIC,goal,2,Die by Magic,death-cause:MAGIC,死于魔法伤害
 DIE_TO_VOID,goal,2,Die by falling in Void,death-cause:VOID,跌入虚空死亡
 FREEZE_TO_DEATH,goal,2,Die by Freezing,death-cause:FREEZE,冻死
-DIE_TO_POLAR_BEAR,goal,2,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
-DIE_TO_PUFFERFISH,goal,2,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
+DIE_TO_POLAR_BEAR,goal,1,Die to Polar Bear,death-attacker:POLAR_BEAR,死于北极熊
+DIE_TO_PUFFERFISH,goal,1,Die to Pufferfish,death-attacker:PUFFERFISH,死于河豚
 DIE_TO_WARDEN,goal,2,Die to Warden,death-attacker:WARDEN,死于监守者
-WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,2,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLACK,goal,2,Wear Black Leather helmet,"equipment-colored:LEATHER_HELMET,BLACK",穿上黑色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_WHITE,goal,2,Wear White Leather helmet,"equipment-colored:LEATHER_HELMET,WHITE",穿上白色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GRAY,goal,2,Wear Gray Leather helmet,"equipment-colored:LEATHER_HELMET,GRAY",穿上灰色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_GRAY,goal,2,Wear Light gray Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_GRAY",穿上淡灰色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BLUE,goal,2,Wear Blue Leather helmet,"equipment-colored:LEATHER_HELMET,BLUE",穿上蓝色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIGHT_BLUE,goal,2,Wear Light blue Leather helmet,"equipment-colored:LEATHER_HELMET,LIGHT_BLUE",穿上淡蓝色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_ORANGE,goal,2,Wear Orange Leather helmet,"equipment-colored:LEATHER_HELMET,ORANGE",穿上橙色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_RED,goal,2,Wear Red Leather helmet,"equipment-colored:LEATHER_HELMET,RED",穿上红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_YELLOW,goal,2,Wear Yellow Leather helmet,"equipment-colored:LEATHER_HELMET,YELLOW",穿上黄色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_MAGENTA,goal,2,Wear Magenta Leather helmet,"equipment-colored:LEATHER_HELMET,MAGENTA",穿上品红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PINK,goal,2,Wear Pink Leather helmet,"equipment-colored:LEATHER_HELMET,PINK",穿上粉红色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_PURPLE,goal,2,Wear Purple Leather helmet,"equipment-colored:LEATHER_HELMET,PURPLE",穿上紫色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_GREEN,goal,2,Wear Green Leather helmet,"equipment-colored:LEATHER_HELMET,GREEN",穿上绿色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_LIME,goal,2,Wear Lime Leather helmet,"equipment-colored:LEATHER_HELMET,LIME",穿上黄绿色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_CYAN,goal,2,Wear Cyan Leather helmet,"equipment-colored:LEATHER_HELMET,CYAN",穿上青色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_HELMET_BROWN,goal,2,Wear Brown Leather helmet,"equipment-colored:LEATHER_HELMET,BROWN",穿上棕色皮革头盔
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLACK,goal,2,Wear Black Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLACK",穿上黑色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_WHITE,goal,2,Wear White Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,WHITE",穿上白色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GRAY,goal,2,Wear Gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GRAY",穿上灰色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_GRAY,goal,2,Wear Light gray Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_GRAY",穿上淡灰色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BLUE,goal,2,Wear Blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BLUE",穿上蓝色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIGHT_BLUE,goal,2,Wear Light blue Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIGHT_BLUE",穿上淡蓝色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_ORANGE,goal,2,Wear Orange Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,ORANGE",穿上橙色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_RED,goal,2,Wear Red Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,RED",穿上红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_YELLOW,goal,2,Wear Yellow Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,YELLOW",穿上黄色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_MAGENTA,goal,2,Wear Magenta Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,MAGENTA",穿上品红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PINK,goal,2,Wear Pink Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PINK",穿上粉红色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_PURPLE,goal,2,Wear Purple Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,PURPLE",穿上紫色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_GREEN,goal,2,Wear Green Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,GREEN",穿上绿色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_LIME,goal,2,Wear Lime Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,LIME",穿上黄绿色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_CYAN,goal,2,Wear Cyan Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,CYAN",穿上青色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_CHESTPLATE_BROWN,goal,2,Wear Brown Leather chestplate,"equipment-colored:LEATHER_CHESTPLATE,BROWN",穿上棕色皮革胸甲
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLACK,goal,2,Wear Black Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLACK",穿上黑色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_WHITE,goal,2,Wear White Leather leggings,"equipment-colored:LEATHER_LEGGINGS,WHITE",穿上白色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GRAY,goal,2,Wear Gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GRAY",穿上灰色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_GRAY,goal,2,Wear Light gray Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_GRAY",穿上淡灰色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BLUE,goal,2,Wear Blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BLUE",穿上蓝色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIGHT_BLUE,goal,2,Wear Light blue Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIGHT_BLUE",穿上淡蓝色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_ORANGE,goal,2,Wear Orange Leather leggings,"equipment-colored:LEATHER_LEGGINGS,ORANGE",穿上橙色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_RED,goal,2,Wear Red Leather leggings,"equipment-colored:LEATHER_LEGGINGS,RED",穿上红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_YELLOW,goal,2,Wear Yellow Leather leggings,"equipment-colored:LEATHER_LEGGINGS,YELLOW",穿上黄色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_MAGENTA,goal,2,Wear Magenta Leather leggings,"equipment-colored:LEATHER_LEGGINGS,MAGENTA",穿上品红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PINK,goal,2,Wear Pink Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PINK",穿上粉红色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_PURPLE,goal,2,Wear Purple Leather leggings,"equipment-colored:LEATHER_LEGGINGS,PURPLE",穿上紫色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_GREEN,goal,2,Wear Green Leather leggings,"equipment-colored:LEATHER_LEGGINGS,GREEN",穿上绿色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_LIME,goal,2,Wear Lime Leather leggings,"equipment-colored:LEATHER_LEGGINGS,LIME",穿上黄绿色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_CYAN,goal,2,Wear Cyan Leather leggings,"equipment-colored:LEATHER_LEGGINGS,CYAN",穿上青色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_LEGGINGS_BROWN,goal,2,Wear Brown Leather leggings,"equipment-colored:LEATHER_LEGGINGS,BROWN",穿上棕色皮革护腿
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLACK,goal,2,Wear Black Leather boots,"equipment-colored:LEATHER_BOOTS,BLACK",穿上黑色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_WHITE,goal,2,Wear White Leather boots,"equipment-colored:LEATHER_BOOTS,WHITE",穿上白色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GRAY,goal,2,Wear Gray Leather boots,"equipment-colored:LEATHER_BOOTS,GRAY",穿上灰色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_GRAY,goal,2,Wear Light gray Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_GRAY",穿上淡灰色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BLUE,goal,2,Wear Blue Leather boots,"equipment-colored:LEATHER_BOOTS,BLUE",穿上蓝色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIGHT_BLUE,goal,2,Wear Light blue Leather boots,"equipment-colored:LEATHER_BOOTS,LIGHT_BLUE",穿上淡蓝色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_ORANGE,goal,2,Wear Orange Leather boots,"equipment-colored:LEATHER_BOOTS,ORANGE",穿上橙色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_RED,goal,2,Wear Red Leather boots,"equipment-colored:LEATHER_BOOTS,RED",穿上红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_YELLOW,goal,2,Wear Yellow Leather boots,"equipment-colored:LEATHER_BOOTS,YELLOW",穿上黄色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_MAGENTA,goal,2,Wear Magenta Leather boots,"equipment-colored:LEATHER_BOOTS,MAGENTA",穿上品红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PINK,goal,2,Wear Pink Leather boots,"equipment-colored:LEATHER_BOOTS,PINK",穿上粉红色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_PURPLE,goal,2,Wear Purple Leather boots,"equipment-colored:LEATHER_BOOTS,PURPLE",穿上紫色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_GREEN,goal,2,Wear Green Leather boots,"equipment-colored:LEATHER_BOOTS,GREEN",穿上绿色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_LIME,goal,2,Wear Lime Leather boots,"equipment-colored:LEATHER_BOOTS,LIME",穿上黄绿色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_CYAN,goal,2,Wear Cyan Leather boots,"equipment-colored:LEATHER_BOOTS,CYAN",穿上青色皮革靴子
-WEAR_COLORED_LEATHER_ARMOR_PIECE_LEATHER_BOOTS_BROWN,goal,2,Wear Brown Leather boots,"equipment-colored:LEATHER_BOOTS,BROWN",穿上棕色皮革靴子
+WEAR_UNIQUE_COLORED_LEATHER_ARMOR,goal,1,"Wear Full Leather Armor, in different colors",equipment-unique-leather-colors:4,穿齐 4 种不同颜色的皮革盔甲
