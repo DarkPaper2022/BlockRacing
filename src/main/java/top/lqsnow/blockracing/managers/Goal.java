@@ -881,11 +881,6 @@ public class Goal {
             return parseItemUniqueRequirement(rawRequirement.substring("item-unique:".length()));
         }
 
-        if (rawRequirement.startsWith("item-any:")) {
-            List<ItemTarget> items = parseItems(rawRequirement.substring("item-any:".length()));
-            return items.isEmpty() ? null : new ItemUniqueRequirement(1, List.copyOf(items));
-        }
-
         if (rawRequirement.startsWith("item:")) {
             List<ItemTarget> items = new ArrayList<>();
             for (String rawItem : rawRequirement.substring("item:".length()).split(",")) {
