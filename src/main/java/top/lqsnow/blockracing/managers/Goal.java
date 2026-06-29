@@ -19,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.RayTraceResult;
-import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -1164,8 +1163,10 @@ public class Goal {
     }
 
     private static String displayMaterial(Material material) {
-        String translatedName = TranslationUtil.getValue(material.name());
-        return translatedName == null || translatedName.isBlank() ? formatKey(material.name()) : translatedName;
+        String displayName = Block.getDisplayName(material.name());
+        return displayName == null || displayName.isBlank() || displayName.equals(material.name())
+                ? formatKey(material.name())
+                : displayName;
     }
 
     private static String displayEntity(EntityType entityType) {

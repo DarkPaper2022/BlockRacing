@@ -9,7 +9,6 @@ import top.lqsnow.blockracing.managers.Message;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Objects;
-import java.util.logging.Level;
 
 public class TranslationUtil {
     private static String cachedLang;
@@ -23,9 +22,8 @@ public class TranslationUtil {
             }
             return (String) getTranslations().get(key);
         } catch (Exception e) {
-            Main.getInstance().getLogger().log(Level.SEVERE, "[BlockRacing] Error getting value of blocks!", e);
+            return null;
         }
-        return null;
     }
 
     private static JSONObject getTranslations() throws Exception {
@@ -35,6 +33,12 @@ public class TranslationUtil {
         }
 
         File file = new File(Main.getInstance().getDataFolder(), lang + ".json");
+        if (!file.exists()) {
+            cachedTranslations = new JSONObject();
+            cachedLang = lang;
+            return cachedTranslations;
+        }
+
         try (FileReader reader = new FileReader(file)) {
             JSONParser parser = new JSONParser();
             cachedTranslations = (JSONObject) parser.parse(reader);
