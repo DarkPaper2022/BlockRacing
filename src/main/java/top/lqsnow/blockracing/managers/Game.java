@@ -194,12 +194,6 @@ public class Game {
             return;
         }
 
-        // Exist empty team
-        if (redTeamPlayers.isEmpty() || blueTeamPlayers.isEmpty()) {
-            player.sendMessage(Message.NOTICE_EMPTY_TEAM.getString());
-            return;
-        }
-
         // Blocks have problems
         if (!checkBlock()) {
             return;
