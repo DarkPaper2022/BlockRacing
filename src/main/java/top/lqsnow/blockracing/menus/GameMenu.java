@@ -23,7 +23,6 @@ import static top.lqsnow.blockracing.managers.Game.blueWaypoint;
 import static top.lqsnow.blockracing.managers.Game.blueWaypointIconCache;
 import static top.lqsnow.blockracing.managers.Game.freeRandomTPList;
 import static top.lqsnow.blockracing.managers.Game.getCoords;
-import static top.lqsnow.blockracing.managers.Game.locateCost;
 import static top.lqsnow.blockracing.managers.Game.randomTeleport;
 import static top.lqsnow.blockracing.managers.Game.redTeamScore;
 import static top.lqsnow.blockracing.managers.Game.redWaypoint;
@@ -131,12 +130,12 @@ public class GameMenu extends Menu {
                     freeRandomTPList.remove(player.getName());
                 } else {
                     if (redTeamPlayers.contains(player.getName())) {
-                        if (redTeamScore < 2) {
+                        if (redTeamScore < Setting.getRandomTeleportCost()) {
                             player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString());
                             return;
                         }
                     } else if (blueTeamPlayers.contains(player.getName())) {
-                        if (blueTeamScore < 2) {
+                        if (blueTeamScore < Setting.getRandomTeleportCost()) {
                             player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString());
                             return;
                         }
@@ -144,11 +143,15 @@ public class GameMenu extends Menu {
                     player.closeInventory();
                     randomTeleport(player, false);
                     if (redTeamPlayers.contains(player.getName())) {
-                        redTeamScore -= 2;
-                        sendAll(Message.NOTICE_RANDOM_TP.getString().replace("%player%", Message.TEAM_RED_COLOR.getString() + player.getName()));
+                        redTeamScore -= Setting.getRandomTeleportCost();
+                        sendAll(Message.NOTICE_RANDOM_TP.getString()
+                                .replace("%player%", Message.TEAM_RED_COLOR.getString() + player.getName())
+                                .replace("%score%", String.valueOf(Setting.getRandomTeleportCost())));
                     } else if (blueTeamPlayers.contains(player.getName())) {
-                        blueTeamScore -= 2;
-                        sendAll(Message.NOTICE_RANDOM_TP.getString().replace("%player%", Message.TEAM_BLUE_COLOR.getString() + player.getName()));
+                        blueTeamScore -= Setting.getRandomTeleportCost();
+                        sendAll(Message.NOTICE_RANDOM_TP.getString()
+                                .replace("%player%", Message.TEAM_BLUE_COLOR.getString() + player.getName())
+                                .replace("%score%", String.valueOf(Setting.getRandomTeleportCost())));
                     }
                     Scoreboard.updateScoreboard();
                 }
@@ -156,7 +159,7 @@ public class GameMenu extends Menu {
 
             @Override
             public ItemStack getItem() {
-                return ItemCreator.of(CompMaterial.ENDER_PEARL, Message.MENU_RANDOM_TP.getString(), Message.MENU_RANDOM_TP_LORE.getStringList()).make();
+                return ItemCreator.of(CompMaterial.ENDER_PEARL, Message.MENU_RANDOM_TP.getString(), replacePlaceholders(Message.MENU_RANDOM_TP_LORE.getStringList())).make();
             }
         };
 
@@ -409,7 +412,9 @@ public class GameMenu extends Menu {
         List<String> modifiedLore = new ArrayList<>();
 
         for (String line : lore) {
-            line = line.replace("%score%", String.valueOf(locateCost));
+            line = line
+                    .replace("%score%", String.valueOf(Setting.getLocateCost()))
+                    .replace("%random_tp_score%", String.valueOf(Setting.getRandomTeleportCost()));
 
             modifiedLore.add(line);
         }
@@ -436,7 +441,8 @@ public class GameMenu extends Menu {
         for (String line : lore) {
             line = line
                     .replace("%index%", String.valueOf(index))
-                    .replace("%target%", Game.getTargetDisplayName(target));
+                    .replace("%target%", Game.getTargetDisplayName(target))
+                    .replace("%score%", String.valueOf(top.lqsnow.blockracing.managers.Block.getTargetScore(target)));
 
             modifiedLore.add(line);
         }

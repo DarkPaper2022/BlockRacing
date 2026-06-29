@@ -16,6 +16,8 @@ public enum Config {
     BLOCK_AMOUNT("block-amount"),
     MAX_EASY_TARGETS_PER_GAME("max-easy-targets-per-game"),
     AVAILABLE_TASK_AMOUNT("available-task-amount"),
+    LOCATE_COST("locate-cost"),
+    RANDOM_TELEPORT_COST("random-teleport-cost"),
     GAME_MODE("game-mode"),
     SPEED_MODE("speed-mode"),
     CONFIG_VERSION("config-version"),

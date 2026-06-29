@@ -21,6 +21,12 @@ max-easy-targets-per-game: 8
 # 最大：128
 available-task-amount: 64
 
+# 购买一次 locate 命令权限消耗的可用积分
+locate-cost: 5
+
+# 随机传送消耗的可用积分，首次随机传送仍免费
+random-teleport-cost: 2
+
 # 游戏模式：
 # normal - 普通模式：两个队伍需要收集的方块及顺序完全随机，收集方块会将一组该方块给到对方的队伍箱子里
 # racing - 竞速模式：两个队伍需要收集的方块及顺序将完全相同，且收集方块将不会给予一组方块到对方队伍箱子里

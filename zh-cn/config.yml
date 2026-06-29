@@ -13,10 +13,19 @@ hard-block: true
 # 每局从总池子抽取的目标数量
 block-amount: 64
 
+# 每局最多抽取多少个 1 分目标
+max-easy-targets-per-game: 8
+
 # 同时可做/可见的队首任务数量
 # 默认：64
 # 最大：128
 available-task-amount: 64
+
+# 购买一次 locate 命令权限消耗的可用积分
+locate-cost: 5
+
+# 随机传送消耗的可用积分，首次随机传送仍免费
+random-teleport-cost: 2
 
 # 游戏模式：
 # normal - 普通模式：两个队伍需要收集的方块及顺序完全随机，收集方块会将一组该方块给到对方的队伍箱子里

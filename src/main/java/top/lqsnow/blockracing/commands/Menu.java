@@ -117,12 +117,12 @@ public class Menu implements CommandExecutor, TabCompleter {
                 freeRandomTPList.remove(player.getName());
             } else {
                 if (redTeamPlayers.contains(player.getName())) {
-                    if (redTeamScore < 2) {
+                    if (redTeamScore < Setting.getRandomTeleportCost()) {
                         player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString());
                         return true;
                     }
                 } else if (blueTeamPlayers.contains(player.getName())) {
-                    if (blueTeamScore < 2) {
+                    if (blueTeamScore < Setting.getRandomTeleportCost()) {
                         player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString());
                         return true;
                     }
@@ -130,11 +130,15 @@ public class Menu implements CommandExecutor, TabCompleter {
                 player.closeInventory();
                 randomTeleport(player, false);
                 if (redTeamPlayers.contains(player.getName())) {
-                    redTeamScore -= 2;
-                    sendAll(Message.NOTICE_RANDOM_TP.getString().replace("%player%", Message.TEAM_RED_COLOR.getString() + player.getName()));
+                    redTeamScore -= Setting.getRandomTeleportCost();
+                    sendAll(Message.NOTICE_RANDOM_TP.getString()
+                            .replace("%player%", Message.TEAM_RED_COLOR.getString() + player.getName())
+                            .replace("%score%", String.valueOf(Setting.getRandomTeleportCost())));
                 } else if (blueTeamPlayers.contains(player.getName())) {
-                    blueTeamScore -= 2;
-                    sendAll(Message.NOTICE_RANDOM_TP.getString().replace("%player%", Message.TEAM_BLUE_COLOR.getString() + player.getName()));
+                    blueTeamScore -= Setting.getRandomTeleportCost();
+                    sendAll(Message.NOTICE_RANDOM_TP.getString()
+                            .replace("%player%", Message.TEAM_BLUE_COLOR.getString() + player.getName())
+                            .replace("%score%", String.valueOf(Setting.getRandomTeleportCost())));
                 }
                 Scoreboard.updateScoreboard();
             }

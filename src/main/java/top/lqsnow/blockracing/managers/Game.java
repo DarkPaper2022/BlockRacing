@@ -87,7 +87,6 @@ public class Game {
     public static List<String> blueRollPlayers = new ArrayList<>();
     public static List<String> inGamePlayers = new ArrayList<>();
     public static ArrayList<String> locateCommandPermission = new ArrayList<>();
-    public static int locateCost;
     public static Map<String, Integer> collectAmount = new HashMap<>();
     private static final Deque<Location> randomTpPool = new ArrayDeque<>();
 
@@ -236,12 +235,11 @@ public class Game {
         blueTeamTotalScore = Block.getTotalScore(blueTeamBlocks);
         redTeamWinScore = getWinScore(redTeamTotalScore);
         blueTeamWinScore = getWinScore(blueTeamTotalScore);
-        setLocateScore();
         updateScoreboard();
         Bukkit.getOnlinePlayers().forEach((Player player) -> freeRandomTPList.add(player.getName()));
         new runPer5Tick().runTaskTimer(Main.getInstance(), 0L, 5L);
         World world = Bukkit.getWorlds().get(0);
-        world.setDifficulty(Difficulty.EASY);
+        world.setDifficulty(Difficulty.HARD);
         world.setTime(1000);
         world.setStorm(false);
         world.setThundering(false);
@@ -338,8 +336,8 @@ public class Game {
             return;
         }
         if (redTeamPlayers.contains(player.getName())) {
-            if (redTeamScore >= locateCost) {
-                redTeamScore -= locateCost;
+            if (redTeamScore >= Setting.getLocateCost()) {
+                redTeamScore -= Setting.getLocateCost();
                 updateScoreboard();
                 locateCommandPermission.add(player.getName());
                 sendAll(Message.NOTICE_BUY_LOCATE.getString().replace("%player%", player.getName()));
@@ -348,8 +346,8 @@ public class Game {
                 player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString());
             }
         } else if (blueTeamPlayers.contains(player.getName())) {
-            if (blueTeamScore >= locateCost) {
-                blueTeamScore -= locateCost;
+            if (blueTeamScore >= Setting.getLocateCost()) {
+                blueTeamScore -= Setting.getLocateCost();
                 updateScoreboard();
                 locateCommandPermission.add(player.getName());
                 sendAll(Message.NOTICE_BUY_LOCATE.getString().replace("%player%", player.getName()));
@@ -538,19 +536,6 @@ public class Game {
                         .replace("%amount%", entry.getValue().toString()));
             }
         }
-    }
-
-    private static void setLocateScore() {
-        if (Setting.getBlockAmount() <= 20)
-            locateCost = 2;
-        else if (Setting.getBlockAmount() <= 50)
-            locateCost = 3;
-        else if (Setting.getBlockAmount() <= 100)
-            locateCost = 5;
-        else if (Setting.getBlockAmount() <= 200)
-            locateCost = 8;
-        else
-            locateCost = 10;
     }
 
     private static void checkRedInventory() {

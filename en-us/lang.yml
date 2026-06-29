@@ -123,7 +123,7 @@ menu:
     waypoints-lore: "&bSave or teleport to waypoints"
     random-tp: "&9Random Teleport"
     random-tp-lore:
-      - "&bSpend 2 points to &lrandomly teleport&r&b"
+      - "&bSpend %random_tp_score% points to &lrandomly teleport&r&b"
       - "&bin the &lOverworld&r&b, first time is free"
   team-chest-select-menu:
     title: "&0Team Chest Selection"
@@ -148,6 +148,11 @@ menu:
     title: "&0Target List %page%/%total_page%"
     item-lore:
       - "&7Target index: &f%index%"
+      - "&7Target score: &e%score%"
+    progress-line: "&7My progress: &f%current%/%required%"
+    progress-done-line: "&aCompleted: &f%items%"
+    progress-missing-line: "&cMissing: &f%items%"
+    progress-more-line: "&7and %amount% more"
     previous: "&ePrevious Page"
     next: "&eNext Page"
     page: "&aPage %page%/%total_page% &7| &f%amount% &7available tasks"
@@ -177,7 +182,7 @@ notice:
   spawn-protect-notice: "&bNote: If you can't place or break blocks near spawn, it's due to spawn protection. Move away from spawn!"
   exist-error-block: "&4Item named %s does not exist! Check the configuration file!"
   not-enough-score: "&cInsufficient points!"
-  random-tp: "&aPlayer %player% used random teleport! Team points -2"
+  random-tp: "&aPlayer %player% used random teleport! Team points -%score%"
   red-collect: "&cRed Team&a collected &b%block% &a(from &c%player%&a)"
   blue-collect: "&9Blue Team&a collected &b%block% &a(from &9%player%&a)"
   team-chest-full: "%team%&c team chest is full! %block% cannot be placed in the team chest!"

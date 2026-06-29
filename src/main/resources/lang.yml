@@ -120,7 +120,7 @@ menu:
     waypoints-lore: "&b保存或传送至记录点"
     random-tp: "&9随机传送"
     random-tp-lore:
-      - "&b花费2积分在&l主世界&r&b随机传送，首次免费"
+      - "&b花费%random_tp_score%积分在&l主世界&r&b随机传送，首次免费"
   team-chest-select-menu:
     title: "&0队伍箱子选择"
     chest: "&b队伍箱子"
@@ -144,6 +144,7 @@ menu:
     title: "&0目标列表 %page%/%total_page%"
     item-lore:
       - "&7目标序号：&f%index%"
+      - "&7目标分数：&e%score%"
     progress-line: "&7我的进度：&f%current%/%required%"
     progress-done-line: "&a已完成：&f%items%"
     progress-missing-line: "&c还缺少：&f%items%"
@@ -177,7 +178,7 @@ notice:
   spawn-protect-notice: "&b提示：如果出生点附近无法放置或破坏方块，是因为服务器带有出生点保护，离开出生点附近即可！"
   exist-error-block: "&4名为 %s 的物品不存在！请检查配置文件！"
   not-enough-score: "&c积分不足！"
-  random-tp: "&a玩家%player%&a使用了随机传送！队伍积分-2"
+  random-tp: "&a玩家%player%&a使用了随机传送！队伍积分-%score%"
   red-collect: "&c红队&a收集了 &b%block% &a(来自&c%player%&a)"
   blue-collect: "&9蓝队&a收集了 &b%block% &a(来自&9%player%&a)"
   team-chest-full: "%team%&c队伍箱子已满！%block%无法放入队伍箱子！"

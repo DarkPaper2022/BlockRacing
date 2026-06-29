@@ -9,6 +9,8 @@ public class Setting {
     public static final int MAX_AVAILABLE_TASK_AMOUNT = 128;
     public static final int MIN_EASY_TARGETS_PER_GAME = 0;
     public static final int MAX_EASY_TARGETS_PER_GAME = 128;
+    public static final int MIN_COST = 0;
+    public static final int MAX_COST = 128;
 
     @Getter
     private static boolean enableMediumBlock;
@@ -20,6 +22,10 @@ public class Setting {
     private static int maxEasyTargetsPerGame;
     @Getter
     private static int availableTaskAmount;
+    @Getter
+    private static int locateCost;
+    @Getter
+    private static int randomTeleportCost;
     @Getter
     private static int maxTeamChestNum;
     @Getter
@@ -37,6 +43,8 @@ public class Setting {
         blockAmount = clamp(Config.BLOCK_AMOUNT.getInt(), 10, MAX_BLOCK_AMOUNT_LIMIT);
         maxEasyTargetsPerGame = clamp(Config.MAX_EASY_TARGETS_PER_GAME.getInt(), MIN_EASY_TARGETS_PER_GAME, MAX_EASY_TARGETS_PER_GAME);
         availableTaskAmount = clamp(Config.AVAILABLE_TASK_AMOUNT.getInt(), MIN_AVAILABLE_TASK_AMOUNT, MAX_AVAILABLE_TASK_AMOUNT);
+        locateCost = clamp(Config.LOCATE_COST.getInt(), MIN_COST, MAX_COST);
+        randomTeleportCost = clamp(Config.RANDOM_TELEPORT_COST.getInt(), MIN_COST, MAX_COST);
         speedMode = Config.SPEED_MODE.getBoolean();
         maxTeamChestNum = Config.MAX_TEAM_CHEST_NUM.getInt();
         maxTeamWaypointNum = Config.MAX_TEAM_WAYPOINT_NUM.getInt();
@@ -66,6 +74,16 @@ public class Setting {
     public static void setAvailableTaskAmount(int availableTaskAmount) {
         Setting.availableTaskAmount = clamp(availableTaskAmount, MIN_AVAILABLE_TASK_AMOUNT, MAX_AVAILABLE_TASK_AMOUNT);
         Config.AVAILABLE_TASK_AMOUNT.setInt(Setting.availableTaskAmount);
+    }
+
+    public static void setLocateCost(int locateCost) {
+        Setting.locateCost = clamp(locateCost, MIN_COST, MAX_COST);
+        Config.LOCATE_COST.setInt(Setting.locateCost);
+    }
+
+    public static void setRandomTeleportCost(int randomTeleportCost) {
+        Setting.randomTeleportCost = clamp(randomTeleportCost, MIN_COST, MAX_COST);
+        Config.RANDOM_TELEPORT_COST.setInt(Setting.randomTeleportCost);
     }
 
     public static void setMaxTeamChestNum(int chestNum) {

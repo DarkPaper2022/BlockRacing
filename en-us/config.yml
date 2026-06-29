@@ -13,10 +13,19 @@ hard-block: true
 # Number of targets sampled from the full target pool per game
 block-amount: 64
 
+# Maximum number of 1-point targets sampled per game
+max-easy-targets-per-game: 8
+
 # Number of leading tasks that are available/visible at the same time
 # default: 64
 # max: 128
 available-task-amount: 64
+
+# Spendable points required to buy one locate command permission
+locate-cost: 5
+
+# Spendable points required for random teleport, first random teleport remains free
+random-teleport-cost: 2
 
 # Game mode:
 # normal - Normal Mode: Both teams need to collect random blocks in random order, and collecting blocks will give a set of those blocks to the opposing team's chest
