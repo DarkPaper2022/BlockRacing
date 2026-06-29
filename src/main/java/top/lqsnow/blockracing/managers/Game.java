@@ -162,7 +162,7 @@ public class Game {
             readyPlayers.add(player.getName());
             sendAll(Message.NOTICE_READY.getString().replace("%player%", player.getName()));
             // Check if the game can start, just notice players
-            if (readyPlayers.size() > 1 && readyPlayers.size() == Bukkit.getOnlinePlayers().size()) {
+            if (readyPlayers.size() == Bukkit.getOnlinePlayers().size()) {
                 sendAll(Message.NOTICE_ALL_READY.getString());
             }
         } else {
@@ -178,12 +178,6 @@ public class Game {
         // Game already start
         if (getCurrentGameState().equals(GameState.INGAME))
             return;
-
-        // Not enough players
-        if (!(Bukkit.getOnlinePlayers().size() > 1)) {
-            player.sendMessage(Message.NOTICE_NOT_ENOUGH_PLAYERS.getString());
-            return;
-        }
 
         // Exist unready players
         if (!(readyPlayers.size() == Bukkit.getOnlinePlayers().size())) {
