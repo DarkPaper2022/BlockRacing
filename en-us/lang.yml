@@ -148,7 +148,7 @@ menu:
     title: "&0Target List %page%/%total_page%"
     item-lore:
       - "&7Target index: &f%index%"
-      - "&7Target score: &e%score%"
+      - "&7Score/reward: &e%score%"
     progress-line: "&7My progress: &f%current%/%required%"
     progress-done-line: "&aCompleted: &f%items%"
     progress-missing-line: "&cMissing: &f%items%"

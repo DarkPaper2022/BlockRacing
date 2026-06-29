@@ -144,7 +144,7 @@ menu:
     title: "&0目标列表 %page%/%total_page%"
     item-lore:
       - "&7目标序号：&f%index%"
-      - "&7目标分数：&e%score%"
+      - "&7目标分数/奖励：&e%score%"
     progress-line: "&7我的进度：&f%current%/%required%"
     progress-done-line: "&a已完成：&f%items%"
     progress-missing-line: "&c还缺少：&f%items%"

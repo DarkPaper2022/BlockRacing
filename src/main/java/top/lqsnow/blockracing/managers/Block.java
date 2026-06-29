@@ -25,6 +25,8 @@ public class Block {
     private static final int NORMAL_SCORE = 2;
     private static final int MIN_HARD_SCORE = 3;
     private static final int MAX_HARD_SCORE = 10;
+    private static final int MIN_BONUS_SCORE = 11;
+    private static final int BONUS_TARGET_AMOUNT = 3;
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
     private static final double MINIMUM_SELECTION_WEIGHT = 0.01D;
     private static final String STRIPPED_PREFIX = "STRIPPED_";
@@ -56,6 +58,8 @@ public class Block {
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
     public static List<String> blueTeamBlocks = new ArrayList<>();
+    public static List<String> redTeamBonusBlocks = new ArrayList<>();
+    public static List<String> blueTeamBonusBlocks = new ArrayList<>();
     public static List<String> redTeamRemainingBlocks = new ArrayList<>();
     public static List<String> blueTeamRemainingBlocks = new ArrayList<>();
 
@@ -69,7 +73,7 @@ public class Block {
         for (String target : targetScores.keySet()) {
             int score = getTargetScore(target);
             if (score == EASY_SCORE || (score == NORMAL_SCORE && Setting.isEnableMediumBlock())
-                    || (score >= MIN_HARD_SCORE && Setting.isEnableHardBlock())) {
+                    || (score >= MIN_HARD_SCORE && score <= MAX_HARD_SCORE && Setting.isEnableHardBlock())) {
                 allBlocks.add(target);
             }
         }
@@ -82,13 +86,20 @@ public class Block {
         blueTeamRemainingBlocks.clear();
 
         List<String> sharedBlocks = generateBlocks();
-        redTeamBlocks = List.copyOf(sharedBlocks);
-        blueTeamBlocks = List.copyOf(sharedBlocks);
+        List<String> sharedBonusBlocks = generateBonusBlocks();
+        List<String> sharedTargets = new ArrayList<>(sharedBlocks);
+        sharedTargets.addAll(sharedBonusBlocks);
+
+        redTeamBlocks = List.copyOf(sharedTargets);
+        blueTeamBlocks = List.copyOf(sharedTargets);
+        redTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
+        blueTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
         redTeamRemainingBlocks.addAll(List.copyOf(redTeamBlocks));
         blueTeamRemainingBlocks.addAll(List.copyOf(blueTeamBlocks));
         Bukkit.getLogger().info("[BlockRacing] Blocks generate complete.");
         Bukkit.getLogger().info("Red team blocks: " + redTeamBlocks.toString());
         Bukkit.getLogger().info("Blue team blocks: " + blueTeamBlocks.toString());
+        Bukkit.getLogger().info("Bonus blocks: " + sharedBonusBlocks);
     }
 
     public static List<String> generateSampleBlocks(int blockAmount) {
@@ -130,6 +141,28 @@ public class Block {
                 + ", one-point=" + countTargetsByScore(targetBlocks, EASY_SCORE)
                 + ", total-score=" + getTotalScore(targetBlocks));
         return targetBlocks;
+    }
+
+    private static List<String> generateBonusBlocks() {
+        List<String> bonusTargets = new ArrayList<>();
+        for (String target : targetScores.keySet()) {
+            if (isBonusTarget(target)) {
+                bonusTargets.add(target);
+            }
+        }
+
+        List<String> selectedBonusTargets = new ArrayList<>();
+        int bonusTargetAmount = Math.min(BONUS_TARGET_AMOUNT, bonusTargets.size());
+        for (int i = 0; i < bonusTargetAmount; i++) {
+            String selectedBlock = bonusTargets.get(RANDOM.nextInt(bonusTargets.size()));
+            selectedBonusTargets.add(selectedBlock);
+            bonusTargets.remove(selectedBlock);
+        }
+
+        Collections.shuffle(selectedBonusTargets, RANDOM);
+        Bukkit.getLogger().info("[BlockRacing] Generated bonus targets: amount=" + selectedBonusTargets.size()
+                + ", reward=" + getTotalScore(selectedBonusTargets));
+        return selectedBonusTargets;
     }
 
     private static void addSelectedTarget(List<String> targetBlocks, List<String> targetPool, Set<String> suppressedRelatedTags) {
@@ -235,7 +268,7 @@ public class Block {
     // Check if there are any problems with the blocks imported from the file
     public static boolean checkBlock() {
         boolean flag = true;
-        for (String str : blocks) {
+        for (String str : targetScores.keySet()) {
             if (Goal.isKnownGoalId(str)) {
                 if (!Goal.isValid(str)) {
                     Bukkit.getLogger().severe("[BlockRacing] Invalid Draftout goal: " + str);
@@ -297,7 +330,7 @@ public class Block {
                 continue;
             }
 
-            if (score < EASY_SCORE || score > MAX_HARD_SCORE) {
+            if (score < EASY_SCORE) {
                 Bukkit.getLogger().warning("[BlockRacing] Target score out of range: " + score + " in " + row);
                 continue;
             }
@@ -334,6 +367,20 @@ public class Block {
             totalScore += getTargetScore(target);
         }
         return totalScore;
+    }
+
+    public static int getMainTotalScore(List<String> targets) {
+        int totalScore = 0;
+        for (String target : targets) {
+            if (!isBonusTarget(target)) {
+                totalScore += getTargetScore(target);
+            }
+        }
+        return totalScore;
+    }
+
+    public static boolean isBonusTarget(String target) {
+        return getTargetScore(target) >= MIN_BONUS_SCORE;
     }
 
     private static int countTargetsByScore(List<String> targets, int score) {

@@ -38,9 +38,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import top.lqsnow.blockracing.Main;
 import static top.lqsnow.blockracing.listeners.BasicListener.editAmountPlayer;
 import static top.lqsnow.blockracing.managers.Block.blueTeamBlocks;
+import static top.lqsnow.blockracing.managers.Block.blueTeamBonusBlocks;
 import static top.lqsnow.blockracing.managers.Block.blueTeamRemainingBlocks;
 import static top.lqsnow.blockracing.managers.Block.checkBlock;
 import static top.lqsnow.blockracing.managers.Block.redTeamBlocks;
+import static top.lqsnow.blockracing.managers.Block.redTeamBonusBlocks;
 import static top.lqsnow.blockracing.managers.Block.redTeamRemainingBlocks;
 import static top.lqsnow.blockracing.managers.Block.setupBlocks;
 import static top.lqsnow.blockracing.managers.Gui.closeAllPlayersMenu;
@@ -219,8 +221,8 @@ public class Game {
         blueTeamTotalBlockAmount = blueTeamBlocks.size();
         redTeamProgressScore = 0;
         blueTeamProgressScore = 0;
-        redTeamTotalScore = Block.getTotalScore(redTeamBlocks);
-        blueTeamTotalScore = Block.getTotalScore(blueTeamBlocks);
+        redTeamTotalScore = Block.getMainTotalScore(redTeamBlocks);
+        blueTeamTotalScore = Block.getMainTotalScore(blueTeamBlocks);
         redTeamWinScore = getWinScore(redTeamTotalScore);
         blueTeamWinScore = getWinScore(blueTeamTotalScore);
         updateScoreboard();
@@ -608,21 +610,25 @@ public class Game {
         if (skipMutualTask(blueTeamRemainingBlocks, block)) {
             blueTeamTotalBlockAmount -= 1;
         }
-        redTeamProgressScore += Block.getTargetScore(block);
-        if (Setting.isSpeedMode())
-            redTeamScore += 3;
-        else
-            redTeamScore += 1;
+        if (Block.isBonusTarget(block)) {
+            redTeamScore += Block.getTargetScore(block);
+        } else {
+            redTeamProgressScore += Block.getTargetScore(block);
+            if (Setting.isSpeedMode())
+                redTeamScore += 3;
+            else
+                redTeamScore += 1;
+        }
         redTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
-        if (redTeamProgressScore >= redTeamWinScore) {
+        if (!Block.isBonusTarget(block) && redTeamProgressScore >= redTeamWinScore) {
             redWin();
             showRanking();
             return;
         }
         // Put items into the opponent's team chest
-        if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
+        if (!Block.isBonusTarget(block) && !Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = blueTeamChest.size() - 1; i >= 0; i--) {
                 Inventory chest = blueTeamChest.get(i);
                 int emptyPos = chest.firstEmpty();
@@ -647,21 +653,25 @@ public class Game {
         if (skipMutualTask(redTeamRemainingBlocks, block)) {
             redTeamTotalBlockAmount -= 1;
         }
-        blueTeamProgressScore += Block.getTargetScore(block);
-        if (Setting.isSpeedMode())
-            blueTeamScore += 3;
-        else
-            blueTeamScore += 1;
+        if (Block.isBonusTarget(block)) {
+            blueTeamScore += Block.getTargetScore(block);
+        } else {
+            blueTeamProgressScore += Block.getTargetScore(block);
+            if (Setting.isSpeedMode())
+                blueTeamScore += 3;
+            else
+                blueTeamScore += 1;
+        }
         blueTeamCurrentBlockAmount += 1;
         collect(player);
         updateScoreboard();
-        if (blueTeamProgressScore >= blueTeamWinScore) {
+        if (!Block.isBonusTarget(block) && blueTeamProgressScore >= blueTeamWinScore) {
             blueWin();
             showRanking();
             return;
         }
         // Put items into the opponent's team chest
-        if (!Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
+        if (!Block.isBonusTarget(block) && !Goal.isGoal(block) && Setting.getCurrentGameMode().equals(Setting.GameMode.NORMAL)) {
             for (int i = redTeamChest.size() - 1; i >= 0; i--) {
                 Inventory chest = redTeamChest.get(i);
                 int emptyPos = chest.firstEmpty();
@@ -701,10 +711,30 @@ public class Game {
     public static List<String> getCurrentBlocks(String team) {
         int availableTaskAmount = Math.max(1, Setting.getAvailableTaskAmount());
         return switch (team) {
-            case "red" -> redTeamRemainingBlocks.subList(0, Math.min(redTeamRemainingBlocks.size(), availableTaskAmount));
-            case "blue" -> blueTeamRemainingBlocks.subList(0, Math.min(blueTeamRemainingBlocks.size(), availableTaskAmount));
+            case "red" -> getAvailableTargets(redTeamRemainingBlocks, redTeamBonusBlocks, availableTaskAmount);
+            case "blue" -> getAvailableTargets(blueTeamRemainingBlocks, blueTeamBonusBlocks, availableTaskAmount);
             default -> throw new IllegalStateException("Unexpected value: " + team);
         };
+    }
+
+    private static List<String> getAvailableTargets(List<String> remainingTargets, List<String> bonusTargets, int availableTaskAmount) {
+        List<String> availableTargets = new ArrayList<>();
+        for (String target : remainingTargets) {
+            if (Block.isBonusTarget(target)) {
+                continue;
+            }
+            availableTargets.add(target);
+            if (availableTargets.size() >= availableTaskAmount) {
+                break;
+            }
+        }
+
+        for (String target : bonusTargets) {
+            if (remainingTargets.contains(target)) {
+                availableTargets.add(target);
+            }
+        }
+        return availableTargets;
     }
 
     public static String getTargetDisplayName(String target) {
