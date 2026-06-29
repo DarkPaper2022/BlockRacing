@@ -44,7 +44,13 @@ public enum Config {
             file = new File(Main.getInstance().getDataFolder(), "config.yml");
         }
         config = YamlConfiguration.loadConfiguration(file);
-        try (Reader reader = new InputStreamReader(Main.getInstance().getResource("config.yml"), StandardCharsets.UTF_8)) {
+        InputStream resource = Main.getInstance().getResource("config.yml");
+        if (resource == null) {
+            Main.getInstance().getLogger().warning("[BlockRacing] Embedded config.yml is missing; using file values only.");
+            return;
+        }
+
+        try (Reader reader = new InputStreamReader(resource, StandardCharsets.UTF_8)) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(reader);
             config.setDefaults(defConfig);
         } catch (IOException ioe) {

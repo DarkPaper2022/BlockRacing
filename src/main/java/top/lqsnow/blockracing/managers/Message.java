@@ -7,6 +7,7 @@ import top.lqsnow.blockracing.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -210,7 +211,13 @@ public enum Message {
     private static FileConfiguration getMessageConfig() {
         FileConfiguration messageConfig = YamlConfiguration.loadConfiguration(new File(Main.getInstance().getDataFolder(), "lang.yml"));
 
-        try (Reader reader = new InputStreamReader(Main.getInstance().getResource("lang.yml"), StandardCharsets.UTF_8)) {
+        InputStream resource = Main.getInstance().getResource("lang.yml");
+        if (resource == null) {
+            Main.getInstance().getLogger().warning("[BlockRacing] Embedded lang.yml is missing; using file values only.");
+            return messageConfig;
+        }
+
+        try (Reader reader = new InputStreamReader(resource, StandardCharsets.UTF_8)) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(reader);
             messageConfig.setDefaults(defConfig);
         } catch (IOException e) {
@@ -221,7 +228,17 @@ public enum Message {
     }
 
     public String getString() {
-        return cacheString != null ? cacheString : (cacheString = ChatColor.translateAlternateColorCodes('&', getMessageConfig().getString(path)));
+        if (cacheString != null) {
+            return cacheString;
+        }
+
+        String value = getMessageConfig().getString(path);
+        if (value == null) {
+            Main.getInstance().getLogger().warning("[BlockRacing] Missing lang.yml key: " + path);
+            value = path;
+        }
+        cacheString = ChatColor.translateAlternateColorCodes('&', value);
+        return cacheString;
     }
 
     public List<String> getStringList() {
