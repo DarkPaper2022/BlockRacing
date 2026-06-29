@@ -8,11 +8,10 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Team;
 
 import static top.lqsnow.blockracing.managers.Game.*;
-import static top.lqsnow.blockracing.managers.Block.*;
-
-
 public class Scoreboard {
-    private static final int SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM = 4;
+    private static final int RED_TARGET_START_SLOT = 11;
+    private static final int BLUE_TARGET_START_SLOT = 5;
+    private static final int LEGACY_TARGET_SLOTS_PER_TEAM = 4;
 
     public static org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
     public static Objective sidebar;
@@ -62,19 +61,10 @@ public class Scoreboard {
                 .replace("%score%", String.valueOf(redTeamScore))
                 .replace("%progress_score%", String.valueOf(redTeamProgressScore))
                 .replace("%win_score%", String.valueOf(redTeamWinScore))
+                .replace("%total_score%", String.valueOf(redTeamTotalScore))
                 .replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount))
                 .replace("%total_block%", String.valueOf(redTeamTotalBlockAmount)));
-        // Clean red team blocks display
-        int redDisplayAmount = Math.min(getCurrentBlocks("red").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
-        for (int i = redDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
-            int slotIndex = 11 - i;
-            setSlot(slotIndex, "");
-        }
-        // Set red team blocks display
-        for (int i = 0; i < redDisplayAmount; i++) {
-            int slotIndex = 11 - i;
-            setSlot(slotIndex, getBlockDisplay(redTeamRemainingBlocks.get(i)));
-        }
+        clearLegacyTargetSlots(RED_TARGET_START_SLOT);
         // Set dividing line
         setSlot(7, Message.SCOREBOARD_DIVIDING_LINE.getString());
         // Set blue team score display
@@ -82,27 +72,18 @@ public class Scoreboard {
                 .replace("%score%", String.valueOf(blueTeamScore))
                 .replace("%progress_score%", String.valueOf(blueTeamProgressScore))
                 .replace("%win_score%", String.valueOf(blueTeamWinScore))
+                .replace("%total_score%", String.valueOf(blueTeamTotalScore))
                 .replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount))
                 .replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount)));
-        // Clean blue team blocks display
-        int blueDisplayAmount = Math.min(getCurrentBlocks("blue").size(), SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM);
-        for (int i = blueDisplayAmount; i < SCOREBOARD_VISIBLE_BLOCKS_PER_TEAM; i++) {
-            int slotIndex = 5 - i;
-            setSlot(slotIndex, "");
-        }
-        // Set blue team blocks display
-        for (int i = 0; i < blueDisplayAmount; i++) {
-            int slotIndex = 5 - i;
-            setSlot(slotIndex, getBlockDisplay(blueTeamRemainingBlocks.get(i)));
-        }
+        clearLegacyTargetSlots(BLUE_TARGET_START_SLOT);
         // Set bottom display
         setSlot(1, Message.SCOREBOARD_BOTTOM_SLOT.getString());
     }
 
-    public static String getBlockDisplay(String block) {
-        return Message.SCOREBOARD_BLOCK_FORMAT.getString()
-                .replace("%score%", String.valueOf(Block.getTargetScore(block)))
-                .replace("%block%", Game.getTargetDisplayName(block));
+    private static void clearLegacyTargetSlots(int startSlot) {
+        for (int i = 0; i < LEGACY_TARGET_SLOTS_PER_TEAM; i++) {
+            setSlot(startSlot - i, "");
+        }
     }
 
     public static void showScoreboard(Player player) {

@@ -39,8 +39,8 @@ scoreboard:
     slot1: "&e&lEnjoy the game!"
   ingame:
     title: "&b&l方块竞速"
-    red-score: "&c红队：&e%progress_score%/%win_score%进度 &6%score%可用"
-    blue-score: "&9蓝队：&e%progress_score%/%win_score%进度 &6%score%可用"
+    red-score: "&c红队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%"
+    blue-score: "&9蓝队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%"
     block-format: "&e%score%分 &7| &f%block%"
     dividing-line: "----------------"
     bottom-slot: "&e&lEnjoy the game!"

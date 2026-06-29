@@ -35,8 +35,8 @@ scoreboard:
     slot1: "&e&lEnjoy the game!"
   ingame:
     title: "&b&lBlock Racing"
-    red-score: "&cRed: &e%progress_score%/%win_score% prog &6%score% spend"
-    blue-score: "&9Blue: &e%progress_score%/%win_score% prog &6%score% spend"
+    red-score: "&cRed &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%"
+    blue-score: "&9Blue &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%"
     block-format: "&e%score% pts &7| &f%block%"
     dividing-line: "----------------"
     bottom-slot: "&e&lEnjoy the game!"
