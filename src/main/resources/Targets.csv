@@ -404,35 +404,12 @@ TWISTING_VINES,block,1,,,缠怨藤
 WARPED_PLANKS,block,2,,,诡异木板
 CRAFTER,block,1,,,合成器
 EXPOSED_COPPER_BULB,block,1,,,斑驳的铜灯
-EXPOSED_COPPER_TRAPDOOR,block,2,,,斑驳的铜活板门
-EXPOSED_CUT_COPPER,block,2,,,斑驳的切制铜块
-EXPOSED_CUT_COPPER_SLAB,block,2,,,斑驳的切制铜台阶
-EXPOSED_CUT_COPPER_STAIRS,block,2,,,斑驳的切制铜楼梯
-WAXED_CHISELED_COPPER,block,2,,,涂蜡的雕纹铜块
-WAXED_COPPER_BLOCK,block,2,,,涂蜡的铜块
-WAXED_COPPER_BULB,block,2,,,涂蜡的铜灯
-WAXED_COPPER_DOOR,block,2,,,涂蜡的铜门
-WAXED_COPPER_GRATE,block,2,,,涂蜡的铜格栅
-WAXED_COPPER_TRAPDOOR,block,2,,,涂蜡的铜活板门
-WAXED_CUT_COPPER,block,2,,,涂蜡的切制铜块
-WAXED_CUT_COPPER_SLAB,block,2,,,涂蜡的切制铜台阶
-WAXED_CUT_COPPER_STAIRS,block,2,,,涂蜡的切制铜楼梯
 CLOSED_EYEBLOSSOM,block,2,,,闭合的眼眸花
 PALE_OAK_PLANKS,block,2,,,苍白橡木木板
 SHORT_DRY_GRASS,block,1,,,矮枯草丛
 TALL_DRY_GRASS,block,1,,,高枯草丛
 CACTUS_FLOWER,block,1,,,仙人掌花
 EXPOSED_COPPER_CHEST,block,2,,,斑驳的铜箱子
-WAXED_COPPER_CHEST,block,2,,,涂蜡的铜箱子
-EXPOSED_COPPER_BARS,block,2,,,斑驳的铜栏杆
-WAXED_COPPER_BARS,block,2,,,涂蜡的铜栏杆
-EXPOSED_COPPER_CHAIN,block,2,,,斑驳的铜链
-WAXED_COPPER_CHAIN,block,2,,,涂蜡的铜链
-EXPOSED_COPPER_LANTERN,block,2,,,斑驳的铜灯笼
-WAXED_COPPER_LANTERN,block,2,,,涂蜡的铜灯笼
-EXPOSED_LIGHTNING_ROD,block,2,,,斑驳的避雷针
-WAXED_LIGHTNING_ROD,block,2,,,涂蜡的避雷针
-EXPOSED_COPPER_GOLEM_STATUE,block,2,,,斑驳的铜傀儡像
 WAXED_COPPER_GOLEM_STATUE,block,2,,,涂蜡的铜傀儡像
 CANDLE,block,1,,,蜡烛
 BREEZE_ROD,block,2,,,旋风棒
@@ -488,20 +465,12 @@ TURTLE_EGG,block,2,,,海龟蛋
 WET_SPONGE,block,2,,,湿海绵
 WAXED_EXPOSED_CHISELED_COPPER,block,1,,,涂蜡的斑驳雕纹铜块
 WAXED_EXPOSED_COPPER,block,1,,,涂蜡的斑驳铜块
-WAXED_EXPOSED_COPPER_BULB,block,1,,,涂蜡的斑驳铜灯
-WAXED_EXPOSED_COPPER_DOOR,block,1,,,涂蜡的斑驳铜门
-WAXED_EXPOSED_COPPER_GRATE,block,1,,,涂蜡的斑驳铜格栅
-WAXED_EXPOSED_COPPER_TRAPDOOR,block,1,,,涂蜡的斑驳铜活板门
-WAXED_EXPOSED_CUT_COPPER,block,1,,,涂蜡的斑驳切制铜块
-WAXED_EXPOSED_CUT_COPPER_SLAB,block,1,,,涂蜡的斑驳切制铜台阶
+WAXED_EXPOSED_COPPER_TRAPDOOR,block,2,,,涂蜡的斑驳铜活板门
 WAXED_EXPOSED_CUT_COPPER_STAIRS,block,1,,,涂蜡的斑驳切制铜楼梯
 CREAKING_HEART,block,2,,,嘎枝之心
 RESIN_BLOCK,block,2,,,树脂块
 DRIED_GHAST,block,2,,,失水恶魂
 WAXED_EXPOSED_COPPER_CHEST,block,1,,,涂蜡的斑驳铜箱子
-WAXED_EXPOSED_COPPER_BARS,block,2,,,涂蜡的斑驳铜栏杆
-WAXED_EXPOSED_COPPER_CHAIN,block,2,,,涂蜡的斑驳铜链
-WAXED_EXPOSED_COPPER_LANTERN,block,2,,,涂蜡的斑驳铜灯笼
 WAXED_EXPOSED_LIGHTNING_ROD,block,2,,,涂蜡的斑驳避雷针
 WAXED_EXPOSED_COPPER_GOLEM_STATUE,block,1,,,涂蜡的斑驳铜傀儡像
 LAPIS_ORE,block,1,,,青金石矿石
@@ -544,7 +513,6 @@ OBTAIN_COPPER_TOOLS,goal,1,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PIC
 MINE_DIAMOND_ORE,goal,1,Mine Diamond Ore,break:DIAMOND_ORE,挖掘钻石矿石
 MINE_EMERALD_ORE,goal,2,Mine Emerald Ore,break:EMERALD_ORE,挖掘绿宝石矿石
 MINE_MOB_SPAWNER,goal,1,Mine a Spawner,break:SPAWNER,挖掘刷怪笼
-MINE_TURTLE_EGG,goal,2,Mine Turtle Egg,break:TURTLE_EGG,挖掘海龟蛋
 MINE_CRAFTER,goal,1,Mine Crafter,break:CRAFTER,挖掘合成器
 WEAR_LEATHER_ARMOR,goal,2,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS",穿上全套皮革盔甲
 WEAR_GOLDEN_ARMOR,goal,1,Wear Full Golden Armor,"equipment-all:GOLDEN_HELMET,GOLDEN_CHESTPLATE,GOLDEN_LEGGINGS,GOLDEN_BOOTS",穿上全套金质盔甲
@@ -739,8 +707,8 @@ WAXED_WEATHERED_CHISELED_COPPER,block,1,,,涂蜡的锈蚀雕纹铜块
 WAXED_WEATHERED_COPPER,block,1,,,涂蜡的锈蚀铜块
 WAXED_WEATHERED_COPPER_BARS,block,1,,,涂蜡的锈蚀铜栏杆
 WAXED_WEATHERED_COPPER_BULB,block,1,,,涂蜡的锈蚀铜灯
-WAXED_WEATHERED_COPPER_CHAIN,block,1,,,涂蜡的锈蚀铜链
-WAXED_WEATHERED_COPPER_CHEST,block,1,,,涂蜡的锈蚀铜箱子
+WAXED_WEATHERED_COPPER_CHAIN,block,-1,,,涂蜡的锈蚀铜链
+WAXED_WEATHERED_COPPER_CHEST,block,-1,,,涂蜡的锈蚀铜箱子
 WAXED_WEATHERED_COPPER_DOOR,block,1,,,涂蜡的锈蚀铜门
 WAXED_WEATHERED_COPPER_GOLEM_STATUE,block,1,,,涂蜡的锈蚀铜傀儡像
 WAXED_WEATHERED_COPPER_GRATE,block,1,,,涂蜡的锈蚀铜格栅
