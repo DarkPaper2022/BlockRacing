@@ -24,7 +24,6 @@ public class Block {
     private static final int EASY_SCORE = 1;
     private static final int NORMAL_SCORE = 2;
     private static final int MIN_HARD_SCORE = 3;
-    private static final int MAX_HARD_SCORE = 10;
     private static final int MIN_BONUS_SCORE = 11;
     private static final int BONUS_TARGET_AMOUNT = 3;
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
@@ -73,7 +72,7 @@ public class Block {
         for (String target : targetScores.keySet()) {
             int score = getTargetScore(target);
             if (score == EASY_SCORE || (score == NORMAL_SCORE && Setting.isEnableMediumBlock())
-                    || (score >= MIN_HARD_SCORE && score <= MAX_HARD_SCORE && Setting.isEnableHardBlock())) {
+                    || (score >= MIN_HARD_SCORE && score < MIN_BONUS_SCORE && Setting.isEnableHardBlock())) {
                 allBlocks.add(target);
             }
         }
