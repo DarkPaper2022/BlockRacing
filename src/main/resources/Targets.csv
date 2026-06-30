@@ -598,7 +598,6 @@ OBTAIN_ALL_MUSHROOMS,goal,1,Obtain every type of Mushroom,"item:RED_MUSHROOM,BRO
 OBTAIN_ALL_PUMPKINS,goal,1,Obtain every type of Pumpkin,"item:PUMPKIN,CARVED_PUMPKIN,JACK_O_LANTERN",获得所有南瓜类物品
 OBTAIN_ALL_TORCHES,goal,1,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDSTONE_TORCH",获得所有火把类物品
 OBTAIN_ALL_RAW_ORE_BLOCKS,goal,2,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK",获得所有粗矿块
-OBTAIN_ALL_SOUPS,goal,2,Obtain every type of Soup,"item:MUSHROOM_STEW,RABBIT_STEW,BEETROOT_SOUP,SUSPICIOUS_STEW",获得所有汤类食物
 OBTAIN_64_ARROWS,goal,1,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
 OBTAIN_64_COARSE_DIRT,goal,1,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
 OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
