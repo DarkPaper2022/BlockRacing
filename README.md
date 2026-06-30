@@ -80,6 +80,8 @@
 
 # 目标方块库修改
 
+当前 Draftout 版本的目标库由 `Targets.csv` 管理。`type=block` 的条目中，物品/方块名以 Paper 的 `Material` 枚举名为准，例如 `SLIME_BLOCK`、`PHANTOM_MEMBRANE`。
+
 在服务器文件夹下的plugins\BlockRacing目录中，存在下面这几个文件：
 
 ```
