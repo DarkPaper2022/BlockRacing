@@ -48,6 +48,7 @@ public class Goal {
     private static final Map<String, Set<String>> CONSUMED_POTIONS = new HashMap<>();
     private static final Map<String, Set<Material>> CRAFTED_ITEMS = new HashMap<>();
     private static final Map<String, Set<Material>> USED_BLOCKS = new HashMap<>();
+    private static final Map<String, Set<Material>> MINED_BLOCKS = new HashMap<>();
     private static final Map<String, Double> DAMAGE_DEALT = new HashMap<>();
     private static final Map<String, Double> DAMAGE_TAKEN = new HashMap<>();
     private static final Map<String, Set<EntityDamageEvent.DamageCause>> DEATH_CAUSES = new HashMap<>();
@@ -177,6 +178,7 @@ public class Goal {
         CONSUMED_POTIONS.clear();
         CRAFTED_ITEMS.clear();
         USED_BLOCKS.clear();
+        MINED_BLOCKS.clear();
         DAMAGE_DEALT.clear();
         DAMAGE_TAKEN.clear();
         DEATH_CAUSES.clear();
@@ -222,6 +224,10 @@ public class Goal {
 
     public static void recordUseBlock(Player player, Material material) {
         USED_BLOCKS.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(material);
+    }
+
+    public static void recordBreak(Player player, Material material) {
+        MINED_BLOCKS.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(material);
     }
 
     public static void recordDamageDealt(Player player, double amount) {
@@ -524,6 +530,10 @@ public class Goal {
             return USED_BLOCKS.getOrDefault(player.getName(), Set.of()).contains(useBlockRequirement.material());
         }
 
+        if (requirement instanceof BreakRequirement breakRequirement) {
+            return MINED_BLOCKS.getOrDefault(player.getName(), Set.of()).contains(breakRequirement.material());
+        }
+
         if (requirement instanceof DamageRequirement damageRequirement) {
             Map<String, Double> damageMap = damageRequirement.kind().equals(DamageRequirement.Kind.DEALT) ? DAMAGE_DEALT : DAMAGE_TAKEN;
             return damageMap.getOrDefault(player.getName(), 0D) >= damageRequirement.amount();
@@ -655,6 +665,14 @@ public class Goal {
         if (requirement instanceof DamageRequirement damageRequirement) {
             Map<String, Double> damageMap = damageRequirement.kind().equals(DamageRequirement.Kind.DEALT) ? DAMAGE_DEALT : DAMAGE_TAKEN;
             return countProgress((int) Math.floor(damageMap.getOrDefault(playerName, 0D)), damageRequirement.amount());
+        }
+
+        if (requirement instanceof BreakRequirement breakRequirement) {
+            String itemName = displayMaterial(breakRequirement.material());
+            if (MINED_BLOCKS.getOrDefault(playerName, Set.of()).contains(breakRequirement.material())) {
+                return new Progress(1, 1, List.of(itemName), List.of());
+            }
+            return new Progress(0, 1, List.of(), List.of(itemName));
         }
 
         if (requirement instanceof FishTreasureRequirement) {
@@ -1030,6 +1048,11 @@ public class Goal {
             return material == null ? null : new UseBlockRequirement(material);
         }
 
+        if (rawRequirement.startsWith("break:")) {
+            Material material = Material.getMaterial(rawRequirement.substring("break:".length()).trim());
+            return material == null ? null : new BreakRequirement(material);
+        }
+
         if (rawRequirement.startsWith("damage-dealt:")) {
             return parsePositiveInt(rawRequirement.substring("damage-dealt:".length()))
                     .map(amount -> new DamageRequirement(DamageRequirement.Kind.DEALT, amount));
@@ -1283,7 +1306,7 @@ public class Goal {
     private record Progress(int current, int required, List<String> completed, List<String> missing) {
     }
 
-    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EnchantedItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, FishTreasureRequirement, SpyUniqueRequirement, WearContinuousRequirement, UseBlockRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement, DeathProjectileRequirement, VillagerMaxLevelRequirement {
+    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EnchantedItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, FishTreasureRequirement, SpyUniqueRequirement, WearContinuousRequirement, UseBlockRequirement, BreakRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement, DeathProjectileRequirement, VillagerMaxLevelRequirement {
     }
 
     private record ItemRequirement(List<ItemTarget> items) implements Requirement {
@@ -1376,6 +1399,9 @@ public class Goal {
     }
 
     private record UseBlockRequirement(Material material) implements Requirement {
+    }
+
+    private record BreakRequirement(Material material) implements Requirement {
     }
 
     private record DamageRequirement(Kind kind, int amount) implements Requirement {

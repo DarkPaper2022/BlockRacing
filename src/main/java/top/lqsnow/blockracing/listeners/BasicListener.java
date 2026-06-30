@@ -9,6 +9,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -205,6 +206,14 @@ public class BasicListener implements Listener {
         if (clickedBlock != null) {
             Goal.recordUseBlock(event.getPlayer(), clickedBlock.getType());
         }
+    }
+
+    @EventHandler
+    private void onBlockBreak(BlockBreakEvent event) {
+        if (!isInGame()) {
+            return;
+        }
+        Goal.recordBreak(event.getPlayer(), event.getBlock().getType());
     }
 
     @EventHandler
