@@ -627,24 +627,24 @@ EAT_RABBIT_STEW,goal,1,Eat Rabbit Stew,consume:RABBIT_STEW,喝下兔肉煲
 EAT_SUSPICIOUS_STEW,goal,1,Eat Suspicious Stew,consume:SUSPICIOUS_STEW,喝下谜之炖菜
 DRINK_HONEY_BOTTLE,goal,1,Drink Honey Bottle,consume:HONEY_BOTTLE,喝下蜂蜜瓶
 DRINK_WATER_BOTTLE,goal,1,Drink Water Bottle,consume-potion:WATER,喝下一瓶水
-ENTER_NETHER,goal,2,Enter Nether,advancement:story/enter_the_nether,勇往直下
-ENTER_END,goal,3,Enter The End,advancement:end/root,末地
-GET_EYE_SPY_ADVANCEMENT,goal,2,Find a Stronghold,advancement:story/follow_ender_eye,隔墙有眼
-GET_WHAT_A_DEAL_ADVANCEMENT,goal,1,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,成交！
-GET_OH_SHINY_ADVANCEMENT,goal,1,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,金光闪闪
-GET_SNIPER_DUEL_ADVANCEMENT,goal,2,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel,狙击手的对决
-GET_BULLSEYE_ADVANCEMENT,goal,2,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye,正中靶心
-GET_HIRED_HELP_ADVANCEMENT,goal,2,Construct an Iron Golem,advancement:adventure/summon_iron_golem,招募援兵
-GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,2,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,画船添足
-GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,2,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,锚没有九条命
-GET_A_COMPLETE_CATALOGUE_ADVANCEMENT,goal,20,"Obtain ""A Complete Catalogue"" Advancement",advancement:husbandry/complete_catalogue,百猫全书
-GET_THE_WHOLE_PACKAGE_ADVANCEMENT,goal,30,"Obtain ""The Whole Package"" Advancement",advancement:husbandry/whole_pack,获得「全套狼群」进度
-GET_WITH_OUR_POWERS_COMBINED_ADVANCEMENT,goal,20,"Obtain ""With Our Powers Combined!"" Advancement",advancement:husbandry/froglights,相映生辉！
-GET_BEACONATOR_ADVANCEMENT,goal,30,"Obtain ""Beaconator"" Advancement",advancement:nether/create_full_beacon,信标工程师
-GET_FEELS_LIKE_HOME_ADVANCEMENT,goal,3,"Obtain ""Feels Like Home"" Advancement",advancement:nether/ride_strider_in_overworld_lava,温暖如家
-GET_COVER_ME_IN_DEBRIS_ADVANCEMENT,goal,10,"Obtain ""Cover Me in Debris"" Advancement",advancement:nether/netherite_armor,残骸裹身
-GET_ZOMBIE_DOCTOR_ADVANCEMENT,goal,3,"Obtain ""Zombie Doctor"" Advancement",advancement:story/cure_zombie_villager,僵尸科医生
-GET_STAR_TRADER_ADVANCEMENT,goal,3,"Obtain ""Star Trader"" Advancement",advancement:adventure/trade_at_world_height,星际商人
+ENTER_NETHER,goal,2,Enter Nether,advancement:story/enter_the_nether,获得勇往直下进度
+ENTER_END,goal,3,Enter The End,advancement:end/root,获得末地进度
+GET_EYE_SPY_ADVANCEMENT,goal,2,Find a Stronghold,advancement:story/follow_ender_eye,获得隔墙有眼进度
+GET_WHAT_A_DEAL_ADVANCEMENT,goal,1,"Obtain ""What a Deal!"" Advancement",advancement:adventure/trade,获得成交！进度
+GET_OH_SHINY_ADVANCEMENT,goal,1,"Obtain ""Oh Shiny"" Advancement",advancement:nether/distract_piglin,获得金光闪闪进度
+GET_SNIPER_DUEL_ADVANCEMENT,goal,2,"Obtain ""Sniper Duel"" Advancement",advancement:adventure/sniper_duel,获得狙击手的对决进度
+GET_BULLSEYE_ADVANCEMENT,goal,2,"Obtain ""Bullseye"" Advancement",advancement:adventure/bullseye,获得正中靶心进度
+GET_HIRED_HELP_ADVANCEMENT,goal,2,Construct an Iron Golem,advancement:adventure/summon_iron_golem,获得招募援兵进度
+GET_THIS_BOAT_HAS_LEGS_ADVANCEMENT,goal,2,"Obtain ""This Boat Has Legs"" Advancement",advancement:nether/ride_strider,获得画船添足进度
+GET_NOT_QUITE_NINE_LIVES_ADVANCEMENT,goal,2,"Obtain ""Not Quite Nine Lives"" Advancement",advancement:nether/charge_respawn_anchor,获得锚没有九条命进度
+GET_A_COMPLETE_CATALOGUE_ADVANCEMENT,goal,20,"Obtain ""A Complete Catalogue"" Advancement",advancement:husbandry/complete_catalogue,获得百猫全书进度
+GET_THE_WHOLE_PACKAGE_ADVANCEMENT,goal,30,"Obtain ""The Whole Package"" Advancement",advancement:husbandry/whole_pack,获得全套狼群进度
+GET_WITH_OUR_POWERS_COMBINED_ADVANCEMENT,goal,20,"Obtain ""With Our Powers Combined!"" Advancement",advancement:husbandry/froglights,获得相映生辉！进度
+GET_BEACONATOR_ADVANCEMENT,goal,30,"Obtain ""Beaconator"" Advancement",advancement:nether/create_full_beacon,获得信标工程师进度
+GET_FEELS_LIKE_HOME_ADVANCEMENT,goal,3,"Obtain ""Feels Like Home"" Advancement",advancement:nether/ride_strider_in_overworld_lava,获得温暖如家进度
+GET_COVER_ME_IN_DEBRIS_ADVANCEMENT,goal,10,"Obtain ""Cover Me in Debris"" Advancement",advancement:nether/netherite_armor,获得残骸裹身进度
+GET_ZOMBIE_DOCTOR_ADVANCEMENT,goal,3,"Obtain ""Zombie Doctor"" Advancement",advancement:story/cure_zombie_villager,获得僵尸科医生进度
+GET_STAR_TRADER_ADVANCEMENT,goal,3,"Obtain ""Star Trader"" Advancement",advancement:adventure/trade_at_world_height,获得星际商人进度
 GET_ABSORPTION_STATUS_EFFECT,goal,-1,Get Absorption,effect:absorption,获得伤害吸收
 GET_BAD_OMEN_STATUS_EFFECT,goal,-1,Get Bad Omen,effect:bad_omen,获得不祥之兆
 GET_GLOWING_STATUS_EFFECT,goal,2,Get Glowing,effect:glowing,获得发光
@@ -698,10 +698,10 @@ OBTAIN_EXCLUSIVE_TRIM,goal,3,"Obtain Wayfinder, Raiser, Shaper or Host Armor Tri
 OBTAIN_5_UNIQUE_DISCS,goal,3,Obtain 5 Unique Music Discs,"item-unique:5:MUSIC_DISC_13,MUSIC_DISC_CAT,MUSIC_DISC_BLOCKS,MUSIC_DISC_CHIRP,MUSIC_DISC_FAR,MUSIC_DISC_MALL,MUSIC_DISC_MELLOHI,MUSIC_DISC_STAL,MUSIC_DISC_STRAD,MUSIC_DISC_WARD,MUSIC_DISC_11,MUSIC_DISC_WAIT,MUSIC_DISC_OTHERSIDE,MUSIC_DISC_RELIC,MUSIC_DISC_5,MUSIC_DISC_PIGSTEP,MUSIC_DISC_CREATOR,MUSIC_DISC_CREATOR_MUSIC_BOX,MUSIC_DISC_PRECIPICE,MUSIC_DISC_LAVA_CHICKEN,MUSIC_DISC_TEARS",获得 5 个独特的唱片
 OBTAIN_8_UNIQUE_DISCS,goal,7,Obtain 8 Unique Music Discs,"item-unique:8:MUSIC_DISC_13,MUSIC_DISC_CAT,MUSIC_DISC_BLOCKS,MUSIC_DISC_CHIRP,MUSIC_DISC_FAR,MUSIC_DISC_MALL,MUSIC_DISC_MELLOHI,MUSIC_DISC_STAL,MUSIC_DISC_STRAD,MUSIC_DISC_WARD,MUSIC_DISC_11,MUSIC_DISC_WAIT,MUSIC_DISC_OTHERSIDE,MUSIC_DISC_RELIC,MUSIC_DISC_5,MUSIC_DISC_PIGSTEP,MUSIC_DISC_CREATOR,MUSIC_DISC_CREATOR_MUSIC_BOX,MUSIC_DISC_PRECIPICE,MUSIC_DISC_LAVA_CHICKEN,MUSIC_DISC_TEARS",获得 8 个独特的唱片
 OBTAIN_ANY_HORSE_ARMOR,goal,2,Obtain any Horse Armor,"item-unique:1:LEATHER_HORSE_ARMOR,COPPER_HORSE_ARMOR,IRON_HORSE_ARMOR,GOLDEN_HORSE_ARMOR,DIAMOND_HORSE_ARMOR,NETHERITE_HORSE_ARMOR",获得任一一种马铠
-GET_REVAULTING_ADVANCEMENT,goal,5,"Obtain ""Revaulting"" Advancement",advancement:adventure/revaulting,获得成就 Revaulting
-GET_HOT_TOURIST_DESTINATIONS,goal,2,"Obtain ""Hot Tourist Destinations"" Advancement",advancement:nether/explore_nether,热门景点
-GET_HERO_OF_THE_VILLAGE,goal,5,"Obtain ""Hero of the Village"" Advancement",advancement:adventure/hero_of_the_village,村庄英雄
-GET_SQUAD_HOPS_INTO_TOWN,goal,4,"Obtain ""When the Squad Hops into Town"" Advancement",advancement:husbandry/leash_all_frog_variants,呱呱队出动
+GET_REVAULTING_ADVANCEMENT,goal,5,"Obtain ""Revaulting"" Advancement",advancement:adventure/revaulting,获得Revaulting进度
+GET_HOT_TOURIST_DESTINATIONS,goal,2,"Obtain ""Hot Tourist Destinations"" Advancement",advancement:nether/explore_nether,获得热门景点进度
+GET_HERO_OF_THE_VILLAGE,goal,5,"Obtain ""Hero of the Village"" Advancement",advancement:adventure/hero_of_the_village,获得村庄英雄进度
+GET_SQUAD_HOPS_INTO_TOWN,goal,4,"Obtain ""When the Squad Hops into Town"" Advancement",advancement:husbandry/leash_all_frog_variants,获得呱呱队出动进度
 EXPOSED_CHISELED_COPPER,block,1,,,斑驳的雕纹铜块
 EXPOSED_COPPER,block,1,,,斑驳的铜块
 EXPOSED_COPPER_DOOR,block,1,,,斑驳的铜门
