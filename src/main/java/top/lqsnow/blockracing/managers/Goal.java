@@ -30,6 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import org.mineacademy.fo.remain.CompMaterial;
 import java.util.logging.Level;
 
 public class Goal {
@@ -317,9 +318,22 @@ public class Goal {
         }
 
         List<String> lore = new ArrayList<>();
+        int current = Math.min(progress.current(), progress.required());
+        int required = progress.required();
         lore.add(Message.MENU_TARGET_LIST_PROGRESS_LINE.getString()
-                .replace("%current%", String.valueOf(Math.min(progress.current(), progress.required())))
-                .replace("%required%", String.valueOf(progress.required())));
+                .replace("%current%", String.valueOf(current))
+                .replace("%required%", String.valueOf(required)));
+
+        if (required > 1 && required <= 30) {
+            StringBuilder bar = new StringBuilder("§7[");
+            int filledBars = (int) ((double) current / required * 10);
+            for (int i = 0; i < 10; i++) {
+                bar.append(i < filledBars ? "§a■" : "§8■");
+            }
+            bar.append("§7]");
+            lore.add(bar.toString());
+        }
+
         addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_DONE_LINE.getString(), progress.completed());
         addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_MISSING_LINE.getString(), progress.missing());
         return lore;
@@ -363,6 +377,130 @@ public class Goal {
         }
 
         return null;
+    }
+
+    public static Requirement getRequirement(String target) {
+        Definition definition = DEFINITIONS.get(decode(target));
+        return definition == null ? null : definition.requirement();
+    }
+
+    public static CompMaterial getGoalIcon(String target) {
+        Requirement requirement = getRequirement(target);
+        if (requirement == null) {
+            return CompMaterial.WRITABLE_BOOK;
+        }
+
+        if (requirement instanceof BreakRequirement) {
+            return CompMaterial.IRON_PICKAXE;
+        }
+        if (requirement instanceof KillRequirement || requirement instanceof KillCountRequirement || requirement instanceof KillUniqueRequirement) {
+            return CompMaterial.DIAMOND_SWORD;
+        }
+        if (requirement instanceof BreedRequirement || requirement instanceof BreedUniqueRequirement) {
+            return CompMaterial.WHEAT_SEEDS;
+        }
+        if (requirement instanceof TameRequirement) {
+            return CompMaterial.LEAD;
+        }
+        if (requirement instanceof AdvancementRequirement || requirement instanceof AdvancementCountRequirement) {
+            return CompMaterial.KNOWLEDGE_BOOK;
+        }
+        if (requirement instanceof ConsumeAllRequirement || requirement instanceof ConsumeUniqueRequirement) {
+            return CompMaterial.COOKED_BEEF;
+        }
+        if (requirement instanceof ConsumeRequirement || requirement instanceof ConsumePotionRequirement) {
+            return CompMaterial.GOLDEN_APPLE;
+        }
+        if (requirement instanceof CraftUniqueRequirement) {
+            return CompMaterial.CRAFTING_TABLE;
+        }
+        if (requirement instanceof EquipmentRequirement || requirement instanceof ColoredEquipmentRequirement || requirement instanceof UniqueLeatherArmorColorsRequirement) {
+            return CompMaterial.IRON_CHESTPLATE;
+        }
+        if (requirement instanceof WearContinuousRequirement) {
+            return CompMaterial.LEATHER_HELMET;
+        }
+        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement) {
+            return CompMaterial.CHEST;
+        }
+        if (requirement instanceof EnchantedItemRequirement) {
+            return CompMaterial.ENCHANTED_BOOK;
+        }
+        if (requirement instanceof LevelRequirement) {
+            return CompMaterial.EXPERIENCE_BOTTLE;
+        }
+        if (requirement instanceof LocationRequirement) {
+            return CompMaterial.COMPASS;
+        }
+        if (requirement instanceof EffectRequirement || requirement instanceof EffectCountRequirement) {
+            return CompMaterial.POTION;
+        }
+        if (requirement instanceof FishTreasureRequirement) {
+            return CompMaterial.FISHING_ROD;
+        }
+        if (requirement instanceof SpyUniqueRequirement) {
+            return CompMaterial.SPYGLASS;
+        }
+        if (requirement instanceof UseBlockRequirement) {
+            return CompMaterial.FLINT_AND_STEEL;
+        }
+        if (requirement instanceof DamageRequirement) {
+            return CompMaterial.SHIELD;
+        }
+        if (requirement instanceof DeathCauseRequirement || requirement instanceof DeathAttackerRequirement || requirement instanceof DeathProjectileRequirement) {
+            return CompMaterial.WITHER_SKELETON_SKULL;
+        }
+        if (requirement instanceof VillagerMaxLevelRequirement) {
+            return CompMaterial.EMERALD;
+        }
+        if (requirement instanceof HungerRequirement) {
+            return CompMaterial.ROTTEN_FLESH;
+        }
+
+        return CompMaterial.WRITABLE_BOOK;
+    }
+
+    public static String getGoalTypeLabel(String target) {
+        Requirement requirement = getRequirement(target);
+        if (requirement == null) {
+            return getDefaultGoalType();
+        }
+
+        if (requirement instanceof BreakRequirement) return "挖掘";
+        if (requirement instanceof KillRequirement || requirement instanceof KillCountRequirement || requirement instanceof KillUniqueRequirement) return "击杀";
+        if (requirement instanceof BreedRequirement || requirement instanceof BreedUniqueRequirement) return "繁殖";
+        if (requirement instanceof TameRequirement) return "驯服";
+        if (requirement instanceof AdvancementRequirement || requirement instanceof AdvancementCountRequirement) return "进度";
+        if (requirement instanceof ConsumeRequirement || requirement instanceof ConsumePotionRequirement || requirement instanceof ConsumeAllRequirement || requirement instanceof ConsumeUniqueRequirement) return "食用";
+        if (requirement instanceof CraftUniqueRequirement) return "合成";
+        if (requirement instanceof EquipmentRequirement || requirement instanceof ColoredEquipmentRequirement || requirement instanceof UniqueLeatherArmorColorsRequirement) return "装备";
+        if (requirement instanceof WearContinuousRequirement) return "穿戴";
+        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement) return "收集";
+        if (requirement instanceof EnchantedItemRequirement) return "附魔";
+        if (requirement instanceof LevelRequirement) return "等级";
+        if (requirement instanceof LocationRequirement) return "到达";
+        if (requirement instanceof EffectRequirement || requirement instanceof EffectCountRequirement) return "效果";
+        if (requirement instanceof FishTreasureRequirement) return "钓鱼";
+        if (requirement instanceof SpyUniqueRequirement) return "观察";
+        if (requirement instanceof UseBlockRequirement) return "使用";
+        if (requirement instanceof DamageRequirement) return "伤害";
+        if (requirement instanceof DeathCauseRequirement || requirement instanceof DeathAttackerRequirement || requirement instanceof DeathProjectileRequirement) return "死亡";
+        if (requirement instanceof VillagerMaxLevelRequirement) return "交易";
+        if (requirement instanceof HungerRequirement) return "饥饿";
+
+        return getDefaultGoalType();
+    }
+
+    private static String getDefaultGoalType() {
+        return "任务";
+    }
+
+    private static int getGoalScoreColor(int score) {
+        if (score >= 11) return 0xAA0000;
+        if (score >= 5) return 0xFFAA00;
+        if (score >= 3) return 0xFF5555;
+        if (score == 2) return 0xFFFF55;
+        return 0x55FF55;
     }
 
     public static boolean isValid(String target) {

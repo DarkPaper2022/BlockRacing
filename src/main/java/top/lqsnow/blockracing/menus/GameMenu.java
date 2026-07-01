@@ -168,13 +168,14 @@ public class GameMenu extends Menu {
     public class TargetListMenu extends Menu {
         private final String team;
         private final int page;
+        private final List<DisplayEntry> displayEntries;
 
         public TargetListMenu(Player player, int page) {
             super(GameMenu.this);
             this.team = redTeamPlayers.contains(player.getName()) ? "red"
                     : (blueTeamPlayers.contains(player.getName()) ? "blue" : "");
-            List<String> targets = getTargets();
-            int maxPage = Math.max(0, (targets.size() - 1) / TARGET_LIST_ITEMS_PER_PAGE);
+            this.displayEntries = buildDisplayEntries();
+            int maxPage = Math.max(0, (displayEntries.size() - 1) / TARGET_LIST_ITEMS_PER_PAGE);
             this.page = Math.max(0, Math.min(page, maxPage));
 
             setTitle(Message.MENU_TARGET_LIST_TITLE.getString()
@@ -183,11 +184,10 @@ public class GameMenu extends Menu {
             setSize(6 * 9);
 
             int start = this.page * TARGET_LIST_ITEMS_PER_PAGE;
-            int end = Math.min(targets.size(), start + TARGET_LIST_ITEMS_PER_PAGE);
+            int end = Math.min(displayEntries.size(), start + TARGET_LIST_ITEMS_PER_PAGE);
             for (int i = start; i < end; i++) {
                 int slot = i - start;
-                String target = targets.get(i);
-                int index = i + 1;
+                DisplayEntry entry = displayEntries.get(i);
                 Button button = new Button(slot) {
                     @Override
                     public void onClickedInMenu(Player player, Menu menu, ClickType click) {
@@ -195,8 +195,7 @@ public class GameMenu extends Menu {
 
                     @Override
                     public ItemStack getItem() {
-                        return ItemCreator.of(getTargetIcon(target), "&e" + index + ". &f" + Game.getTargetDisplayName(target),
-                                getTargetLore(player, index, target)).make();
+                        return entry.toItemStack(player);
                     }
                 };
                 this.registerButton(button);
@@ -227,7 +226,7 @@ public class GameMenu extends Menu {
                     return ItemCreator.of(CompMaterial.PAPER, Message.MENU_TARGET_LIST_PAGE.getString()
                             .replace("%page%", String.valueOf(TargetListMenu.this.page + 1))
                             .replace("%total_page%", String.valueOf(maxPage + 1))
-                            .replace("%amount%", String.valueOf(targets.size()))).make();
+                            .replace("%amount%", String.valueOf(displayEntries.size()))).make();
                 }
             };
             this.registerButton(pageInfo);
@@ -261,7 +260,49 @@ public class GameMenu extends Menu {
             this.registerButton(back);
         }
 
-        private List<String> getTargets() {
+        private List<DisplayEntry> buildDisplayEntries() {
+            List<String> rawTargets = getRawTargets();
+            List<DisplayEntry> entries = new ArrayList<>();
+
+            List<String> blockTargets = new ArrayList<>();
+            List<String> goalTargets = new ArrayList<>();
+            List<String> bonusTargets = new ArrayList<>();
+
+            for (String target : rawTargets) {
+                if (top.lqsnow.blockracing.managers.Block.isBonusTarget(target)) {
+                    bonusTargets.add(target);
+                } else if (target.startsWith("DRAFTOUT:")) {
+                    goalTargets.add(target);
+                } else {
+                    blockTargets.add(target);
+                }
+            }
+
+            if (!blockTargets.isEmpty()) {
+                entries.add(new DisplayEntry(true, "§a■ 方块任务", 0));
+                for (String target : blockTargets) {
+                    entries.add(new DisplayEntry(false, target, entries.size()));
+                }
+            }
+
+            if (!goalTargets.isEmpty()) {
+                entries.add(new DisplayEntry(true, "§b■ 特殊任务", 0));
+                for (String target : goalTargets) {
+                    entries.add(new DisplayEntry(false, target, entries.size()));
+                }
+            }
+
+            if (!bonusTargets.isEmpty()) {
+                entries.add(new DisplayEntry(true, "§4■ 奖励任务", 0));
+                for (String target : bonusTargets) {
+                    entries.add(new DisplayEntry(false, target, entries.size()));
+                }
+            }
+
+            return entries;
+        }
+
+        private List<String> getRawTargets() {
             return switch (team) {
                 case "red" -> Game.getCurrentBlocks("red");
                 case "blue" -> Game.getCurrentBlocks("blue");
@@ -272,6 +313,28 @@ public class GameMenu extends Menu {
         @Override
         protected boolean addReturnButton() {
             return false;
+        }
+    }
+
+    private class DisplayEntry {
+        private final boolean isHeader;
+        private final String target;
+        private final int displayIndex;
+
+        private DisplayEntry(boolean isHeader, String target, int displayIndex) {
+            this.isHeader = isHeader;
+            this.target = target;
+            this.displayIndex = displayIndex;
+        }
+
+        private ItemStack toItemStack(Player player) {
+            if (isHeader) {
+                return ItemCreator.of(CompMaterial.LIGHT_BLUE_STAINED_GLASS_PANE, "§m§l  ").make();
+            }
+            int score = top.lqsnow.blockracing.managers.Block.getTargetScore(target);
+            String nameColor = score >= 11 ? "&4" : score >= 5 ? "&6" : score >= 3 ? "&c" : score == 2 ? "&e" : "&f";
+            return ItemCreator.of(getTargetIcon(target), nameColor + Game.getTargetDisplayName(target),
+                    getTargetLore(player, displayIndex, target)).make();
         }
     }
 
@@ -450,14 +513,44 @@ public class GameMenu extends Menu {
     }
 
     private Collection<String> getTargetLore(Player player, int index, String target) {
-        List<String> lore = new ArrayList<>(replaceTargetPlaceholders(Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(), index, target));
+        List<String> lore = new ArrayList<>();
+
+        int score = top.lqsnow.blockracing.managers.Block.getTargetScore(target);
+        String scoreColor = score >= 11 ? "&4" : score >= 5 ? "&6" : score >= 3 ? "&c" : score == 2 ? "&e" : "&a";
+
+        lore.add("&7#" + index + " &8| &7类型：&f" + getTargetTypeLabel(target));
+        lore.add(scoreColor + "✦ " + score + " 分");
+
         lore.addAll(Goal.getProgressLore(target, player));
+
+        Collection<String> originalLore = replaceTargetPlaceholders(Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(), index, target);
+        for (String line : originalLore) {
+            if (!lore.contains(line)) {
+                lore.add(line);
+            }
+        }
+
         return lore;
     }
 
+    private String getTargetTypeLabel(String target) {
+        if (target == null) return "";
+        if (target.startsWith("DRAFTOUT:")) {
+            return Goal.getGoalTypeLabel(target);
+        }
+        if (top.lqsnow.blockracing.managers.Block.isBonusTarget(target)) {
+            return "&4特殊";
+        }
+        return "方块";
+    }
+
     private CompMaterial getTargetIcon(String target) {
-        if (target == null || target.startsWith("DRAFTOUT:")) {
-            return CompMaterial.WRITABLE_BOOK;
+        if (target == null) {
+            return CompMaterial.PAPER;
+        }
+
+        if (target.startsWith("DRAFTOUT:")) {
+            return Goal.getGoalIcon(target);
         }
 
         try {
