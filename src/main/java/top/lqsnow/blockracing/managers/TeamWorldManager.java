@@ -137,6 +137,15 @@ public class TeamWorldManager {
         Bukkit.getLogger().info("[BlockRacing] Team worlds deleted.");
     }
 
+    public static void deleteLeftoverWorlds() {
+        for (String team : new String[]{"red", "blue"}) {
+            String prefix = TEAM_WORLD_PREFIX.get(team);
+            deleteWorldFiles(prefix);
+            deleteWorldFiles(prefix + "_nether");
+            deleteWorldFiles(prefix + "_the_end");
+        }
+    }
+
     private static void deleteWorld(String name) {
         World world = Bukkit.getWorld(name);
         if (world == null) return;

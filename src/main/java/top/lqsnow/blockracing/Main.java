@@ -81,6 +81,9 @@ public class Main extends SimplePlugin {
         world.getWorldBorder().setCenter(world.getSpawnLocation());
         world.getWorldBorder().setSize(32);
 
+        // Clean up leftover team worlds from previous session
+        TeamWorldManager.deleteLeftoverWorlds();
+
         // Complete
         Bukkit.getLogger().info("[BlockRacing] Load Complete!");
     }
