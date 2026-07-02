@@ -24,8 +24,7 @@ public class Block {
     private static final int EASY_SCORE = 1;
     private static final int NORMAL_SCORE = 2;
     private static final int MIN_HARD_SCORE = 3;
-    private static final int MIN_BONUS_SCORE = 11;
-    private static final int BONUS_TARGET_AMOUNT = 3;
+
     private static final double RELATED_WOOD_SERIES_WEIGHT_MULTIPLIER = 0.1D;
     private static final double MINIMUM_SELECTION_WEIGHT = 0.01D;
     private static final String STRIPPED_PREFIX = "STRIPPED_";
@@ -72,7 +71,7 @@ public class Block {
         for (String target : targetScores.keySet()) {
             int score = getTargetScore(target);
             if (score == EASY_SCORE || (score == NORMAL_SCORE && Setting.isEnableMediumBlock())
-                    || (score >= MIN_HARD_SCORE && score < MIN_BONUS_SCORE && Setting.isEnableHardBlock())) {
+                    || (score >= MIN_HARD_SCORE && score < Setting.getBonusScoreThreshold() && Setting.isEnableHardBlock())) {
                 allBlocks.add(target);
             }
         }
@@ -151,7 +150,7 @@ public class Block {
         }
 
         List<String> selectedBonusTargets = new ArrayList<>();
-        int bonusTargetAmount = Math.min(BONUS_TARGET_AMOUNT, bonusTargets.size());
+        int bonusTargetAmount = Math.min(Setting.getBonusTargetAmount(), bonusTargets.size());
         for (int i = 0; i < bonusTargetAmount; i++) {
             String selectedBlock = bonusTargets.get(RANDOM.nextInt(bonusTargets.size()));
             selectedBonusTargets.add(selectedBlock);
@@ -379,7 +378,7 @@ public class Block {
     }
 
     public static boolean isBonusTarget(String target) {
-        return getTargetScore(target) >= MIN_BONUS_SCORE;
+        return getTargetScore(target) >= Setting.getBonusScoreThreshold();
     }
 
     private static int countTargetsByScore(List<String> targets, int score) {

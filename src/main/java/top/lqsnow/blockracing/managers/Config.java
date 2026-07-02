@@ -18,6 +18,8 @@ public enum Config {
     AVAILABLE_TASK_AMOUNT("available-task-amount"),
     LOCATE_COST("locate-cost"),
     RANDOM_TELEPORT_COST("random-teleport-cost"),
+    BONUS_SCORE_THRESHOLD("bonus-score-threshold"),
+    BONUS_TARGET_AMOUNT("bonus-target-amount"),
     GAME_MODE("game-mode"),
     SPEED_MODE("speed-mode"),
     CONFIG_VERSION("config-version"),

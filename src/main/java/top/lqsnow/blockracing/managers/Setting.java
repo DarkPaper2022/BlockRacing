@@ -27,6 +27,10 @@ public class Setting {
     @Getter
     private static int randomTeleportCost;
     @Getter
+    private static int bonusScoreThreshold;
+    @Getter
+    private static int bonusTargetAmount;
+    @Getter
     private static int maxTeamChestNum;
     @Getter
     private static  int maxTeamWaypointNum;
@@ -43,6 +47,8 @@ public class Setting {
         blockAmount = clamp(Config.BLOCK_AMOUNT.getInt(), 10, MAX_BLOCK_AMOUNT_LIMIT);
         maxEasyTargetsPerGame = clamp(Config.MAX_EASY_TARGETS_PER_GAME.getInt(), MIN_EASY_TARGETS_PER_GAME, MAX_EASY_TARGETS_PER_GAME);
         availableTaskAmount = clamp(Config.AVAILABLE_TASK_AMOUNT.getInt(), MIN_AVAILABLE_TASK_AMOUNT, MAX_AVAILABLE_TASK_AMOUNT);
+        bonusScoreThreshold = clamp(Config.BONUS_SCORE_THRESHOLD.getInt(), 11, 99);
+        bonusTargetAmount = clamp(Config.BONUS_TARGET_AMOUNT.getInt(), 1, 10);
         locateCost = clamp(Config.LOCATE_COST.getInt(), MIN_COST, MAX_COST);
         randomTeleportCost = clamp(Config.RANDOM_TELEPORT_COST.getInt(), MIN_COST, MAX_COST);
         speedMode = Config.SPEED_MODE.getBoolean();
@@ -84,6 +90,16 @@ public class Setting {
     public static void setRandomTeleportCost(int randomTeleportCost) {
         Setting.randomTeleportCost = clamp(randomTeleportCost, MIN_COST, MAX_COST);
         Config.RANDOM_TELEPORT_COST.setInt(Setting.randomTeleportCost);
+    }
+
+    public static void setBonusScoreThreshold(int threshold) {
+        Setting.bonusScoreThreshold = clamp(threshold, 11, 99);
+        Config.BONUS_SCORE_THRESHOLD.setInt(Setting.bonusScoreThreshold);
+    }
+
+    public static void setBonusTargetAmount(int amount) {
+        Setting.bonusTargetAmount = clamp(amount, 1, 10);
+        Config.BONUS_TARGET_AMOUNT.setInt(Setting.bonusTargetAmount);
     }
 
     public static void setMaxTeamChestNum(int chestNum) {
