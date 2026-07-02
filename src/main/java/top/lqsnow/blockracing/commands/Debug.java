@@ -25,13 +25,27 @@ import static top.lqsnow.blockracing.utils.ColorUtil.t;
 public class Debug implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player player)) {
-            Bukkit.getLogger().info("This command can only be run by a player.");
+        boolean isPlayer = sender instanceof Player;
+        Player player = isPlayer ? (Player) sender : null;
+
+        if (args.length == 0) {
+            sender.sendMessage(t("&cMissing parameters"));
             return true;
         }
 
-        if (args.length == 0) {
-            player.sendMessage(t("&cMissing parameters"));
+        // Start game (debug/testing only)
+        if (args[0].equalsIgnoreCase("start")) {
+            if (getCurrentGameState().equals(GameState.PREGAME)) {
+                startGame();
+                sender.sendMessage(t("&aGame started via debug command."));
+            } else {
+                sender.sendMessage(t("&cGame is not in PREGAME state."));
+            }
+            return true;
+        }
+
+        if (!isPlayer) {
+            sender.sendMessage(t("&cThis command requires a player context."));
             return true;
         }
 
@@ -171,6 +185,7 @@ public class Debug implements CommandExecutor, TabCompleter {
             completions.add("gettranslation");
             completions.add("getteam");
             completions.add("setteam");
+            completions.add("start");
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("skip") || args[0].equalsIgnoreCase("setscore") || args[0].equalsIgnoreCase("getblock") || args[0].equalsIgnoreCase("gettranslation") || args[0].equalsIgnoreCase("setteam")) {
                 completions.add("red");
