@@ -2,6 +2,7 @@ package top.lqsnow.blockracing.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
@@ -98,6 +99,44 @@ public class TeamWorldManager {
             }
         }
         return false;
+    }
+
+    public static Location getPortalDestination(Player player, Location from, boolean isNether) {
+        String team = getTeamForWorld(from.getWorld());
+        if (team == null) return null;
+
+        World.Environment fromEnv = from.getWorld().getEnvironment();
+        World targetWorld;
+
+        if (isNether) {
+            boolean goingToNether = fromEnv == World.Environment.NORMAL;
+            targetWorld = goingToNether ? getTeamNether(team) : getTeamOverworld(team);
+            if (targetWorld == null) return null;
+
+            double scale = goingToNether ? 1.0 / 8.0 : 8.0;
+            return new Location(
+                    targetWorld,
+                    from.getX() * scale,
+                    Math.min(Math.max(from.getY(), -64), targetWorld.getMaxHeight()),
+                    from.getZ() * scale,
+                    from.getYaw(),
+                    from.getPitch()
+            );
+        }
+
+        // End portal
+        boolean goingToEnd = fromEnv == World.Environment.NORMAL;
+        targetWorld = goingToEnd ? getTeamEnd(team) : getTeamOverworld(team);
+        if (targetWorld == null) return null;
+
+        if (goingToEnd) {
+            Location endPlatform = targetWorld.getEnderDragonBattle() != null
+                    ? targetWorld.getEnderDragonBattle().getEndPortalLocation()
+                    : null;
+            return endPlatform != null ? endPlatform : new Location(targetWorld, 0, 50, 0);
+        }
+
+        return targetWorld.getSpawnLocation();
     }
 
     public static World getLobbyWorld() {

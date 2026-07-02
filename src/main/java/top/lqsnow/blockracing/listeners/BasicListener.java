@@ -1,6 +1,7 @@
 package top.lqsnow.blockracing.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -125,6 +126,17 @@ public class BasicListener implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, -1, 1, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, -1, 1, false, false));
         }, 10L);
+    }
+
+    @EventHandler
+    private void onPlayerPortal(PlayerPortalEvent event) {
+        if (!isInGame()) return;
+        Player player = event.getPlayer();
+        Location target = TeamWorldManager.getPortalDestination(
+                player, event.getFrom(), event.getCause() == PlayerPortalEvent.TeleportCause.NETHER_PORTAL);
+        if (target != null) {
+            event.setTo(target);
+        }
     }
 
     @EventHandler
