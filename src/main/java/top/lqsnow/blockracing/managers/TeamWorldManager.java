@@ -32,7 +32,17 @@ public class TeamWorldManager {
             createAndSetupWorld(prefix + "_nether", seed, World.Environment.NETHER);
             createAndSetupWorld(prefix + "_the_end", seed, World.Environment.THE_END);
         }
+        // Unload default dimension worlds to reduce tick overhead
+        unloadWorldIfLoaded("world_nether");
+        unloadWorldIfLoaded("world_the_end");
         Bukkit.getLogger().info("[BlockRacing] Created team worlds with seed: " + seed);
+    }
+
+    private static void unloadWorldIfLoaded(String name) {
+        World world = Bukkit.getWorld(name);
+        if (world != null) {
+            Bukkit.unloadWorld(world, false);
+        }
     }
 
     private static World createAndSetupWorld(String name, long seed, World.Environment environment) {
