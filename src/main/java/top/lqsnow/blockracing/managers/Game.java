@@ -9,17 +9,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
-import org.bukkit.GameRules;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
@@ -116,6 +112,9 @@ public class Game {
                 player.sendMessage(Message.NOTICE_SPECTATOR_JOIN.getString());
                 return;
             }
+
+            // Teleport to team world (handles both rejoin and wrong-world correction)
+            TeamWorldManager.teleportToTeamWorld(player);
 
             // Players who choose a team before the start of the game and exit, but enter
             // after the start of the game
@@ -228,17 +227,10 @@ public class Game {
         updateScoreboard();
         Bukkit.getOnlinePlayers().forEach((Player player) -> freeRandomTPList.add(player.getName()));
         new runPer5Tick().runTaskTimer(Main.getInstance(), 0L, 5L);
-        World world = Bukkit.getWorlds().get(0);
-        world.setDifficulty(Difficulty.HARD);
-        world.setTime(1000);
-        world.setStorm(false);
-        world.setThundering(false);
-        world.getEntities().stream().filter(e -> e instanceof Item).forEach(Entity::remove);
-        world.setGameRule(GameRules.LOCATOR_BAR, false);
 
-        // World border
-        world.getWorldBorder().setCenter(world.getSpawnLocation());
-        world.getWorldBorder().setSize(59999968);
+        // Create per-team worlds with a common seed
+        long seed = new Random().nextLong();
+        TeamWorldManager.createTeamWorlds(seed);
 
         // Processing of unselected team players (spectators)
         inGamePlayers.addAll(getOnlinePlayersString());
@@ -252,9 +244,11 @@ public class Game {
 
         // Settings for each player
         for (String p : inGamePlayers) {
-            // General
             Player player = Bukkit.getPlayer(p);
-            initPlayer(player);
+            if (player != null) {
+                TeamWorldManager.teleportToTeamWorld(player);
+                initPlayer(player);
+            }
         }
 
         Bukkit.getLogger().info("Red team players: " + redTeamPlayers.toString());
@@ -351,7 +345,7 @@ public class Game {
     // Random Teleport
     public static void randomTeleport(Player player, boolean avoidOcean) {
         Random random = new Random();
-        World playerWorld = Bukkit.getWorlds().get(0);
+        World playerWorld = player.getWorld();
         Location candidate = pollRandomTeleportCandidate();
         double randX = candidate != null ? candidate.getX() : (random.nextInt(20000) - 10000);
         double randZ = candidate != null ? candidate.getZ() : (random.nextInt(20000) - 10000);
@@ -695,6 +689,7 @@ public class Game {
         sendAll(Message.NOTICE_RED_WIN.getString());
         playSound(Sound.UI_TOAST_CHALLENGE_COMPLETE);
         setCurrentGameState(GameState.END);
+        TeamWorldManager.deleteTeamWorlds();
     }
 
     public static void blueWin() {
@@ -706,6 +701,7 @@ public class Game {
         sendAll(Message.NOTICE_BLUE_WIN.getString());
         playSound(Sound.UI_TOAST_CHALLENGE_COMPLETE);
         setCurrentGameState(GameState.END);
+        TeamWorldManager.deleteTeamWorlds();
     }
 
     public static List<String> getCurrentBlocks(String team) {
