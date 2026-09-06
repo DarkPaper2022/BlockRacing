@@ -10,6 +10,7 @@ import io
 import json
 from pathlib import Path
 import zipfile
+from task_icon_animation import FRAME_TICKS, MANIFEST_PATH, frame_plan, spec_digest, sprite_strip
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -63,10 +64,9 @@ def describe(row):
         if kind == "equipment-any": count = 1
         action = "wear" if kind.startswith("equipment") else "eat" if kind == "consume-all" else "collect"
         badge = "ANY" if (kind == "item-unique" and count == 1) or kind == "equipment-any" else str(count)
-        use(representative(values), action, badge, count, values[:4])
+        use(representative(values), action, badge, count, values)
         if row["id"] == "COLLECT_ALL_COPPER_VARIANTS":
-            use("WAXED_COPPER_BLOCK", action, "ALL", count,
-                ["COPPER_BLOCK", "EXPOSED_COPPER", "WEATHERED_COPPER", "OXIDIZED_COPPER"])
+            use("WAXED_COPPER_BLOCK", action, "ALL", count, values)
     elif kind in ("kill", "breed", "tame", "death-attacker"):
         use(value + "_SPAWN_EGG", "death" if kind == "death-attacker" else kind)
     elif kind in ("break", "use-block", "consume"):
@@ -217,6 +217,30 @@ class ClientTextures:
             return image
         if material == "ZOMBIE_HEAD": return self.icon("ZOMBIE_SPAWN_EGG")
         node = self.read_json(f"assets/minecraft/items/{material.lower()}.json")["model"]
+        if material.endswith("COPPER_CHEST"):
+            texture = node["model"]["texture"].split(":", 1)[1]
+            skin = Image.open(io.BytesIO(self.archive.read(f"assets/minecraft/textures/entity/chest/{texture}.png"))).convert("RGBA")
+            image = Image.new("RGBA", (16, 16))
+            image.alpha_composite(skin.crop((14, 14, 28, 19)), (1, 0))
+            image.alpha_composite(skin.crop((14, 33, 28, 43)), (1, 5))
+            image.alpha_composite(skin.crop((1, 1, 3, 5)), (7, 3))
+            self.cache[material] = image
+            return image.copy()
+        if material.endswith("COPPER_GOLEM_STATUE"):
+            texture = node["fallback"]["model"]["texture"].split(":", 1)[1]
+            skin = Image.open(io.BytesIO(self.archive.read(f"assets/minecraft/{texture}"))).convert("RGBA")
+            image = Image.new("RGBA", (16, 16))
+            face = skin.crop((8, 8, 16, 16))
+            image.alpha_composite(face, (4, 1))
+            # Compact frontal statue silhouette, using the matching oxidation texture.
+            body = skin.crop((4, 20, 10, 26))
+            image.alpha_composite(body, (5, 8))
+            image.alpha_composite(body.resize((2, 5), Image.Resampling.NEAREST), (2, 8))
+            image.alpha_composite(body.resize((2, 5), Image.Resampling.NEAREST), (12, 8))
+            image.alpha_composite(body.resize((2, 3), Image.Resampling.NEAREST), (5, 13))
+            image.alpha_composite(body.resize((2, 3), Image.Resampling.NEAREST), (9, 13))
+            self.cache[material] = image
+            return image.copy()
         model = self.model_path(node)
         if model is None: raise ValueError(f"No GUI model for {material}")
         textures = self.model_textures(model)
@@ -243,10 +267,12 @@ class ClientTextures:
         return image.copy()
 
 
-def render_icon(spec, client, bonus=False):
+def render_icon(spec, client, bonus=False, phase=""):
     from PIL import Image, ImageDraw, ImageColor
     image = Image.new("RGBA", (32, 32))
     subjects = spec["subjects"]
+    if not 1 <= len(subjects) <= 4:
+        raise ValueError("Render one planned frame at a time; do not truncate a candidate list")
     if len(subjects) == 1:
         sprite = client.icon(subjects[0]).resize((24, 24), Image.Resampling.NEAREST)
         if spec.get("rainbow"):
@@ -258,7 +284,7 @@ def render_icon(spec, client, bonus=False):
                     sprite.putpixel((x, y), (*(int(c * max(r, g, b) / 255) for c in tint), a))
         image.alpha_composite(sprite, (4, 8))
     else:
-        for i, subject in enumerate(subjects[:4]):
+        for i, subject in enumerate(subjects):
             sprite = client.icon(subject).resize((14, 14), Image.Resampling.NEAREST)
             image.alpha_composite(sprite, (2 + i % 2 * 14, 5 + i // 2 * 13))
     draw = ImageDraw.Draw(image)
@@ -276,6 +302,9 @@ def render_icon(spec, client, bonus=False):
         # Corner brackets keep the central object unobscured.
         for x, y, dx, dy in [(0, 0, 1, 1), (31, 0, -1, 1), (0, 31, 1, -1), (31, 31, -1, -1)]:
             draw.line([(x + 4 * dx, y), (x, y), (x, y + 4 * dy)], fill="#fbbf24")
+    if phase:
+        draw.rectangle((10, 0, 17, 6), fill="#111827")
+        draw_label(image, phase, 10, 1, "#facc15" if phase.startswith("W") else "#cbd5e1")
     return image
 
 
@@ -287,6 +316,7 @@ def build_pack(client_jar, specs):
     output.mkdir(parents=True, exist_ok=True)
     files = {}
     previews = {}
+    manifest = {"format": 1, "goals": {}}
     with zipfile.ZipFile(client_jar) as archive:
         version = json.loads(archive.read("version.json"))
         if version["id"] != "26.2": raise ValueError("Use a Minecraft 26.2 client, matching the plugin API")
@@ -294,13 +324,17 @@ def build_pack(client_jar, specs):
         grouped = {}
         for goal, spec in specs.items():
             key = "task/" + goal.lower()
+            plan = frame_plan(spec)
+            manifest["goals"][goal] = {"spec_sha256": spec_digest(spec), "frames": plan}
             for bonus in (False, True):
                 name = key + ("_bonus" if bonus else "")
-                picture = render_icon(spec, client, bonus)
-                if not bonus: previews[goal] = picture
-                data = io.BytesIO()
-                picture.save(data, format="PNG")
-                files[f"assets/blockracing/textures/item/{name}.png"] = data.getvalue()
+                pictures = [render_icon(spec | {"subjects": frame["subjects"]}, client, bonus, frame["phase"]) for frame in plan]
+                if not bonus: previews[goal] = pictures[0]
+                path = f"assets/blockracing/textures/item/{name}.png"
+                files[path] = sprite_strip(pictures)
+                if len(pictures) > 1:
+                    files[path + ".mcmeta"] = {"animation": {"width": 32, "height": 32,
+                                                               "frametime": FRAME_TICKS, "interpolate": False}}
                 files[f"assets/blockracing/models/item/{name}.json"] = {
                     "parent": "minecraft:item/generated", "gui_light": "front",
                     "textures": {"layer0": f"blockracing:item/{name}"}}
@@ -316,6 +350,7 @@ def build_pack(client_jar, specs):
                                                "index": 0, "cases": cases, "fallback": original["model"]}}
     files["pack.mcmeta"] = {"pack": {"min_format": [88, 0], "max_format": [88, 0],
                                      "description": "BlockRacing task icons | object + action + quantity | 26.2"}}
+    files[MANIFEST_PATH] = manifest
     files["LICENSE-NOTICE.txt"] = ("Task composites use assets from your local Minecraft installation. "
                                   "Minecraft assets belong to Mojang/Microsoft. Do not treat them as AGPL artwork. "
                                   "Original badge code and layout are part of the BlockRacing fork. "
@@ -349,7 +384,8 @@ def build_pack(client_jar, specs):
                 "GET_REVAULTING_ADVANCEMENT", "GET_POISON_STATUS_EFFECT", "COLLECT_ALL_COPPER_VARIANTS", "CRAFT_100_UNIQUE_ITEMS"]
     sheet(examples, "preview.png", 4)
     sheet(list(specs), "all-goals.png", 8)
-    print(json.dumps({"goals": len(specs), "base_models": len(grouped), "pack": str(pack_path.relative_to(ROOT)),
+    print(json.dumps({"goals": len(specs), "animated": sum(len(g["frames"]) > 1 for g in manifest["goals"].values()),
+                      "base_models": len(grouped), "pack": str(pack_path.relative_to(ROOT)),
                       "bytes": pack_path.stat().st_size, "sha1": hashlib.sha1(pack_path.read_bytes()).hexdigest()}))
 
 

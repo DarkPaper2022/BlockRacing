@@ -7,6 +7,7 @@ import unittest
 import zipfile
 from PIL import Image
 import build_task_icons as icons
+from task_icon_animation import FRAME_TICKS, MANIFEST_PATH, decode_texture, frame_plan, gif_bytes, spec_digest
 
 CLIENT_JAR = None
 
@@ -66,13 +67,61 @@ class TaskIconTests(unittest.TestCase):
         for name in self.pack.namelist():
             if not name.endswith(".png"): continue
             picture = Image.open(io.BytesIO(self.pack.read(name)))
-            self.assertEqual((32, 32), picture.size)
+            self.assertEqual(32, picture.width)
+            self.assertEqual(0, picture.height % 32)
             self.assertEqual("RGBA", picture.mode)
             self.assertEqual(0, picture.getchannel("A").getextrema()[0])
         for left, right in [("obtain_5_unique_discs", "obtain_8_unique_discs"),
                             ("kill_warden", "die_to_warden"), ("craft_20_unique_items", "craft_100_unique_items")]:
             prefix = "assets/blockracing/textures/item/task/"
             self.assertNotEqual(self.pack.read(prefix + left + ".png"), self.pack.read(prefix + right + ".png"))
+
+    def test_animation_manifest_covers_every_candidate_and_both_variants(self):
+        manifest = json.loads(self.pack.read(MANIFEST_PATH))
+        self.assertEqual(set(self.specs), set(manifest["goals"]))
+        animated = 0
+        for goal, spec in self.specs.items():
+            with self.subTest(goal=goal):
+                plan = frame_plan(spec)
+                self.assertEqual(sorted(spec["subjects"]), sorted(s for frame in plan for s in frame["subjects"]))
+                self.assertEqual({"spec_sha256": spec_digest(spec), "frames": plan}, manifest["goals"][goal])
+                animated += len(plan) > 1
+                for suffix in ("", "_bonus"):
+                    texture = "assets/blockracing/textures/item/task/" + goal.lower() + suffix + ".png"
+                    frames, order, durations = decode_texture(self.pack, texture)
+                    self.assertEqual(len(plan), len(frames))
+                    self.assertEqual(tuple(range(len(plan))), order)
+                    self.assertEqual((FRAME_TICKS * 50,) * len(plan), durations)
+                    # The changing subjects must never replace action/quantity overlays.
+                    boxes = [(0, 0, 9, 9)]
+                    if spec["badge"]:
+                        boxes.append((31 - len(spec["badge"]) * 4, 0, 32, 7))
+                    for box in boxes:
+                        overlays = [Image.open(io.BytesIO(frame)).crop(box).tobytes() for frame in frames]
+                        self.assertEqual(1, len(set(overlays)))
+        self.assertEqual(30, animated)
+
+    def test_copper_is_grouped_by_wax_and_oxidation_without_omissions(self):
+        spec = self.specs["COLLECT_ALL_COPPER_VARIANTS"]
+        plan = frame_plan(spec)
+        self.assertEqual(120, len(spec["subjects"]))
+        self.assertEqual(32, len(plan))
+        self.assertEqual({f"{wax}{stage}" for wax in "UW" for stage in range(4)}, {p["phase"] for p in plan})
+        self.assertTrue(all(1 <= len(p["subjects"]) <= 4 for p in plan))
+
+    def test_gif_preserves_entire_playback_and_timing(self):
+        for goal, spec in self.specs.items():
+            if len(frame_plan(spec)) < 2: continue
+            with self.subTest(goal=goal):
+                frames, order, durations = decode_texture(self.pack, "assets/blockracing/textures/item/task/" + goal.lower() + ".png")
+                with Image.open(io.BytesIO(gif_bytes(tuple(frames[i] for i in order), durations))) as gif:
+                    self.assertEqual(0, gif.info["loop"])
+                    self.assertEqual(len(order), gif.n_frames)
+                    total = 0
+                    for i in range(gif.n_frames):
+                        gif.seek(i)
+                        total += gif.info["duration"]
+                    self.assertEqual(sum(durations), total)
 
 
 if __name__ == "__main__":

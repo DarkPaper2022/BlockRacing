@@ -30,3 +30,4 @@ world*/
 # Local icon builder caches
 __pycache__/
 *.py[cod]
+.worktrees/

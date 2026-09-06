@@ -18,13 +18,21 @@
 `BlockRacing-TaskIcons-26.2.zip` 是 **26.2 客户端**资源包，无需客户端模组。放进客户端的 `resourcepacks/` 并启用；服务器自动分发可在后续配置，本次没有修改任何客户端目录或服务器分发设置。
 
 - 左上：动作符号（镐＝挖掘、交叉剑＝击杀、心＝繁殖、骷髅＝死亡等），形状与颜色共同区分。
-- 中央：具体对象；套装/集合用多个物品组成图标。凋零使用三头剪影，工作站使用其方块外观。
+- 中央：具体对象；30 个多候选目标轮播展示完整候选，动作与需求数量不变。凋零使用三头剪影，工作站使用其方块外观。
 - 右上：精确数量；`ANY` 表示任一、`ALL` 表示全套、`5M` 表示 5 分钟、`MAX` 表示满级/完整附魔。
 - 金色角标：当前配置下属于 Bonus，动态读取运行时分类，不把默认 11 分阈值烘焙到图片中。
 
 每个目标使用 `custom_model_data.strings[0] = blockracing:task/<id>`；`flags[0]` 选择 Bonus 变体。资源包只匹配这些命名空间键，保留 26.2 原版物品模型和 tint 等属性作为 fallback。**没有安装资源包也不会因为自定义 item_model 引用而出现紫黑缺失贴图**，而是正常显示原版对象。
 
 资源包覆盖了 131 种基础物品的模型选择文件；其他修改相同文件的资源包可能发生优先级冲突，需要合并选择规则。生成时同时提供全部目标和精选目标的 PNG 预览，方便人工检查。预览是离线图标图集，不是游戏截图；较低 GUI 缩放下动作小符号可能需要悬停确认。
+
+### 多候选轮播
+
+- 游戏资源包使用 32×32 帧的纵向 PNG 图带及 `.png.mcmeta`，不是直接把 GIF 放入 Minecraft；每帧 16 tick（0.8 秒），不做插值。动画由客户端播放，不增加服务端定时器。
+- 2–12 个候选逐个展示，例如树苗、工具、马铠；更多候选每帧最多四个，例如 21 张唱片分为 6 帧。不会只截取前四个候选。
+- 全铜变种 120 个对象按是否涂蜡、四档氧化程度分组，共 32 帧。顶部 `U0`–`U3` / `W0`–`W3` 区分未涂蜡 / 已涂蜡及氧化阶段，右侧 `ALL` 与动作角标始终不变。
+- 资源包附带候选帧清单及图标定义摘要。审计导出读取实际 PNG、`.mcmeta` 的帧序与时长，并校验清单覆盖和版本一致性，避免用新描述审计旧资源包。
+- `preview.png`、`all-goals.png` 仍是首帧速览；**完整候选请看审计 HTML**。铜箱和铜傀儡雕像使用客户端实体纹理的正面裁切组合，不是原版三维模型截图。
 
 ## 维护与构建
 
@@ -58,18 +66,24 @@ python tools/test_task_icons.py --client-jar /path/to/26.2.jar
 python tools/export_task_audit.py
 ```
 
-导出 `target/task-ui/audit/task-audit.png`（单张长图）和 `task-audit.html`（自包含、离线可用、可搜索的大表）。每行左侧是资源包实际图标，右侧完整展示中文/英文描述、分数、任务 ID、动作、数量标识及 requirement；保持 CSV 顺序，不截断长规则。
+默认导出 `target/task-ui/audit/task-audit.html`（自包含、离线可用的大表）。每行左侧播放资源包实际帧生成的 GIF，右侧完整展示中文/英文描述、分数、任务 ID、动作、数量标识及 requirement；保持 CSV 顺序，不截断长规则。
+
+轮播行默认展开全部静态帧、候选物品名和帧时长，可点击任一帧定格，或用左右按钮逐帧查看；支持全局暂停/播放、展开/收起、搜索及“只看轮播目标”。遵循系统减少动画设置；禁用 JavaScript 时仍保留首帧与全部静态帧。GIF 暂停时回到所选静态帧，不保证停在点击瞬间的 GIF 帧。GIF 使用固定深色底，避免透明帧残影；PNG 静态帧保留原始透明像素。
 
 默认覆盖当前 158 个启用的行为/组合目标，普通物品沿用原版图标，不在本表。Bonus 按默认 11 分阈值选用金色角标版本；运行配置不同时传 `--bonus-threshold 20` 等对应值。导出图不模拟客户端附魔闪光和叠放数字。
 
-可选参数：`--format html` 仅导出网页表；`--width 1600` 设置长图宽度；`--font /path/to/CJK.ttf` 指定中文字体；`--pack /path/to/pack.zip` 指定资源包；`--output-dir target/my-audit` 指定输出目录。PNG 默认通过 fontconfig 寻找中文字体，缺少字体时可仅导出 HTML。依赖与图标生成器相同（Python + Pillow），不联网。
+可选参数：`--format both` 同时导出网页与 PNG 长图，`--format png` 仅长图（轮播行左侧列出全部帧，并非只导出首帧）；`--width 1600` 设置长图宽度；`--font /path/to/CJK.ttf` 指定中文字体；`--pack /path/to/pack.zip` 指定资源包；`--output-dir target/my-audit` 指定输出目录。PNG 默认通过 fontconfig 寻找中文字体，缺少字体时使用默认 HTML 即可。依赖与图标生成器相同（Python + Pillow），不联网。
 
 测试：`python tools/test_export_task_audit.py`。
+
+可选浏览器回归：`node tools/test_task_audit_browser.cjs`，需要已有 Playwright 和 Chromium。可用 `PLAYWRIGHT_MODULE` 指向已有模块目录，`PW_CHROMIUM_EXECUTABLE` 指向已有浏览器；脚本不会安装依赖或下载浏览器。验证搜索、筛选、暂停、逐帧、全部候选展开、减少动画偏好及离线加载，并输出 `browser-saplings.png` 截图。
 
 ### 原目标 UI 验证
 
 参考 [Draftout 官方目标库](https://draftoutmc.com/wiki) 的具体对象/组合物品展示思路，自行实现像素组合。模型选择机制依据 [Minecraft 官方自定义模型数据说明](https://www.minecraft.net/zh-hans/article/minecraft-snapshot-24w45a)，版本使用本机官方 26.2 客户端的 `version.json`（资源格式 88.0）。
 
 2026-09-06：32 项 Java 测试通过；5 项离线资源包测试通过，覆盖目录与 CSV 一致性、完整图标覆盖、原版 fallback 保留、Bonus 模型引用、透明图片和易混目标区别。测试日志位于本机 `.local-backups/task-ui-20260906/`。
+
+轮播增量：32 项 Java、8 项资源包、7 项导出测试通过；30 个动画的 GIF 帧数与总时长匹配游戏纹理。浏览器交互回归覆盖 158 行与全部 32 个铜变种帧。轮播产物另存 `builds/task-ui-animation-20260906/`，未替换运行中的旧版服务器。
 
 实机待验：Paper 26.2 启动、`/menu targetpreview` 翻页与筛选、原版/启用资源包两种显示、叠放数、Bonus 动态阈值、中英文、拒绝或移除资源包、其他包叠加。现有 1.21.11 测试服未替换；本次产物暂存在约定部署目录的 `builds/task-ui-20260906/`。
