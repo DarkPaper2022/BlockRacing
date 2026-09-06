@@ -50,6 +50,24 @@ python tools/test_task_icons.py --client-jar /path/to/26.2.jar
 
 ## 设计参考与验证
 
+### 导出审计大表
+
+资源包生成后，在仓库根目录运行：
+
+```sh
+python tools/export_task_audit.py
+```
+
+导出 `target/task-ui/audit/task-audit.png`（单张长图）和 `task-audit.html`（自包含、离线可用、可搜索的大表）。每行左侧是资源包实际图标，右侧完整展示中文/英文描述、分数、任务 ID、动作、数量标识及 requirement；保持 CSV 顺序，不截断长规则。
+
+默认覆盖当前 158 个启用的行为/组合目标，普通物品沿用原版图标，不在本表。Bonus 按默认 11 分阈值选用金色角标版本；运行配置不同时传 `--bonus-threshold 20` 等对应值。导出图不模拟客户端附魔闪光和叠放数字。
+
+可选参数：`--format html` 仅导出网页表；`--width 1600` 设置长图宽度；`--font /path/to/CJK.ttf` 指定中文字体；`--pack /path/to/pack.zip` 指定资源包；`--output-dir target/my-audit` 指定输出目录。PNG 默认通过 fontconfig 寻找中文字体，缺少字体时可仅导出 HTML。依赖与图标生成器相同（Python + Pillow），不联网。
+
+测试：`python tools/test_export_task_audit.py`。
+
+### 原目标 UI 验证
+
 参考 [Draftout 官方目标库](https://draftoutmc.com/wiki) 的具体对象/组合物品展示思路，自行实现像素组合。模型选择机制依据 [Minecraft 官方自定义模型数据说明](https://www.minecraft.net/zh-hans/article/minecraft-snapshot-24w45a)，版本使用本机官方 26.2 客户端的 `version.json`（资源格式 88.0）。
 
 2026-09-06：32 项 Java 测试通过；5 项离线资源包测试通过，覆盖目录与 CSV 一致性、完整图标覆盖、原版 fallback 保留、Bonus 模型引用、透明图片和易混目标区别。测试日志位于本机 `.local-backups/task-ui-20260906/`。
