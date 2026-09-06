@@ -31,6 +31,8 @@ public class Team {
     }
 
     public static boolean joinTeam(Player player, org.bukkit.scoreboard.Team team, boolean sendMessage) {
+        // Team membership is fixed while a round is active: historical work cannot cross teams.
+        if (Game.getCurrentGameState() == Game.GameState.INGAME) return false;
         if (team.equals(redTeam)) {
             if (redTeamPlayers.contains(player.getName())) {
                 if (sendMessage) {

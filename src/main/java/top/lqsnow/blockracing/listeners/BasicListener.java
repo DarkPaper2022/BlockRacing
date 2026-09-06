@@ -1,5 +1,7 @@
 package top.lqsnow.blockracing.listeners;
 
+import top.lqsnow.blockracing.managers.Team;
+
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -55,6 +57,14 @@ public class BasicListener implements Listener {
         Game.playerLogin(event.getPlayer());
         if (LanguageManager.registerFirstJoin(event.getPlayer())) {
             LanguageMenu.sendFirstJoinPrompt(event.getPlayer());
+        }
+    }
+
+    @EventHandler
+    private void onAdvancement(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
+        Player player = event.getPlayer();
+        if (isInGame() && (Team.redTeamPlayers.contains(player.getName()) || Team.blueTeamPlayers.contains(player.getName()))) {
+            Goal.recordAdvancement(player, event.getAdvancement());
         }
     }
 
@@ -135,7 +145,7 @@ public class BasicListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onEntityBreed(EntityBreedEvent event) {
         if (!isInGame() || !(event.getBreeder() instanceof Player player)) {
             return;
@@ -143,7 +153,7 @@ public class BasicListener implements Listener {
         Goal.recordBreed(player, event.getEntityType());
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onEntityTame(EntityTameEvent event) {
         if (!isInGame() || !(event.getOwner() instanceof Player player)) {
             return;
@@ -151,7 +161,7 @@ public class BasicListener implements Listener {
         Goal.recordTame(player, event.getEntityType());
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerItemConsume(PlayerItemConsumeEvent event) {
         if (!isInGame()) {
             return;
@@ -164,7 +174,7 @@ public class BasicListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerFish(PlayerFishEvent event) {
         if (!isInGame() || !event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
             return;
@@ -174,7 +184,7 @@ public class BasicListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onCraftItem(CraftItemEvent event) {
         if (!isInGame() || !(event.getWhoClicked() instanceof Player player)) {
             return;
@@ -188,7 +198,7 @@ public class BasicListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onInventoryClick(InventoryClickEvent event) {
         if (!isInGame() || !(event.getWhoClicked() instanceof Player player)
                 || !(event.getView().getTopInventory() instanceof MerchantInventory merchantInventory)
@@ -204,7 +214,7 @@ public class BasicListener implements Listener {
         });
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerInteract(PlayerInteractEvent event) {
         if (!isInGame()) {
             return;
@@ -219,7 +229,7 @@ public class BasicListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onBlockBreak(BlockBreakEvent event) {
         if (!isInGame()) {
             return;
@@ -227,7 +237,7 @@ public class BasicListener implements Listener {
         Goal.recordBreak(event.getPlayer(), event.getBlock().getType());
     }
 
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
     private void onEntityDamage(EntityDamageEvent event) {
         if (!isInGame()) {
             return;

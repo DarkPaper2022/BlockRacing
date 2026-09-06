@@ -9,6 +9,7 @@
 ## 分支
 
 - `main`：原 `local-3.5-patch`，包含积分制、Bonus、CSV 任务库和任务进度菜单，是后续开发的基线。
+- `feature/shared-team-progress`：队伍共享目标进度，累计求和、唯一目标去重，尚未合入 `main`；详见[共享规则与验证](docs/shared-team-progress.md)。
 - `feature/per-team-worlds`：**暂缓开发**，同种子队伍独立世界的性能开销过大；保留代码作参考，不合入 `main`。
 - `3.0`、`26.2`：保留的上游版本快照，历史中的服务端二进制已移除；`26.2` 已合并进 `main`。
 
