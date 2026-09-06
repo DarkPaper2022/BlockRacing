@@ -9,7 +9,7 @@ Target server: Minecraft 1.21.11. Build requirements: JDK 21 and Maven. Plugin v
 ## Branches
 
 - `main` was renamed from `local-3.5-patch`. It contains scored tasks, Bonus tasks, CSV definitions and the task progress menu.
-- `feature/per-team-worlds` adds separate red/blue worlds with the same seed, respawn handling and portal routing. These features are not merged into `main` and still need multiplayer regression testing.
+- `feature/per-team-worlds` is **on hold due to excessive performance overhead**. Its separate team worlds, respawn handling and portal routing are retained for reference and are not being merged into `main`.
 - `3.0` and `26.2` preserve upstream snapshots with server binaries removed from history.
 
 ## Gameplay
