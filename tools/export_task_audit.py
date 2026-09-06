@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export the custom-goal icons as a two-column audit table (PNG and standalone HTML).
 
-Uses the actual generated resource-pack PNGs, not approximate redraws. Includes every
+Uses the actual generated resource-pack PNGs (native textures for vanilla goals). Includes every
 enabled goal in CSV order; ordinary block/item tasks keep native icons and are excluded.
 """
 import argparse
@@ -37,13 +37,15 @@ class Row:
     durations: tuple[int, ...] = ()
     frame_labels: tuple[str, ...] = ()
     frame_subjects: tuple[tuple[str, ...], ...] = ()
+    vanilla: bool = False
 
     def pictures(self):
         return self.frames or (self.png,)
 
     def metadata(self):
         score = f"Bonus 奖励 {self.score} 分（不计胜利进度）" if self.bonus else f"普通任务 · {self.score} 分"
-        return f"{score} | 对象 {self.material} | 动作 {self.action} | 数量标识 {self.badge or '无'}"
+        rendering = " | 原版物品图标（无角标）" if self.vanilla else ""
+        return f"{score} | 对象 {self.material} | 动作 {self.action} | 数量标识 {self.badge or '无'}{rendering}"
 
 
 def load_rows(targets, catalog_path, pack_path, bonus_threshold):
@@ -66,14 +68,15 @@ def load_rows(targets, catalog_path, pack_path, bonus_threshold):
             score = int(target["score"])
             bonus = score >= bonus_threshold
             key = "blockracing:task/" + goal.lower()
-            model = json.loads(pack.read(f"assets/minecraft/items/{spec['icon'].lower()}.json"))["model"]
-            case = next((c for c in model["cases"] if c["when"] == key), None)
-            if case is None:
-                raise ValueError(f"Resource pack does not contain the model selection for {goal}")
-            branch = case["model"]["on_true" if bonus else "on_false"]["model"]
-            expected = f"blockracing:item/task/{goal.lower()}" + ("_bonus" if bonus else "")
-            if branch != expected:
-                raise ValueError(f"Unexpected resource-pack model for {goal}: {branch}")
+            if not spec.get("vanilla"):
+                model = json.loads(pack.read(f"assets/minecraft/items/{spec['icon'].lower()}.json"))["model"]
+                case = next((c for c in model["cases"] if c["when"] == key), None)
+                if case is None:
+                    raise ValueError(f"Resource pack does not contain the model selection for {goal}")
+                branch = case["model"]["on_true" if bonus else "on_false"]["model"]
+                expected = f"blockracing:item/task/{goal.lower()}" + ("_bonus" if bonus else "")
+                if branch != expected:
+                    raise ValueError(f"Unexpected resource-pack model for {goal}: {branch}")
             texture = f"assets/blockracing/textures/item/task/{goal.lower()}" + ("_bonus" if bonus else "") + ".png"
             physical, order, durations = decode_texture(pack, texture)
             if manifest is None:
@@ -95,7 +98,7 @@ def load_rows(targets, catalog_path, pack_path, bonus_threshold):
             rows.append(Row(goal, target["中文显示"], target["display_name"], score, bonus,
                             target["requirement"], spec["icon"], spec["action"], spec["badge"], frames[0], frames, durations,
                             tuple(plan[index]["label"] for index in order),
-                            tuple(tuple(plan[index]["subjects"]) for index in order)))
+                            tuple(tuple(plan[index]["subjects"]) for index in order), bool(spec.get("vanilla"))))
     if not rows:
         raise ValueError("No enabled custom goals found")
     return rows
@@ -215,7 +218,7 @@ button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid
 .toolbar,.row-controls{display:none!important}tr{break-inside:avoid}.frame-grid{display:grid}}
 </style><main><h1>BlockRacing 目标图标审计</h1>'''
         + f"<p>{len(rows)} 个启用的行为/组合目标 · {sum(len(r.pictures()) > 1 for r in rows)} 个轮播目标 · Bonus 阈值 {threshold} 分。普通物品原版图标不在本表。</p>"
-        + "<p>左侧播放资源包实际帧（含 Bonus 角标），右侧完整展开全部帧、对象名称和规则；可暂停、逐帧查看、搜索。所有素材内嵌，离线可用。</p>"
+        + "<p>左侧播放资源包实际帧（含 Bonus 角标）；标记为原版物品图标的目标展示原版纹理，不加角标。右侧完整展开全部帧、对象名称和规则；可暂停、逐帧查看、搜索。所有素材内嵌，离线可用。</p>"
         + "<p>铜方块按涂蜡/氧化程度分组：U0–U3 未涂蜡，W0–W3 已涂蜡。动作与需求角标始终不变；轮播不是任务切换。</p>"
         + "<p>这是图标审计表，不是游戏截图；附魔闪光、叠放数字由客户端另行绘制。自动遵循系统减少动画设置；GIF 暂停后可从所选静态帧审计。</p>"
         + controls + '<table><thead><tr><th>图标</th><th>描述 / 审计信息</th></tr></thead><tbody>'

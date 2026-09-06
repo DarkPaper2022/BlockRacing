@@ -40,7 +40,7 @@ public final class TargetIconCatalog {
                 icons.put(id, new Icon(id, (String) value.get("requirement"),
                         Material.valueOf((String) value.get("icon")), (String) value.get("action"),
                         (String) value.get("badge"), ((Number) value.get("count")).intValue(),
-                        Boolean.TRUE.equals(value.get("glint"))));
+                        Boolean.TRUE.equals(value.get("glint")), Boolean.TRUE.equals(value.get("vanilla"))));
             }
             return Map.copyOf(icons);
         } catch (Exception ex) {
@@ -49,7 +49,7 @@ public final class TargetIconCatalog {
     }
 
     public record Icon(String id, String requirement, Material material, String action,
-                       String badge, int count, boolean glint) {
+                       String badge, int count, boolean glint, boolean vanilla) {
         public String modelKey() {
             return "blockracing:task/" + id.toLowerCase(Locale.ROOT);
         }
@@ -82,7 +82,7 @@ public final class TargetIconCatalog {
 
         /** Never silently turn a 100/200/400 requirement into a capped stack count. */
         public int stackAmount() {
-            return count >= 2 && count <= 64 && badge.equals(Integer.toString(count)) ? count : 1;
+            return !vanilla && count >= 2 && count <= 64 && badge.equals(Integer.toString(count)) ? count : 1;
         }
     }
 }

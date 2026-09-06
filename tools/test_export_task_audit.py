@@ -58,6 +58,11 @@ class AuditExportTests(unittest.TestCase):
         self.assertIn("不计胜利进度", text)
         self.assertIn("ALL", text)
 
+    def test_native_icon_metadata_does_not_claim_quantity_overlay(self):
+        row = replace(self.example(), material="SPYGLASS", badge="", vanilla=True)
+        self.assertIn("原版物品图标（无角标）", row.metadata())
+        self.assertIn("数量标识 无", row.metadata())
+
     def test_animated_html_includes_gif_and_all_inspectable_static_frames(self):
         row = self.example()
         other = png_bytes(Image.new("RGBA", (32, 32), "red"))

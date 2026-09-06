@@ -114,6 +114,8 @@ def describe(row):
         }
         icon, action = count_types[kind]  # Missing coverage fails the build, never silently produces a book.
         use(icon, action, value, int(value))
+        if kind == "spy-unique":
+            spec.update(vanilla=True, badge="")
         if kind == "equipment-unique-leather-colors": spec["rainbow"] = True
     return spec
 
@@ -188,6 +190,13 @@ class ClientTextures:
 
     def model_path(self, node):
         if node.get("type") == "minecraft:model": return node["model"]
+        # Spyglasses (and other context-dependent items) have different GUI and
+        # held models. Resolve the GUI case before considering the fallback.
+        if node.get("type") == "minecraft:select" and node.get("property") == "minecraft:display_context":
+            for case in node.get("cases", []):
+                contexts = case["when"] if isinstance(case["when"], list) else [case["when"]]
+                if "gui" in contexts:
+                    return self.model_path(case["model"])
         for key in ("fallback", "on_false", "base"):
             if isinstance(node.get(key), dict):
                 result = self.model_path(node[key])
@@ -274,6 +283,9 @@ class ClientTextures:
 
 def render_icon(spec, client, bonus=False, phase=""):
     from PIL import Image, ImageDraw, ImageColor
+    if spec.get("vanilla"):
+        # Audit preview only: the plugin leaves this item's native model untouched.
+        return client.icon(spec["icon"]).resize((32, 32), Image.Resampling.NEAREST)
     image = Image.new("RGBA", (32, 32))
     subjects = spec["subjects"]
     if not 1 <= len(subjects) <= 4:
@@ -340,9 +352,13 @@ def build_pack(client_jar, specs):
                 if len(pictures) > 1:
                     files[path + ".mcmeta"] = {"animation": {"width": 32, "height": 32,
                                                                "frametime": FRAME_TICKS, "interpolate": False}}
+                if spec.get("vanilla"):
+                    continue
                 files[f"assets/blockracing/models/item/{name}.json"] = {
                     "parent": "minecraft:item/generated", "gui_light": "front",
                     "textures": {"layer0": f"blockracing:item/{name}"}}
+            if spec.get("vanilla"):
+                continue
             grouped.setdefault(spec["icon"].lower(), []).append({
                 "when": "blockracing:" + key,
                 "model": {"type": "minecraft:condition", "property": "minecraft:custom_model_data", "index": 0,

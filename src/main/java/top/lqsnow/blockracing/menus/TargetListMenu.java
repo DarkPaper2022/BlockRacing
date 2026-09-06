@@ -156,7 +156,7 @@ public final class TargetListMenu extends MenuView {
                 + Game.getTargetDisplayName(target, viewer)).lore(lore).build();
         ItemMeta meta = item.getItemMeta();
         meta.setEnchantmentGlintOverride(Block.isBonusTarget(target) || (visual != null && visual.glint()));
-        if (visual != null) {
+        if (visual != null && !visual.vanilla()) {
             var model = meta.getCustomModelDataComponent();
             model.setStrings(List.of(visual.modelKey()));
             model.setFlags(List.of(Block.isBonusTarget(target)));

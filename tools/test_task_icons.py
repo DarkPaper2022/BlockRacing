@@ -46,7 +46,7 @@ class TaskIconTests(unittest.TestCase):
                              {k: v for k, v in original.items() if k != "model"}, name)
             self.assertEqual(changed["model"]["property"], "minecraft:custom_model_data")
             count += 1
-        self.assertEqual(count, len({s["icon"] for s in self.specs.values()}))
+        self.assertEqual(count, len({s["icon"] for s in self.specs.values() if not s.get("vanilla")}))
 
     def test_every_goal_has_matching_normal_and_bonus_models(self):
         actual = set()
@@ -61,7 +61,20 @@ class TaskIconTests(unittest.TestCase):
                     document = json.loads(self.pack.read("assets/blockracing/models/" + model + ".json"))
                     texture = document["textures"]["layer0"].split(":", 1)[1]
                     self.assertIn("assets/blockracing/textures/" + texture + ".png", self.pack.namelist())
-        self.assertEqual(actual, {"blockracing:task/" + goal.lower() for goal in self.specs})
+        self.assertEqual(actual, {"blockracing:task/" + goal.lower() for goal, spec in self.specs.items()
+                                  if not spec.get("vanilla")})
+
+    def test_spyglass_uses_unmodified_vanilla_texture_without_model_override(self):
+        spec = self.specs["SPY_ON_20_UNIQUE_MOBS"]
+        self.assertTrue(spec["vanilla"])
+        self.assertEqual("", spec["badge"])
+        self.assertNotIn("assets/minecraft/items/spyglass.json", self.pack.namelist())
+        native = Image.open(io.BytesIO(self.client.read("assets/minecraft/textures/item/spyglass.png")))
+        native = native.convert("RGBA").resize((32, 32), Image.Resampling.NEAREST)
+        for suffix in ("", "_bonus"):
+            path = "assets/blockracing/textures/item/task/spy_on_20_unique_mobs" + suffix + ".png"
+            actual = Image.open(io.BytesIO(self.pack.read(path)))
+            self.assertEqual(native.tobytes(), actual.tobytes())
 
     def test_sprites_are_small_transparent_and_distinguish_critical_variants(self):
         for name in self.pack.namelist():

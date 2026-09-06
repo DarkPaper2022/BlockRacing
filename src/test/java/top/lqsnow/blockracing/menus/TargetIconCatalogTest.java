@@ -12,6 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TargetIconCatalogTest {
     @Test
+    void spyglassUsesNativeIconWithoutArtificialStackCount() {
+        var spyglass = TargetIconCatalog.matching("SPY_ON_20_UNIQUE_MOBS", "spy-unique:20");
+        assertNotNull(spyglass);
+        assertTrue(spyglass.vanilla());
+        assertEquals("SPYGLASS", spyglass.material().name());
+        assertEquals(20, spyglass.count());
+        assertEquals(1, spyglass.stackAmount());
+        assertEquals("", spyglass.badge());
+        var eyeSpy = TargetIconCatalog.all().get("GET_EYE_SPY_ADVANCEMENT");
+        assertEquals("ENDER_EYE", eyeSpy.material().name());
+        assertFalse(eyeSpy.vanilla());
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
     void everyEnabledGoalHasMatchingMetadata() throws Exception {
         var parser = Block.class.getDeclaredMethod("parseCsvLine", String.class);
