@@ -1,52 +1,58 @@
-# BlockRacing Game Settings
-# This configuration file is only used to retain settings data after server restarts.
-# Settings for the current game will be automatically saved to this file when the server shuts down.
-# If the server is already running, please go to the in-game settings interface for adjustments, do not modify here.
+# BlockRacing game settings
+# 该配置文件仅用于服务器重启后保留设置数据
+# 服务器关闭时将自动保存本局游戏的设置到该文件
+# 如果服务器已启动，请前往游戏中的设置界面进行设置，不要在这里调整
 
-# Language
+# 语言
 lang: en_us
 
-# Additional progress-score band settings, excluding 1-point targets
+# 除去 1 分目标以外的额外进度分值段设置
 medium-block: true
 hard-block: true
 
-# Number of targets sampled from the full target pool per game
+# Total number of target blocks in one game (regular scored tasks)
 block-amount: 64
 
-# Maximum number of 1-point targets sampled per game
+# 每局最多抽取多少个 1 分目标
 max-easy-targets-per-game: 8
 
-# Number of leading tasks that are available/visible at the same time
-# default: 64
-# max: 128
+# Bonus 任务的分数阈值，分数 >= 此值视为 bonus 任务
+bonus-score-threshold: 11
+
+# 每局抽取多少个 bonus 任务
+bonus-target-amount: 3
+
+# 同时可做/可见的队首任务数量
+# 默认：64
+# 最大：128
 available-task-amount: 64
 
-# Spendable points required to buy one locate command permission
+# 购买一次 locate 命令权限消耗的可用积分
 locate-cost: 5
 
-# Spendable points required for random teleport, first random teleport remains free
+# 随机传送消耗的可用积分，首次随机传送仍免费
 random-teleport-cost: 2
 
-# Game mode:
-# normal - Normal Mode: Both teams need to collect random blocks in random order, and collecting blocks will give a set of those blocks to the opposing team's chest
-# racing - Racing Mode: Both teams need to collect the same blocks in the same order, and collecting blocks will not give a set of blocks to the opposing team
+# 游戏模式：
+# normal - 普通模式：双方共享互斥任务；普通物品任务完成后向对方队伍箱子赠送一组物品
+# racing - 竞速模式：双方共享互斥任务，不赠送物品
 game-mode: racing
 
-# Speed mode:
-# When speed mode is enabled, players will be given certain items and effects at the start
-# Items: Silk Touch Iron Pickaxe, Cooked Beef, Damaged Elytra, Experience Repair Enchantment Book
-# Effects: Haste V
+# 极速模式：
+# 开启极速模式后，开局时将会给予玩家部分道具和效果
+# 物品：精准采集铁镐、熟牛排、损坏的鞘翅、经验修补附魔书
+# 效果：急迫V
 speed-mode: false
 
-# max team chest number
-# default：8
-# max：53
+# 团队箱子个数
+# 默认：8
+# 最大：53
 max-team-chest-num: 8
 
-# max team waypoint number
-# default: 8
-# max: 53
+# 路径点个数
+# 默认：8
+# 最大：53
 max-team-waypoint-num: 8
 
-# If you don't know what this is, don't touch it
-config-version: 3.5
+# 如果你不知道这是什么，不要动它
+config-version: 26.2.1

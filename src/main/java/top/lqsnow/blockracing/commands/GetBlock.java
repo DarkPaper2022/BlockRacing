@@ -9,14 +9,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.lqsnow.blockracing.managers.Game;
+import top.lqsnow.blockracing.managers.Message;
+import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static top.lqsnow.blockracing.managers.Game.getCurrentBlocks;
 import static top.lqsnow.blockracing.managers.Game.getCurrentGameState;
-import static top.lqsnow.blockracing.utils.ColorUtil.t;
-
 public class GetBlock implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -27,42 +27,38 @@ public class GetBlock implements CommandExecutor, TabCompleter {
         }
 
         if (getCurrentGameState().equals(Game.GameState.PREGAME)) {
-            player.sendMessage(t("&cThis command can only be used after the start of the game!"));
+            player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
             return true;
         }
 
-        if (args.length < 2) {
-            player.sendMessage(t("&cMissing parameters"));
+        if (args.length != 2) {
+            player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
 
+        if (!args[0].equalsIgnoreCase("red") && !args[0].equalsIgnoreCase("blue")) {
+            player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
+            return true;
+        }
         int index;
         try {
             index = Integer.parseInt(args[1]);
-        } catch (NumberFormatException exception) {
-            player.sendMessage(t("&cParameters error"));
+        } catch (NumberFormatException ex) {
+            player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
-
-        if (index < 1) {
-            player.sendMessage(t("&cMissing parameters"));
+        List<String> currentBlocks = getCurrentBlocks(args[0].toLowerCase());
+        if (index < 1 || index > currentBlocks.size()) {
+            player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
 
         if (args[0].equalsIgnoreCase("red")) {
-            if (index > getCurrentBlocks("red").size()) {
-                player.sendMessage(t("&cParameters error"));
-                return true;
-            }
-            String block = getCurrentBlocks("red").get(index - 1);
-            sender.sendMessage(Game.getTargetDisplayName(block));
+            String block = currentBlocks.get(index - 1);
+            player.sendMessage(Game.getTargetDisplayName(block, player));
         } else if (args[0].equalsIgnoreCase("blue")) {
-            if (index > getCurrentBlocks("blue").size()) {
-                player.sendMessage(t("&cParameters error"));
-                return true;
-            }
-            String block = getCurrentBlocks("blue").get(index - 1);
-            sender.sendMessage(Game.getTargetDisplayName(block));
+            String block = currentBlocks.get(index - 1);
+            player.sendMessage(Game.getTargetDisplayName(block, player));
         }
         return true;
     }
@@ -76,14 +72,10 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             completions.add("red");
             completions.add("blue");
         } else if (args.length == 2) {
-            int maxIndex = 0;
-            if (args[0].equalsIgnoreCase("red")) {
-                maxIndex = getCurrentBlocks("red").size();
-            } else if (args[0].equalsIgnoreCase("blue")) {
-                maxIndex = getCurrentBlocks("blue").size();
-            }
-            for (int i = 1; i <= maxIndex; i++) {
-                completions.add(String.valueOf(i));
+            if (args[0].equalsIgnoreCase("red") || args[0].equalsIgnoreCase("blue")) {
+                for (int index = 1; index <= getCurrentBlocks(args[0].toLowerCase(java.util.Locale.ROOT)).size(); index++) {
+                    completions.add(String.valueOf(index));
+                }
             }
         }
 

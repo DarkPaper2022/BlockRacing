@@ -3,8 +3,6 @@ package top.lqsnow.blockracing.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.mineacademy.fo.menu.model.ItemCreator;
-import org.mineacademy.fo.remain.CompMaterial;
 import top.lqsnow.blockracing.Main;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
@@ -16,10 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.logging.Level;
 
-import static top.lqsnow.blockracing.managers.Gui.checkBlockInventory;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class Block {
+    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Block.class.getName());
     private static final Random RANDOM = new Random();
     private static final int EASY_SCORE = 1;
     private static final int NORMAL_SCORE = 2;
@@ -53,6 +51,7 @@ public class Block {
     public static List<String> allBlocks = new ArrayList<>();
     public static Map<String, Integer> targetScores = new HashMap<>();
     private static final Map<String, String> chineseDisplayNames = new HashMap<>();
+    private static final Map<String, String> definitionSignatures = new HashMap<>();
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
     public static List<String> blueTeamBlocks = new ArrayList<>();
@@ -79,6 +78,20 @@ public class Block {
         maxBlockAmount = blocks.size();
     }
 
+    public static int selectableTargetCount() {
+        int easy = (int) allBlocks.stream().filter(target -> getTargetScore(target) == EASY_SCORE).count();
+        return allBlocks.size() - easy + Math.min(easy, Setting.getMaxEasyTargetsPerGame());
+    }
+
+    public static int clampBlockAmount(int requested, int available) {
+        return Math.max(0, Math.min(Math.min(Setting.MAX_BLOCK_AMOUNT_LIMIT, Math.max(10, requested)), available));
+    }
+
+    public static void refreshAvailableBlocksAndClampAmount() {
+        addUpBlocks();
+        Setting.setBlockAmount(clampBlockAmount(Setting.getBlockAmount(), selectableTargetCount()));
+    }
+
     public static void setupBlocks() {
         redTeamRemainingBlocks.clear();
         blueTeamRemainingBlocks.clear();
@@ -94,10 +107,10 @@ public class Block {
         blueTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
         redTeamRemainingBlocks.addAll(List.copyOf(redTeamBlocks));
         blueTeamRemainingBlocks.addAll(List.copyOf(blueTeamBlocks));
-        Bukkit.getLogger().info("[BlockRacing] Blocks generate complete.");
-        Bukkit.getLogger().info("Red team blocks: " + redTeamBlocks.toString());
-        Bukkit.getLogger().info("Blue team blocks: " + blueTeamBlocks.toString());
-        Bukkit.getLogger().info("Bonus blocks: " + sharedBonusBlocks);
+        LOGGER.info("[BlockRacing] Blocks generate complete.");
+        LOGGER.info("Red team blocks: " + redTeamBlocks.toString());
+        LOGGER.info("Blue team blocks: " + blueTeamBlocks.toString());
+        LOGGER.info("Bonus blocks: " + sharedBonusBlocks);
     }
 
     public static List<String> generateSampleBlocks(int blockAmount) {
@@ -135,13 +148,13 @@ public class Block {
         }
 
         Collections.shuffle(targetBlocks, RANDOM);
-        Bukkit.getLogger().info("[BlockRacing] Generated targets: amount=" + targetBlocks.size()
+        LOGGER.fine("[BlockRacing] Generated targets: amount=" + targetBlocks.size()
                 + ", one-point=" + countTargetsByScore(targetBlocks, EASY_SCORE)
                 + ", total-score=" + getTotalScore(targetBlocks));
         return targetBlocks;
     }
 
-    private static List<String> generateBonusBlocks() {
+    static List<String> generateBonusBlocks() {
         List<String> bonusTargets = new ArrayList<>();
         for (String target : targetScores.keySet()) {
             if (isBonusTarget(target)) {
@@ -158,7 +171,7 @@ public class Block {
         }
 
         Collections.shuffle(selectedBonusTargets, RANDOM);
-        Bukkit.getLogger().info("[BlockRacing] Generated bonus targets: amount=" + selectedBonusTargets.size()
+        LOGGER.info("[BlockRacing] Generated bonus targets: amount=" + selectedBonusTargets.size()
                 + ", reward=" + getTotalScore(selectedBonusTargets));
         return selectedBonusTargets;
     }
@@ -269,17 +282,17 @@ public class Block {
         for (String str : targetScores.keySet()) {
             if (Goal.isKnownGoalId(str)) {
                 if (!Goal.isValid(str)) {
-                    Bukkit.getLogger().severe("[BlockRacing] Invalid Draftout goal: " + str);
+                    LOGGER.severe("[BlockRacing] Invalid Draftout goal: " + str);
                     sendAll(String.format(Message.NOTICE_ERROR_BLOCK.getString(), getDisplayName(str)));
                     flag = false;
                 }
                 continue;
             }
             try {
-                ItemStack item = ItemCreator.of(CompMaterial.fromMaterial(Material.valueOf(str))).amount(64).make();
-                checkBlockInventory.setItem(0, item);
+                Material material = Material.valueOf(str);
+                if (!material.isItem()) throw new IllegalArgumentException("Not an inventory item: " + str);
             } catch (Exception e) {
-                Bukkit.getLogger().severe(String.format("[BlockRacing] " + Message.NOTICE_ERROR_BLOCK.getString(), str));
+                LOGGER.severe(String.format("[BlockRacing] " + Message.NOTICE_ERROR_BLOCK.getString(), str));
                 sendAll(String.format(Message.NOTICE_ERROR_BLOCK.getString(), str));
                 flag = false;
             }
@@ -297,10 +310,11 @@ public class Block {
 
         Goal.clearDefinitions();
         chineseDisplayNames.clear();
+        definitionSignatures.clear();
 
         for (List<String> row : readCsvFile(TARGETS_FILE_NAME)) {
             if (row.size() < 3) {
-                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                LOGGER.warning("[BlockRacing] Invalid target CSV row: " + row);
                 continue;
             }
 
@@ -316,7 +330,7 @@ public class Block {
             }
 
             if (id.isEmpty() || type.isEmpty() || rawScore.isEmpty()) {
-                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                LOGGER.warning("[BlockRacing] Invalid target CSV row: " + row);
                 continue;
             }
 
@@ -324,12 +338,12 @@ public class Block {
             try {
                 score = Integer.parseInt(rawScore);
             } catch (NumberFormatException exception) {
-                Bukkit.getLogger().warning("[BlockRacing] Invalid target score: " + rawScore + " in " + row);
+                LOGGER.warning("[BlockRacing] Invalid target score: " + rawScore + " in " + row);
                 continue;
             }
 
             if (score < EASY_SCORE) {
-                Bukkit.getLogger().warning("[BlockRacing] Target score out of range: " + score + " in " + row);
+                LOGGER.warning("[BlockRacing] Target score out of range: " + score + " in " + row);
                 continue;
             }
 
@@ -340,7 +354,7 @@ public class Block {
             };
 
             if (target == null) {
-                Bukkit.getLogger().warning("[BlockRacing] Invalid target CSV row: " + row);
+                LOGGER.warning("[BlockRacing] Invalid target CSV row: " + row);
                 continue;
             }
 
@@ -349,14 +363,28 @@ public class Block {
             }
 
             loadedTargetScores.put(target, score);
+            definitionSignatures.put(target, type + "|" + score + "|" + requirement);
         }
 
         targetScores = Map.copyOf(loadedTargetScores);
-        Bukkit.getLogger().info("[BlockRacing] Loaded targets: " + targetScores.size());
+        LOGGER.info("[BlockRacing] Loaded targets: " + targetScores.size());
     }
 
     public static int getTargetScore(String target) {
         return targetScores.getOrDefault(target, EASY_SCORE);
+    }
+
+    public static String definitionFingerprint() {
+        String canonical = definitionSignatures.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .collect(java.util.stream.Collectors.joining("\n"));
+        try {
+            return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256")
+                    .digest(canonical.getBytes(StandardCharsets.UTF_8)));
+        } catch (java.security.NoSuchAlgorithmException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     public static int getTotalScore(List<String> targets) {
@@ -389,6 +417,14 @@ public class Block {
             }
         }
         return count;
+    }
+
+    public static String getDisplayName(String target, org.bukkit.entity.Player viewer) {
+        if (viewer == null) return getDisplayName(target);
+        if (LanguageManager.usesChinese(viewer)) {
+            return chineseDisplayNames.getOrDefault(target, Goal.isGoal(target) ? Goal.getDisplayName(target) : target);
+        }
+        return Goal.isGoal(target) ? Goal.getDisplayName(target) : TranslationUtil.getValue(target, viewer);
     }
 
     public static String getDisplayName(String target) {

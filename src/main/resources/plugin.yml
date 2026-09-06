@@ -1,10 +1,14 @@
 name: BlockRacing
-version: 3.5
+version: 26.2.1
 main: top.lqsnow.blockracing.Main
-api-version: 1.21.11
+api-version: '26.2'
 authors: [ LQ_Snow, xiaojiuwo233, FHSHKL ]
 description: The first team to collect the required blocks wins
 commands:
+  sampleblocks:
+    usage: "/sampleblocks [amount]"
+    description: "Preview regular scored tasks before starting a game."
+    permission: op
   tp:
     usage: "/tp <Teammate>"
     description: "TP to teammate."
@@ -31,9 +35,13 @@ commands:
     usage: "/block <team> <number>"
     description: "Query block."
   randomteam:
-    usage: "/randomteam"
-    description: "Random team."
-  sampleblocks:
-    usage: "/sampleblocks [amount]"
-    description: "Generate a pre-game sample block list."
-    permission: op
+    usage: "/randomteam [confirm]"
+    description: "Request or confirm balanced random teams."
+  shout:
+    aliases: [all]
+    usage: "/shout <message>"
+    description: "Send a message to every player."
+  language:
+    aliases: [lang]
+    usage: "/language [auto|zh_cn|en_us]"
+    description: "Select your display language."

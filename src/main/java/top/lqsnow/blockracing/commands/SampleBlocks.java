@@ -18,6 +18,10 @@ public class SampleBlocks implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (Game.getCurrentGameState() != Game.GameState.PREGAME) {
+            sender.sendMessage("Task sampling and reload are only available before a game.");
+            return true;
+        }
         int blockAmount = DEFAULT_SAMPLE_BLOCK_AMOUNT;
 
         if (args.length >= 1) {

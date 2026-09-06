@@ -1,223 +1,286 @@
-# BlockRacing 语言文件
-# 该文件存储了游戏中除了方块名的所有语言文字
-# 如果需要翻译方块名，请查看 https://github.com/LQSnow/BlockRacing/blob/3.0/docs/zh/TranslationTutorial-zh.md 的教程
-# 如需这个文件的翻译，可直接复制文件内容给ChatGPT，让他帮忙翻译
-# BlockRacing language files
-# This file stores all language characters in the game except block names.
-# If you need to translate the block name, please check the tutorial at https://github.com/LQSnow/BlockRacing/blob/3.0/docs/en/TranslationTutorial-en.md
-# If you need to translate this file, you can directly copy the file content to ChatGPT and let him help translate it.
-
-# 当前语言: 简体中文
 lang: zh_cn
-
-# 记分板
-# slot项中，如果引号里没有任何字符表示这一行不显示，如果引号里加空格表示这一行为空行
-# 注意！最终显示在记分板上的每一行，总字符数不能超过30，这是一行的最大显示范围！
-# 这个显示范围包含颜色代码和空格，占位符替换的文字也包含在内！
-# 超出范围的文字将无法显示！
 scoreboard:
   game-mode:
-    normal: "&a普通模式"
-    racing: "&3竞速模式"
-    speed: "&9极速模式"
+    normal: '&a普通模式'
+    racing: '&3竞速模式'
+    speed: '&9极速模式'
   blocks:
-    easy: "&a1分"
-    medium: "&e2分"
-    hard: "&c3分以上"
+    easy: '&a简单'
+    medium: '&e中等'
+    hard: '&c困难'
+    dyed: '&d染色'
+    end: '&e末地'
   pregame:
-    title: "&b&l方块竞速"
-    slot11: ""
-    slot10: "&a&lShift+F打开菜单"
-    slot9: "&e如果无法打开，"
-    slot8: "&e请检查&l潜行&e和&l切换副手&e的快捷键"
-    slot7: " "
-    slot6: "&b当前模式：&e%game_mode%"
-    slot5: "&b目标方块数量：&e%block_amount%"
-    slot4: "&b启用目标分值："
-    slot3: "%blocks%"
-    slot2: " "
-    slot1: "&e&lEnjoy the game!"
+    title: '&b&l方块竞速'
+    slot11: ''
+    slot10: '&b&lShift+F &f打开菜单'
+    slot9: ''
+    slot8: ''
+    slot7: ' '
+    slot6: '&7模式 &f%game_mode%'
+    slot5: '&7目标数量 &f%block_amount%'
+    slot4: '&7方块库'
+    slot3: '%blocks%'
+    slot2: ' '
+    slot1: '&7/language &8> &b切换语言'
   ingame:
-    title: "&b&l方块竞速"
-    red-score: "&c红队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%"
-    blue-score: "&9蓝队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%"
-    block-format: "&e%score%分 &7| &f%block%"
-    dividing-line: "----------------"
-    bottom-slot: "&e&lEnjoy the game!"
-
-# 队伍
+    title: '&b&l方块竞速'
+    red-score: '&c红队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
+    blue-score: '&9蓝队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
+    block-format: '&8[%difficulty%&8] &f%block%'
+    dividing-line: '&8&m--------------------------------'
+    bottom-slot: ''
+    block-difficulty:
+      easy: '&a简单'
+      medium: '&e中等'
+      hard: '&c困难'
+      dyed: '&d染色'
+      end: '&e末地'
 team:
   red:
-    name: "&c红队"
-    prefix: "&c[红队]"
-    chat: "&c[红队] %s: &f%s"
-    color: "&c"
+    name: '&c红队'
+    prefix: '&c[红队]'
+    chat: '&8[&a队伍&8] &c%s&7: &f%s'
+    color: '&c'
   blue:
-    name: "&9蓝队"
-    prefix: "&9[蓝队]"
-    chat: "&9[蓝队] %s: &f%s"
-    color: "&9"
-
-# 菜单
+    name: '&9蓝队'
+    prefix: '&9[蓝队]'
+    chat: '&8[&a队伍&8] &9%s&7: &f%s'
+    color: '&9'
 menu:
   pregame-menu:
-    title: "&0准备菜单"
-    join-red: "&c加入红队"
-    join-red-lore: "&c点击此处加入红队"
-    join-blue: "&9加入蓝队"
-    join-blue-lore: "&9点击此处加入蓝队"
-    ready: "&e准备"
-    ready-lore: "&9点击此处准备"
-    start: "&b开始游戏"
-    start-lore: "&9点击此处开始游戏"
-    block-amount: "&e目标方块数量："
-    block-amount-lore: "&e点击此处更改目标方块数量"
-    medium-blocks: "&e普通目标："
-    hard-blocks: "&e困难方块："
-    disabled: "&c已禁用"
-    enabled: "&a已启用"
-    current-mode: "&a当前模式："
-    switch-to: "&e切换至："
-    normal-mode: "&a普通模式"
-    racing-mode: "&3竞速模式"
-    speed-mode-enabled: "&a当前已开启：&9极速模式"
-    speed-mode-disabled: "&e当前未开启：&9极速模式"
+    title: '&0准备菜单'
+    join-red: '&c加入红队'
+    join-red-lore: '&c点击此处加入红队'
+    join-blue: '&9加入蓝队'
+    join-blue-lore: '&9点击此处加入蓝队'
+    ready: '&e准备'
+    ready-lore: '&9点击此处准备'
+    start: '&b开始游戏'
+    start-lore: '&9点击此处开始游戏'
+    block-amount: '&e目标方块数量：'
+    block-amount-lore: '&e点击此处更改目标方块数量'
+    medium-blocks: '&e普通目标：'
+    hard-blocks: '&e困难方块：'
+    dyed-blocks: '&e染色方块：'
+    end-blocks: '&e末地方块：'
+    disabled: '&c已禁用'
+    enabled: '&a已启用'
+    current-mode: '&a当前模式：'
+    switch-to: '&e切换至：'
+    normal-mode: '&a普通模式'
+    racing-mode: '&3竞速模式'
+    speed-mode-enabled: '&a当前已开启：&9极速模式'
+    speed-mode-disabled: '&e当前未开启：&9极速模式'
     normal-mode-lore:
-      - "&e两个队伍需要收集的方块及顺序完全&l随机&r&e，"
-      - "&e收集方块会将一组该方块给到对方的队伍箱子里！"
-      - "&b物品：石镐、石斧、石铲"
+    - '&e两个队伍需要收集的方块及顺序完全&l随机&r&e，'
+    - '&e收集方块会将一组该方块给到对方的队伍箱子里！'
+    - '&b物品：石镐、石斧、石铲'
     racing-mode-lore:
-      - "&e两个队伍需要收集的方块及顺序将完全&l相同&r&e，"
-      - "&e且收集方块将&l不会&r&e给予一组方块到对方队伍！"
-      - "&b物品：石镐、石斧、石铲"
+    - '&e两个队伍需要收集的方块及顺序将完全&l相同&r&e，'
+    - '&e且收集方块将&l不会&r&e给予一组方块到对方队伍！'
+    - '&b物品：石镐、石斧、石铲'
     speed-mode-lore:
-      - "&a开启极速模式后，开局时将会&l给予玩家部分物品和效果&e，"
-      - "&e完成任务可获得更多可消费积分。"
-      - "&b物品：精准采集铁镐、金胡萝卜、损坏的鞘翅、经验修补附魔书"
-      - "&b效果：急迫5、速度2、抗性2"
-    select-team: "&a选队"
-    block-setting: "&a方块设置"
-    select-mode: "&a模式选择"
-    ready-and-start: "&a准备和开始游戏"
+    - '&a开启极速模式后，开局时将会&l给予玩家部分物品和效果&e，'
+    - '&e且获得方块时加3分，以加快游戏进度。'
+    - '&b物品：精准采集铁镐、金胡萝卜、损坏的鞘翅、经验修补附魔书'
+    - '&b效果：急迫5、速度2、抗性2'
+    select-team: '&a选队'
+    block-setting: '&a方块设置'
+    select-mode: '&a模式选择'
+    ready-and-start: '&a准备和开始游戏'
+    random-team: '&d随机组队'
+    random-team-lore:
+    - '&b将当前所有在线玩家随机平均分配到红蓝两队'
+    - '&e点击后需要在聊天框中再次确认'
   game-menu:
-    title: "&0主菜单"
-    team-chest: "&a队伍箱子"
-    team-chest-lore: "&b打开队伍箱子选择界面"
-    target-list: "&e目标列表"
-    target-list-lore:
-      - "&b查看当前可完成的所有任务"
-      - "&7任务数量由服务器配置决定"
-    roll: "&e轮换已禁用"
-    roll-lore: "&c本服使用共享目标清单，不能轮换方块"
-    locate: "&b定位"
+    title: '&0主菜单'
+    team-chest: '&a队伍箱子'
+    team-chest-lore: '&b打开队伍箱子选择界面'
+    roll: '&e轮换'
+    roll-lore: '&b替换当前目标方块（每局每队最多 %count% 次）'
+    locate: '&b定位'
     locate-lore:
-      - "&b花费%score%积分获得一次locate命令使用权限"
-      - "&a请使用/locatebiome查询生物群系位置"
-      - "&a请使用/locatestructure查询结构位置"
-      - "&c注意！请确保语法正确，且结构存在于当前维度！"
-      - "&c指令一旦发送，无论有没有获取到坐标，都会扣除积分！"
-    waypoints: "&d记录点"
-    waypoints-lore: "&b保存或传送至记录点"
-    random-tp: "&9随机传送"
+    - '&b花费%score%积分获得一次locate命令使用权限'
+    - '&a请使用/locatebiome查询生物群系位置'
+    - '&a请使用/locatestructure查询结构位置'
+    - '&c注意！请确保语法正确，且结构存在于当前维度！'
+    - '&c指令一旦发送，无论有没有获取到坐标，都会扣除积分！'
+    waypoints: '&d记录点'
+    waypoints-lore: '&b保存或传送至记录点'
+    random-tp: '&9随机传送'
     random-tp-lore:
-      - "&b花费%random_tp_score%积分在&l主世界&r&b随机传送，首次免费"
+    - '&b花费%random_tp_score%积分在&l主世界&r&b随机传送，首次免费'
+    current-blocks: '&6当前目标概览'
+    current-blocks-lore:
+    - '&b在聊天框中显示红蓝两队'
+    - '&b当前可见的全部目标方块'
+    teammate-teleport: '&a传送到队友'
+    teammate-teleport-lore:
+    - '&b选择一名在线队友并直接传送'
+    - '&7也可以使用 /tp <玩家>'
+    supply: '&6购买团队补给 &8- &e5积分'
+    supply-lore:
+    - '&7为每位在线队友发放：'
+    - '&616个金胡萝卜 &8+ &f32个烟花火箭'
+    - '&7背包已满的物品会掉落在玩家脚下'
+    target-list: '&e目标列表'
+    target-list-lore:
+    - '&b查看当前可完成的所有任务'
+    - '&7任务数量由服务器配置决定'
+  teammate-teleport:
+    title: '&0传送到队友'
+    player-lore:
+    - '&a点击传送到该队友'
+    empty: '&c暂无在线队友'
+    empty-lore:
+    - '&7队友上线后会显示在这里'
   team-chest-select-menu:
-    title: "&0队伍箱子选择"
-    chest: "&b队伍箱子"
+    title: '&0队伍箱子选择'
+    chest: '&b队伍箱子'
   team-chest:
-    red-chest: "&c红队队伍箱子"
-    blue-chest: "&9蓝队队伍箱子"
+    red-chest: '&c红队队伍箱子'
+    blue-chest: '&9蓝队队伍箱子'
   way-point:
-    title: "&0记录点"
+    title: '&0记录点'
     empty:
-      waypoint: "&d记录点"
-      lore: "&b左键点击创建记录点"
+      waypoint: '&d记录点'
+      lore: '&b左键点击创建记录点'
     filled:
-      waypoint: "&6记录点"
+      waypoint: '&6记录点'
       lore:
-        - "&a维度：%dimension%"
-        - "&a坐标：%coords%"
-        - "&a群系：%biome%"
-        - "&b左键点击传送，右键点击删除"
-        - "&b删除记录点需要在聊天框确认"
-  target-list:
-    title: "&0目标列表 %page%/%total_page%"
-    item-lore:
-      - "&7目标序号：&f%index%"
-      - "&7目标分数/奖励：&e%score%"
-    progress-line: "&7我的进度：&f%current%/%required%"
-    progress-done-line: "&a已完成：&f%items%"
-    progress-missing-line: "&c还缺少：&f%items%"
-    progress-more-line: "&7等 %amount% 项"
-    previous: "&e上一页"
-    next: "&e下一页"
-    page: "&a第 %page%/%total_page% 页 &7| &f%amount% &7个可做任务"
+      - '&a维度：%dimension%'
+      - '&a坐标：%coords%'
+      - '&a群系：%biome%'
+      - '&b左键点击传送，右键点击删除'
+      - '&b删除记录点需要在聊天框确认'
   all:
-    return-back: "&c返回"
+    return-back: '&c返回'
+  target-list:
+    title: '&0目标列表 %page%/%total_page%'
+    item-lore:
+    - '&7目标序号：&f%index%'
+    - '&7目标分数/奖励：&e%score%'
+    progress-line: '&7我的进度：&f%current%/%required%'
+    progress-done-line: '&a已完成：&f%items%'
+    progress-missing-line: '&c还缺少：&f%items%'
+    progress-more-line: '&7等 %amount% 项'
+    previous: '&e上一页'
+    next: '&e下一页'
+    page: '&a第 %page%/%total_page% 页 &7| &f%amount% &7个可做任务'
+rule-book:
+  title: '&b方块竞速规则'
+  author: '&7BlockRacing'
+  pages:
+  - '&b&l任务竞速
 
-# 提示
+
+    &0双方共享任务，一方完成后另一方无法再获得。普通任务按分值计入胜利进度，达到开局总分的 50%（向上取整）获胜。通过 /menu targets 查看任务和个人进度。'
+  - '&b&l积分与 Bonus
+
+
+    &0普通任务另奖励 1 点可用积分，极速模式为 3 点。Bonus 按其分值奖励可用积分，不计胜利进度。定位、随机传送和补给消耗可用积分，不扣胜利进度。共享任务不允许轮换。'
+  - '&b&l配置与交流
+
+
+    &0默认 64 个普通任务、最多 8 个 1 分任务，另抽 3 个 Bonus。设置见 config.yml。/language 切换语言，游戏中聊天默认队内，/shout 向所有人发言。'
 notice:
-  welcome: "&b&l欢迎来到方块竞速！按Shift+F打开菜单进行选队和准备！如果没反应，请检查潜行和切换副手的快捷键！如果记分板显示的方块名称不完整，可以使用/block <队伍> <编号> 命令来查询！"
-  join-red: "&c%player% 加入了红队！"
-  join-blue: "&9%player% 加入了蓝队！"
-  already-in-red: "&c您已经加入红队了！"
-  already-in-blue: "&c您已经加入蓝队了！"
-  ready: "&a%player% 已准备！"
-  cancel-ready: "&c%player% 已取消准备！"
-  all-ready: "&b所有人都准备好了，可以开始游戏了！"
-  start: "&b游戏开始！"
-  exist-unready: "&c游戏无法开始！还有玩家未准备！"
-  unready-players: "&c未准备的玩家："
-  not-enough-players: "&c游戏无法开始！至少需要两个人！"
-  empty-team: "&c游戏无法开始！有队伍空无一人！"
-  too-much-blocks: "&c目标方块数量过多！最多只能设置为："
-  set-blocks: "&e请直接发送目标方块数量，发送quit取消输入"
-  set-blocks-quit: "&a成功退出输入模式！"
-  set-blocks-error: "&c请输入正确数字！如果您想退出输入模式，请发送quit"
-  set-blocks-success: "&a需要收集的方块数量更改为："
-  spawn-protect-notice: "&b提示：如果出生点附近无法放置或破坏方块，是因为服务器带有出生点保护，离开出生点附近即可！"
-  exist-error-block: "&4名为 %s 的物品不存在！请检查配置文件！"
-  not-enough-score: "&c积分不足！"
-  random-tp: "&a玩家%player%&a使用了随机传送！队伍积分-%score%"
-  red-collect: "&c红队&a收集了 &b%block% &a(来自&c%player%&a)"
-  blue-collect: "&9蓝队&a收集了 &b%block% &a(来自&9%player%&a)"
-  team-chest-full: "%team%&c队伍箱子已满！%block%无法放入队伍箱子！"
-  red-win: "&c&l红队获胜！"
-  blue-win: "&9&l蓝队获胜！"
-  red-team-chest: "&c红队队伍箱子"
-  blue-team-chest: "&9蓝队队伍箱子"
-  remove-waypoint: "&a&n点击此处删除记录点%index%"
-  tp-success: "&a已传送到 %x% %y% %z%"
-  tp-ocean: "&e检测您被传送到了海洋，正在重新传送"
-  red-remove-waypoint: "&b玩家 &c%player% &b移除了传送点%index%！"
-  blue-remove-waypoint: "&b玩家 &9%player% &b移除了传送点%index%！"
-  cannot-roll: "&c本局使用共享目标清单，不能轮换方块！"
-  roll-request: "&b玩家 %player% 申请轮换方块！本队所有在线玩家同意即可轮换！"
-  roll-request-cancel: "&c玩家 %player% 取消申请轮换方块！"
-  red-roll-success: "&c红队&a轮换掉了方块！"
-  blue-roll-success: "&9蓝队&a轮换掉了方块！"
-  spectator: "&c游戏已开始，由于您未选择队伍，您现在为旁观者！"
-  spectator-join: "&c游戏已开始，您现在为旁观者！"
-  locate-already-bought: "&c您已经购买过一次locate命令了！请使用完毕再购买！"
-  buy-locate: "&a%player%购买了定位命令使用权限！"
-  error-command: "&c指令输入错误！"
-  locate-no-permission: "&c您没有该命令的使用权限！请在菜单中购买！"
-  restart: "&b%player%申请重启！服务器中所有玩家申请即可重启游戏！使用/restartgame命令即可申请！"
-  restart-cancel: "&c%player%已取消重启申请！"
-  game-not-start: "&c游戏未开始！"
-  game-has-start: "&c游戏已开始！"
-  tp-player-success: "&a[队伍传送] &f已成功传送至 %player%"
-  spectator-tp-player-success: "&e[旁观者传送] &f已成功传送至 %player%"
-  player-not-exist: "&c玩家不存在！"
-  player-not-in-same-team: "&c玩家不在同一队伍！"
-  ranking: "&b---方块收集排行榜---"
-  ranking-red: "&c%player%: &b%amount%"
-  ranking-blue: "&9%player%: &b%amount%"
-  ranking-offline: "&7%player%: &b%amount%"
-  version-mismatch: "&c警告！当前您的config.yml和lang.yml的文件版本，与插件的版本不对应！您可能更新了插件，但没有更新配置文件！这可能会导致一些意料之外的错误！您可以将\\plugins\\BlockRacing文件夹中的两个配置文件删除，然后重启服务器，亦或是到github上下载最新版本的配置文件替换！"
-  version-mismatch-title: "&c警告！版本不对应！"
-  version-mismatch-subtitle: "&c请查看聊天框的具体信息！"
-  team-shuffle: "&a随机组队已完成！"
-
-# 如果你不知道这是什么，不要动它
-lang-version: 3.5
+  welcome: '&b&l欢迎来到方块竞速！按Shift+F打开菜单进行选队和准备！如果没反应，请检查潜行和切换副手的快捷键！如果记分板显示的方块名称不完整，可以使用/block <队伍> <编号> 命令来查询！'
+  welcome-lines:
+  - '&8&m--------------------------------'
+  - '&b&l方块竞速 &8| &f欢迎，%player%！'
+  - '&7按 &bShift+F &7打开菜单，选择队伍并准备。'
+  - '&7菜单无响应时，请检查潜行与切换副手按键。'
+  - '&7方块名显示不全？主菜单可查看全部目标。'
+  - '&8&m--------------------------------'
+  recovered-game:
+  - '&8&m--------------------------------'
+  - '&a&l已恢复上一局未完成的比赛'
+  - '&7分数、目标、队伍箱子、记录点与队伍均已恢复。'
+  - '&7如果上一局已经结束，请点击下方按钮投票重启。'
+  - '&8&m--------------------------------'
+  recovered-reset-button: '&c&l[上一局已结束，投票重启]'
+  recovered-reset-hover: '&7点击参与 /restartgame 重启投票'
+  join-red: '&8[&c队伍&8] &f%player% &7加入了&c红队&7。'
+  join-blue: '&8[&9队伍&8] &f%player% &7加入了&9蓝队&7。'
+  already-in-red: '&c您已经加入红队了！'
+  already-in-blue: '&c您已经加入蓝队了！'
+  ready: '&8[&a准备&8] &f%player% &7已准备。'
+  cancel-ready: '&8[&c准备&8] &f%player% &7取消了准备。'
+  all-ready: '&8[&a准备&8] &f所有人均已准备，可以开始游戏。'
+  start: '&8[&b游戏&8] &b&l游戏开始！'
+  exist-unready: '&c游戏无法开始！还有玩家未准备！'
+  unready-players: '&c未准备的玩家：'
+  not-enough-players: '&c游戏无法开始！至少需要两个人！'
+  empty-team: '&c游戏无法开始！有队伍空无一人！'
+  too-much-blocks: '&c目标方块数量过多！最多只能设置为：'
+  set-blocks: '&e请直接发送目标方块数量，发送quit取消输入'
+  set-blocks-quit: '&a成功退出输入模式！'
+  set-blocks-error: '&c请输入正确数字！如果您想退出输入模式，请发送quit'
+  set-blocks-success: '&a需要收集的方块数量更改为：'
+  spawn-protect-notice: '&8[&b提示&8] &7出生点附近受服务器保护，请离开该区域后再放置或破坏方块。'
+  exist-error-block: '&4名为 %s 的物品不存在！请检查配置文件！'
+  not-enough-score: '&c积分不足！'
+  random-tp: '&a玩家%player%&a使用了随机传送！队伍积分-%score%'
+  red-collect: '&8[&c红队&8] &f收集了 &b%block% &8· &7%player%'
+  blue-collect: '&8[&9蓝队&8] &f收集了 &b%block% &8· &7%player%'
+  team-chest-full: '%team%&c队伍箱子已满！%block%无法放入队伍箱子！'
+  supply-purchased: '&8[&6补给&8] &f%player% &7为%team%&7购买了团队补给，积分 &c-5&7。'
+  supply-speed-only: '&c团队补给仅在极速模式中可用！'
+  red-win: '&c&l红队获胜！'
+  blue-win: '&9&l蓝队获胜！'
+  red-team-chest: '&c红队队伍箱子'
+  blue-team-chest: '&9蓝队队伍箱子'
+  remove-waypoint: '&a&n点击此处删除记录点%index%'
+  tp-success: '&a已传送到 %x% %y% %z%'
+  tp-ocean: '&e检测您被传送到了海洋，正在重新传送'
+  red-remove-waypoint: '&b玩家 &c%player% &b移除了传送点%index%！'
+  blue-remove-waypoint: '&b玩家 &9%player% &b移除了传送点%index%！'
+  cannot-roll: '&c本局使用共享目标清单，不能轮换方块！'
+  roll-request: '&b玩家 %player% 申请轮换方块！本队所有在线玩家同意即可轮换！'
+  roll-request-cancel: '&c玩家 %player% 取消申请轮换方块！'
+  red-roll-success: '&8[&e轮换&8] &c红队 &7已更换当前目标方块。'
+  blue-roll-success: '&8[&e轮换&8] &9蓝队 &7已更换当前目标方块。'
+  spectator: '&c游戏已开始，由于您未选择队伍，您现在为旁观者！'
+  spectator-join: '&c游戏已开始，您现在为旁观者！'
+  locate-already-bought: '&c您已经购买过一次locate命令了！请使用完毕再购买！'
+  buy-locate: '&a%player%购买了定位命令使用权限！'
+  error-command: '&c指令输入错误！'
+  locate-no-permission: '&c您没有该命令的使用权限！请在菜单中购买！'
+  restart: '&b%player%申请重启！服务器中所有玩家申请即可重启游戏！使用/restartgame命令即可申请！'
+  restart-cancel: '&c%player%已取消重启申请！'
+  game-not-start: '&c游戏未开始！'
+  game-has-start: '&c游戏已开始！'
+  tp-player-success: '&a[队伍传送] &f已成功传送至 %player%'
+  spectator-tp-player-success: '&e[旁观者传送] &f已成功传送至 %player%'
+  player-not-exist: '&c玩家不存在！'
+  player-not-in-same-team: '&c玩家不在同一队伍！'
+  ranking: '&8&m------------&r &b&l收集排行 &8&m------------'
+  ranking-red: '&c■ &f%player% &8· &b%amount%'
+  ranking-blue: '&9■ &f%player% &8· &b%amount%'
+  ranking-offline: '&7■ %player% &8· &b%amount%'
+  ranking-divider: '&8&m--------------------------------'
+  version-mismatch: '&c警告！当前您的config.yml和lang.yml的文件版本，与插件的版本不对应！您可能更新了插件，但没有更新配置文件！这可能会导致一些意料之外的错误！您可以将\plugins\BlockRacing文件夹中的两个配置文件删除，然后重启服务器，亦或是到github上下载最新版本的配置文件替换！'
+  version-mismatch-lines:
+  - '&8&m--------------------------------'
+  - '&c&l配置文件版本不匹配'
+  - '&7插件已更新，但 config.yml 或 lang.yml 仍是旧版本。'
+  - '&7请备份自定义内容后更新配置文件，否则可能出现异常。'
+  - '&8&m--------------------------------'
+  version-mismatch-title: '&c警告！版本不对应！'
+  version-mismatch-subtitle: '&c请查看聊天框的具体信息！'
+  team-shuffle-triggered: '&d%player% &a触发了随机组队，当前在线玩家已完成平均分队！'
+  team-shuffle-confirm: '&e确定要将当前所有在线玩家重新随机分队吗？'
+  team-shuffle-confirm-button: '&a&l[点击确认随机组队]'
+  team-shuffle-confirm-hover: '&7确认后将清除当前队伍分配并重新平均分队'
+  team-shuffle-confirm-expired: '&c随机组队确认已失效，请重新发起！'
+  block-overview:
+    title: '&b&l当前目标方块'
+    red: '&c&l红队'
+    blue: '&9&l蓝队'
+    entry: '&7%index%. &f%block%'
+    divider: '&8&m--------------------------------'
+chat:
+  global-format: '&8[&e&l全部&8] %team% &f%player%&7: &f%message%'
+  team-hint: '&8[&b提示&8] &7当前为队伍聊天；使用 &f/shout 消息&7，或以 &f@ / ! &7开头发送给所有人。'
+lang-version: 26.2.1

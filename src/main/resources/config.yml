@@ -1,4 +1,4 @@
-# BlockRacing 游戏设置
+# BlockRacing game settings
 # 该配置文件仅用于服务器重启后保留设置数据
 # 服务器关闭时将自动保存本局游戏的设置到该文件
 # 如果服务器已启动，请前往游戏中的设置界面进行设置，不要在这里调整
@@ -10,7 +10,7 @@ lang: zh_cn
 medium-block: true
 hard-block: true
 
-# 每局从总池子抽取的目标数量
+# Total number of target blocks in one game (regular scored tasks)
 block-amount: 64
 
 # 每局最多抽取多少个 1 分目标
@@ -34,8 +34,8 @@ locate-cost: 5
 random-teleport-cost: 2
 
 # 游戏模式：
-# normal - 普通模式：两个队伍需要收集的方块及顺序完全随机，收集方块会将一组该方块给到对方的队伍箱子里
-# racing - 竞速模式：两个队伍需要收集的方块及顺序将完全相同，且收集方块将不会给予一组方块到对方队伍箱子里
+# normal - 普通模式：双方共享互斥任务；普通物品任务完成后向对方队伍箱子赠送一组物品
+# racing - 竞速模式：双方共享互斥任务，不赠送物品
 game-mode: racing
 
 # 极速模式：
@@ -55,4 +55,4 @@ max-team-chest-num: 8
 max-team-waypoint-num: 8
 
 # 如果你不知道这是什么，不要动它
-config-version: 3.5
+config-version: 26.2.1

@@ -1,14 +1,35 @@
 package top.lqsnow.blockracing.listeners;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.*;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import top.lqsnow.blockracing.Main;
+import top.lqsnow.blockracing.managers.*;
+import top.lqsnow.blockracing.menus.PreGameMenu;
+import top.lqsnow.blockracing.menus.LanguageMenu;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static top.lqsnow.blockracing.managers.Gui.updateMenu;
+import static top.lqsnow.blockracing.managers.Scoreboard.updateScoreboard;
+import static top.lqsnow.blockracing.managers.Team.isPlayerInBlueTeam;
+import static top.lqsnow.blockracing.managers.Team.isPlayerInRedTeam;
+import static top.lqsnow.blockracing.managers.Block.*;
+import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityBreedEvent;
@@ -19,40 +40,34 @@ import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
-import top.lqsnow.blockracing.Main;
-import top.lqsnow.blockracing.managers.*;
-import top.lqsnow.blockracing.menus.PreGameMenu;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static top.lqsnow.blockracing.managers.Gui.updateMenu;
-import static top.lqsnow.blockracing.managers.Scoreboard.updateScoreboard;
-import static top.lqsnow.blockracing.managers.Team.isPlayerInBlueTeam;
-import static top.lqsnow.blockracing.managers.Team.isPlayerInRedTeam;
-import static top.lqsnow.blockracing.utils.ColorUtil.t;
-import static top.lqsnow.blockracing.managers.Block.*;
-import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public class BasicListener implements Listener {
-    public static List<String> editAmountPlayer = new ArrayList<>();
+    private static final LegacyComponentSerializer LEGACY_SERIALIZER = LegacyComponentSerializer.legacySection();
+    public static List<String> editAmountPlayer = new CopyOnWriteArrayList<>();
 
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent event) {
         Game.playerLogin(event.getPlayer());
+        if (LanguageManager.registerFirstJoin(event.getPlayer())) {
+            LanguageMenu.sendFirstJoinPrompt(event.getPlayer());
+        }
     }
 
     @EventHandler
     private void onPlayerQuit(PlayerQuitEvent event) {
         Game.playerQuit(event.getPlayer());
+        Scoreboard.removePlayer(event.getPlayer());
+    }
+
+    @EventHandler
+    private void onPlayerLocaleChange(PlayerLocaleChangeEvent event) {
+        Bukkit.getScheduler().runTask(Main.getInstance(),
+                () -> Scoreboard.refreshPlayer(event.getPlayer()));
     }
 
     @EventHandler
@@ -65,46 +80,42 @@ public class BasicListener implements Listener {
     }
 
     @EventHandler
-    private void onPlayerChat(AsyncPlayerChatEvent event) {
+    private void onPlayerChat(AsyncChatEvent event) {
         Player player = event.getPlayer();
 
         // Change block amount
         if (editAmountPlayer.contains(player.getName())) {
-            if (!Game.getCurrentGameState().equals(Game.GameState.PREGAME)) return;
-            if (event.getMessage().equals("quit")) {
-                player.sendMessage(Message.NOTICE_SET_BLOCKS_QUIT.getString());
-                editAmountPlayer.remove(player.getName());
-                event.setCancelled(true);
-                return;
-            }
-            boolean flag;
-            int blockAmount = 0;
-            try {
-                blockAmount = Integer.parseInt(event.getMessage());
-                flag = true;
-            } catch (Exception ex) {
-                player.sendMessage(Message.NOTICE_SET_BLOCKS_ERROR.getString());
-                flag = false;
-            } finally {
-                event.setCancelled(true);
-            }
-            if (flag) {
-                setBlockAmount(blockAmount, true);
-                editAmountPlayer.remove(player.getName());
-            }
+            event.setCancelled(true);
+            String message = LEGACY_SERIALIZER.serialize(event.message());
+            Bukkit.getScheduler().runTask(Main.getInstance(), () -> handleBlockAmountInput(player, message));
+            return;
         }
 
-        // Change chat format
-        if (isPlayerInRedTeam(player)) {
-            event.setFormat(t(Message.TEAM_RED_CHAT.getString()));
-        } else if (isPlayerInBlueTeam(player)) {
-            event.setFormat(t(Message.TEAM_BLUE_CHAT.getString()));
+        TeamChat.handle(event);
+    }
+
+    private void handleBlockAmountInput(Player player, String message) {
+        if (!editAmountPlayer.contains(player.getName())) return;
+        if (!Game.getCurrentGameState().equals(Game.GameState.PREGAME)) {
+            editAmountPlayer.remove(player.getName());
+            return;
+        }
+        if (message.equalsIgnoreCase("quit")) {
+            player.sendMessage(Message.NOTICE_SET_BLOCKS_QUIT.getString(player));
+            editAmountPlayer.remove(player.getName());
+            return;
+        }
+        try {
+            setBlockAmount(Integer.parseInt(message), true);
+            editAmountPlayer.remove(player.getName());
+        } catch (NumberFormatException ex) {
+            player.sendMessage(Message.NOTICE_SET_BLOCKS_ERROR.getString(player));
         }
     }
 
     @EventHandler
     private void onPlayerRespawn(PlayerRespawnEvent event) {
-        event.getPlayer().sendMessage(Message.NOTICE_SPAWN_PROTECT.getString());
+        event.getPlayer().sendMessage(Message.NOTICE_SPAWN_PROTECT.getString(event.getPlayer()));
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, -1, 0, false, false));
             if (Game.getCurrentGameState().equals(Game.GameState.INGAME) && Setting.isSpeedMode()) event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.HASTE, -1, 4, false, false));
@@ -280,15 +291,11 @@ public class BasicListener implements Listener {
 
     public static void setBlockAmount(int blockAmount, Boolean sendMessage) {
         Block.addUpBlocks();
-        int maxAllowedBlockAmount = Math.min(maxBlockAmount, Setting.MAX_BLOCK_AMOUNT_LIMIT);
-        if (blockAmount < 10) {
-            if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + 10);
-            blockAmount = 10;
-        } else if (blockAmount > maxAllowedBlockAmount) {
-            if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + maxAllowedBlockAmount);
-            blockAmount = maxAllowedBlockAmount;
-        } else {
-            if (sendMessage) sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS.getString() + blockAmount);
+        blockAmount = Block.clampBlockAmount(blockAmount, Block.selectableTargetCount());
+        if (sendMessage) {
+            int finalBlockAmount = blockAmount;
+            sendAll(Message.NOTICE_SET_BLOCKS_SUCCESS,
+                    (viewer, text) -> text + finalBlockAmount);
         }
         Setting.setBlockAmount(blockAmount);
         updateMenu(new PreGameMenu());

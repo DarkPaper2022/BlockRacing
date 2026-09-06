@@ -1,13 +1,12 @@
 package top.lqsnow.blockracing.managers;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import top.lqsnow.blockracing.Main;
+import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +15,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
+import static top.lqsnow.blockracing.utils.ColorUtil.t;
+
 public enum Message {
+    MENU_TARGET_LIST("menu.game-menu.target-list"),
+    MENU_TARGET_LIST_LORE("menu.game-menu.target-list-lore"),
+    MENU_TARGET_LIST_TITLE("menu.target-list.title"),
+    MENU_TARGET_LIST_ITEM_LORE("menu.target-list.item-lore"),
+    MENU_TARGET_LIST_PROGRESS_LINE("menu.target-list.progress-line"),
+    MENU_TARGET_LIST_PROGRESS_DONE_LINE("menu.target-list.progress-done-line"),
+    MENU_TARGET_LIST_PROGRESS_MISSING_LINE("menu.target-list.progress-missing-line"),
+    MENU_TARGET_LIST_PROGRESS_MORE_LINE("menu.target-list.progress-more-line"),
+    MENU_TARGET_LIST_PREVIOUS("menu.target-list.previous"),
+    MENU_TARGET_LIST_NEXT("menu.target-list.next"),
+    MENU_TARGET_LIST_PAGE("menu.target-list.page"),
+    NOTICE_TEAM_SHUFFLE("notice.team-shuffle"),
     // scoreboard
     SCOREBOARD_MODE_NORMAL("scoreboard.game-mode.normal"),
     SCOREBOARD_MODE_RACING("scoreboard.game-mode.racing"),
@@ -24,6 +37,8 @@ public enum Message {
     SCOREBOARD_BLOCKS_EASY("scoreboard.blocks.easy"),
     SCOREBOARD_BLOCKS_MEDIUM("scoreboard.blocks.medium"),
     SCOREBOARD_BLOCKS_HARD("scoreboard.blocks.hard"),
+    SCOREBOARD_BLOCKS_DYED("scoreboard.blocks.dyed"),
+    SCOREBOARD_BLOCKS_END("scoreboard.blocks.end"),
     SCOREBOARD_PREGAME_TITLE("scoreboard.pregame.title"),
     SCOREBOARD_PREGAME_SLOT11("scoreboard.pregame.slot11"),
     SCOREBOARD_PREGAME_SLOT10("scoreboard.pregame.slot10"),
@@ -42,6 +57,12 @@ public enum Message {
     SCOREBOARD_BLOCK_FORMAT("scoreboard.ingame.block-format"),
     SCOREBOARD_DIVIDING_LINE("scoreboard.ingame.dividing-line"),
     SCOREBOARD_BOTTOM_SLOT("scoreboard.ingame.bottom-slot"),
+    SCOREBOARD_BLOCK_DIFFICULTY_EASY("scoreboard.ingame.block-difficulty.easy"),
+    SCOREBOARD_BLOCK_DIFFICULTY_MEDIUM("scoreboard.ingame.block-difficulty.medium"),
+    SCOREBOARD_BLOCK_DIFFICULTY_HARD("scoreboard.ingame.block-difficulty.hard"),
+    SCOREBOARD_BLOCK_DIFFICULTY_DYED("scoreboard.ingame.block-difficulty.dyed"),
+    SCOREBOARD_BLOCK_DIFFICULTY_END("scoreboard.ingame.block-difficulty.end"),
+
     // team
     TEAM_RED_NAME("team.red.name"),
     TEAM_RED_PREFIX("team.red.prefix"),
@@ -66,6 +87,8 @@ public enum Message {
     MENU_BLOCK_AMOUNT_LORE("menu.pregame-menu.block-amount-lore"),
     MENU_MEDIUM_BLOCKS("menu.pregame-menu.medium-blocks"),
     MENU_HARD_BLOCKS("menu.pregame-menu.hard-blocks"),
+    MENU_DYED_BLOCKS("menu.pregame-menu.dyed-blocks"),
+    MENU_END_BLOCKS("menu.pregame-menu.end-blocks"),
     MENU_DISABLED("menu.pregame-menu.disabled"),
     MENU_ENABLED("menu.pregame-menu.enabled"),
     MENU_CURRENT_MODE("menu.pregame-menu.current-mode"),
@@ -81,11 +104,11 @@ public enum Message {
     MENU_BLOCK_SETTING("menu.pregame-menu.block-setting"),
     MENU_SELECT_MODE("menu.pregame-menu.select-mode"),
     MENU_READY_AND_START("menu.pregame-menu.ready-and-start"),
+    MENU_RANDOM_TEAM("menu.pregame-menu.random-team"),
+    MENU_RANDOM_TEAM_LORE("menu.pregame-menu.random-team-lore"),
     MENU_GAME_TITLE("menu.game-menu.title"),
     MENU_TEAM_CHEST("menu.game-menu.team-chest"),
     MENU_TEAM_CHEST_LORE("menu.game-menu.team-chest-lore"),
-    MENU_TARGET_LIST("menu.game-menu.target-list"),
-    MENU_TARGET_LIST_LORE("menu.game-menu.target-list-lore"),
     MENU_ROLL("menu.game-menu.roll"),
     MENU_ROLL_LORE("menu.game-menu.roll-lore"),
     MENU_LOCATE("menu.game-menu.locate"),
@@ -94,6 +117,19 @@ public enum Message {
     MENU_WAYPOINTS_LORE("menu.game-menu.waypoints-lore"),
     MENU_RANDOM_TP("menu.game-menu.random-tp"),
     MENU_RANDOM_TP_LORE("menu.game-menu.random-tp-lore"),
+    MENU_CURRENT_BLOCKS("menu.game-menu.current-blocks"),
+    MENU_CURRENT_BLOCKS_LORE("menu.game-menu.current-blocks-lore"),
+    MENU_TEAMMATE_TELEPORT("menu.game-menu.teammate-teleport"),
+    MENU_TEAMMATE_TELEPORT_LORE("menu.game-menu.teammate-teleport-lore"),
+    MENU_TEAMMATE_TELEPORT_TITLE("menu.teammate-teleport.title"),
+    MENU_TEAMMATE_TELEPORT_PLAYER_LORE("menu.teammate-teleport.player-lore"),
+    MENU_TEAMMATE_TELEPORT_EMPTY("menu.teammate-teleport.empty"),
+    MENU_TEAMMATE_TELEPORT_EMPTY_LORE("menu.teammate-teleport.empty-lore"),
+    MENU_SUPPLY("menu.game-menu.supply"),
+    MENU_SUPPLY_LORE("menu.game-menu.supply-lore"),
+    RULE_BOOK_TITLE("rule-book.title"),
+    RULE_BOOK_AUTHOR("rule-book.author"),
+    RULE_BOOK_PAGES("rule-book.pages"),
     MENU_TEAM_CHEST_SELECT_TITLE("menu.team-chest-select-menu.title"),
     MENU_TEAM_CHEST_SELECT_CHEST("menu.team-chest-select-menu.chest"),
     MENU_RED_CHEST("menu.team-chest.red-chest"),
@@ -103,19 +139,14 @@ public enum Message {
     MENU_WAYPOINT_EMPTY_LORE("menu.way-point.empty.lore"),
     MENU_WAYPOINT_FILLED("menu.way-point.filled.waypoint"),
     MENU_WAYPOINT_FILLED_LORE("menu.way-point.filled.lore"),
-    MENU_TARGET_LIST_TITLE("menu.target-list.title"),
-    MENU_TARGET_LIST_ITEM_LORE("menu.target-list.item-lore"),
-    MENU_TARGET_LIST_PROGRESS_LINE("menu.target-list.progress-line"),
-    MENU_TARGET_LIST_PROGRESS_DONE_LINE("menu.target-list.progress-done-line"),
-    MENU_TARGET_LIST_PROGRESS_MISSING_LINE("menu.target-list.progress-missing-line"),
-    MENU_TARGET_LIST_PROGRESS_MORE_LINE("menu.target-list.progress-more-line"),
-    MENU_TARGET_LIST_PREVIOUS("menu.target-list.previous"),
-    MENU_TARGET_LIST_NEXT("menu.target-list.next"),
-    MENU_TARGET_LIST_PAGE("menu.target-list.page"),
     MENU_ALL_RETURN_BACK("menu.all.return-back"),
 
     // notice
     NOTICE_WELCOME("notice.welcome"),
+    NOTICE_WELCOME_LINES("notice.welcome-lines"),
+    NOTICE_RECOVERED_GAME("notice.recovered-game"),
+    NOTICE_RECOVERED_RESET_BUTTON("notice.recovered-reset-button"),
+    NOTICE_RECOVERED_RESET_HOVER("notice.recovered-reset-hover"),
     NOTICE_JOIN_RED("notice.join-red"),
     NOTICE_JOIN_BLUE("notice.join-blue"),
     NOTICE_ALREADY_IN_RED("notice.already-in-red"),
@@ -140,6 +171,12 @@ public enum Message {
     NOTICE_RED_COLLECT("notice.red-collect"),
     NOTICE_BLUE_COLLECT("notice.blue-collect"),
     NOTICE_TEAM_CHEST_FULL("notice.team-chest-full"),
+    NOTICE_SUPPLY_PURCHASED("notice.supply-purchased"),
+    NOTICE_SUPPLY_SPEED_ONLY("notice.supply-speed-only"),
+    NOTICE_TEAM_SHUFFLE_CONFIRM("notice.team-shuffle-confirm"),
+    NOTICE_TEAM_SHUFFLE_CONFIRM_BUTTON("notice.team-shuffle-confirm-button"),
+    NOTICE_TEAM_SHUFFLE_CONFIRM_HOVER("notice.team-shuffle-confirm-hover"),
+    NOTICE_TEAM_SHUFFLE_CONFIRM_EXPIRED("notice.team-shuffle-confirm-expired"),
     NOTICE_RED_WIN("notice.red-win"),
     NOTICE_BLUE_WIN("notice.blue-win"),
     NOTICE_RED_TEAM_CHEST("notice.red-team-chest"),
@@ -172,10 +209,21 @@ public enum Message {
     NOTICE_RANKING_RED("notice.ranking-red"),
     NOTICE_RANKING_BLUE("notice.ranking-blue"),
     NOTICE_RANKING_OFFLINE("notice.ranking-offline"),
+    NOTICE_RANKING_DIVIDER("notice.ranking-divider"),
     NOTICE_VERSION_MISMATCH("notice.version-mismatch"),
+    NOTICE_VERSION_MISMATCH_LINES("notice.version-mismatch-lines"),
     NOTICE_VERSION_MISMATCH_TITLE("notice.version-mismatch-title"),
     NOTICE_VERSION_MISMATCH_SUBTITLE("notice.version-mismatch-subtitle"),
-    NOTICE_TEAM_SHUFFLE("notice.team-shuffle"),
+    NOTICE_TEAM_SHUFFLE_TRIGGERED("notice.team-shuffle-triggered"),
+    NOTICE_BLOCK_OVERVIEW_TITLE("notice.block-overview.title"),
+    NOTICE_BLOCK_OVERVIEW_RED("notice.block-overview.red"),
+    NOTICE_BLOCK_OVERVIEW_BLUE("notice.block-overview.blue"),
+    NOTICE_BLOCK_OVERVIEW_ENTRY("notice.block-overview.entry"),
+    NOTICE_BLOCK_OVERVIEW_DIVIDER("notice.block-overview.divider"),
+
+    // chat
+    CHAT_GLOBAL_FORMAT("chat.global-format"),
+    CHAT_TEAM_HINT("chat.team-hint"),
 
     // other
     MESSAGE_LANG("lang"),
@@ -206,18 +254,13 @@ public enum Message {
             m.cacheString = null;
             m.cacheStringList = null;
         }
+        TranslationUtil.reload();
     }
 
     private static FileConfiguration getMessageConfig() {
         FileConfiguration messageConfig = YamlConfiguration.loadConfiguration(new File(Main.getInstance().getDataFolder(), "lang.yml"));
 
-        InputStream resource = Main.getInstance().getResource("lang.yml");
-        if (resource == null) {
-            Main.getInstance().getLogger().warning("[BlockRacing] Embedded lang.yml is missing; using file values only.");
-            return messageConfig;
-        }
-
-        try (Reader reader = new InputStreamReader(resource, StandardCharsets.UTF_8)) {
+        try (Reader reader = new InputStreamReader(Main.getInstance().getResource("lang.yml"), StandardCharsets.UTF_8)) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(reader);
             messageConfig.setDefaults(defConfig);
         } catch (IOException e) {
@@ -228,24 +271,26 @@ public enum Message {
     }
 
     public String getString() {
-        if (cacheString != null) {
-            return cacheString;
-        }
+        return cacheString != null ? cacheString : (cacheString = t(getMessageConfig().getString(path)));
+    }
 
-        String value = getMessageConfig().getString(path);
-        if (value == null) {
-            Main.getInstance().getLogger().warning("[BlockRacing] Missing lang.yml key: " + path);
-            value = path;
-        }
-        cacheString = ChatColor.translateAlternateColorCodes('&', value);
-        return cacheString;
+    public String getString(org.bukkit.entity.Player player) {
+        return LanguageManager.getString(this, player);
     }
 
     public List<String> getStringList() {
         return cacheStringList != null ? cacheStringList : (cacheStringList = Collections.unmodifiableList(
                 getMessageConfig().getStringList(path).stream()
-                        .map(msg -> ChatColor.translateAlternateColorCodes('&', msg))
+                        .map(msg -> t(msg))
                         .collect(Collectors.toList())
         ));
+    }
+
+    public List<String> getStringList(org.bukkit.entity.Player player) {
+        return LanguageManager.getStringList(this, player);
+    }
+
+    public String getPath() {
+        return path;
     }
 }

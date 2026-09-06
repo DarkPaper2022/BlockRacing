@@ -45,7 +45,14 @@ public enum Config {
         if (file == null) {
             file = new File(Main.getInstance().getDataFolder(), "config.yml");
         }
-        config = YamlConfiguration.loadConfiguration(file);
+        YamlConfiguration loaded = new YamlConfiguration();
+        loaded.options().parseComments(true);
+        try {
+            loaded.load(file);
+        } catch (IOException | org.bukkit.configuration.InvalidConfigurationException ex) {
+            throw new IllegalStateException("Unable to load config.yml", ex);
+        }
+        config = loaded;
         InputStream resource = Main.getInstance().getResource("config.yml");
         if (resource == null) {
             Main.getInstance().getLogger().warning("[BlockRacing] Embedded config.yml is missing; using file values only.");

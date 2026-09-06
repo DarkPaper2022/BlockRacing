@@ -4,7 +4,7 @@
 
 A score-based Minecraft team race derived from [LQSnow/BlockRacing](https://github.com/LQSnow/BlockRacing). Targets are shared and exclusive: completing a task removes it from the other team's list. The first team to earn at least half of the initial regular-task score wins, rounded up.
 
-Target server: Minecraft 1.21.11. Build requirements: JDK 21 and Maven. Plugin version: 3.5.
+Target server: Paper 26.2. Build/runtime requirements: JDK 25 or newer and Maven. Plugin version: 26.2.1. Upstream `26.2` (original commit `971489d`) is merged while retaining Draftout scoring.
 
 ## Branches
 
@@ -27,13 +27,15 @@ Target server: Minecraft 1.21.11. Build requirements: JDK 21 and Maven. Plugin v
 mvn clean verify
 ```
 
-Copy `target/BlockRacing-3.5.jar` into the `plugins/` directory of a separately installed Paper 1.21.11 server. Server binaries, worlds and generated outputs are excluded from Git.
+Copy `target/BlockRacing-26.2.1.jar` into the `plugins/` directory of a separately installed Paper 26.2 server. Server binaries, worlds and generated outputs are excluded from Git.
 
 On first startup, the plugin creates `plugins/BlockRacing/` with configuration, language resources and `Targets.csv`. Existing resources are not automatically replaced. Back up and compare your files when upgrading; edit server files while the server is stopped.
 
-The project currently has no automated tests. A successful build confirms compilation and packaging, not multiplayer behavior.
+`mvn verify` runs tests for sampling, resources, task-menu grouping, saved progress and upstream utilities. Multiplayer behavior still needs in-game verification.
 
-On `feature/per-team-worlds`, the six `world_red*` and `world_blue*` worlds belong to the plugin and are cleaned up after a win and on the next startup. Reserve these names for the game. `main` does not manage separate team worlds.
+The upgrade includes per-player Chinese/English (`/language`), team chat and global `/shout`, teammate teleport menus, speed supplies and saved-game recovery. Recovery preserves currency, victory points, Bonus tasks and custom goal progress separately. Incompatible task definitions cause the saved game to be backed up instead of resumed. Back up worlds and update your existing configuration, CSV and both language files before upgrading; old 1.21.11 servers cannot load this plugin.
+
+The paused feature branch still targets 1.21.11/JDK 21 and does not receive this upgrade. On `feature/per-team-worlds`, the six `world_red*` and `world_blue*` worlds belong to the plugin and are cleaned up after a win and on the next startup. Reserve these names for the game. `main` does not manage separate team worlds.
 
 ## Configuration and commands
 
@@ -48,8 +50,10 @@ See [the canonical configuration](../../src/main/resources/config.yml) for defau
 | `/menu randomTP` | Random teleport; the first menu teleport is free |
 | `/tp <teammate>` | Team teleport; use `/minecraft:tp` for the vanilla command |
 | `/block <red or blue> <index>` | Inspect a current target |
-| `/randomteam` | Assign teams randomly |
-| `/restartgame` | Shut down after player confirmation; restarting needs an external launcher |
+| `/language [auto or zh_cn or en_us]` | Choose a per-player language |
+| `/shout <message>` | Global message during a game; normal chat is team-only |
+| `/randomteam` | Assign teams randomly after confirmation |
+| `/restartgame` | Shut down after confirmation; back up/reset worlds on next startup; restarting needs an external launcher |
 | `/sampleblocks [amount]` | Admin preview of regular targets; use before a game |
 | `/debug reload` | Player-admin message reload; also reload targets before a game |
 | `/debug setscore <red or blue> <score>` | Set spendable currency, not victory progress |

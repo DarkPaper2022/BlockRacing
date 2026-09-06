@@ -1,7 +1,5 @@
 package top.lqsnow.blockracing.managers;
 
-import lombok.Getter;
-import lombok.Setter;
 
 public class Setting {
     public static final int MAX_BLOCK_AMOUNT_LIMIT = 128;
@@ -12,33 +10,19 @@ public class Setting {
     public static final int MIN_COST = 0;
     public static final int MAX_COST = 128;
 
-    @Getter
     private static boolean enableMediumBlock;
-    @Getter
     private static boolean enableHardBlock;
-    @Getter
     private static int blockAmount;
-    @Getter
     private static int maxEasyTargetsPerGame;
-    @Getter
     private static int availableTaskAmount;
-    @Getter
     private static int locateCost;
-    @Getter
     private static int randomTeleportCost;
-    @Getter
     private static int bonusScoreThreshold;
-    @Getter
     private static int bonusTargetAmount;
-    @Getter
     private static int maxTeamChestNum;
-    @Getter
     private static  int maxTeamWaypointNum;
-    @Getter
     private static boolean speedMode;
     public enum GameMode {NORMAL, RACING}
-    @Getter
-    @Setter
     private static GameMode currentGameMode = GameMode.NORMAL;
 
     public static void getSettings(){
@@ -52,9 +36,13 @@ public class Setting {
         locateCost = clamp(Config.LOCATE_COST.getInt(), MIN_COST, MAX_COST);
         randomTeleportCost = clamp(Config.RANDOM_TELEPORT_COST.getInt(), MIN_COST, MAX_COST);
         speedMode = Config.SPEED_MODE.getBoolean();
-        maxTeamChestNum = Config.MAX_TEAM_CHEST_NUM.getInt();
-        maxTeamWaypointNum = Config.MAX_TEAM_WAYPOINT_NUM.getInt();
-        setCurrentGameMode(GameMode.valueOf(Config.GAME_MODE.getString().toUpperCase()));
+        maxTeamChestNum = clamp(Config.MAX_TEAM_CHEST_NUM.getInt(), 1, 53);
+        maxTeamWaypointNum = clamp(Config.MAX_TEAM_WAYPOINT_NUM.getInt(), 1, 53);
+        try {
+            setCurrentGameMode(GameMode.valueOf(Config.GAME_MODE.getString().toUpperCase(java.util.Locale.ROOT)));
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            setCurrentGameMode(GameMode.RACING);
+        }
     }
 
     public static void setEnableMediumBlock(boolean enableMediumBlock) {
@@ -68,7 +56,7 @@ public class Setting {
     }
 
     public static void setBlockAmount(int blockAmount) {
-        Setting.blockAmount = clamp(blockAmount, 10, MAX_BLOCK_AMOUNT_LIMIT);
+        Setting.blockAmount = clamp(blockAmount, 0, MAX_BLOCK_AMOUNT_LIMIT);
         Config.BLOCK_AMOUNT.setInt(Setting.blockAmount);
     }
 
@@ -122,6 +110,25 @@ public class Setting {
 
     public static void toggleSpeedMode() {
         setSpeedMode(!isSpeedMode());
+    }
+
+    public static boolean isEnableMediumBlock() { return enableMediumBlock; }
+    public static boolean isEnableHardBlock() { return enableHardBlock; }
+    public static int getBlockAmount() { return blockAmount; }
+    public static int getMaxEasyTargetsPerGame() { return maxEasyTargetsPerGame; }
+    public static int getAvailableTaskAmount() { return availableTaskAmount; }
+    public static int getLocateCost() { return locateCost; }
+    public static int getRandomTeleportCost() { return randomTeleportCost; }
+    public static int getBonusScoreThreshold() { return bonusScoreThreshold; }
+    public static int getBonusTargetAmount() { return bonusTargetAmount; }
+    public static int getMaxTeamChestNum() { return maxTeamChestNum; }
+    public static int getMaxTeamWaypointNum() { return maxTeamWaypointNum; }
+    public static boolean isSpeedMode() { return speedMode; }
+    public static GameMode getCurrentGameMode() { return currentGameMode; }
+
+    public static void setCurrentGameMode(GameMode mode) {
+        currentGameMode = mode;
+        Config.GAME_MODE.setString(mode.name().toLowerCase(java.util.Locale.ROOT));
     }
 
     private static int clamp(int value, int min, int max) {

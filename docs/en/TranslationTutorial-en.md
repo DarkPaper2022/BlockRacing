@@ -2,22 +2,21 @@
 
 [README](README-en.md) · [简体中文](../../TranslationTutorial.md)
 
-Messages and menus use the server's `plugins/BlockRacing/lang.yml`. Simplified Chinese task names come from the sixth column of `Targets.csv`; non-Chinese item names use `<language>.json`. Custom goals use the CSV `display_name` outside Chinese mode.
+The 26.2 merge supports per-player Chinese and English. Use `/language` or `/language auto|zh_cn|en_us`. Auto selects Chinese for Chinese clients and English otherwise.
 
-## Switching languages
+| Content | File under plugins/BlockRacing |
+| --- | --- |
+| Chinese messages | `lang.yml` |
+| English messages | `languages/en_us/lang.yml` |
+| Player preferences | `language-preferences.yml` |
+| Material translations | `zh_cn.json`, `en_us.json` |
+| Chinese task names | `Targets.csv`, column `中文显示` |
+| English custom goal names | `Targets.csv`, column `display_name` |
 
-1. Back up `plugins/BlockRacing/` and stop the server.
-2. Use the [bundled Chinese messages](../../src/main/resources/lang.yml) or [English messages](../../en-us/lang.yml) as the server's `lang.yml`.
-3. Set `lang` in `lang.yml` to `zh_cn`, `en_us`, or your language code. This is the field the translation code reads; the legacy `lang` field in `config.yml` is not read by the current `Config` enum.
-4. For English, keep `en_us.json` beside `lang.yml`; it is created on first startup. For another language, supply the matching JSON yourself.
-5. Restart and check task names, menus and messages.
+Missing files are copied on first startup; existing files are not replaced. Back up, stop the server and compare/update resources when upgrading. Do not overwrite the top-level Chinese message file with English to switch languages.
 
-Preserve YAML structure, color codes and placeholders such as `%player%`. Compare translations against the bundled message file when adding missing keys. Use [src/main/resources/config.yml](../../src/main/resources/config.yml) for current game defaults; the configuration examples in `en-us/` and `zh-cn/` are historical and should not replace your server settings wholesale.
+Edit [the English source](../../en-us/lang.yml) and [the Chinese source](../../src/main/resources/lang.yml), retaining YAML keys, color codes and placeholders. Missing message keys fall back to defaults, but existing outdated scoring or rule-book text must be updated manually. Admin `/debug reload` reloads messages; restart for a complete upgrade.
 
-## Additional languages
+The top-level `lang` field still controls legacy messages without player context, not player preferences. Some custom-goal progress details retain Chinese labels. A third selectable language requires changes to `LanguageManager`, the command and the menu, not just another JSON file.
 
-Find `minecraft/lang/<language>.json` in the asset index for your current Minecraft client. Use its hash to locate the corresponding asset object, then copy that object to the plugin directory as `<language>.json`. Asset index filenames vary between game versions.
-
-Translate CSV `display_name` for custom goals in non-Chinese mode, or `中文显示` for Chinese mode. Keep task IDs, Material names and requirement identifiers unchanged. This fork does not bundle `zh_cn.json`; Chinese target names are maintained in the CSV.
-
-See [target maintenance](../targets.md) for CSV details.
+Translate CSV labels, never task IDs, Material enum names or requirement identifiers. See [target maintenance](../targets.md).

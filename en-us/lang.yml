@@ -1,227 +1,304 @@
-# BlockRacing language files
-# This file stores all language characters in the game except block names.
-# If you need to translate the block name, please check the tutorial at https://github.com/LQSnow/BlockRacing/blob/3.0/docs/en/TranslationTutorial-en.md
-# If you need to translate this file, you can directly copy the file content to ChatGPT and let him help translate it.
-
-# Current language: English
 lang: en_us
-
-# Scoreboard
-# In slot settings, If there are no characters in the quotation marks, the line will not be displayed. If there is only one space in the quotation marks, it means that this line is empty.
-# Notice! The total number of characters in each line finally displayed on the scoreboard cannot exceed 30, which is the maximum display range of a line!
-# This display range includes color codes and spaces, and the text replaced by placeholders is also included!
-# Text beyond the range will not be displayed!
 scoreboard:
   game-mode:
-    normal: "&aNormal"
-    racing: "&3Racing"
-    speed: "&9Speed"
+    normal: '&aNormal'
+    racing: '&3Racing'
+    speed: '&9Speed'
   blocks:
-    easy: "&a1pt"
-    medium: "&e2pt"
-    hard: "&c3+pt"
+    easy: '&aEZ'
+    medium: '&eMID'
+    hard: '&cHARD'
+    dyed: '&dDYED'
+    end: '&eEND'
   pregame:
-    title: "&b&lBlock Racing"
-    slot11: "&a&lShift+F to open the menu"
-    slot10: "&eIf it doesn't work,"
-    slot9: "&epls check the key binds of"
-    slot8: "&e&lSneak &e& &e&lSwap offhand"
-    slot7: " "
-    slot6: "&bCurrent mode: &e%game_mode%"
-    slot5: "&bBlock amount: &e%block_amount%"
-    slot4: "&bTarget scores: "
-    slot3: "%blocks%"
-    slot2: " "
-    slot1: "&e&lEnjoy the game!"
+    title: '&b&lBlock Racing'
+    slot11: ''
+    slot10: '&b&lShift+F &fto open the menu'
+    slot9: ''
+    slot8: ''
+    slot7: ' '
+    slot6: '&7Mode &f%game_mode%'
+    slot5: '&7Targets &f%block_amount%'
+    slot4: '&7Block Pools'
+    slot3: '%blocks%'
+    slot2: ' '
+    slot1: '&7/language &8> &bLanguage'
   ingame:
-    title: "&b&lBlock Racing"
-    red-score: "&cRed &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%"
-    blue-score: "&9Blue &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%"
-    block-format: "&e%score% pts &7| &f%block%"
-    dividing-line: "----------------"
-    bottom-slot: "&e&lEnjoy the game!"
-
-# Team
+    title: '&b&lBlock Racing'
+    red-score: '&cRed &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%'
+    blue-score: '&9Blue &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%'
+    block-format: '&8[%difficulty%&8] &f%block%'
+    dividing-line: '&8&m--------------------------------'
+    bottom-slot: ''
+    block-difficulty:
+      easy: '&aEASY'
+      medium: '&eMID'
+      hard: '&cHARD'
+      dyed: '&dDYED'
+      end: '&eEND'
 team:
   red:
-    name: "&RedTeam"
-    prefix: "&c[RedTeam]"
-    chat: "&c[RedTeam] %s: &f%s"
-    color: "&c"
+    name: '&cRed Team'
+    prefix: '&c[Red]'
+    chat: '&8[&aTeam&8] &c%s&7: &f%s'
+    color: '&c'
   blue:
-    name: "&BlueTeam"
-    prefix: "&9[BlueTeam]"
-    chat: "&9[BlueTeam] %s: &f%s"
-    color: "&9"
-
-# Menu
+    name: '&9Blue Team'
+    prefix: '&9[Blue]'
+    chat: '&8[&aTeam&8] &9%s&7: &f%s'
+    color: '&9'
 menu:
   pregame-menu:
-    title: "&0Preparation Menu"
-    join-red: "&cJoin Red Team"
-    join-red-lore: "&cClick here to join the Red Team"
-    join-blue: "&9Join Blue Team"
-    join-blue-lore: "&9Click here to join the Blue Team"
-    ready: "&eReady"
-    ready-lore: "&9Click here to ready up"
-    start: "&bStart Game"
-    start-lore: "&9Click here to start the game"
-    block-amount: "&eTarget Block Amount: "
-    block-amount-lore: "&eClick here to change the target block amount"
-    medium-blocks: "&eNormal Targets: "
-    hard-blocks: "&eHard Targets: "
-    disabled: "&cDisabled"
-    enabled: "&aEnabled"
-    current-mode: "&aCurrent Mode: "
-    switch-to: "&eSwitch to: "
-    normal-mode: "&aNormal Mode"
-    racing-mode: "&3Racing Mode"
-    speed-mode-enabled: "&aCurrently Enabled: &9Speed Mode"
-    speed-mode-disabled: "&eCurrently Disabled: &9Speed Mode"
+    title: '&0Preparation Menu'
+    join-red: '&cJoin Red Team'
+    join-red-lore: '&cClick here to join the Red Team'
+    join-blue: '&9Join Blue Team'
+    join-blue-lore: '&9Click here to join the Blue Team'
+    ready: '&eReady'
+    ready-lore: '&9Click here to ready up'
+    start: '&bStart Game'
+    start-lore: '&9Click here to start the game'
+    block-amount: '&eTarget Block Amount: '
+    block-amount-lore: '&eClick here to change the target block amount'
+    medium-blocks: '&eNormal Targets: '
+    hard-blocks: '&eHard Targets: '
+    dyed-blocks: '&eDyed Blocks: '
+    end-blocks: '&eEnd Blocks: '
+    disabled: '&cDisabled'
+    enabled: '&aEnabled'
+    current-mode: '&aCurrent Mode: '
+    switch-to: '&eSwitch to: '
+    normal-mode: '&aNormal Mode'
+    racing-mode: '&3Racing Mode'
+    speed-mode-enabled: '&aCurrently Enabled: &9Speed Mode'
+    speed-mode-disabled: '&eCurrently Disabled: &9Speed Mode'
     normal-mode-lore:
-      - "&eThe blocks that both teams need to collect"
-      - "&eare completely &lrandom&r&e,"
-      - "&eCollecting a block will give 64 blocks"
-      - "&eof that block to the opponent's team chest!"
+    - '&eThe blocks that both teams need to collect'
+    - '&eare completely &lrandom&r&e,'
+    - '&eCollecting a block will give 64 blocks'
+    - '&eof that block to the opponent''s team chest!'
     racing-mode-lore:
-      - "&eThe blocks that both teams need to collect"
-      - "&eand the order will be completely &lsynchronized&r&e,"
-      - "&eand collecting blocks will &lnot&r&e give 64 blocks"
-      - "&eof that block to the opposing team!"
+    - '&eThe blocks that both teams need to collect'
+    - '&eand the order will be completely &lsynchronized&r&e,'
+    - '&eand collecting blocks will &lnot&r&e give 64 blocks'
+    - '&eof that block to the opposing team!'
     speed-mode-lore:
-      - "&aAfter enabling Speed Mode, players will be"
-      - "&e&lgiven certain items and effects&e at the start,"
-      - "&ecompleted tasks grant more spendable points."
-      - "&bItems: Silk Touch Iron Pickaxe, Cooked Beef, "
-      - "&b       Damaged Elytra, Enchanted Book of Mending"
-      - "&bEffects: Haste V"
-    select-team: "&aSelect Team"
-    block-setting: "&aBlock Setting"
-    select-mode: "&aMode Selection"
-    ready-and-start: "&aReady and Start Game"
+    - '&aAfter enabling Speed Mode, players will be'
+    - '&e&lgiven certain items and effects&e at the start,'
+    - '&eand gaining blocks will earn 3 points, '
+    - '&espeeding up the game progress.'
+    - '&bItems: Silk Touch Iron Pickaxe, Cooked Beef, '
+    - '&b       Damaged Elytra, Enchanted Book of Mending'
+    - '&bEffects: Haste V'
+    select-team: '&aSelect Team'
+    block-setting: '&aBlock Setting'
+    select-mode: '&aMode Selection'
+    ready-and-start: '&aReady and Start Game'
+    random-team: '&dRandom Teams'
+    random-team-lore:
+    - '&bRandomly balance all online players between both teams'
+    - '&eRequires confirmation in chat'
   game-menu:
-    title: "&0Main Menu"
-    team-chest: "&aTeam Chest"
-    team-chest-lore: "&bOpen the team chest selection menu"
-    target-list: "&eTarget List"
-    target-list-lore:
-      - "&bView all currently available tasks"
-      - "&7The amount is controlled by server config"
-    roll: "&eRoll Disabled"
-    roll-lore: "&cThis server uses a shared target list; rolling is disabled"
-    locate: "&bLocate"
+    title: '&0Main Menu'
+    team-chest: '&aTeam Chest'
+    team-chest-lore: '&bOpen the team chest selection menu'
+    roll: '&eRoll'
+    roll-lore: '&bReplace current targets (up to %count% times per team)'
+    locate: '&bLocate'
     locate-lore:
-      - "&bSpend %score% points to gain permission"
-      - "&bto use the locate command"
-      - "&aUse /locatebiome to query biome locations"
-      - "&aUse /locatestructure to query structure locations"
-      - "&cNote! Ensure correct syntax and that"
-      - "&cthe structure exists in the current dimension!"
-      - "&cOnce the command is sent, points will be"
-      - "&cdeducted whether or not coordinates are obtained!"
-    waypoints: "&dWaypoints"
-    waypoints-lore: "&bSave or teleport to waypoints"
-    random-tp: "&9Random Teleport"
+    - '&bSpend %score% points to gain permission'
+    - '&bto use the locate command'
+    - '&aUse /locatebiome to query biome locations'
+    - '&aUse /locatestructure to query structure locations'
+    - '&cNote! Ensure correct syntax and that'
+    - '&cthe structure exists in the current dimension!'
+    - '&cOnce the command is sent, points will be'
+    - '&cdeducted whether or not coordinates are obtained!'
+    waypoints: '&dWaypoints'
+    waypoints-lore: '&bSave or teleport to waypoints'
+    random-tp: '&9Random Teleport'
     random-tp-lore:
-      - "&bSpend %random_tp_score% points to &lrandomly teleport&r&b"
-      - "&bin the &lOverworld&r&b, first time is free"
+    - '&bSpend %random_tp_score% points to &lrandomly teleport&r&b'
+    - '&bin the &lOverworld&r&b, first time is free'
+    current-blocks: '&6Current task overview'
+    current-blocks-lore:
+    - '&bShow every currently visible target'
+    - '&bfor both teams in chat'
+    teammate-teleport: '&aTeleport to Teammate'
+    teammate-teleport-lore:
+    - '&bChoose an online teammate to teleport to'
+    - '&7You can also use /tp <player>'
+    supply: '&6Buy Team Supplies &8- &e5 Points'
+    supply-lore:
+    - '&7Give every online teammate:'
+    - '&616 Golden Carrots &8+ &f32 Firework Rockets'
+    - '&7Items drop at their feet if inventories are full'
+    target-list: '&eTarget List'
+    target-list-lore:
+    - '&bView all currently available tasks'
+    - '&7The amount is controlled by server config'
+  teammate-teleport:
+    title: '&0Teleport to Teammate'
+    player-lore:
+    - '&aClick to teleport to this teammate'
+    empty: '&cNo Online Teammates'
+    empty-lore:
+    - '&7Online teammates will appear here'
   team-chest-select-menu:
-    title: "&0Team Chest Selection"
-    chest: "&gTeam Chest "
+    title: '&0Team Chest Selection'
+    chest: '&bTeam Chest '
   team-chest:
-    red-chest: "&cRed Team Chest "
-    blue-chest: "&9Blue Team Chest "
+    red-chest: '&cRed Team Chest '
+    blue-chest: '&9Blue Team Chest '
   way-point:
-    title: "&0Waypoints"
+    title: '&0Waypoints'
     empty:
-      waypoint: "&dWaypoint "
-      lore: "&bLeft-click to create a waypoint"
+      waypoint: '&dWaypoint '
+      lore: '&bLeft-click to create a waypoint'
     filled:
-      waypoint: "&6Waypoint "
+      waypoint: '&6Waypoint '
       lore:
-        - "&aDimension: %dimension%"
-        - "&aCoordinates: %coords%"
-        - "&aBiom: %biome%"
-        - "&bLeft-click to teleport, right-click to delete"
-        - "&bDeleting waypoints requires confirmation in the chat"
-  target-list:
-    title: "&0Target List %page%/%total_page%"
-    item-lore:
-      - "&7Target index: &f%index%"
-      - "&7Score/reward: &e%score%"
-    progress-line: "&7My progress: &f%current%/%required%"
-    progress-done-line: "&aCompleted: &f%items%"
-    progress-missing-line: "&cMissing: &f%items%"
-    progress-more-line: "&7and %amount% more"
-    previous: "&ePrevious Page"
-    next: "&eNext Page"
-    page: "&aPage %page%/%total_page% &7| &f%amount% &7available tasks"
+      - '&aDimension: %dimension%'
+      - '&aCoordinates: %coords%'
+      - '&aBiome: %biome%'
+      - '&bLeft-click to teleport, right-click to delete'
+      - '&bDeleting waypoints requires confirmation in the chat'
   all:
-    return-back: "&cReturn"
+    return-back: '&cReturn'
+  target-list:
+    title: '&0Target List %page%/%total_page%'
+    item-lore:
+    - '&7Target index: &f%index%'
+    - '&7Score/reward: &e%score%'
+    progress-line: '&7My progress: &f%current%/%required%'
+    progress-done-line: '&aCompleted: &f%items%'
+    progress-missing-line: '&cMissing: &f%items%'
+    progress-more-line: '&7and %amount% more'
+    previous: '&ePrevious Page'
+    next: '&eNext Page'
+    page: '&aPage %page%/%total_page% &7| &f%amount% &7available tasks'
+rule-book:
+  title: '&bBlock Racing Rules'
+  author: '&7BlockRacing'
+  pages:
+  - '&b&lTask race
 
-# Notices
+
+    &0Both teams share exclusive tasks. Regular tasks award victory points. Reach half of the initial regular-task total,
+    rounded up, to win. Use /menu targets for tasks and personal progress.'
+  - '&b&lCurrency and Bonus
+
+
+    &0Regular tasks also award 1 currency, or 3 in speed mode. Bonus awards its score as currency only. Locate, random teleport
+    and supplies spend currency, not victory points. Shared tasks cannot be rolled.'
+  - '&b&lSettings and chat
+
+
+    &0Defaults: 64 regular tasks, at most eight 1-point tasks, plus three Bonus. See config.yml. Use /language for language
+    and /shout for global chat during a game.'
 notice:
-  welcome: "&b&lWelcome to Block Racing! Press Shift+F to open the menu for team selection and preparation! If there's no response, check the sneak and offhand switch shortcuts! If the block names displayed on the scoreboard are incomplete, you can use the /block <team> <number> command to query!"
-  join-red: "&c%player% joined the Red Team!"
-  join-blue: "&9%player% joined the Blue Team!"
-  already-in-red: "&cYou are already on the Red Team!"
-  already-in-blue: "&cYou are already on the Blue Team!"
-  ready: "&a%player% is ready!"
-  cancel-ready: "&c%player% canceled their ready status!"
-  all-ready: "&bEveryone is ready. The game can now begin!"
-  start: "&bGame Start!"
-  exist-unready: "&cThe game cannot start! Some players are not ready!"
-  unready-players: "&cUnready players: "
-  not-enough-players: "&cThe game cannot start! At least two players are needed!"
-  empty-team: "&cThe game cannot start! One team is empty!"
-  too-much-blocks: "&cToo many target blocks! Maximum allowed is: "
-  set-blocks: "&ePlease directly send the target block amount, send 'quit' to cancel input"
-  set-blocks-quit: "&aSuccessfully exited input mode!"
-  set-blocks-error: "&cPlease enter a valid number! Send 'quit' to exit input mode if needed."
-  set-blocks-success: "&aChanged the required block amount to: "
-  spawn-protect-notice: "&bNote: If you can't place or break blocks near spawn, it's due to spawn protection. Move away from spawn!"
-  exist-error-block: "&4Item named %s does not exist! Check the configuration file!"
-  not-enough-score: "&cInsufficient points!"
-  random-tp: "&aPlayer %player% used random teleport! Team points -%score%"
-  red-collect: "&cRed Team&a collected &b%block% &a(from &c%player%&a)"
-  blue-collect: "&9Blue Team&a collected &b%block% &a(from &9%player%&a)"
-  team-chest-full: "%team%&c team chest is full! %block% cannot be placed in the team chest!"
-  red-win: "&c&lRed Team Wins!"
-  blue-win: "&9&lBlue Team Wins!"
-  red-team-chest: "&cRed Team Chest"
-  blue-team-chest: "&9Blue Team Chest"
-  remove-waypoint: "&a&nClick here to delete waypoint %index%"
-  tp-success: "&aTeleported to %x% %y% %z%"
-  tp-ocean: "&eDetected teleportation to ocean, reteleporting"
-  red-remove-waypoint: "&bPlayer &c%player% &bremoved waypoint %index%!"
-  blue-remove-waypoint: "&bPlayer &9%player% &bremoved waypoint %index%!"
-  cannot-roll: "&cThis game uses a shared target list; rolling is disabled!"
-  roll-request: "&bPlayer %player% requests to roll blocks! All online players in the team must agree to proceed!"
-  roll-request-cancel: "&cPlayer %player% canceled the block roll request!"
-  red-roll-success: "&cRed Team&a successfully rolled the blocks!"
-  blue-roll-success: "&9Blue Team&a successfully rolled the blocks!"
-  spectator: "&cThe game has started, since you haven't selected a team, you are now a spectator!"
-  spectator-join: "&cThe game has started, you are now a spectator!"
-  locate-already-bought: "&cYou have already purchased the locate command once! Please use it before buying again!"
-  buy-locate: "&a%player% purchased the locate command permission!"
-  error-command: "&cIncorrect command input!"
-  locate-no-permission: "&cYou don't have permission to use that command! Purchase it in the menu!"
-  restart: "&b%player% requested a restart! The game will restart if all players on the server agree! Use /restartgame to apply!"
-  restart-cancel: "&c%player%'s restart request canceled!"
-  game-not-start: "&cThe game has not started!"
-  game-has-start: "&cThe game has started!"
-  tp-player-success: "&a[Team Teleport] &fSuccessfully teleported to %player%"
-  spectator-tp-player-success: "&e[Spectator Teleport] &fSuccessfully teleported to %player%"
-  player-not-exist: "&cPlayer does not exist!"
-  player-not-in-same-team: "&cPlayer is not on the same team!"
-  ranking: "&b---Block Collection Ranking---"
-  ranking-red: "&c%player%: &b%amount%"
-  ranking-blue: "&9%player%: &b%amount%"
-  ranking-offline: "&7%player%: &b%amount%"
-  version-mismatch: "&cWarning! The current file versions of your config.yml and lang.yml do not correspond to the plugin version! You may have updated the plugin, but did not update the configuration file! This may lead to some unexpected errors! You can delete the two configuration files in the \\plugins\\BlockRacing folder, and then restart the server, or download the latest version of the configuration file on GitHub to replace it!"
-  version-mismatch-title: "&cWarning! Version Mismatch!"
-  version-mismatch-subtitle: "&cPlease check the specific information in the chat!"
-  team-shuffle: "&aRandom team shuffle complete!"
-
-# If you don't know what this is, don't touch it
-lang-version: 3.5
+  welcome: '&b&lWelcome to Block Racing! Press Shift+F to open the menu for team selection and preparation! If there''s no
+    response, check the sneak and offhand switch shortcuts! If the block names displayed on the scoreboard are incomplete,
+    you can use the /block <team> <number> command to query!'
+  welcome-lines:
+  - '&8&m--------------------------------'
+  - '&b&lBlock Racing &8| &fWelcome, %player%!'
+  - '&7Press &bShift+F &7to choose a team and get ready.'
+  - '&7If it does not open, check Sneak and Swap Offhand.'
+  - '&7Target clipped? View all targets from the main menu.'
+  - '&8&m--------------------------------'
+  recovered-game:
+  - '&8&m--------------------------------'
+  - '&a&lRecovered the unfinished previous game'
+  - '&7Scores, targets, team chests, waypoints and teams were restored.'
+  - '&7If the previous game had ended, click below to vote for a restart.'
+  - '&8&m--------------------------------'
+  recovered-reset-button: '&c&l[Previous game ended — vote to restart]'
+  recovered-reset-hover: '&7Click to join the /restartgame vote'
+  join-red: '&8[&cTeam&8] &f%player% &7joined the &cRed Team&7.'
+  join-blue: '&8[&9Team&8] &f%player% &7joined the &9Blue Team&7.'
+  already-in-red: '&cYou are already on the Red Team!'
+  already-in-blue: '&cYou are already on the Blue Team!'
+  ready: '&8[&aReady&8] &f%player% &7is ready.'
+  cancel-ready: '&8[&cReady&8] &f%player% &7is no longer ready.'
+  all-ready: '&8[&aReady&8] &fEveryone is ready. The game can begin.'
+  start: '&8[&bGame&8] &b&lGame started!'
+  exist-unready: '&cThe game cannot start! Some players are not ready!'
+  unready-players: '&cUnready players: '
+  not-enough-players: '&cThe game cannot start! At least two players are needed!'
+  empty-team: '&cThe game cannot start! One team is empty!'
+  too-much-blocks: '&cToo many target blocks! Maximum allowed is: '
+  set-blocks: '&ePlease directly send the target block amount, send ''quit'' to cancel input'
+  set-blocks-quit: '&aSuccessfully exited input mode!'
+  set-blocks-error: '&cPlease enter a valid number! Send ''quit'' to exit input mode if needed.'
+  set-blocks-success: '&aChanged the required block amount to: '
+  spawn-protect-notice: '&8[&bTip&8] &7Spawn is protected. Move away before placing or breaking blocks.'
+  exist-error-block: '&4Item named %s does not exist! Check the configuration file!'
+  not-enough-score: '&cInsufficient points!'
+  random-tp: '&aPlayer %player% used random teleport! Team points -%score%'
+  red-collect: '&8[&cRed&8] &fCollected &b%block% &8· &7%player%'
+  blue-collect: '&8[&9Blue&8] &fCollected &b%block% &8· &7%player%'
+  team-chest-full: '%team%&c team chest is full! %block% cannot be placed in the team chest!'
+  supply-purchased: '&8[&6Supplies&8] &f%player% &7bought team supplies for %team%&7. Points &c-5&7.'
+  supply-speed-only: '&cTeam supplies are only available in Speed Mode!'
+  red-win: '&c&lRed Team Wins!'
+  blue-win: '&9&lBlue Team Wins!'
+  red-team-chest: '&cRed Team Chest'
+  blue-team-chest: '&9Blue Team Chest'
+  remove-waypoint: '&a&nClick here to delete waypoint %index%'
+  tp-success: '&aTeleported to %x% %y% %z%'
+  tp-ocean: '&eDetected teleportation to ocean, reteleporting'
+  red-remove-waypoint: '&bPlayer &c%player% &bremoved waypoint %index%!'
+  blue-remove-waypoint: '&bPlayer &9%player% &bremoved waypoint %index%!'
+  cannot-roll: '&cThis game uses a shared target list; rolling is disabled!'
+  roll-request: '&bPlayer %player% requests to roll blocks! All online players in the team must agree to proceed!'
+  roll-request-cancel: '&cPlayer %player% canceled the block roll request!'
+  red-roll-success: '&8[&eRoll&8] &cRed Team &7replaced its current targets.'
+  blue-roll-success: '&8[&eRoll&8] &9Blue Team &7replaced its current targets.'
+  spectator: '&cThe game has started, since you haven''t selected a team, you are now a spectator!'
+  spectator-join: '&cThe game has started, you are now a spectator!'
+  locate-already-bought: '&cYou have already purchased the locate command once! Please use it before buying again!'
+  buy-locate: '&a%player% purchased the locate command permission!'
+  error-command: '&cIncorrect command input!'
+  locate-no-permission: '&cYou don''t have permission to use that command! Purchase it in the menu!'
+  restart: '&b%player% requested a restart! The game will restart if all players on the server agree! Use /restartgame to
+    apply!'
+  restart-cancel: '&c%player%''s restart request canceled!'
+  game-not-start: '&cThe game has not started!'
+  game-has-start: '&cThe game has started!'
+  tp-player-success: '&a[Team Teleport] &fSuccessfully teleported to %player%'
+  spectator-tp-player-success: '&e[Spectator Teleport] &fSuccessfully teleported to %player%'
+  player-not-exist: '&cPlayer does not exist!'
+  player-not-in-same-team: '&cPlayer is not on the same team!'
+  ranking: '&8&m------------&r &b&lCollection Ranking &8&m------------'
+  ranking-red: '&c■ &f%player% &8· &b%amount%'
+  ranking-blue: '&9■ &f%player% &8· &b%amount%'
+  ranking-offline: '&7■ %player% &8· &b%amount%'
+  ranking-divider: '&8&m--------------------------------'
+  version-mismatch: '&cWarning! The current file versions of your config.yml and lang.yml do not correspond to the plugin
+    version! You may have updated the plugin, but did not update the configuration file! This may lead to some unexpected
+    errors! You can delete the two configuration files in the \plugins\BlockRacing folder, and then restart the server, or
+    download the latest version of the configuration file on GitHub to replace it!'
+  version-mismatch-lines:
+  - '&8&m--------------------------------'
+  - '&c&lConfiguration Version Mismatch'
+  - '&7The plugin was updated, but config.yml or lang.yml is still old.'
+  - '&7Back up custom values and update the files to avoid errors.'
+  - '&8&m--------------------------------'
+  version-mismatch-title: '&cWarning! Version Mismatch!'
+  version-mismatch-subtitle: '&cPlease check the specific information in the chat!'
+  team-shuffle-triggered: '&d%player% &atriggered random teams. All online players have been balanced!'
+  team-shuffle-confirm: '&eRandomly reassign all online players to balanced teams?'
+  team-shuffle-confirm-button: '&a&l[Click to confirm random teams]'
+  team-shuffle-confirm-hover: '&7This clears current teams and creates new balanced teams'
+  team-shuffle-confirm-expired: '&cThe random-team confirmation expired. Please try again!'
+  block-overview:
+    title: '&b&lCurrent Target Blocks'
+    red: '&c&lRed Team'
+    blue: '&9&lBlue Team'
+    entry: '&7%index%. &f%block%'
+    divider: '&8&m--------------------------------'
+chat:
+  global-format: '&8[&e&lALL&8] %team% &f%player%&7: &f%message%'
+  team-hint: '&8[&bTip&8] &7You are in team chat. Use &f/shout message&7 or start with &f@ / ! &7to message everyone.'
+lang-version: 26.2.1

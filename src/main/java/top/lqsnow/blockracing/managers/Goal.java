@@ -30,7 +30,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import org.mineacademy.fo.remain.CompMaterial;
 import java.util.logging.Level;
 
 public class Goal {
@@ -166,6 +165,83 @@ public class Goal {
 
         DEFINITIONS.put(normalizedId, new Definition(normalizedId, normalizedLabel, requirement));
         return encode(normalizedId);
+    }
+
+    public static void saveProgress(org.bukkit.configuration.ConfigurationSection section) {
+        saveSets(section, "KILLED_ENTITY_TYPES", KILLED_ENTITY_TYPES);
+        saveSets(section, "BRED_ENTITY_TYPES", BRED_ENTITY_TYPES);
+        saveSets(section, "TAMED_ENTITY_TYPES", TAMED_ENTITY_TYPES);
+        saveSets(section, "CONSUMED_ITEMS", CONSUMED_ITEMS);
+        saveSets(section, "CONSUMED_POTIONS", CONSUMED_POTIONS);
+        saveSets(section, "CRAFTED_ITEMS", CRAFTED_ITEMS);
+        saveSets(section, "USED_BLOCKS", USED_BLOCKS);
+        saveSets(section, "MINED_BLOCKS", MINED_BLOCKS);
+        saveSets(section, "DEATH_CAUSES", DEATH_CAUSES);
+        saveSets(section, "DEATH_ATTACKERS", DEATH_ATTACKERS);
+        saveSets(section, "DEATH_PROJECTILES", DEATH_PROJECTILES);
+        saveSets(section, "SPIED_ENTITY_TYPES", SPIED_ENTITY_TYPES);
+        section.createSection("KILL_COUNTS", new HashMap<>(KILL_COUNTS));
+        section.createSection("UNDEAD_KILL_COUNTS", new HashMap<>(UNDEAD_KILL_COUNTS));
+        section.createSection("ARTHROPOD_KILL_COUNTS", new HashMap<>(ARTHROPOD_KILL_COUNTS));
+        section.createSection("CONTINUOUS_WEAR_TICKS", new HashMap<>(CONTINUOUS_WEAR_TICKS));
+        section.createSection("DAMAGE_DEALT", new HashMap<>(DAMAGE_DEALT));
+        section.createSection("DAMAGE_TAKEN", new HashMap<>(DAMAGE_TAKEN));
+        section.set("FISHED_TREASURE_PLAYERS", new ArrayList<>(FISHED_TREASURE_PLAYERS));
+        section.set("MAX_LEVEL_VILLAGER_PLAYERS", new ArrayList<>(MAX_LEVEL_VILLAGER_PLAYERS));
+    }
+
+    public static void restoreProgress(org.bukkit.configuration.ConfigurationSection section) {
+        resetProgress();
+        if (section == null) return;
+        restoreSets(section, "KILLED_ENTITY_TYPES", KILLED_ENTITY_TYPES, EntityType::valueOf);
+        restoreSets(section, "BRED_ENTITY_TYPES", BRED_ENTITY_TYPES, EntityType::valueOf);
+        restoreSets(section, "TAMED_ENTITY_TYPES", TAMED_ENTITY_TYPES, EntityType::valueOf);
+        restoreSets(section, "CONSUMED_ITEMS", CONSUMED_ITEMS, Material::valueOf);
+        restoreSets(section, "CONSUMED_POTIONS", CONSUMED_POTIONS, value -> value);
+        restoreSets(section, "CRAFTED_ITEMS", CRAFTED_ITEMS, Material::valueOf);
+        restoreSets(section, "USED_BLOCKS", USED_BLOCKS, Material::valueOf);
+        restoreSets(section, "MINED_BLOCKS", MINED_BLOCKS, Material::valueOf);
+        restoreSets(section, "DEATH_CAUSES", DEATH_CAUSES, EntityDamageEvent.DamageCause::valueOf);
+        restoreSets(section, "DEATH_ATTACKERS", DEATH_ATTACKERS, EntityType::valueOf);
+        restoreSets(section, "DEATH_PROJECTILES", DEATH_PROJECTILES, EntityType::valueOf);
+        restoreSets(section, "SPIED_ENTITY_TYPES", SPIED_ENTITY_TYPES, EntityType::valueOf);
+        restoreNumbers(section.getConfigurationSection("KILL_COUNTS"), KILL_COUNTS, Number::intValue);
+        restoreNumbers(section.getConfigurationSection("UNDEAD_KILL_COUNTS"), UNDEAD_KILL_COUNTS, Number::intValue);
+        restoreNumbers(section.getConfigurationSection("ARTHROPOD_KILL_COUNTS"), ARTHROPOD_KILL_COUNTS, Number::intValue);
+        restoreNumbers(section.getConfigurationSection("CONTINUOUS_WEAR_TICKS"), CONTINUOUS_WEAR_TICKS, Number::intValue);
+        restoreNumbers(section.getConfigurationSection("DAMAGE_DEALT"), DAMAGE_DEALT, Number::doubleValue);
+        restoreNumbers(section.getConfigurationSection("DAMAGE_TAKEN"), DAMAGE_TAKEN, Number::doubleValue);
+        FISHED_TREASURE_PLAYERS.addAll(section.getStringList("FISHED_TREASURE_PLAYERS"));
+        MAX_LEVEL_VILLAGER_PLAYERS.addAll(section.getStringList("MAX_LEVEL_VILLAGER_PLAYERS"));
+    }
+
+    private static <T> void saveSets(org.bukkit.configuration.ConfigurationSection parent,
+                                     String key, Map<String, Set<T>> values) {
+        var section = parent.createSection(key);
+        values.forEach((player, items) -> section.set(player, items.stream()
+                .map(item -> item instanceof Enum<?> value ? value.name() : item.toString()).sorted().toList()));
+    }
+
+    private static <T> void restoreSets(org.bukkit.configuration.ConfigurationSection parent,
+                                        String key, Map<String, Set<T>> values,
+                                        java.util.function.Function<String, T> decode) {
+        var section = parent.getConfigurationSection(key);
+        if (section == null) return;
+        for (String player : section.getKeys(false)) {
+            Set<T> items = new HashSet<>();
+            for (String item : section.getStringList(player)) items.add(decode.apply(item));
+            values.put(player, items);
+        }
+    }
+
+    private static <T extends Number> void restoreNumbers(org.bukkit.configuration.ConfigurationSection section,
+                                                          Map<String, T> values,
+                                                          java.util.function.Function<Number, T> decode) {
+        if (section == null) return;
+        for (String key : section.getKeys(false)) {
+            Object raw = section.get(key);
+            if (raw instanceof Number number) values.put(key, decode.apply(number));
+        }
     }
 
     public static void resetProgress() {
@@ -320,7 +396,7 @@ public class Goal {
         List<String> lore = new ArrayList<>();
         int current = Math.min(progress.current(), progress.required());
         int required = progress.required();
-        lore.add(Message.MENU_TARGET_LIST_PROGRESS_LINE.getString()
+        lore.add(Message.MENU_TARGET_LIST_PROGRESS_LINE.getString(player)
                 .replace("%current%", String.valueOf(current))
                 .replace("%required%", String.valueOf(required)));
 
@@ -334,8 +410,8 @@ public class Goal {
             lore.add(bar.toString());
         }
 
-        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_DONE_LINE.getString(), progress.completed());
-        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_MISSING_LINE.getString(), progress.missing());
+        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_DONE_LINE.getString(player), progress.completed(), player);
+        addDetailLore(lore, Message.MENU_TARGET_LIST_PROGRESS_MISSING_LINE.getString(player), progress.missing(), player);
         return lore;
     }
 
@@ -384,80 +460,109 @@ public class Goal {
         return definition == null ? null : definition.requirement();
     }
 
-    public static CompMaterial getGoalIcon(String target) {
+    public static Material getGoalIcon(String target) {
         Requirement requirement = getRequirement(target);
         if (requirement == null) {
-            return CompMaterial.WRITABLE_BOOK;
+            return Material.WRITABLE_BOOK;
         }
 
         if (requirement instanceof BreakRequirement) {
-            return CompMaterial.IRON_PICKAXE;
+            return Material.IRON_PICKAXE;
         }
         if (requirement instanceof KillRequirement || requirement instanceof KillCountRequirement || requirement instanceof KillUniqueRequirement) {
-            return CompMaterial.DIAMOND_SWORD;
+            return Material.DIAMOND_SWORD;
         }
         if (requirement instanceof BreedRequirement || requirement instanceof BreedUniqueRequirement) {
-            return CompMaterial.WHEAT_SEEDS;
+            return Material.WHEAT_SEEDS;
         }
         if (requirement instanceof TameRequirement) {
-            return CompMaterial.LEAD;
+            return Material.LEAD;
         }
         if (requirement instanceof AdvancementRequirement || requirement instanceof AdvancementCountRequirement) {
-            return CompMaterial.KNOWLEDGE_BOOK;
+            return Material.KNOWLEDGE_BOOK;
         }
         if (requirement instanceof ConsumeAllRequirement || requirement instanceof ConsumeUniqueRequirement) {
-            return CompMaterial.COOKED_BEEF;
+            return Material.COOKED_BEEF;
         }
         if (requirement instanceof ConsumeRequirement || requirement instanceof ConsumePotionRequirement) {
-            return CompMaterial.GOLDEN_APPLE;
+            return Material.GOLDEN_APPLE;
         }
         if (requirement instanceof CraftUniqueRequirement) {
-            return CompMaterial.CRAFTING_TABLE;
+            return Material.CRAFTING_TABLE;
         }
         if (requirement instanceof EquipmentRequirement || requirement instanceof ColoredEquipmentRequirement || requirement instanceof UniqueLeatherArmorColorsRequirement) {
-            return CompMaterial.IRON_CHESTPLATE;
+            return Material.IRON_CHESTPLATE;
         }
         if (requirement instanceof WearContinuousRequirement) {
-            return CompMaterial.LEATHER_HELMET;
+            return Material.LEATHER_HELMET;
         }
         if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement) {
-            return CompMaterial.CHEST;
+            return Material.CHEST;
         }
         if (requirement instanceof EnchantedItemRequirement) {
-            return CompMaterial.ENCHANTED_BOOK;
+            return Material.ENCHANTED_BOOK;
         }
         if (requirement instanceof LevelRequirement) {
-            return CompMaterial.EXPERIENCE_BOTTLE;
+            return Material.EXPERIENCE_BOTTLE;
         }
         if (requirement instanceof LocationRequirement) {
-            return CompMaterial.COMPASS;
+            return Material.COMPASS;
         }
         if (requirement instanceof EffectRequirement || requirement instanceof EffectCountRequirement) {
-            return CompMaterial.POTION;
+            return Material.POTION;
         }
         if (requirement instanceof FishTreasureRequirement) {
-            return CompMaterial.FISHING_ROD;
+            return Material.FISHING_ROD;
         }
         if (requirement instanceof SpyUniqueRequirement) {
-            return CompMaterial.SPYGLASS;
+            return Material.SPYGLASS;
         }
         if (requirement instanceof UseBlockRequirement) {
-            return CompMaterial.FLINT_AND_STEEL;
+            return Material.FLINT_AND_STEEL;
         }
         if (requirement instanceof DamageRequirement) {
-            return CompMaterial.SHIELD;
+            return Material.SHIELD;
         }
         if (requirement instanceof DeathCauseRequirement || requirement instanceof DeathAttackerRequirement || requirement instanceof DeathProjectileRequirement) {
-            return CompMaterial.WITHER_SKELETON_SKULL;
+            return Material.WITHER_SKELETON_SKULL;
         }
         if (requirement instanceof VillagerMaxLevelRequirement) {
-            return CompMaterial.EMERALD;
+            return Material.EMERALD;
         }
         if (requirement instanceof HungerRequirement) {
-            return CompMaterial.ROTTEN_FLESH;
+            return Material.ROTTEN_FLESH;
         }
 
-        return CompMaterial.WRITABLE_BOOK;
+        return Material.WRITABLE_BOOK;
+    }
+
+    public static String getGoalTypeLabel(String target, Player viewer) {
+        String label = getGoalTypeLabel(target);
+        if (LanguageManager.usesChinese(viewer)) return label;
+        return switch (label) {
+            case "挖掘" -> "Mining";
+            case "击杀" -> "Kills";
+            case "繁殖" -> "Breeding";
+            case "驯服" -> "Taming";
+            case "进度" -> "Advancement";
+            case "食用" -> "Food";
+            case "合成" -> "Crafting";
+            case "装备" -> "Equipment";
+            case "穿戴" -> "Wearing";
+            case "收集" -> "Collection";
+            case "附魔" -> "Enchanting";
+            case "等级" -> "Level";
+            case "到达" -> "Location";
+            case "效果" -> "Effect";
+            case "钓鱼" -> "Fishing";
+            case "观察" -> "Observation";
+            case "使用" -> "Interaction";
+            case "伤害" -> "Damage";
+            case "死亡" -> "Death";
+            case "交易" -> "Trading";
+            case "饥饿" -> "Hunger";
+            default -> "Goal";
+        };
     }
 
     public static String getGoalTypeLabel(String target) {
@@ -1294,7 +1399,7 @@ public class Goal {
                 .count();
     }
 
-    private static void addDetailLore(List<String> lore, String template, List<String> items) {
+    private static void addDetailLore(List<String> lore, String template, List<String> items, Player player) {
         if (items.isEmpty()) {
             return;
         }
@@ -1306,7 +1411,7 @@ public class Goal {
             lore.add(start == 0 ? template.replace("%items%", line) : "§f" + line);
         }
         if (items.size() > displayAmount) {
-            lore.add(Message.MENU_TARGET_LIST_PROGRESS_MORE_LINE.getString()
+            lore.add(Message.MENU_TARGET_LIST_PROGRESS_MORE_LINE.getString(player)
                     .replace("%amount%", String.valueOf(items.size() - displayAmount)));
         }
     }
