@@ -163,7 +163,7 @@ public class Goal {
             return null;
         }
 
-        DEFINITIONS.put(normalizedId, new Definition(normalizedId, normalizedLabel, requirement));
+        DEFINITIONS.put(normalizedId, new Definition(normalizedId, normalizedLabel, requirement, rawRequirement.trim()));
         return encode(normalizedId);
     }
 
@@ -466,8 +466,8 @@ public class Goal {
             return Material.WRITABLE_BOOK;
         }
 
-        if (requirement instanceof BreakRequirement) {
-            return Material.IRON_PICKAXE;
+        if (requirement instanceof BreakRequirement broken) {
+            return broken.material();
         }
         if (requirement instanceof KillRequirement || requirement instanceof KillCountRequirement || requirement instanceof KillUniqueRequirement) {
             return Material.DIAMOND_SWORD;
@@ -1133,7 +1133,7 @@ public class Goal {
             return null;
         }
 
-        return new Definition(id, label, requirement);
+        return new Definition(id, label, requirement, parts[2].trim());
     }
 
     private static Requirement parseRequirement(String rawRequirement) {
@@ -1543,7 +1543,12 @@ public class Goal {
         return target != null && target.startsWith(PREFIX) ? target.substring(PREFIX.length()) : target;
     }
 
-    private record Definition(String id, String label, Requirement requirement) {
+    public static String getRawRequirement(String target) {
+        Definition definition = DEFINITIONS.get(decode(target));
+        return definition == null ? null : definition.rawRequirement();
+    }
+
+    private record Definition(String id, String label, Requirement requirement, String rawRequirement) {
     }
 
     private record Progress(int current, int required, List<String> completed, List<String> missing) {

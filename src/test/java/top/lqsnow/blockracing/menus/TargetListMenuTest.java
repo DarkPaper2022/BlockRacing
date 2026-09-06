@@ -27,5 +27,20 @@ class TargetListMenuTest {
         }
         assertEquals(0, entries.stream().filter(e -> "DIAMOND".equals(e.target())).findFirst().orElseThrow().category());
         assertEquals(2, entries.stream().filter(e -> "ZOMBIE_HEAD".equals(e.target())).findFirst().orElseThrow().category());
+        var goals = TargetListMenu.buildEntries(targets, TargetListMenu.Filter.GOALS);
+        assertEquals(1, goals.stream().filter(e -> e.target() != null).count());
+        assertEquals(2, goals.stream().filter(e -> e.target() != null).findFirst().orElseThrow().index());
+        var bonus = TargetListMenu.buildEntries(targets, TargetListMenu.Filter.BONUS);
+        assertEquals("ZOMBIE_HEAD", bonus.stream().filter(e -> e.target() != null).findFirst().orElseThrow().target());
+    }
+
+    @Test
+    void filteredEmptyListsHaveNoOrphanHeaders() {
+        assertTrue(TargetListMenu.buildEntries(List.of()).isEmpty());
+        Block.targetScores = Map.of("STONE", 1);
+        assertTrue(TargetListMenu.buildEntries(List.of("STONE"), TargetListMenu.Filter.GOALS).isEmpty());
+        var filter = TargetListMenu.Filter.ALL;
+        for (int i = 0; i < 4; i++) filter = filter.next();
+        assertEquals(TargetListMenu.Filter.ALL, filter);
     }
 }

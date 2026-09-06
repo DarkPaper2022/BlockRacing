@@ -26,3 +26,7 @@ logs/
 crash-reports/
 world*/
 *.log
+
+# Local icon builder caches
+__pycache__/
+*.py[cod]

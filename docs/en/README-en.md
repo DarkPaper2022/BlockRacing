@@ -23,6 +23,8 @@ Target server: Paper 26.2. Build/runtime requirements: JDK 25 or newer and Maven
 
 ## Build and install
 
+Task icons now identify concrete objects, with category filtering and an operator-only `/menu targetpreview` before a game. An optional 26.2 resource pack adds action/quantity badges; unmodified clients retain native icons. See [task UI and pack maintenance](../task-ui.md) for installation, limitations and offline build instructions.
+
 ```sh
 mvn clean verify
 ```

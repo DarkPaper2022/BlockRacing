@@ -31,6 +31,14 @@ public class Menu implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if (args.length == 1 && args[0].equalsIgnoreCase("targetpreview")) {
+            if (player.isOp() && Game.getCurrentGameState() == Game.GameState.PREGAME) {
+                top.lqsnow.blockracing.menus.TargetListMenu.preview(player).open(player);
+            } else {
+                player.sendMessage("UI preview requires an operator in pregame.");
+            }
+            return true;
+        }
         if (Game.getCurrentGameState().equals(Game.GameState.END)) return true;
 
         if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("main"))) {
@@ -185,6 +193,7 @@ public class Menu implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             completions.add("main");
             completions.add("targets");
+            if (sender.isOp() && Game.getCurrentGameState() == Game.GameState.PREGAME) completions.add("targetpreview");
             completions.add("chest");
             completions.add("waypoints");
             completions.add("roll");

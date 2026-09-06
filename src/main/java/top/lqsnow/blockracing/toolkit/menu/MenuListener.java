@@ -1,5 +1,7 @@
 package top.lqsnow.blockracing.toolkit.menu;
 
+import org.bukkit.Bukkit;
+import top.lqsnow.blockracing.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +20,14 @@ public final class MenuListener implements Listener {
         event.setCancelled(true);
         if (event.getRawSlot() >= 0 && event.getRawSlot() < top.getSize()
                 && event.getWhoClicked() instanceof Player player) {
-            menu.click(player, event.getRawSlot(), event.getClick());
+            int slot = event.getRawSlot();
+            var click = event.getClick();
+            // Opening/closing an inventory during InventoryClickEvent is unsafe.
+            Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                if (player.isOnline() && player.getOpenInventory().getTopInventory().getHolder() == menu) {
+                    menu.click(player, slot, click);
+                }
+            });
         }
     }
 
