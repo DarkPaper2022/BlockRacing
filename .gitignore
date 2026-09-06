@@ -1,10 +1,28 @@
+# Local tools, backups and editors
+.local-backups/
 .vscode/
+.idea/
+.omo/
+*.iml
+
+# Build outputs and downloaded binaries
 target/
 dependency-reduced-pom.xml
-.omo/
+*.jar
+*.class
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# Local Minecraft runtime
+server/
 cache/
 libraries/
 versions/
+plugins/
+logs/
+crash-reports/
+world*/
 *.log
-*.iml
-.idea/

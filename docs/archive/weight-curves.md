@@ -1,16 +1,20 @@
-# 权重曲线维护说明
+# 旧权重曲线维护说明（归档）
+
+> 本文保留积分制改造前的设计与历史模拟结果，不适用于当前版本。
+> 下文的 `calculate*Weight()`、五类文本任务库及本机验证命令已不再是当前维护入口。
+> 现行规则见 [任务库与抽取规则](../targets.md)。模拟结果未在本次整理中重新运行。
 
 这份文档说明如何维护 `简单`、`普通`、`困难` 等方块池在总列表里的抽取权重。
 
 如果你要改“某个方块出现后，关联方块在池内降权”的逻辑，看：
 
-- `/home/darkpaper/Game/blockeracing-src/RelatedBlockSuppressionMaintenance.md`
+- [任务库与关联降权](../targets.md)
 
 ## 核心文件
 
 权重曲线定义在：
 
-- `/home/darkpaper/Game/blockeracing-src/src/main/java/top/lqsnow/blockracing/managers/Block.java`
+- [Block.java](../../src/main/java/top/lqsnow/blockracing/managers/Block.java)（当前文件已采用新抽样逻辑）
 
 真正控制比例的是以下方法：
 
