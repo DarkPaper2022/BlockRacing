@@ -56,9 +56,9 @@ def describe(row):
     def representative(values):
         return next((i for i in values if i.endswith("_PICKAXE") or i.endswith("_CHESTPLATE")), values[0])
 
-    if kind in ("item", "item-unique", "equipment-all", "equipment-any", "consume-all"):
-        values = items(value.split(":", 1)[1] if kind == "item-unique" else value)
-        count = int(value.split(":", 1)[0]) if kind == "item-unique" else len(values)
+    if kind in ("item", "item-unique", "item-total", "equipment-all", "equipment-any", "consume-all"):
+        values = items(value.split(":", 1)[1] if kind in ("item-unique", "item-total") else value)
+        count = int(value.split(":", 1)[0]) if kind in ("item-unique", "item-total") else len(values)
         if kind == "item" and len(values) == 1:
             count = int(value.split("*", 1)[1]) if "*" in value else 1
         if kind == "equipment-any": count = 1
@@ -67,6 +67,11 @@ def describe(row):
         use(representative(values), action, badge, count, values)
         if row["id"] == "COLLECT_ALL_COPPER_VARIANTS":
             use("WAXED_COPPER_BLOCK", action, "ALL", count, values)
+    elif kind == "actions":
+        icon, action = {"MILK_CLEANSE": ("MILK_BUCKET", "eat"), "LOOM_CRAFT": ("LOOM", "craft"),
+                        "CAULDRON_CLEAN": ("CAULDRON", "use"), "COMPOST_FILL,COMPOST_COLLECT": ("COMPOSTER", "use"),
+                        "JUKEBOX_PLAY": ("JUKEBOX", "use")}[value]
+        use(icon, action)
     elif kind in ("kill", "breed", "tame", "death-attacker"):
         use(value + "_SPAWN_EGG", "death" if kind == "death-attacker" else kind)
     elif kind in ("break", "use-block", "consume"):

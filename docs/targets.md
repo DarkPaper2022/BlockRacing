@@ -26,6 +26,9 @@ OBTAIN_ANY_HORSE_ARMOR,goal,2,Obtain any Horse Armor,"item-unique:1:LEATHER_HORS
 | `item:FURNACE,BLAST_FURNACE,SMOKER` | 取得所列全部物品 |
 | `item:ARROW*64` | 取得指定数量 |
 | `item-unique:5:<Material列表>` | 取得列表中至少 5 种不同物品 |
+| `item-total:64:<Material列表>` | 队伍在线背包与共享箱内列出材料的总数量达到 64，允许混合种类，不接受条目内的 `*数量` |
+| `actions:MILK_CLEANSE` | 实际用牛奶移除效果，不是仅喝奶 |
+| `actions:COMPOST_FILL,COMPOST_COLLECT` | 队伍完成两种实际操作；其余动作有 `LOOM_CRAFT`、`CAULDRON_CLEAN`、`JUKEBOX_PLAY` |
 | `kill:WITHER` | 击杀指定实体 |
 | `advancement:adventure/revaulting` | 完成指定进度 |
 | `break:<Material>` | 追踪破坏方块事件 |

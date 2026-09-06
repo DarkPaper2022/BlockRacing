@@ -217,6 +217,45 @@ class SharedTeamProgressTest {
         };
     }
 
+    @Test void mixedColorsSumQuantitiesNotDistinctMaterialCount() {
+        Player a = player("Alex", 0, inventory(PlayerInventory.class, stack(Material.RED_WOOL, 31)));
+        Inventory chest = inventory(Inventory.class, stack(Material.BLUE_WOOL, 33), stack(Material.DIAMOND, 64));
+        String task = target("item-total:64:RED_WOOL,BLUE_WOOL,RED_WOOL");
+        Goal.Progress p = Goal.teamProgress(task, RED, List.of(chest, chest), n -> n.equals("Alex") ? a : null);
+        assertEquals(64, p.current()); assertEquals(64, p.required());
+        assertEquals(33, Goal.teamProgress(task, RED, List.of(chest), OFFLINE).current());
+        assertNull(Goal.registerDefinition("BAD", "Bad", "item-total:64:RED_WOOL*2"));
+        assertNull(Goal.registerDefinition("BAD", "Bad", "item-total:0:RED_WOOL"));
+    }
+
+    @Test void realActionsCannotBeSatisfiedByOldRightClickOrMilkConsumptionHistory() {
+        Goal.recordUseBlock(player("Alex", 0, null), Material.COMPOSTER);
+        Goal.recordConsume(player("Alex", 0, null), Material.MILK_BUCKET);
+        String compost = target("actions:COMPOST_FILL,COMPOST_COLLECT");
+        assertEquals(0, progress(compost).current());
+        Goal.recordAction(player("Alex", 0, null), Goal.TaskAction.COMPOST_FILL);
+        Goal.recordAction(player("Steve", 0, null), Goal.TaskAction.COMPOST_FILL);
+        assertEquals(1, progress(compost).current());
+        Goal.recordAction(player("Blue", 0, null), Goal.TaskAction.COMPOST_COLLECT);
+        assertEquals(1, progress(compost).current());
+        Goal.recordAction(player("Steve", 0, null), Goal.TaskAction.COMPOST_COLLECT);
+        assertEquals(2, progress(compost).current());
+        YamlConfiguration save = new YamlConfiguration(); Goal.saveProgress(save); Goal.restoreProgress(save);
+        assertEquals(2, progress(compost).current());
+        assertEquals(0, progress(target("actions:MILK_CLEANSE")).current());
+        assertNull(Goal.registerDefinition("BAD", "Bad", "actions:UNKNOWN"));
+    }
+
+    @Test void miningAcceptsDeepVariantsWithoutMakingOtherBlocksOrExplicitDeepGoalsEquivalent() {
+        assertTrue(Goal.matchesMinedBlock(Material.DIAMOND_ORE, java.util.Set.of(Material.DEEPSLATE_DIAMOND_ORE)));
+        assertTrue(Goal.matchesMinedBlock(Material.EMERALD_ORE, java.util.Set.of(Material.DEEPSLATE_EMERALD_ORE)));
+        assertTrue(Goal.matchesMinedBlock(Material.DIAMOND_ORE, java.util.Set.of(Material.DIAMOND_ORE)));
+        assertFalse(Goal.matchesMinedBlock(Material.DIAMOND_ORE, java.util.Set.of(Material.DEEPSLATE_EMERALD_ORE)));
+        assertFalse(Goal.matchesMinedBlock(Material.DEEPSLATE_DIAMOND_ORE, java.util.Set.of(Material.DIAMOND_ORE)));
+        Goal.recordBreak(player("Alex", 0, null), Material.DEEPSLATE_DIAMOND_ORE);
+        assertEquals(1, progress(target("break:DIAMOND_ORE")).current());
+    }
+
     @SuppressWarnings("unchecked")
     private static <T extends Inventory> T inventory(Class<T> type, ItemStack... contents) {
         return (T) Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[]{type}, (proxy, method, args) -> {

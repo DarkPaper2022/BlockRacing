@@ -99,7 +99,18 @@ class TaskIconTests(unittest.TestCase):
                     for box in boxes:
                         overlays = [Image.open(io.BytesIO(frame)).crop(box).tobytes() for frame in frames]
                         self.assertEqual(1, len(set(overlays)))
-        self.assertEqual(30, animated)
+        self.assertEqual(32, animated)
+
+    def test_all_specific_advancement_keys_exist_and_have_display_in_owned_client(self):
+        checked = 0
+        for goal, spec in self.specs.items():
+            if not spec["requirement"].startswith("advancement:"): continue
+            key = spec["requirement"].split(":", 1)[1]
+            path = "data/minecraft/advancement/" + key + ".json"
+            self.assertIn(path, self.client.namelist(), goal)
+            self.assertIn("display", json.loads(self.client.read(path)), goal)
+            checked += 1
+        self.assertEqual(22, checked)
 
     def test_copper_is_grouped_by_wax_and_oxidation_without_omissions(self):
         spec = self.specs["COLLECT_ALL_COPPER_VARIANTS"]

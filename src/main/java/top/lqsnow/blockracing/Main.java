@@ -37,6 +37,7 @@ public class Main extends JavaPlugin {
 
         // Register events
         getPluginManager().registerEvents(new BasicListener(), this);
+        getPluginManager().registerEvents(new top.lqsnow.blockracing.listeners.TaskActionListener(), this);
         getPluginManager().registerEvents(new MenuListener(), this);
 
         // Register commands

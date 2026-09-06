@@ -1,5 +1,7 @@
 # 逐目标一致性审计报告 (Target Consistency Audit)
 
+> 本报告保留审计时的基线结论；main 后续修复和累计进度复查见 [修复记录](fixes.md)。
+
 - **基线提交 (Commit SHA)**: `b6efc020ab329926a389a193374e2b4269410570`
 - **审计环境**: Paper 26.2 API (`io.papermc.paper:paper-api:26.2.build.84-stable`), Java 26
 - **审计时间**: 2026-09-06T21:30:18+08:00 开始，复核修订会话于 2026-09-06T21:49:00+08:00 结束（以本地进程日志为准）。

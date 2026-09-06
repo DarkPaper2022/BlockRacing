@@ -510,8 +510,8 @@ OBTAIN_IRON_TOOLS,goal,1,Obtain all Iron Tools,"item:IRON_SWORD,IRON_PICKAXE,IRO
 OBTAIN_GOLDEN_TOOLS,goal,1,Obtain all Golden Tools,"item:GOLDEN_SWORD,GOLDEN_PICKAXE,GOLDEN_AXE,GOLDEN_SHOVEL,GOLDEN_HOE",获得全套金质工具
 OBTAIN_DIAMOND_TOOLS,goal,2,Obtain all Diamond Tools,"item:DIAMOND_SWORD,DIAMOND_PICKAXE,DIAMOND_AXE,DIAMOND_SHOVEL,DIAMOND_HOE",获得全套钻石工具
 OBTAIN_COPPER_TOOLS,goal,1,Obtain all Copper Tools,"item:COPPER_SWORD,COPPER_PICKAXE,COPPER_AXE,COPPER_SHOVEL,COPPER_HOE,COPPER_SPEAR",获得全套铜质工具
-MINE_DIAMOND_ORE,goal,1,Mine Diamond Ore,break:DIAMOND_ORE,挖掘钻石矿石
-MINE_EMERALD_ORE,goal,2,Mine Emerald Ore,break:EMERALD_ORE,挖掘绿宝石矿石
+MINE_DIAMOND_ORE,goal,1,Mine Diamond Ore,break:DIAMOND_ORE,挖掘钻石矿石（含深层变种）
+MINE_EMERALD_ORE,goal,2,Mine Emerald Ore,break:EMERALD_ORE,挖掘绿宝石矿石（含深层变种）
 MINE_MOB_SPAWNER,goal,1,Mine a Spawner,break:SPAWNER,挖掘刷怪笼
 MINE_CRAFTER,goal,1,Mine Crafter,break:CRAFTER,挖掘合成器
 WEAR_LEATHER_ARMOR,goal,2,Wear Full Leather Armor,"equipment-all:LEATHER_HELMET,LEATHER_CHESTPLATE,LEATHER_LEGGINGS,LEATHER_BOOTS",穿上全套皮革盔甲
@@ -569,8 +569,8 @@ OBTAIN_ALL_TORCHES,goal,1,Obtain every type of Torch,"item:TORCH,SOUL_TORCH,REDS
 OBTAIN_ALL_RAW_ORE_BLOCKS,goal,2,Obtain all Raw Ore Blocks,"item:RAW_IRON_BLOCK,RAW_GOLD_BLOCK,RAW_COPPER_BLOCK",获得所有粗矿块
 OBTAIN_64_ARROWS,goal,1,Obtain 64 Arrows,item:ARROW*64,获得 64 支箭
 OBTAIN_64_COARSE_DIRT,goal,1,Obtain 64 Coarse Dirt,item:COARSE_DIRT*64,获得 64 个砂土
-OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Colored Wool,item:WHITE_WOOL*64,获得 64 个彩色羊毛
-OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Colored Concrete,item:WHITE_CONCRETE*64,获得 64 个彩色混凝土
+OBTAIN_64_COLORED_WOOL,goal,2,Obtain 64 Mixed-color Wool,"item-total:64:WHITE_WOOL,ORANGE_WOOL,MAGENTA_WOOL,LIGHT_BLUE_WOOL,YELLOW_WOOL,LIME_WOOL,PINK_WOOL,GRAY_WOOL,LIGHT_GRAY_WOOL,CYAN_WOOL,PURPLE_WOOL,BLUE_WOOL,BROWN_WOOL,GREEN_WOOL,RED_WOOL,BLACK_WOOL",获得合计 64 个任意颜色的羊毛
+OBTAIN_64_COLORED_CONCRETE,goal,2,Obtain 64 Mixed-color Concrete,"item-total:64:WHITE_CONCRETE,ORANGE_CONCRETE,MAGENTA_CONCRETE,LIGHT_BLUE_CONCRETE,YELLOW_CONCRETE,LIME_CONCRETE,PINK_CONCRETE,GRAY_CONCRETE,LIGHT_GRAY_CONCRETE,CYAN_CONCRETE,PURPLE_CONCRETE,BLUE_CONCRETE,BROWN_CONCRETE,GREEN_CONCRETE,RED_CONCRETE,BLACK_CONCRETE",获得合计 64 个任意颜色的混凝土
 OBTAIN_6_UNIQUE_BUCKETS,goal,1,Obtain 6 Unique Buckets,"item:BUCKET,WATER_BUCKET,LAVA_BUCKET,MILK_BUCKET,POWDER_SNOW_BUCKET,TROPICAL_FISH_BUCKET",获得 6 种不同桶类物品
 OBTAIN_4_UNIQUE_SAPLINGS,goal,1,Obtain 4 Unique Saplings,"item-unique:4:OAK_SAPLING,SPRUCE_SAPLING,BIRCH_SAPLING,JUNGLE_SAPLING,ACACIA_SAPLING,DARK_OAK_SAPLING,MANGROVE_PROPAGULE,CHERRY_SAPLING,PALE_OAK_SAPLING",获得 4 种不同树苗
 OBTAIN_4_UNIQUE_SEEDS,goal,2,Obtain 4 Unique Seeds,"item:WHEAT_SEEDS,PUMPKIN_SEEDS,MELON_SEEDS,BEETROOT_SEEDS",获得 4 种不同种子
@@ -621,7 +621,7 @@ GET_MINING_FATIGUE_STATUS_EFFECT,goal,1,Get Mining Fatigue,effect:mining_fatigue
 GET_NAUSEA_STATUS_EFFECT,goal,1,Get Nausea,effect:nausea,获得反胃
 GET_POISON_STATUS_EFFECT,goal,1,Get Poison,effect:poison,获得中毒
 GET_WEAKNESS_STATUS_EFFECT,goal,1,Get Weakness,effect:weakness,获得虚弱
-REMOVE_STATUS_EFFECT_USING_MILK,goal,1,Remove Effect using Milk Bucket,consume:MILK_BUCKET,使用牛奶桶清除状态效果
+REMOVE_STATUS_EFFECT_USING_MILK,goal,1,Remove Effect using Milk Bucket,"actions:MILK_CLEANSE",使用牛奶桶清除状态效果
 GET_10_ADVANCEMENTS,goal,1,Get 10 Advancements,advancement-count:10,获得 10 个进度
 GET_20_ADVANCEMENTS,goal,1,Get 20 Advancements,advancement-count:20,获得 20 个进度
 GET_30_ADVANCEMENTS,goal,2,Get 30 Advancements,advancement-count:30,获得 30 个进度
@@ -635,11 +635,11 @@ USE_STONECUTTER,goal,1,Use Stonecutter,use-block:STONECUTTER,使用切石机
 USE_ANVIL,goal,-1,Use Anvil,use-block:ANVIL,使用铁砧
 USE_ENCHANTING_TABLE,goal,2,Use Enchanting Table,use-block:ENCHANTING_TABLE,使用附魔台
 USE_GRINDSTONE,goal,-1,Use Grindstone,use-block:GRINDSTONE,使用砂轮
-USE_LOOM,goal,1,Use Loom to design a Banner,use-block:LOOM,使用织布机设计旗帜
+USE_LOOM,goal,1,Use Loom to design a Banner,"actions:LOOM_CRAFT",使用织布机设计旗帜
 USE_SMITHING_TABLE,goal,2,Use Smithing Table,use-block:SMITHING_TABLE,使用锻造台
-USE_CAULDRON,goal,1,Use Cauldron to wash something,use-block:CAULDRON,使用炼药锅清洗物品
-USE_COMPOSTER,goal,1,Fill Composter and get Bone Meal,use-block:COMPOSTER,将堆肥桶填满并获得骨粉
-USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,use-block:JUKEBOX,使用唱片机播放唱片
+USE_CAULDRON,goal,1,Use Cauldron to wash something,"actions:CAULDRON_CLEAN",使用炼药锅清洗物品
+USE_COMPOSTER,goal,1,Fill Composter and get Bone Meal,"actions:COMPOST_FILL,COMPOST_COLLECT",将堆肥桶填满并获得骨粉
+USE_JUKEBOX,goal,2,Play a Music Disc in Jukebox,"actions:JUKEBOX_PLAY",使用唱片机播放唱片
 CRAFT_20_UNIQUE_ITEMS,goal,1,Craft 20 Unique Items,craft-unique:20,合成 20 种不同物品
 CRAFT_50_UNIQUE_ITEMS,goal,2,Craft 50 Unique Items,craft-unique:50,合成 50 种不同物品
 CRAFT_100_UNIQUE_ITEMS,goal,3,Craft 100 Unique Items,craft-unique:100,合成 100 种不同物品

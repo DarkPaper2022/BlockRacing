@@ -20,7 +20,7 @@ def frame_plan(spec):
     if not subjects:
         raise ValueError("An icon needs at least one subject")
     kind = spec["requirement"].partition(":")[0]
-    collections = {"item", "item-unique", "equipment-all", "equipment-any", "consume-all"}
+    collections = {"item", "item-unique", "item-total", "equipment-all", "equipment-any", "consume-all"}
     if len(subjects) == 1 or kind not in collections:
         return [{"subjects": subjects, "label": " / ".join(subjects), "phase": ""}]
     if spec["badge"] == "ALL" and spec["icon"] == "WAXED_COPPER_BLOCK":

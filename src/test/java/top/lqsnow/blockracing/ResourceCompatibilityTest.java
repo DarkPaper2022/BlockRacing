@@ -51,9 +51,9 @@ class ResourceCompatibilityTest {
             } else {
                 String requirement = row.get(4);
                 assertFalse(requirement.isBlank(), row.get(0));
-                if (requirement.startsWith("item:") || requirement.startsWith("item-unique:")
+                if (requirement.startsWith("item:") || requirement.startsWith("item-unique:") || requirement.startsWith("item-total:")
                         || requirement.startsWith("enchanted-item:") || requirement.startsWith("break:")) {
-                    String items = requirement.startsWith("item-unique:") ? requirement.split(":", 3)[2]
+                    String items = requirement.startsWith("item-unique:") || requirement.startsWith("item-total:") ? requirement.split(":", 3)[2]
                             : requirement.startsWith("enchanted-item:") ? requirement.split(":", 3)[1]
                             : requirement.substring(requirement.indexOf(':') + 1);
                     for (String item : items.split(",")) {

@@ -37,6 +37,11 @@ public class Goal {
 
     public static final String TEAM_COMPLETION_SOURCE = "[team effort]";
     private static final Map<String, Set<String>> COMPLETED_ADVANCEMENTS = new HashMap<>();
+    private static final Map<String, Set<TaskAction>> COMPLETED_ACTIONS = new HashMap<>();
+    private static String progressEpoch = java.util.UUID.randomUUID().toString();
+    public static String progressEpoch() { return progressEpoch; }
+
+    public enum TaskAction { MILK_CLEANSE, LOOM_CRAFT, CAULDRON_CLEAN, COMPOST_FILL, COMPOST_COLLECT, JUKEBOX_PLAY }
     private static final Map<String, Definition> DEFINITIONS = new HashMap<>();
     private static final Map<String, Set<EntityType>> KILLED_ENTITY_TYPES = new HashMap<>();
     private static final Map<String, Integer> KILL_COUNTS = new HashMap<>();
@@ -168,8 +173,10 @@ public class Goal {
     }
 
     public static void saveProgress(org.bukkit.configuration.ConfigurationSection section) {
+        section.set("progress-epoch", progressEpoch);
         section.set("sharing-policy", "sum-union-v1");
         saveSets(section, "COMPLETED_ADVANCEMENTS", COMPLETED_ADVANCEMENTS);
+        saveSets(section, "COMPLETED_ACTIONS", COMPLETED_ACTIONS);
         saveSets(section, "KILLED_ENTITY_TYPES", KILLED_ENTITY_TYPES);
         saveSets(section, "BRED_ENTITY_TYPES", BRED_ENTITY_TYPES);
         saveSets(section, "TAMED_ENTITY_TYPES", TAMED_ENTITY_TYPES);
@@ -195,7 +202,10 @@ public class Goal {
     public static void restoreProgress(org.bukkit.configuration.ConfigurationSection section) {
         resetProgress();
         if (section == null) return;
+        String savedEpoch = section.getString("progress-epoch");
+        if (savedEpoch != null) progressEpoch = java.util.UUID.fromString(savedEpoch).toString();
         restoreSets(section, "COMPLETED_ADVANCEMENTS", COMPLETED_ADVANCEMENTS, value -> value);
+        restoreSets(section, "COMPLETED_ACTIONS", COMPLETED_ACTIONS, TaskAction::valueOf);
         restoreSets(section, "KILLED_ENTITY_TYPES", KILLED_ENTITY_TYPES, EntityType::valueOf);
         restoreSets(section, "BRED_ENTITY_TYPES", BRED_ENTITY_TYPES, EntityType::valueOf);
         restoreSets(section, "TAMED_ENTITY_TYPES", TAMED_ENTITY_TYPES, EntityType::valueOf);
@@ -248,7 +258,9 @@ public class Goal {
     }
 
     public static void resetProgress() {
+        progressEpoch = java.util.UUID.randomUUID().toString();
         COMPLETED_ADVANCEMENTS.clear();
+        COMPLETED_ACTIONS.clear();
         KILLED_ENTITY_TYPES.clear();
         KILL_COUNTS.clear();
         UNDEAD_KILL_COUNTS.clear();
@@ -316,6 +328,27 @@ public class Goal {
     public static void recordUseBlock(Player player, Material material) {
         if (!isParticipant(player)) return;
         USED_BLOCKS.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(material);
+    }
+
+    public static void recordAction(Player player, TaskAction action) {
+        if (isParticipant(player)) COMPLETED_ACTIONS.computeIfAbsent(player.getName(), ignored -> new HashSet<>()).add(action);
+    }
+
+    /** Alias only when the requirement asks for the ordinary ore; explicit deepslate goals stay strict. */
+    static boolean matchesMinedBlock(Material wanted, Set<Material> mined) {
+        if (mined.contains(wanted)) return true;
+        Material deep = switch (wanted) {
+            case COAL_ORE -> Material.DEEPSLATE_COAL_ORE;
+            case IRON_ORE -> Material.DEEPSLATE_IRON_ORE;
+            case COPPER_ORE -> Material.DEEPSLATE_COPPER_ORE;
+            case GOLD_ORE -> Material.DEEPSLATE_GOLD_ORE;
+            case REDSTONE_ORE -> Material.DEEPSLATE_REDSTONE_ORE;
+            case EMERALD_ORE -> Material.DEEPSLATE_EMERALD_ORE;
+            case LAPIS_ORE -> Material.DEEPSLATE_LAPIS_ORE;
+            case DIAMOND_ORE -> Material.DEEPSLATE_DIAMOND_ORE;
+            default -> null;
+        };
+        return deep != null && mined.contains(deep);
     }
 
     public static void recordBreak(Player player, Material material) {
@@ -422,10 +455,15 @@ public class Goal {
 
         List<String> lore = new ArrayList<>();
         boolean chinese = LanguageManager.usesChinese(player);
+        if (definition.requirement() instanceof AdvancementCountRequirement) {
+            lore.add("§7" + (chinese ? "有效进度去重总数：" : "Distinct completed advancements: ") + progress.current());
+            lore.add("§7" + (chinese ? "含已记录的离线队友；不含配方解锁；开局已有进度也计入"
+                    : "Includes recorded offline members and pre-round completions; excludes recipes"));
+        }
         lore.add("§b" + (isIndividualState(definition.requirement())
                 ? (chinese ? "队伍最佳个人进度 · 须同一人满足" : "Team's best player · one player must satisfy all")
                 : (chinese ? "队伍共享进度" : "Shared team progress")));
-        if (definition.requirement() instanceof ItemRequirement || definition.requirement() instanceof ItemUniqueRequirement) {
+        if (definition.requirement() instanceof ItemRequirement || definition.requirement() instanceof ItemUniqueRequirement || definition.requirement() instanceof ItemTotalRequirement) {
             lore.add("§7" + (chinese ? "合计在线队友背包与队伍箱 · 不累计历史持有" : "Online inventories + team chests · currently held only"));
         }
         int current = Math.min(progress.current(), progress.required());
@@ -472,6 +510,10 @@ public class Goal {
         Requirement r = getRequirement(target);
         if (r == null) return null;
         List<String> names = members.stream().distinct().toList();
+        if (r instanceof ActionRequirement v) {
+            Set<TaskAction> done = union(COMPLETED_ACTIONS, names);
+            return countProgress((int) v.actions().stream().filter(done::contains).count(), v.actions().size());
+        }
         if (r instanceof KillCountRequirement v) return countProgress(sum(KILL_COUNTS, names), v.amount());
         if (r instanceof DamageRequirement v) {
             var map = v.kind() == DamageRequirement.Kind.DEALT ? DAMAGE_DEALT : DAMAGE_TAKEN;
@@ -506,7 +548,7 @@ public class Goal {
         if (r instanceof SpyUniqueRequirement v) return collectionProgress(
                 union(SPIED_ENTITY_TYPES, names).stream().map(Goal::displayEntity).toList(), v.amount());
         if (r instanceof UseBlockRequirement v) return flag(union(USED_BLOCKS, names).contains(v.material()));
-        if (r instanceof BreakRequirement v) return flag(union(MINED_BLOCKS, names).contains(v.material()));
+        if (r instanceof BreakRequirement v) return flag(matchesMinedBlock(v.material(), union(MINED_BLOCKS, names)));
         if (r instanceof DeathCauseRequirement v) return flag(union(DEATH_CAUSES, names).contains(v.cause()));
         if (r instanceof DeathAttackerRequirement v) return flag(union(DEATH_ATTACKERS, names).contains(v.entityType()));
         if (r instanceof DeathProjectileRequirement v) return flag(union(DEATH_PROJECTILES, names).contains(v.entityType()));
@@ -517,7 +559,7 @@ public class Goal {
                 new ArrayList<>(union(COMPLETED_ADVANCEMENTS, names)), v.amount());
 
         List<Player> online = names.stream().map(players).filter(Objects::nonNull).toList();
-        if (r instanceof ItemRequirement || r instanceof ItemUniqueRequirement || r instanceof EnchantedItemRequirement) {
+        if (r instanceof ItemRequirement || r instanceof ItemUniqueRequirement || r instanceof ItemTotalRequirement || r instanceof EnchantedItemRequirement) {
             // Identity-deduplicate inventories so an accidental duplicate chest reference cannot mint items.
             Set<Inventory> inventories = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
             inventories.addAll(chests);
@@ -534,6 +576,8 @@ public class Goal {
                 }
             }
             if (r instanceof ItemRequirement v) return sharedItemProgress(amounts, v.items(), (int) countUniqueMaterials(v.items()), true);
+            if (r instanceof ItemTotalRequirement v) return countProgress((int) Math.min(Integer.MAX_VALUE,
+                    v.items().stream().distinct().mapToLong(material -> amounts.getOrDefault(material, 0)).sum()), v.amount());
             ItemUniqueRequirement v = (ItemUniqueRequirement) r;
             return sharedItemProgress(amounts, v.items(), v.amount(), false);
         }
@@ -643,7 +687,11 @@ public class Goal {
 
     /** Import each player's completed progress once on start/login, not for every goal every five ticks. */
     public static void refreshAdvancements(Player player) {
-        Iterator<Advancement> iterator = Bukkit.advancementIterator();
+        refreshAdvancements(player, Bukkit.advancementIterator());
+    }
+
+    static void refreshAdvancements(Player player, Iterator<Advancement> iterator) {
+        if (!isParticipant(player)) return;
         while (iterator.hasNext()) {
             Advancement advancement = iterator.next();
             if (isCountableAdvancement(advancement.getKey(), advancement.getDisplay() != null)
@@ -697,7 +745,7 @@ public class Goal {
         if (requirement instanceof WearContinuousRequirement) {
             return Material.LEATHER_HELMET;
         }
-        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement) {
+        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement || requirement instanceof ItemTotalRequirement) {
             return Material.CHEST;
         }
         if (requirement instanceof EnchantedItemRequirement) {
@@ -781,14 +829,14 @@ public class Goal {
         if (requirement instanceof CraftUniqueRequirement) return "合成";
         if (requirement instanceof EquipmentRequirement || requirement instanceof ColoredEquipmentRequirement || requirement instanceof UniqueLeatherArmorColorsRequirement) return "装备";
         if (requirement instanceof WearContinuousRequirement) return "穿戴";
-        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement) return "收集";
+        if (requirement instanceof ItemRequirement || requirement instanceof ItemUniqueRequirement || requirement instanceof ItemTotalRequirement) return "收集";
         if (requirement instanceof EnchantedItemRequirement) return "附魔";
         if (requirement instanceof LevelRequirement) return "等级";
         if (requirement instanceof LocationRequirement) return "到达";
         if (requirement instanceof EffectRequirement || requirement instanceof EffectCountRequirement) return "效果";
         if (requirement instanceof FishTreasureRequirement) return "钓鱼";
         if (requirement instanceof SpyUniqueRequirement) return "观察";
-        if (requirement instanceof UseBlockRequirement) return "使用";
+        if (requirement instanceof UseBlockRequirement || requirement instanceof ActionRequirement) return "使用";
         if (requirement instanceof DamageRequirement) return "伤害";
         if (requirement instanceof DeathCauseRequirement || requirement instanceof DeathAttackerRequirement || requirement instanceof DeathProjectileRequirement) return "死亡";
         if (requirement instanceof VillagerMaxLevelRequirement) return "交易";
@@ -947,6 +995,21 @@ public class Goal {
     }
 
     private static Requirement parseRequirement(String rawRequirement) {
+        if (rawRequirement.startsWith("actions:")) {
+            try {
+                List<TaskAction> actions = java.util.Arrays.stream(rawRequirement.substring(8).split(",", -1))
+                        .map(String::trim).map(TaskAction::valueOf).distinct().toList();
+                return new ActionRequirement(actions);
+            } catch (IllegalArgumentException ex) { return null; }
+        }
+        if (rawRequirement.startsWith("item-total:")) {
+            String[] parts = rawRequirement.substring(11).split(":", 2);
+            if (parts.length != 2) return null;
+            int amount = parsePositiveInt(parts[0]).orElse(-1);
+            List<ItemTarget> items = parseItems(parts[1]);
+            if (amount < 1 || items.isEmpty() || items.stream().anyMatch(item -> item.amount() != 1)) return null;
+            return new ItemTotalRequirement(amount, items.stream().map(ItemTarget::material).distinct().toList());
+        }
         if (rawRequirement.startsWith("item-unique:")) {
             return parseItemUniqueRequirement(rawRequirement.substring("item-unique:".length()));
         }
@@ -1364,11 +1427,15 @@ public class Goal {
     record Progress(int current, int required, List<String> completed, List<String> missing) {
     }
 
-    private sealed interface Requirement permits ItemRequirement, ItemUniqueRequirement, EnchantedItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, FishTreasureRequirement, SpyUniqueRequirement, WearContinuousRequirement, UseBlockRequirement, BreakRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement, DeathProjectileRequirement, VillagerMaxLevelRequirement {
+    private sealed interface Requirement permits ItemTotalRequirement, ActionRequirement, ItemRequirement, ItemUniqueRequirement, EnchantedItemRequirement, EquipmentRequirement, ColoredEquipmentRequirement, UniqueLeatherArmorColorsRequirement, AdvancementRequirement, AdvancementCountRequirement, LevelRequirement, LocationRequirement, EffectRequirement, EffectCountRequirement, HungerRequirement, KillRequirement, KillCountRequirement, KillUniqueRequirement, BreedRequirement, BreedUniqueRequirement, TameRequirement, ConsumeRequirement, ConsumePotionRequirement, ConsumeAllRequirement, ConsumeUniqueRequirement, CraftUniqueRequirement, FishTreasureRequirement, SpyUniqueRequirement, WearContinuousRequirement, UseBlockRequirement, BreakRequirement, DamageRequirement, DeathCauseRequirement, DeathAttackerRequirement, DeathProjectileRequirement, VillagerMaxLevelRequirement {
     }
 
     private record ItemRequirement(List<ItemTarget> items) implements Requirement {
     }
+
+    private record ItemTotalRequirement(int amount, List<Material> items) implements Requirement { }
+
+    private record ActionRequirement(List<TaskAction> actions) implements Requirement { }
 
     private record ItemUniqueRequirement(int amount, List<ItemTarget> items) implements Requirement {
     }

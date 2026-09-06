@@ -8,6 +8,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GoalPersistenceTest {
+    @Test void roundEpochSurvivesRecoveryButNotANewRound() {
+        Goal.resetProgress();
+        String epoch = Goal.progressEpoch();
+        YamlConfiguration saved = new YamlConfiguration();
+        Goal.saveProgress(saved);
+        Goal.resetProgress();
+        assertNotEquals(epoch, Goal.progressEpoch());
+        Goal.restoreProgress(saved);
+        assertEquals(epoch, Goal.progressEpoch());
+        Goal.resetProgress();
+    }
     @Test
     void goalEventsSurviveYamlRoundTrip() throws Exception {
         YamlConfiguration original = new YamlConfiguration();
