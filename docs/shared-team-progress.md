@@ -1,6 +1,6 @@
 # 队伍共享目标进度
 
-状态：`feature/shared-team-progress`，基于 `main` 的独立功能分支，尚未合入主线。与暂停的 `feature/per-team-worlds` 无关，不创建额外世界。
+状态：2026-09-06 已从 `feature/shared-team-progress` 合入 `main`；保留原开发分支。与暂停的 `feature/per-team-worlds` 无关，不创建额外世界。
 
 ## 共享规则
 
