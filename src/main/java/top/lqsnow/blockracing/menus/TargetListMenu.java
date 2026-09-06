@@ -73,11 +73,11 @@ public final class TargetListMenu extends MenuView {
                         "§f对象图标 = 具体物品 / 生物 / 工作站", "§f叠放数量 = 需求数量，不是任务分数",
                         "§6Bonus 发光；标题 ★ 标记，筛选可单独查看", "§7可选资源包：左上动作符号，右上精确数量",
                         "§7ANY = 任一；ALL = 全部；5M = 5 分钟", "§7数字 100/200/400 不截断成 64",
-                        "§7悬停直接显示完整目标与个人进度，无需点击", "§7点击底部页码刷新任务与进度") : List.of(
+                        "§7悬停直接显示完整目标与队伍进度，无需点击", "§7伤害求和；唯一目标去重；装备等须同一人满足", "§7点击底部页码刷新任务与进度") : List.of(
                         "§fObject = required item / mob / workstation", "§fStack count = requirement, NOT score",
                         "§6Bonus glows and is marked ★; use the Bonus filter", "§7Optional pack: action top-left, exact count top-right",
                         "§7ANY = any one; ALL = all; 5M = 5 minutes", "§7Counts over 64 are never truncated",
-                        "§7Hover for full goal and personal progress; no click needed", "§7Click the page counter to refresh")).build(),
+                        "§7Hover for full goal and team progress; no click needed", "§7Sum damage; deduplicate unique goals; equipment stays per player", "§7Click the page counter to refresh")).build(),
                 (viewer, click) -> { }));
         setButton(49, MenuButton.of(viewer -> ItemBuilder.of(Material.PAPER)
                 .name(Message.MENU_TARGET_LIST_PAGE.getString(viewer)

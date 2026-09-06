@@ -142,6 +142,8 @@ public class Game {
                 return;
             }
 
+            Goal.refreshAdvancements(player);
+
             // Players who choose a team before the start of the game and exit, but enter
             // after the start of the game
             if (!inGamePlayers.contains(player.getName())) {
@@ -187,6 +189,8 @@ public class Game {
     }
 
     public static void playerQuit(Player player) {
+        Goal.playerDisconnected(player);
+        if (currentGameState == GameState.INGAME) GameProgressStore.saveNow();
         redRollPlayers.remove(player.getName());
         blueRollPlayers.remove(player.getName());
         readyPlayers.remove(player.getName());
@@ -293,6 +297,7 @@ public class Game {
             // General
             Player player = Bukkit.getPlayer(p);
             initPlayer(player);
+            Goal.refreshAdvancements(player);
         }
 
         Bukkit.getLogger().info("Red team players: " + redTeamPlayers.toString());
@@ -306,6 +311,10 @@ public class Game {
     }
 
     public static void resumeRecoveredGame() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (redTeamPlayers.contains(player.getName()) || blueTeamPlayers.contains(player.getName()))
+                Goal.refreshAdvancements(player);
+        }
         new runPer5Tick().runTaskTimer(Main.getInstance(), 0L, 5L);
     }
 
@@ -685,35 +694,26 @@ public class Game {
     }
 
     private static void checkRedInventory() {
-        // Complete from player
-        for (String player : redTeamPlayers) {
-            for (String block : getCurrentBlocks("red")) {
-                if (Goal.isGoal(block)) {
-                    String completionSource = Goal.findCompletionSource(block, redTeamPlayers, redTeamChest,
-                            Message.NOTICE_RED_TEAM_CHEST.getString());
-                    if (completionSource != null) {
-                        redTaskComplete(block, completionSource);
-                        return;
-                    }
-                    continue;
+        for (String target : getCurrentBlocks("red")) {
+            if (Goal.isGoal(target)) {
+                String source = Goal.findCompletionSource(target, redTeamPlayers, redTeamChest,
+                        Message.NOTICE_RED_TEAM_CHEST.getString());
+                if (source != null) {
+                    redTaskComplete(target, source);
+                    return;
                 }
-                Player p = Bukkit.getPlayer(player);
-                if (p == null)
-                    continue;
-                if (p.getInventory().contains(Material.valueOf(block))) {
-                    redTaskComplete(block, player);
+                continue;
+            }
+            for (String name : redTeamPlayers) {
+                Player player = Bukkit.getPlayer(name);
+                if (player != null && player.getInventory().contains(Material.valueOf(target))) {
+                    redTaskComplete(target, name);
                     return;
                 }
             }
-        }
-        // Complete from team chest
-        for (String block : getCurrentBlocks("red")) {
-            if (Goal.isGoal(block)) {
-                continue;
-            }
             for (Inventory chest : redTeamChest) {
-                if (chest.contains(Material.valueOf(block))) {
-                    redTaskComplete(block, Message.NOTICE_RED_TEAM_CHEST.getString());
+                if (chest.contains(Material.valueOf(target))) {
+                    redTaskComplete(target, Message.NOTICE_RED_TEAM_CHEST.getString());
                     return;
                 }
             }
@@ -721,35 +721,26 @@ public class Game {
     }
 
     private static void checkBlueInventory() {
-        // Complete from player
-        for (String player : blueTeamPlayers) {
-            for (String block : getCurrentBlocks("blue")) {
-                if (Goal.isGoal(block)) {
-                    String completionSource = Goal.findCompletionSource(block, blueTeamPlayers, blueTeamChest,
-                            Message.NOTICE_BLUE_TEAM_CHEST.getString());
-                    if (completionSource != null) {
-                        blueTaskComplete(block, completionSource);
-                        return;
-                    }
-                    continue;
+        for (String target : getCurrentBlocks("blue")) {
+            if (Goal.isGoal(target)) {
+                String source = Goal.findCompletionSource(target, blueTeamPlayers, blueTeamChest,
+                        Message.NOTICE_BLUE_TEAM_CHEST.getString());
+                if (source != null) {
+                    blueTaskComplete(target, source);
+                    return;
                 }
-                Player p = Bukkit.getPlayer(player);
-                if (p == null)
-                    continue;
-                if (p.getInventory().contains(Material.valueOf(block))) {
-                    blueTaskComplete(block, player);
+                continue;
+            }
+            for (String name : blueTeamPlayers) {
+                Player player = Bukkit.getPlayer(name);
+                if (player != null && player.getInventory().contains(Material.valueOf(target))) {
+                    blueTaskComplete(target, name);
                     return;
                 }
             }
-        }
-        // Complete from team chest
-        for (String block : getCurrentBlocks("blue")) {
-            if (Goal.isGoal(block)) {
-                continue;
-            }
             for (Inventory chest : blueTeamChest) {
-                if (chest.contains(Material.valueOf(block))) {
-                    blueTaskComplete(block, Message.NOTICE_BLUE_TEAM_CHEST.getString());
+                if (chest.contains(Material.valueOf(target))) {
+                    blueTaskComplete(target, Message.NOTICE_BLUE_TEAM_CHEST.getString());
                     return;
                 }
             }
@@ -760,7 +751,9 @@ public class Game {
         if (currentGameState != GameState.INGAME || !redTeamRemainingBlocks.contains(block)) return;
         sendAll(Message.NOTICE_RED_COLLECT, (viewer, text) -> text
                 .replace("%block%", getTargetDisplayName(block, viewer))
-                .replace("%player%", player.equals(Message.NOTICE_RED_TEAM_CHEST.getString())
+                .replace("%player%", Goal.TEAM_COMPLETION_SOURCE.equals(player)
+                        ? (LanguageManager.usesChinese(viewer) ? "队伍协作" : "Team effort")
+                        : player.equals(Message.NOTICE_RED_TEAM_CHEST.getString())
                         ? Message.NOTICE_RED_TEAM_CHEST.getString(viewer) : player));
         Bukkit.getLogger().info(Message.NOTICE_RED_COLLECT.getString()
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
@@ -779,7 +772,7 @@ public class Game {
                 redTeamScore += 1;
         }
         redTeamCurrentBlockAmount += 1;
-        collect(player);
+        if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
         GameProgressStore.saveNow();
         if (!Block.isBonusTarget(block) && redTeamProgressScore >= redTeamWinScore) {
@@ -809,7 +802,9 @@ public class Game {
         if (currentGameState != GameState.INGAME || !blueTeamRemainingBlocks.contains(block)) return;
         sendAll(Message.NOTICE_BLUE_COLLECT, (viewer, text) -> text
                 .replace("%block%", getTargetDisplayName(block, viewer))
-                .replace("%player%", player.equals(Message.NOTICE_BLUE_TEAM_CHEST.getString())
+                .replace("%player%", Goal.TEAM_COMPLETION_SOURCE.equals(player)
+                        ? (LanguageManager.usesChinese(viewer) ? "队伍协作" : "Team effort")
+                        : player.equals(Message.NOTICE_BLUE_TEAM_CHEST.getString())
                         ? Message.NOTICE_BLUE_TEAM_CHEST.getString(viewer) : player));
         Bukkit.getLogger().info(Message.NOTICE_BLUE_COLLECT.getString()
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
@@ -828,7 +823,7 @@ public class Game {
                 blueTeamScore += 1;
         }
         blueTeamCurrentBlockAmount += 1;
-        collect(player);
+        if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
         GameProgressStore.saveNow();
         if (!Block.isBonusTarget(block) && blueTeamProgressScore >= blueTeamWinScore) {
