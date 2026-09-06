@@ -31,6 +31,8 @@
 
 多候选目标支持轮播；资源包生成后运行 `python tools/export_task_audit.py`，可离线打开 `target/task-ui/audit/task-audit.html`，审计动画、全部静态帧及完整描述。
 
+764 个目标的中文、requirement 与代码判定静态核对见[一致性审计报告](docs/audits/target-consistency-20260906/summary.md)和[逐项结果表](docs/audits/target-consistency-20260906/targets.csv)；已识别问题尚未修改规则。
+
 上游新增功能包括按玩家切换中英文（`/language`）、队内聊天和全服喊话（`/shout`）、随机分队确认、极速模式补给、规则书，以及对局自动保存/恢复。恢复数据包含胜利进度、可用积分、Bonus 和行为任务进度；任务定义不兼容时保留备份，不自动恢复。
 
 ## 构建与安装
