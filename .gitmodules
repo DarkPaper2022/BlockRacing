@@ -1,0 +1,3 @@
+[submodule "client-mod"]
+	path = client-mod
+	url = https://github.com/DarkPaper2022/BlockRacing-Client.git

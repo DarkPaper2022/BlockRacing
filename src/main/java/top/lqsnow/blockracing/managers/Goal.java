@@ -487,6 +487,20 @@ public class Goal {
         return lore;
     }
 
+    /** Read-only numeric UI projection; does not check off targets or import advancements. */
+    public static int[] getBoardProgress(String target, Player player) {
+        List<Inventory> chests = Team.redTeamPlayers.contains(player.getName()) ? Game.redTeamChest
+                : Team.blueTeamPlayers.contains(player.getName()) ? Game.blueTeamChest : List.of();
+        Progress progress = teamProgress(target, teamMembers(player.getName()), chests, Bukkit::getPlayer);
+        return progress == null ? new int[]{0, 1}
+                : new int[]{Math.max(0, progress.current()), Math.max(1, progress.required())};
+    }
+
+    public static boolean isBoardProgressIndividual(String target) {
+        Definition definition = DEFINITIONS.get(decode(target));
+        return definition != null && isIndividualState(definition.requirement());
+    }
+
     public static String findCompletionSource(String target, List<String> teamPlayers, List<Inventory> teamChests, String chestSource) {
         Definition definition = DEFINITIONS.get(decode(target));
         if (definition == null) {

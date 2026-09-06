@@ -92,6 +92,7 @@ public class Main extends JavaPlugin {
             Scoreboard.setPreGameScoreboard();
         }
         GameProgressStore.startAutosave();
+        new top.lqsnow.blockracing.network.TaskBoardBridge(this).start();
         new Game.runPer2Tick().runTaskTimer(this, 0L, 2L);
 
         if (!recoveredGame) {
