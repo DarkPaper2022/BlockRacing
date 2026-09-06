@@ -1,207 +1,88 @@
-[English](./docs/en/README-en.md) | [简体中文](./README.md)
+# BlockRacing · Draftout
 
-[Translation Tutorial](./docs/en/TranslationTutorial-en.md) | [翻译教程](./TranslationTutorial.md)
+[English](docs/en/README-en.md) · [任务库与抽取规则](docs/targets.md) · [开发与验证](docs/development.md) · [翻译](TranslationTutorial.md)
 
-# 方块竞速BlockRacing
+基于 [LQSnow/BlockRacing](https://github.com/LQSnow/BlockRacing) 的 Minecraft 红蓝队任务竞速插件。当前分支使用积分制：双方争夺同一组任务，先拿到本局普通任务总分至少 50% 的队伍获胜。
 
-这是一个Minecraft多人竞速小游戏，分为两个队伍，先收集完指定方块的队伍获胜。
+目标服务器版本为 Minecraft 1.21.11，构建使用 JDK 21 和 Maven，插件版本为 3.5。
 
-版本：Java 1.21.11
+## 分支
 
-# 特色功能
+- `main`：原 `local-3.5-patch`，包含积分制、Bonus、CSV 任务库和任务进度菜单，是后续开发的基线。
+- `feature/per-team-worlds`：在基线上增加红蓝队同种子独立世界、复活与传送门处理，尚需联机回归验证。
+- `3.0`、`26.2`：保留的上游版本快照，历史中的服务端二进制已移除。
 
-1. 队伍箱子：每个队伍都有3个队伍箱子，箱子里的物品对同队伍成员共享。
+独立世界功能尚未合并进 `main`。分支整理不代表完成了游戏内验收。
 
-2. 奖励机制：每收集一个方块，对方队伍将会获得一组该方块（存放在队伍箱子里）。
+## 当前玩法
 
-3. 队伍TP：同队伍之间可以自由TP。
+1. 每局默认抽取 64 个普通任务，分数为 1–10；1 分任务最多 8 个，上限可配置。
+2. 另抽取 3 个 Bonus 任务，默认来自 11 分及以上的任务池。Bonus 不计入胜利总分，完成后按其分值奖励可用积分。
+3. 普通任务完成后增加胜利进度，并奖励 1 点可用积分；极速模式奖励 3 点。定位和随机传送消耗可用积分，不扣胜利进度。
+4. 双方共享任务列表；一方完成后，该任务也从对方列表移除。胜利门槛为开局普通任务总分的一半，向上取整。
+5. 普通模式完成物品任务会向对方队伍箱子赠送一组该物品；竞速模式不赠送，默认使用竞速模式。
 
-4. 轮换方块：当前所需方块太难获取时，可以轮换掉，每局仅限三次。
+加入服务器后，按 Shift+F 或输入 `/menu`，选队并准备。所有在线玩家准备后可开始；允许单人或只有一支队伍参与，便于本地测试。
 
-5. 定位：玩家可以花费队伍积分购买locate指令，用于定位群系或结构。
+开局后通过 `/menu targets` 查看任务、分值和进度。菜单还提供队伍箱子、路径点、定位和随机传送；游戏难度设置为困难。
 
-6. 记录点：每个队伍有3个记录点，可以自由保存、传送、删除。
+## 构建与安装
 
-# 玩法说明
-
-## 准备阶段
-
-- 进入游戏后，按Shift+F打开菜单。
-- 在菜单进行选队。
-- 菜单中可以设置目标方块库，可以选择性开启中等难度方块、困难难度方块、染色方块和末地方块。
-- 菜单中可以设置目标方块数量。
-- 菜单中可以切换模式（普通模式或竞速模式，可选开启极速模式）
-- 所有玩家准备后，即可在菜单点击钻石开始游戏。
-- 所有玩家输入/restartgame可以关闭服务器（通过后续设置可以实现自动重启）。
-
-## 游戏阶段
-
-- 随机传送后，按照记分板上的内容，开始收集方块吧。
-  
-- Shift+F可以打开菜单，在菜单里可以使用队伍箱子、Roll、定位、记录点、随机传送功能。
-  
-- 购买定位权限后，可以使用/locatestrcture或/locatebiome进行定位。
-  
-- 输入/tp \<teammates>可以TP队友。
-
-
-# 安装教程
-
-1. 准备一个Paper服务器（也可以是Spigot或Purpur）（如果不会，可以去看我的博客里的相关文章，网址lqsnow.top）
-
-2. 下载插件，将插件放到服务器目录下的`plugins`文件夹中
-
-3. （**推荐**）将`server.properties`中`spawn-protection`的值改为0（避免出生点无法破坏方块）
-
-4. （**推荐**）在`server.properties`文件中，更改如下设置：
-
-   ```
-   pvp=false
-   seed=
-   ```
-
-   推荐关闭PVP，让玩家沉浸于方块收集。
-
-   推荐将种子留空，玩完一局后将`world` `world_nether` `world_the_end`三个文件夹删除，起到重置种子的作用。
-
-   你也可以更改服务器启动文件（start.bat）以自动重启、自动重置种子（seed留空就是随机种子）：
-
-   ```
-   :start
-   java -Xmx4G -Xms4G -jar server.jar nogui
-   rd /s /q world
-   rd /s /q world_nether
-   rd /s /q world_the_end
-   timeout /nobreak /t 5
-   goto start
-   ```
-
-   记得修改server.jar为你的服务器核心文件名，并按实际情况分配内存。
-
-# 目标方块库修改
-
-当前 Draftout 版本的目标库由 `Targets.csv` 管理。`type=block` 的条目中，物品/方块名以 Paper 的 `Material` 枚举名为准，例如 `SLIME_BLOCK`、`PHANTOM_MEMBRANE`。
-
-在服务器文件夹下的plugins\BlockRacing目录中，存在下面这几个文件：
-
-```
-EasyBlocks.txt 简单方块库
-MediumBlocks.txt 中等方块库
-HardBlocks.txt 困难方块库
-DyedBlocks.txt 染色方块库
-EndBlocks.txt 末地方块库
-config.yml 配置文件
-lang.yml 语言文件
-zh_cn.json 翻译文件
-en_us.json 翻译文件
+```sh
+mvn clean verify
 ```
 
-5个方块库文件你可以自由修改，但请注意：
+构建产物为 `target/BlockRacing-3.5.jar`。项目目前没有自动化测试，构建通过仅代表编译和打包成功。
 
-1. 每行只写一个方块名
-   
-2. 方块名使用全大写的方块命名空间
-   
-3. 5个方块库中不要有重复方块
-   
-4. 不要有空行、空格等字符
-   
-5. 不要修改文件名，不要删除文件
-   
-6. 游戏内除了简单方块库必选以外，剩下的都可以选择性开启，如非特殊需要不要动这5个文件
+自行准备 Paper 1.21.11 服务端，将插件 JAR 放入其 `plugins/` 目录并启动。服务端 JAR、世界存档、依赖缓存和编译产物不纳入 Git。
 
-# 不同难度方块的生成权重变化
+首次启动会在 `plugins/BlockRacing/` 生成配置、语言文件和 `Targets.csv`。已有文件不会自动被新的默认资源覆盖；升级时先备份，停服后比较并更新配置及任务库。
 
-简单：游戏进程从0%到100%，权重从100减小到20。
+若使用 `feature/per-team-worlds`，插件会创建 `world_red*`、`world_blue*` 六个队伍世界，并在胜利后以及下次启动时清理这些队伍世界。请将这些名称专用于本小游戏。`main` 没有这套世界创建与清理逻辑。
 
-中等：游戏进程从0%到40%，权重从20增加到60；游戏进程从40%到100%，权重保持60不变。
+## 配置
 
-困难：游戏进程从0%到50%，权重从1增加到20；游戏进程从50%到100%，权重从20增加到60。
+默认值以 [src/main/resources/config.yml](src/main/resources/config.yml) 为准。游戏运行期间通过菜单调整支持的选项，其他设置停服后修改。
 
-染色：游戏进程从0%到100%，权重保持10不变。
+| 配置 | 默认值 | 作用 |
+| --- | --- | --- |
+| `block-amount` | 64 | 普通任务目标数量 |
+| `max-easy-targets-per-game` | 8 | 1 分任务数量上限 |
+| `bonus-score-threshold` | 11 | Bonus 起始分值，可设 11–99 |
+| `bonus-target-amount` | 3 | Bonus 数量，可设 1–10 |
+| `available-task-amount` | 64 | 同时可做的普通任务数，Bonus 另行显示 |
+| `medium-block` / `hard-block` | true / true | 启用 2 分 / 3 分至 Bonus 阈值以下任务 |
+| `locate-cost` | 5 | 购买定位权限的可用积分消耗 |
+| `random-teleport-cost` | 2 | 随机传送消耗；首次菜单随机传送免费 |
+| `max-team-chest-num` / `max-team-waypoint-num` | 8 / 8 | 每队箱子数 / 路径点数 |
+| `game-mode` / `speed-mode` | racing / false | 模式 / 极速模式 |
 
-末地：当游戏进程超过非末地方块在总方块的占比时，权重固定为60。当游戏进程未达到非末地方块在总方块的占比时：游戏进程从0%到80%，权重为0；游戏进程从80%到100%，权重从0增加到60。（参考数据：默认方块库，如果所有方块难度全部启用，末地方块占比约为2%，非末地方块占比约为98%）
+## 常用命令
 
-# 指令对照表
+| 命令 | 用途 |
+| --- | --- |
+| `/menu`、`/menu targets` | 主菜单、任务列表 |
+| `/menu chest [编号]` | 队伍箱子 |
+| `/menu waypoints` | 路径点菜单 |
+| `/menu locate` | 购买定位权限 |
+| `/locatebiome <群系>`、`/locatestructure <结构>` | 使用定位权限 |
+| `/menu randomTP` | 随机传送 |
+| `/tp <队友>` | 队内传送；原版命令使用 `/minecraft:tp` |
+| `/block <red或blue> <编号>` | 查询当前目标 |
+| `/randomteam` | 随机分队 |
+| `/restartgame` | 玩家共同确认后关闭服务器，自动重启需外部启动脚本 |
+| `/sampleblocks [数量]` | 管理员预览普通任务抽样，默认 64，建议仅在准备阶段使用 |
+| `/debug reload` | 玩家管理员重载消息；准备阶段还会重载任务库 |
+| `/debug setscore <red或blue> <分数>` | 调整可用积分，不改变胜利进度 |
 
-### /tp - 传送
+`/debug start` 仅在独立世界功能分支提供，可用于管理员测试开局。完整命令注册见 [plugin.yml](src/main/resources/plugin.yml)。
 
-`/tp <player>`
-- `<player>`: 要传送到的玩家名称。只能传送到同队玩家。
+## 文档与许可
 
-**注意，/tp命令已被插件修改，如果想使用原版tp的指令，请输入/teleport或/minecraft:tp**
+- [任务库、分数、组合目标与关联降权](docs/targets.md)
+- [开发流程、分支维护、部署与手工验证](docs/development.md)
+- [语言配置](TranslationTutorial.md)
+- [变更记录](CHANGELOG.md)
+- [已归档的旧权重曲线](docs/archive/weight-curves.md)
 
-### /menu - 打开菜单
-
-`/menu [main|chest|waypoints|roll|locate|randomTP]`
-- `main`: 打开主菜单。
-- `chest [1|2|3]`: 打开队伍箱子菜单或指定队伍箱子。
-- `waypoints [use <index>]`: 打开路径点菜单或使用指定路径点。
-- `roll`: 执行轮换操作。
-- `locate`: 购买定位指令使用权限。
-- `randomTP`: 随机传送。
-
-### /locatebiome - 定位生物群系
-
-`/locatebiome <biome>`
-- `<biome>`: 要定位的生物群系名称。
-
-### /locatestructure - 定位结构
-
-`/locatestructure <structure>`
-- `<structure>`: 要定位的结构名称。
-
-### /restart - 重启服务器
-
-`/restart`
-- 在所有玩家确认重启之后，关闭服务器并重新启动。
-
-### /getblock - 获取方块信息
-
-`/getblock <red|blue> <index>`
-- `<red|blue>`: 队伍颜色。
-- `<index>`: 方块索引（1, 2, 3 或 4）。
-
-### /waypoint - 管理路径点
-
-`/waypoint remove <index>`
-- `<index>`: 要删除的路径点索引（1, 2 或 3）。
-
-### /debug - 调试命令（需要管理员权限）
-
-`/debug reload`
-- 重新加载游戏消息和方块信息，并在游戏进行中重载方块。
-
-`/debug skip <team> [block number|all]`
-- 跳过指定队伍的指定方块任务，或跳过全部方块任务。
-
-`/debug setscore <team> <score>`
-- 设置指定队伍的分数。
-
-`/debug getblock <team> <type>`
-- 查询指定队伍的方块信息，包括剩余方块和所有方块。
-
-`/debug gettranslation <team> <block number>`
-- 获取指定队伍的指定方块的翻译信息和 Minecraft 中的键。
-
-`/debug getteam`
-- 获取当前红蓝队伍的玩家列表。
-
-`/debug setteam <team> <add|remove> <player>`
-- 将指定玩家添加到或从指定队伍移除。
-
-# 意见反馈
-
-游戏反馈：lq_snow@outlook.com
-
-联系方式：
-
->  邮箱：lq_snow@outlook.com
-> 
->  QQ：2784628010
-
-# 版权说明
-
-该项目签署 [**GNU Affero General Public License v3.0**](https://github.com/LQSnow/BlockRacing/blob/main/LICENSE) 授权许可
-
-The project is licensed under the [**GNU Affero General Public License v3.0**](https://github.com/LQSnow/BlockRacing/blob/main/LICENSE)
+保留上游作者署名，项目采用 [GNU Affero General Public License v3.0](LICENSE)。本 fork 托管于 [DarkPaper2022/BlockRacing](https://github.com/DarkPaper2022/BlockRacing)。
