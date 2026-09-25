@@ -4,7 +4,7 @@
 
 ## 布局与交互
 
-`client-mod/` 是独立 Git 子模块，服务端仍为本仓库的 Paper 插件。客户端为 Minecraft 26.2 / Fabric，Java 25+。无模组客户端继续使用 `/menu targets`，不强制安装。
+`client-mod/` 是独立 Git 子模块，服务端仍为本仓库的 Paper 插件。客户端为 Minecraft 26.2 / Fabric Loader 0.19.3+ / Fabric API 0.154.0+，Java 25+。无模组客户端继续使用 `/menu targets`，不强制安装。
 
 - 在支持协议的服务器上，普通 Tab 单次按下打开面板，再按 Tab 或 Esc 关闭。长按不反复开关。Shift+Tab 在游戏画面中传给原版玩家列表；聊天、背包等其他界面的 Tab 不拦截。不会修改 `options.txt` 或玩家已有键位；第一版固定拦截普通 Tab。
 - 中央固定 **8×8**，默认 64 个普通目标。图标、两行目标名、分数、进度/状态常驻；悬停显示完整名称与 requirement。方向键选择，滚轮或 PgUp/PgDn 翻页。
