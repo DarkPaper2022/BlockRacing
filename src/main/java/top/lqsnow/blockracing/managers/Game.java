@@ -152,6 +152,8 @@ public class Game {
                 freeRandomTPList.add(player.getName());
                 GameProgressStore.saveNow();
             }
+        } else if (getCurrentGameState().equals(GameState.END)) {
+            player.setGameMode(GameMode.SPECTATOR);
         }
 
         // The permissions will disappear when the player exits and re-enters,
@@ -308,6 +310,7 @@ public class Game {
             Bukkit.getLogger().info("Game mode: Racing");
         Bukkit.getLogger().info(Setting.isSpeedMode() ? "Speed mode: On" : "Speed mode: Off");
         GameProgressStore.saveNow();
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
     }
 
     public static void resumeRecoveredGame() {
@@ -757,7 +760,7 @@ public class Game {
                         ? Message.NOTICE_RED_TEAM_CHEST.getString(viewer) : player));
         Bukkit.getLogger().info(Message.NOTICE_RED_COLLECT.getString()
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
-        playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
+        playSound(() -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         redTeamRemainingBlocks.remove(block);
         if (skipMutualTask(blueTeamRemainingBlocks, block)) {
             blueTeamTotalBlockAmount -= 1;
@@ -775,6 +778,7 @@ public class Game {
         if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
         GameProgressStore.saveNow();
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
         if (!Block.isBonusTarget(block) && redTeamProgressScore >= redTeamWinScore) {
             redWin();
             showRanking();
@@ -808,7 +812,7 @@ public class Game {
                         ? Message.NOTICE_BLUE_TEAM_CHEST.getString(viewer) : player));
         Bukkit.getLogger().info(Message.NOTICE_BLUE_COLLECT.getString()
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
-        playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
+        playSound(() -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         blueTeamRemainingBlocks.remove(block);
         if (skipMutualTask(redTeamRemainingBlocks, block)) {
             redTeamTotalBlockAmount -= 1;
@@ -826,6 +830,7 @@ public class Game {
         if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
         GameProgressStore.saveNow();
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
         if (!Block.isBonusTarget(block) && blueTeamProgressScore >= blueTeamWinScore) {
             blueWin();
             showRanking();
@@ -859,9 +864,10 @@ public class Game {
             player.setGameMode(GameMode.SPECTATOR);
         }
         sendAll(Message.NOTICE_RED_WIN);
-        playSound(Sound.UI_TOAST_CHALLENGE_COMPLETE);
+        playSound(() -> Sound.UI_TOAST_CHALLENGE_COMPLETE);
         setCurrentGameState(GameState.END);
         GameProgressStore.clear();
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
     }
 
     public static void blueWin() {
@@ -874,9 +880,10 @@ public class Game {
             player.setGameMode(GameMode.SPECTATOR);
         }
         sendAll(Message.NOTICE_BLUE_WIN);
-        playSound(Sound.UI_TOAST_CHALLENGE_COMPLETE);
+        playSound(() -> Sound.UI_TOAST_CHALLENGE_COMPLETE);
         setCurrentGameState(GameState.END);
         GameProgressStore.clear();
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
     }
 
     public static List<String> getCurrentBlocks(String team) {
@@ -947,6 +954,11 @@ public class Game {
             }
         }
         return onlineTeamPlayers;
+    }
+
+    public static void playSound(java.util.function.Supplier<Sound> soundSupplier) {
+        if (Bukkit.getOnlinePlayers().isEmpty()) return;
+        playSound(soundSupplier.get());
     }
 
     public static void playSound(Sound sound) {

@@ -51,4 +51,45 @@ class TaskBoardBridgeTest {
             Game.blueTeamProgressScore = oldScore;
         }
     }
+
+    @Test void immediateOpenRequestSendsSnapshotAndThrottlesSpam() throws Exception {
+        var preferences = LanguageManager.class.getDeclaredField("preferences");
+        preferences.setAccessible(true);
+        Object oldPreferences = preferences.get(null);
+        var oldState = Game.currentGameState;
+        var oldRed = List.copyOf(Team.redTeamPlayers);
+        List<byte[]> sentPayloads = new ArrayList<>();
+        UUID viewerId = UUID.fromString("00000000-0000-0000-0000-000000000099");
+        Player viewer = (Player) Proxy.newProxyInstance(Player.class.getClassLoader(), new Class<?>[]{Player.class},
+                (proxy, method, args) -> switch (method.getName()) {
+                    case "getName" -> "TabTester";
+                    case "getUniqueId" -> viewerId;
+                    case "locale" -> Locale.SIMPLIFIED_CHINESE;
+                    case "getListeningPluginChannels" -> Set.of(BoardWire.SNAPSHOT);
+                    case "sendPluginMessage" -> { sentPayloads.add((byte[]) args[2]); yield null; }
+                    default -> null;
+                });
+        try {
+            preferences.set(null, new YamlConfiguration());
+            Team.redTeamPlayers.clear();
+            Team.redTeamPlayers.add("TabTester");
+            Game.currentGameState = Game.GameState.PREGAME;
+
+            TaskBoardBridge bridge = new TaskBoardBridge(null);
+            // First open request sends immediately (0-tick wait)
+            bridge.onPluginMessageReceived(BoardWire.REQUEST, viewer, new byte[]{1});
+            assertEquals(1, sentPayloads.size());
+            // Immediate spam within 200ms cooldown is throttled
+            bridge.onPluginMessageReceived(BoardWire.REQUEST, viewer, new byte[]{1});
+            assertEquals(1, sentPayloads.size());
+            // Channel registration also pushes initial snapshot
+            bridge.onRegisterChannel(new org.bukkit.event.player.PlayerRegisterChannelEvent(viewer, BoardWire.SNAPSHOT));
+            assertEquals(2, sentPayloads.size());
+        } finally {
+            preferences.set(null, oldPreferences);
+            Game.currentGameState = oldState;
+            Team.redTeamPlayers.clear();
+            Team.redTeamPlayers.addAll(oldRed);
+        }
+    }
 }

@@ -15,17 +15,26 @@ import java.util.*;
 
 /** Opt-in read-only bridge. No task mutation, inventory write, or client-supplied team/score. */
 public final class TaskBoardBridge implements PluginMessageListener, Listener {
+    private static final long LEASE_NANOS = 12_000_000_000L;
+    private static final long IMMEDIATE_COOLDOWN_NANOS = 200_000_000L;
+    private static TaskBoardBridge activeBridge;
     private final JavaPlugin plugin;
     private final Map<UUID, Long> leases = new HashMap<>();
+    private final Map<UUID, Long> lastImmediateSend = new HashMap<>();
 
     public TaskBoardBridge(JavaPlugin plugin) { this.plugin = plugin; }
 
     public void start() {
+        activeBridge = this;
         var messenger = plugin.getServer().getMessenger();
         messenger.registerIncomingPluginChannel(plugin, BoardWire.REQUEST, this);
         messenger.registerOutgoingPluginChannel(plugin, BoardWire.SNAPSHOT);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         Bukkit.getScheduler().runTaskTimer(plugin, this::update, 20L, 20L);
+    }
+
+    public static void pushAll() {
+        if (activeBridge != null) activeBridge.broadcastSnapshots();
     }
 
     @Override
@@ -34,15 +43,34 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
         UUID id = player.getUniqueId();
         if (message[0] == 0) { leases.remove(id); return; }
         long now = System.nanoTime();
-        // Renew in O(1), including a rapid close/reopen. Expensive work is limited
-        // by update(), so dropping this request would only strand a legitimate UI.
-        leases.put(id, now + 12_000_000_000L);
-        // Snapshot work happens only in the rate-limited timer, never per incoming packet.
+        leases.put(id, now + LEASE_NANOS);
+        // Send an immediate snapshot if outside the 200ms per-player cooldown so Tab open is instant,
+        // while spamming packets remains rate-limited in O(1).
+        if (now - lastImmediateSend.getOrDefault(id, 0L) >= IMMEDIATE_COOLDOWN_NANOS) {
+            lastImmediateSend.put(id, now);
+            sendTo(player, new HashMap<>());
+        }
+    }
+
+    @EventHandler
+    public void onRegisterChannel(org.bukkit.event.player.PlayerRegisterChannelEvent event) {
+        if (BoardWire.SNAPSHOT.equals(event.getChannel())) {
+            sendTo(event.getPlayer(), new HashMap<>());
+        }
     }
 
     @EventHandler
     public void quit(PlayerQuitEvent event) {
-        leases.remove(event.getPlayer().getUniqueId());
+        UUID id = event.getPlayer().getUniqueId();
+        leases.remove(id);
+        lastImmediateSend.remove(id);
+    }
+
+    private void broadcastSnapshots() {
+        Map<String, byte[]> cache = new HashMap<>();
+        for (Player viewer : Bukkit.getOnlinePlayers()) {
+            sendTo(viewer, cache);
+        }
     }
 
     private void update() {
@@ -51,17 +79,21 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
         Map<String, byte[]> cache = new HashMap<>();
         for (UUID id : leases.keySet()) {
             Player viewer = Bukkit.getPlayer(id);
-            if (viewer == null || !viewer.getListeningPluginChannels().contains(BoardWire.SNAPSHOT)) continue;
-            String key = team(viewer) + ":" + LanguageManager.usesChinese(viewer);
-            byte[] data = cache.computeIfAbsent(key, ignored -> {
-                try { return BoardWire.encode(snapshot(viewer)); }
-                catch (RuntimeException ex) {
-                    plugin.getLogger().warning("Task board snapshot unavailable: " + ex.getClass().getSimpleName());
-                    return BoardWire.encode(Map.of("version", 1, "error", "目标面板暂不可用 / Board unavailable", "tasks", List.of()));
-                }
-            });
-            viewer.sendPluginMessage(plugin, BoardWire.SNAPSHOT, data);
+            if (viewer != null) sendTo(viewer, cache);
         }
+    }
+
+    private void sendTo(Player viewer, Map<String, byte[]> cache) {
+        if (viewer == null || !viewer.getListeningPluginChannels().contains(BoardWire.SNAPSHOT)) return;
+        String key = team(viewer) + ":" + LanguageManager.usesChinese(viewer);
+        byte[] data = cache.computeIfAbsent(key, ignored -> {
+            try { return BoardWire.encode(snapshot(viewer)); }
+            catch (RuntimeException ex) {
+                plugin.getLogger().warning("Task board snapshot unavailable: " + ex.getClass().getSimpleName());
+                return BoardWire.encode(Map.of("version", 1, "error", "目标面板暂不可用 / Board unavailable", "tasks", List.of()));
+            }
+        });
+        viewer.sendPluginMessage(plugin, BoardWire.SNAPSHOT, data);
     }
 
     static String team(Player viewer) {

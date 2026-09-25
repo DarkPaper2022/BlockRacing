@@ -130,11 +130,12 @@ public final class TaskActionListener implements Listener {
         } else if (block.getType() == Material.COMPOSTER && block.getBlockData() instanceof Levelled level && level.getLevel() == 8) {
             // Tag only newly emitted bone meal after a successful player extraction. Pickup is counted separately.
             org.bukkit.Location output = block.getLocation().add(0.5, 1, 0.5);
-            Set<UUID> before = nearbyItems(output, null);
+            java.util.Map<UUID, Integer> before = nearbyBoneMealAmounts(output);
             afterAction(player, () -> {
                 if (block.getType() != Material.COMPOSTER || !(block.getBlockData() instanceof Levelled now) || now.getLevel() != 0) return;
                 for (org.bukkit.entity.Entity entity : output.getWorld().getNearbyEntities(output, 1.5, 1.5, 1.5)) {
-                    if (entity instanceof Item drop && !before.contains(drop.getUniqueId()) && drop.getItemStack().getType() == Material.BONE_MEAL)
+                    if (entity instanceof Item drop && drop.getItemStack().getType() == Material.BONE_MEAL
+                            && drop.getItemStack().getAmount() > before.getOrDefault(drop.getUniqueId(), 0))
                         drop.getPersistentDataContainer().set(COMPOST_OUTPUT, PersistentDataType.STRING, Goal.progressEpoch());
                 }
             });
@@ -169,5 +170,12 @@ public final class TaskActionListener implements Listener {
         for (org.bukkit.entity.Entity entity : center.getWorld().getNearbyEntities(center, 1.5, 1.5, 1.5))
             if (entity instanceof Item item && (match == null || item.getItemStack().isSimilar(match))) ids.add(item.getUniqueId());
         return ids;
+    }
+    private static java.util.Map<UUID, Integer> nearbyBoneMealAmounts(org.bukkit.Location center) {
+        java.util.Map<UUID, Integer> amounts = new java.util.HashMap<>();
+        for (org.bukkit.entity.Entity entity : center.getWorld().getNearbyEntities(center, 1.5, 1.5, 1.5))
+            if (entity instanceof Item item && item.getItemStack().getType() == Material.BONE_MEAL)
+                amounts.put(item.getUniqueId(), item.getItemStack().getAmount());
+        return amounts;
     }
 }

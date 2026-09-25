@@ -31,24 +31,30 @@ public final class Scoreboard {
      * localized copies whose team entries are synchronized by {@link #syncPlayerTeams()}.
      */
     public static final org.bukkit.scoreboard.Scoreboard scoreboard =
-            Bukkit.getScoreboardManager().getNewScoreboard();
+            Bukkit.getScoreboardManager() != null ? Bukkit.getScoreboardManager().getNewScoreboard() : null;
     public static Objective sidebar;
 
     private Scoreboard() {
     }
 
     public static void createScoreboard() {
-        sidebar = createSidebar(scoreboard);
+        if (scoreboard != null) {
+            sidebar = createSidebar(scoreboard);
+        }
     }
 
     public static void setPreGameScoreboard() {
-        renderPreGame(scoreboard, sidebar, null);
+        if (scoreboard != null && sidebar != null) {
+            renderPreGame(scoreboard, sidebar, null);
+        }
         PLAYER_BOARDS.forEach((uuid, view) ->
                 renderPreGame(view.scoreboard(), view.sidebar(), Bukkit.getPlayer(uuid)));
     }
 
     public static void setInGameScoreboard() {
-        renderInGame(scoreboard, sidebar, null);
+        if (scoreboard != null && sidebar != null) {
+            renderInGame(scoreboard, sidebar, null);
+        }
         PLAYER_BOARDS.forEach((uuid, view) ->
                 renderInGame(view.scoreboard(), view.sidebar(), Bukkit.getPlayer(uuid)));
     }
@@ -96,7 +102,7 @@ public final class Scoreboard {
     public static void updateScoreboard() {
         if (getCurrentGameState().equals(GameState.PREGAME)) {
             setPreGameScoreboard();
-        } else if (getCurrentGameState().equals(GameState.INGAME)) {
+        } else if (getCurrentGameState().equals(GameState.INGAME) || getCurrentGameState().equals(GameState.END)) {
             setInGameScoreboard();
         }
     }
@@ -122,7 +128,7 @@ public final class Scoreboard {
     }
 
     private static void renderCurrent(PlayerBoard view, Player player) {
-        if (getCurrentGameState().equals(GameState.INGAME)) {
+        if (getCurrentGameState().equals(GameState.INGAME) || getCurrentGameState().equals(GameState.END)) {
             renderInGame(view.scoreboard(), view.sidebar(), player);
         } else {
             renderPreGame(view.scoreboard(), view.sidebar(), player);

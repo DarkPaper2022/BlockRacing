@@ -71,6 +71,7 @@ public class Team {
                         (viewer, text) -> text.replace("%player%", player.getName()));
             }
         }
+        top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
         return true;
     }
 
