@@ -1,6 +1,6 @@
 # BlockRacing · Draftout
 
-[English](docs/en/README-en.md) · [任务库与抽取规则](docs/targets.md) · [开发与验证](docs/development.md) · [翻译](TranslationTutorial.md)
+[English](docs/en/README-en.md) · [任务库与抽取规则](docs/targets.md) · [开发与验证](docs/development.md) · [交接与 TODO](docs/handoff-and-todo.md) · [翻译](TranslationTutorial.md)
 
 基于 [LQSnow/BlockRacing](https://github.com/LQSnow/BlockRacing) 的 Minecraft 红蓝队任务竞速插件。当前分支使用积分制：双方争夺同一组任务，先拿到本局普通任务总分至少 50% 的队伍获胜。
 
