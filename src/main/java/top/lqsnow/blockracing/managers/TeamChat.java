@@ -10,6 +10,7 @@ import org.bukkit.persistence.PersistentDataType;
 import top.lqsnow.blockracing.Main;
 import top.lqsnow.blockracing.toolkit.text.Texts;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,9 +28,8 @@ public final class TeamChat {
             return;
         }
         Player sender = event.getPlayer();
-        boolean red = Team.redTeamPlayers.contains(sender.getName());
-        boolean blue = Team.blueTeamPlayers.contains(sender.getName());
-        if (!red && !blue) {
+        String teamId = Team.getTeam(sender);
+        if (teamId.isEmpty()) {
             return;
         }
 
@@ -48,10 +48,10 @@ public final class TeamChat {
             return;
         }
 
-        Set<String> members = red ? Set.copyOf(Team.redTeamPlayers) : Set.copyOf(Team.blueTeamPlayers);
+        List<String> members = Team.getPlayers(teamId);
         event.viewers().removeIf(viewer -> viewer instanceof Player player
                 && !members.contains(player.getName()));
-        Message format = red ? Message.TEAM_RED_CHAT : Message.TEAM_BLUE_CHAT;
+        Message format = Team.getTeamChatMessage(teamId);
         event.renderer((source, displayName, message, viewer) -> {
             String localized = viewer instanceof Player player
                     ? format.getString(player)
@@ -82,26 +82,20 @@ public final class TeamChat {
     }
 
     private static String globalTeamPrefix(Player viewer, String playerName) {
-        Message prefix;
-        if (Team.redTeamPlayers.contains(playerName)) {
-            prefix = Message.TEAM_RED_PREFIX;
-        } else if (Team.blueTeamPlayers.contains(playerName)) {
-            prefix = Message.TEAM_BLUE_PREFIX;
-        } else {
+        String teamId = Team.getTeam(playerName);
+        if (teamId.isEmpty()) {
             return "&7[--]";
         }
+        Message prefix = Team.getTeamPrefixMessage(teamId);
         return viewer == null ? prefix.getString() : prefix.getString(viewer);
     }
 
     private static String globalPlayerName(Player viewer, String playerName) {
-        Message color;
-        if (Team.redTeamPlayers.contains(playerName)) {
-            color = Message.TEAM_RED_COLOR;
-        } else if (Team.blueTeamPlayers.contains(playerName)) {
-            color = Message.TEAM_BLUE_COLOR;
-        } else {
+        String teamId = Team.getTeam(playerName);
+        if (teamId.isEmpty()) {
             return "&7" + playerName;
         }
+        Message color = Team.getTeamColorMessage(teamId);
         return (viewer == null ? color.getString() : color.getString(viewer)) + playerName;
     }
 

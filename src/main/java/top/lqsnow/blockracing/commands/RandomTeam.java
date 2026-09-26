@@ -14,6 +14,7 @@ import top.lqsnow.blockracing.managers.Gui;
 import top.lqsnow.blockracing.managers.Message;
 import top.lqsnow.blockracing.managers.Scoreboard;
 import top.lqsnow.blockracing.managers.Team;
+import top.lqsnow.blockracing.managers.TeamId;
 import top.lqsnow.blockracing.menus.PreGameMenu;
 import top.lqsnow.blockracing.toolkit.text.Texts;
 import top.lqsnow.blockracing.utils.CommandUtil;
@@ -85,10 +86,21 @@ public class RandomTeam implements CommandExecutor {
             return;
         }
 
-        List<List<Player>> teams = splitPlayers(Bukkit.getOnlinePlayers(), new Random());
+        // Determine how many teams to split into:
+        // If players currently joined 3 or 4 teams, balance across those teams; otherwise balance across 2 teams (red and blue).
+        List<String> activeTeams = Team.getActiveTeamIds();
+        int numTeams = Math.max(2, Math.min(TeamId.ALL.size(), activeTeams.size()));
+        List<String> targetTeamIds = new ArrayList<>();
+        for (int i = 0; i < numTeams; i++) {
+            targetTeamIds.add(TeamId.ALL.get(i).id());
+        }
+
+        List<List<Player>> splits = splitPlayers(Bukkit.getOnlinePlayers(), targetTeamIds.size(), new Random());
         Team.clearTeams();
-        teams.get(0).forEach(member -> Team.joinTeam(member, Team.redTeam, false));
-        teams.get(1).forEach(member -> Team.joinTeam(member, Team.blueTeam, false));
+        for (int i = 0; i < targetTeamIds.size(); i++) {
+            String teamId = targetTeamIds.get(i);
+            splits.get(i).forEach(member -> Team.joinTeam(member, teamId, false));
+        }
 
         CommandUtil.sendAll(Message.NOTICE_TEAM_SHUFFLE_TRIGGERED,
                 (viewer, text) -> text.replace("%player%", player.getName()));
@@ -96,15 +108,22 @@ public class RandomTeam implements CommandExecutor {
         Scoreboard.updateScoreboard();
     }
 
-    static <T> List<List<T>> splitPlayers(Collection<? extends T> players, Random random) {
+    public static <T> List<List<T>> splitPlayers(Collection<? extends T> players, Random random) {
+        return splitPlayers(players, 2, random);
+    }
+
+    public static <T> List<List<T>> splitPlayers(Collection<? extends T> players, int numTeams, Random random) {
+        if (numTeams <= 0) throw new IllegalArgumentException("numTeams must be positive");
         List<T> shuffled = new ArrayList<>(players);
         Collections.shuffle(shuffled, random);
-        int splitIndex = shuffled.size() / 2;
-        List<T> first = new ArrayList<>(shuffled.subList(0, splitIndex));
-        List<T> second = new ArrayList<>(shuffled.subList(splitIndex, shuffled.size()));
 
-        return random.nextBoolean()
-                ? List.of(first, second)
-                : List.of(second, first);
+        List<List<T>> result = new ArrayList<>();
+        for (int i = 0; i < numTeams; i++) {
+            result.add(new ArrayList<>());
+        }
+        for (int i = 0; i < shuffled.size(); i++) {
+            result.get(i % numTeams).add(shuffled.get(i));
+        }
+        return result;
     }
 }

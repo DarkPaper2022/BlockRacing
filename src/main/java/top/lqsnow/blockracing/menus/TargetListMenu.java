@@ -42,8 +42,7 @@ public final class TargetListMenu extends MenuView {
                 ? "任务 · " + filter.label(true) : "Tasks · " + filter.label(false)));
         this.preview = preview;
         this.filter = filter;
-        team = Team.redTeamPlayers.contains(player.getName()) ? "red"
-                : Team.blueTeamPlayers.contains(player.getName()) ? "blue" : "";
+        team = Team.getTeam(player);
         page = Math.max(0, requestedPage);
         for (int slot = 0; slot < PAGE_SIZE; slot++) {
             int offset = slot;

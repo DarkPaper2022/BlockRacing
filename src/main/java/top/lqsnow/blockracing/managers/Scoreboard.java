@@ -1,7 +1,6 @@
 package top.lqsnow.blockracing.managers;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,12 +10,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Team;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static top.lqsnow.blockracing.managers.Block.*;
 import static top.lqsnow.blockracing.managers.Game.*;
@@ -26,10 +20,6 @@ public final class Scoreboard {
             LegacyComponentSerializer.legacySection();
     private static final Map<UUID, PlayerBoard> PLAYER_BOARDS = new HashMap<>();
 
-    /**
-     * The canonical board owns the teams used by the game logic. Players receive
-     * localized copies whose team entries are synchronized by {@link #syncPlayerTeams()}.
-     */
     public static final org.bukkit.scoreboard.Scoreboard scoreboard = getInitialScoreboard();
     public static Objective sidebar;
 
@@ -117,10 +107,10 @@ public final class Scoreboard {
     private static PlayerBoard createPlayerBoard(Player player) {
         org.bukkit.scoreboard.Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = createSidebar(board);
-        Team red = board.registerNewTeam("red");
-        Team blue = board.registerNewTeam("blue");
-        localizeTeam(red, Message.TEAM_RED_NAME, Message.TEAM_RED_PREFIX, player);
-        localizeTeam(blue, Message.TEAM_BLUE_NAME, Message.TEAM_BLUE_PREFIX, player);
+        for (TeamId teamId : TeamId.ALL) {
+            Team team = board.registerNewTeam(teamId.id());
+            localizeTeam(team, teamId, player);
+        }
         return new PlayerBoard(board, objective);
     }
 
@@ -181,69 +171,70 @@ public final class Scoreboard {
                                      Objective objective, Player player) {
         clearLines(board);
         setTitle(objective, text(Message.SCOREBOARD_INGAME_TITLE, player));
-        List<String> contentLines = new ArrayList<>();
-        String redScore = text(Message.SCOREBOARD_RED_SCORE, player)
-                .replace("%score%", String.valueOf(redTeamScore))
-                .replace("%progress_score%", String.valueOf(redTeamProgressScore))
-                .replace("%win_score%", String.valueOf(redTeamWinScore))
-                .replace("%total_score%", String.valueOf(redTeamTotalScore))
-                .replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount))
-                .replace("%total_block%", String.valueOf(redTeamTotalBlockAmount));
-        contentLines.add(redScore);
-        setSlot(board, objective, 15, redScore);
 
-        String blueScore = text(Message.SCOREBOARD_BLUE_SCORE, player)
-                .replace("%score%", String.valueOf(blueTeamScore))
-                .replace("%progress_score%", String.valueOf(blueTeamProgressScore))
-                .replace("%win_score%", String.valueOf(blueTeamWinScore))
-                .replace("%total_score%", String.valueOf(blueTeamTotalScore))
-                .replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount))
-                .replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount));
-        contentLines.add(blueScore);
-        setSlot(board, objective, 14, blueScore);
+        // Determine which teams to show on scoreboard
+        // Show active teams (teams with players); if fewer than 2 active, show first 2 default (red, blue)
+        List<String> displayTeams = top.lqsnow.blockracing.managers.Team.getActiveTeamIds();
+        if (displayTeams.size() < 2) {
+            displayTeams = List.of("red", "blue");
+        }
 
-        // Blank line between scores and favorites header
-        setSlot(board, objective, 13, " ");
+        int currentSlot = 15;
+        for (String teamId : displayTeams) {
+            if (currentSlot < 1) break;
+            Message scoreMsg = top.lqsnow.blockracing.managers.Team.getScoreboardScoreMessage(teamId);
+            String scoreLine = text(scoreMsg, player)
+                    .replace("%score%", String.valueOf(Game.getTeamScore(teamId)))
+                    .replace("%progress_score%", String.valueOf(Game.getTeamProgressScore(teamId)))
+                    .replace("%win_score%", String.valueOf(Game.getTeamWinScore(teamId)))
+                    .replace("%total_score%", String.valueOf(Game.getTeamTotalScore(teamId)))
+                    .replace("%current_block%", String.valueOf(Game.getTeamCurrentBlockAmount(teamId)))
+                    .replace("%total_block%", String.valueOf(Game.getTeamTotalBlockAmount(teamId)));
+            setSlot(board, objective, currentSlot--, scoreLine);
+        }
+
+        // Blank line
+        if (currentSlot >= 1) {
+            setSlot(board, objective, currentSlot--, " ");
+        }
 
         // Combined divider and team pinned header
-        String header = text(Message.SCOREBOARD_FAVORITES_HEADER, player);
-        setSlot(board, objective, 12, header);
+        if (currentSlot >= 1) {
+            String header = text(Message.SCOREBOARD_FAVORITES_HEADER, player);
+            setSlot(board, objective, currentSlot--, header);
+        }
 
-        // Render N fixed favorite slots
-        String team = top.lqsnow.blockracing.managers.Team.getTeam(player);
-        List<String> favorites = FavoriteManager.getFavorites(team);
+        // Render favorite slots
+        String playerTeam = top.lqsnow.blockracing.managers.Team.getTeam(player);
+        List<String> favorites = FavoriteManager.getFavorites(playerTeam);
         int maxSlots = Math.min(10, Math.max(1, Setting.getMaxFavoriteTargets()));
         for (int i = 0; i < maxSlots; i++) {
-            int slotNumber = 11 - i;
-            if (slotNumber < 1) break;
+            if (currentSlot < 1) break;
             if (i < favorites.size()) {
                 String target = favorites.get(i);
-                setSlot(board, objective, slotNumber, " §6" + (i + 1) + ". " + getBlockDisplay(target, player));
+                setSlot(board, objective, currentSlot--, " §6" + (i + 1) + ". " + getBlockDisplay(target, player));
             } else {
-                setSlot(board, objective, slotNumber, " ");
+                setSlot(board, objective, currentSlot--, " ");
             }
         }
     }
 
     private static void syncPlayerTeams(PlayerBoard view, Player player) {
-        Team red = view.scoreboard().getTeam("red");
-        Team blue = view.scoreboard().getTeam("blue");
-        if (red == null || blue == null) {
-            return;
+        for (TeamId teamId : TeamId.ALL) {
+            Team team = view.scoreboard().getTeam(teamId.id());
+            if (team == null) continue;
+            new HashSet<>(team.getEntries()).forEach(team::removeEntry);
+            top.lqsnow.blockracing.managers.Team.getPlayers(teamId.id()).forEach(team::addEntry);
+            localizeTeam(team, teamId, player);
         }
-
-        new HashSet<>(red.getEntries()).forEach(red::removeEntry);
-        new HashSet<>(blue.getEntries()).forEach(blue::removeEntry);
-        top.lqsnow.blockracing.managers.Team.redTeamPlayers.forEach(red::addEntry);
-        top.lqsnow.blockracing.managers.Team.blueTeamPlayers.forEach(blue::addEntry);
-        localizeTeam(red, Message.TEAM_RED_NAME, Message.TEAM_RED_PREFIX, player);
-        localizeTeam(blue, Message.TEAM_BLUE_NAME, Message.TEAM_BLUE_PREFIX, player);
     }
 
-    private static void localizeTeam(Team team, Message name, Message prefix, Player player) {
-        team.displayName(LEGACY_SERIALIZER.deserialize(text(name, player)));
-        team.prefix(LEGACY_SERIALIZER.deserialize(text(prefix, player)));
-        team.color(name == Message.TEAM_RED_NAME ? NamedTextColor.RED : NamedTextColor.BLUE);
+    private static void localizeTeam(Team team, TeamId teamId, Player player) {
+        Message nameMsg = top.lqsnow.blockracing.managers.Team.getTeamNameMessage(teamId.id());
+        Message prefixMsg = top.lqsnow.blockracing.managers.Team.getTeamPrefixMessage(teamId.id());
+        team.displayName(LEGACY_SERIALIZER.deserialize(text(nameMsg, player)));
+        team.prefix(LEGACY_SERIALIZER.deserialize(text(prefixMsg, player)));
+        team.color(teamId.textColor());
     }
 
     private static String text(Message message, Player player) {
@@ -253,37 +244,6 @@ public final class Scoreboard {
     private static boolean isLegacySlogan(String text) {
         return text != null
                 && text.replaceAll("(?i)§[0-9A-FK-OR]", "").equalsIgnoreCase("Enjoy the game!");
-    }
-
-    private static String dynamicDivider(Iterable<String> lines) {
-        int widest = 0;
-        for (String line : lines) {
-            widest = Math.max(widest, approximatePixelWidth(line));
-        }
-        int hyphens = Math.max(8, Math.min(24, (widest + 5) / 6));
-        return "§8§m" + "-".repeat(hyphens);
-    }
-
-    static int approximatePixelWidth(String text) {
-        if (text == null) {
-            return 0;
-        }
-        String plain = text.replaceAll("(?i)§[0-9A-FK-OR]", "");
-        int width = 0;
-        for (int offset = 0; offset < plain.length(); ) {
-            int codePoint = plain.codePointAt(offset);
-            offset += Character.charCount(codePoint);
-            if (codePoint > 127) {
-                width += 9;
-            } else {
-                width += switch (codePoint) {
-                    case ' ', 'i', '!', '.', ',', ':', ';', '\'', '|' -> 3;
-                    case 'I', '[', ']', '(', ')', 't', 'f', 'k', '<', '>' -> 5;
-                    default -> 6;
-                };
-            }
-        }
-        return width;
     }
 
     private static void clearLines(org.bukkit.scoreboard.Scoreboard board) {

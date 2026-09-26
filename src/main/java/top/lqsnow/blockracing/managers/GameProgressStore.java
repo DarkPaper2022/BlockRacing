@@ -22,11 +22,9 @@ import java.util.logging.Level;
 
 import static top.lqsnow.blockracing.managers.Block.*;
 import static top.lqsnow.blockracing.managers.Game.*;
-import static top.lqsnow.blockracing.managers.Team.blueTeamPlayers;
-import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 
 public final class GameProgressStore {
-    private static final int FORMAT_VERSION = 2;
+    private static final int FORMAT_VERSION = 3;
     private static File file;
     private static boolean recoveredGame;
 
@@ -58,24 +56,45 @@ public final class GameProgressStore {
                 return false;
             }
             Game.currentGameState = Game.GameState.INGAME;
-            Game.redTeamScore = state.getInt("scores.red");
-            Game.blueTeamScore = state.getInt("scores.blue");
-            Game.redTeamProgressScore = state.getInt("victory.red-progress");
-            Game.blueTeamProgressScore = state.getInt("victory.blue-progress");
-            Game.redTeamTotalScore = state.getInt("victory.red-total");
-            Game.blueTeamTotalScore = state.getInt("victory.blue-total");
-            Game.redTeamWinScore = state.getInt("victory.red-threshold");
-            Game.blueTeamWinScore = state.getInt("victory.blue-threshold");
+
+            for (TeamId t : TeamId.ALL) {
+                String id = t.id();
+                Game.setTeamScore(id, state.getInt("scores." + id, 0));
+                Game.setTeamProgressScore(id, state.getInt("victory." + id + "-progress", 0));
+                Game.setTeamTotalScore(id, state.getInt("victory." + id + "-total", 0));
+                Game.setTeamWinScore(id, state.getInt("victory." + id + "-threshold", 0));
+                Game.setTeamCurrentBlockAmount(id, state.getInt("progress." + id + "-current", 0));
+                Game.setTeamTotalBlockAmount(id, state.getInt("progress." + id + "-total", 0));
+
+                List<String> allBlocks = state.getStringList("blocks." + id + "-all");
+                if (!allBlocks.isEmpty()) {
+                    Block.getTeamBlocks(id).clear();
+                    Block.getTeamBlocks(id).addAll(allBlocks);
+                }
+                List<String> remBlocks = state.getStringList("blocks." + id + "-remaining");
+                if (!remBlocks.isEmpty()) {
+                    Block.getTeamRemainingBlocks(id).clear();
+                    Block.getTeamRemainingBlocks(id).addAll(remBlocks);
+                }
+                List<String> bonusBlocks = state.getStringList("blocks." + id + "-bonus");
+                if (!bonusBlocks.isEmpty()) {
+                    Block.setTeamBonusBlocks(id, bonusBlocks);
+                }
+
+                Map<Integer, Location> wps = readLocations(state.getConfigurationSection("waypoints." + id));
+                Game.getTeamWaypoints(id).clear();
+                Game.getTeamWaypoints(id).putAll(wps);
+
+                restoreChests(state, "chests." + id, Game.getTeamChests(id));
+            }
+
             Setting.setBonusScoreThreshold(state.getInt("settings.bonus-score-threshold"));
             Setting.setBonusTargetAmount(state.getInt("settings.bonus-target-amount"));
             Setting.setAvailableTaskAmount(state.getInt("settings.available-task-amount"));
             Setting.setLocateCost(state.getInt("settings.locate-cost"));
             Setting.setRandomTeleportCost(state.getInt("settings.random-teleport-cost"));
             Goal.restoreProgress(state.getConfigurationSection("goals"));
-            Game.redTeamCurrentBlockAmount = state.getInt("progress.red-current");
-            Game.blueTeamCurrentBlockAmount = state.getInt("progress.blue-current");
-            Game.redTeamTotalBlockAmount = state.getInt("progress.red-total");
-            Game.blueTeamTotalBlockAmount = state.getInt("progress.blue-total");
+
             Game.redTeamRollCount = state.getInt("rolls.red");
             Game.blueTeamRollCount = state.getInt("rolls.blue");
             Game.locateCost = state.getInt("locate-cost");
@@ -84,27 +103,25 @@ public final class GameProgressStore {
                 Setting.setCurrentGameMode(Setting.GameMode.valueOf(
                         state.getString("settings.game-mode", Setting.getCurrentGameMode().name())));
             } catch (IllegalArgumentException ignored) {
-                // Keep the configured mode if an older/corrupt state contains an unknown value.
             }
 
-            redTeamBlocks = new ArrayList<>(state.getStringList("blocks.red-all"));
-            blueTeamBlocks = new ArrayList<>(state.getStringList("blocks.blue-all"));
-            redTeamRemainingBlocks = new ArrayList<>(state.getStringList("blocks.red-remaining"));
-            blueTeamRemainingBlocks = new ArrayList<>(state.getStringList("blocks.blue-remaining"));
-            redTeamBonusBlocks = List.copyOf(state.getStringList("blocks.red-bonus"));
-            blueTeamBonusBlocks = List.copyOf(state.getStringList("blocks.blue-bonus"));
+            Map<String, List<String>> restoredTeamMap = new HashMap<>();
+            for (TeamId t : TeamId.ALL) {
+                restoredTeamMap.put(t.id(), state.getStringList("teams." + t.id()));
+            }
+            Team.restoreTeams(restoredTeamMap);
 
-            Team.restoreTeams(state.getStringList("teams.red"), state.getStringList("teams.blue"));
             replace(Game.inGamePlayers, state.getStringList("players.in-game"));
             replace(Game.freeRandomTPList, state.getStringList("players.free-random-tp"));
             replace(Game.locateCommandPermission, state.getStringList("players.locate-permission"));
             Game.collectAmount = readIntegerMap(state.getConfigurationSection("collected"));
 
-            Game.redWaypoint = readLocations(state.getConfigurationSection("waypoints.red"));
-            Game.blueWaypoint = readLocations(state.getConfigurationSection("waypoints.blue"));
-            restoreChests(state, "chests.red", Game.redTeamChest);
-            restoreChests(state, "chests.blue", Game.blueTeamChest);
-            FavoriteManager.restore(state.getStringList("favorites.red"), state.getStringList("favorites.blue"));
+            Map<String, List<String>> restoredFavs = new HashMap<>();
+            for (TeamId t : TeamId.ALL) {
+                restoredFavs.put(t.id(), state.getStringList("favorites." + t.id()));
+            }
+            FavoriteManager.restore(restoredFavs);
+
             recoveredGame = true;
             Main.getInstance().getLogger().info("Recovered unfinished BlockRacing game progress.");
             return true;
@@ -119,7 +136,8 @@ public final class GameProgressStore {
     }
 
     static boolean compatibleState(YamlConfiguration state) {
-        return state.getInt("format-version") == FORMAT_VERSION
+        int ver = state.getInt("format-version");
+        return (ver == FORMAT_VERSION || ver == 2)
                 && Block.definitionFingerprint().equals(state.getString("targets-fingerprint"));
     }
 
@@ -173,47 +191,43 @@ public final class GameProgressStore {
         state.set("format-version", FORMAT_VERSION);
         state.set("targets-fingerprint", Block.definitionFingerprint());
         state.set("state", Game.getCurrentGameState().name());
-        state.set("scores.red", Game.redTeamScore);
-        state.set("scores.blue", Game.blueTeamScore);
-        state.set("victory.red-progress", Game.redTeamProgressScore);
-        state.set("victory.blue-progress", Game.blueTeamProgressScore);
-        state.set("victory.red-total", Game.redTeamTotalScore);
-        state.set("victory.blue-total", Game.blueTeamTotalScore);
-        state.set("victory.red-threshold", Game.redTeamWinScore);
-        state.set("victory.blue-threshold", Game.blueTeamWinScore);
+
+        for (TeamId t : TeamId.ALL) {
+            String id = t.id();
+            state.set("scores." + id, Game.getTeamScore(id));
+            state.set("victory." + id + "-progress", Game.getTeamProgressScore(id));
+            state.set("victory." + id + "-total", Game.getTeamTotalScore(id));
+            state.set("victory." + id + "-threshold", Game.getTeamWinScore(id));
+            state.set("progress." + id + "-current", Game.getTeamCurrentBlockAmount(id));
+            state.set("progress." + id + "-total", Game.getTeamTotalBlockAmount(id));
+            state.set("blocks." + id + "-all", new ArrayList<>(Block.getTeamBlocks(id)));
+            state.set("blocks." + id + "-remaining", new ArrayList<>(Block.getTeamRemainingBlocks(id)));
+            state.set("blocks." + id + "-bonus", new ArrayList<>(Block.getTeamBonusBlocks(id)));
+            state.set("teams." + id, new ArrayList<>(Team.getPlayers(id)));
+            state.set("favorites." + id, new ArrayList<>(FavoriteManager.getFavorites(id)));
+
+            Map<Integer, Location> wps = Game.getTeamWaypoints(id);
+            wps.forEach((index, location) -> state.set("waypoints." + id + "." + index, location));
+            saveChests(state, "chests." + id, Game.getTeamChests(id));
+        }
+
         state.set("settings.bonus-score-threshold", Setting.getBonusScoreThreshold());
         state.set("settings.bonus-target-amount", Setting.getBonusTargetAmount());
         state.set("settings.available-task-amount", Setting.getAvailableTaskAmount());
         state.set("settings.locate-cost", Setting.getLocateCost());
         state.set("settings.random-teleport-cost", Setting.getRandomTeleportCost());
         Goal.saveProgress(state.createSection("goals"));
-        state.set("progress.red-current", Game.redTeamCurrentBlockAmount);
-        state.set("progress.blue-current", Game.blueTeamCurrentBlockAmount);
-        state.set("progress.red-total", Game.redTeamTotalBlockAmount);
-        state.set("progress.blue-total", Game.blueTeamTotalBlockAmount);
+
         state.set("rolls.red", Game.redTeamRollCount);
         state.set("rolls.blue", Game.blueTeamRollCount);
         state.set("locate-cost", Game.locateCost);
         state.set("settings.speed-mode", Setting.isSpeedMode());
         state.set("settings.game-mode", Setting.getCurrentGameMode().name());
-        state.set("blocks.red-all", new ArrayList<>(redTeamBlocks));
-        state.set("blocks.blue-all", new ArrayList<>(blueTeamBlocks));
-        state.set("blocks.red-remaining", new ArrayList<>(redTeamRemainingBlocks));
-        state.set("blocks.blue-remaining", new ArrayList<>(blueTeamRemainingBlocks));
-        state.set("blocks.red-bonus", new ArrayList<>(redTeamBonusBlocks));
-        state.set("blocks.blue-bonus", new ArrayList<>(blueTeamBonusBlocks));
-        state.set("teams.red", new ArrayList<>(redTeamPlayers));
-        state.set("teams.blue", new ArrayList<>(blueTeamPlayers));
         state.set("players.in-game", new ArrayList<>(Game.inGamePlayers));
         state.set("players.free-random-tp", new ArrayList<>(Game.freeRandomTPList));
         state.set("players.locate-permission", new ArrayList<>(Game.locateCommandPermission));
         Game.collectAmount.forEach((name, amount) -> state.set("collected." + name, amount));
-        Game.redWaypoint.forEach((index, location) -> state.set("waypoints.red." + index, location));
-        Game.blueWaypoint.forEach((index, location) -> state.set("waypoints.blue." + index, location));
-        saveChests(state, "chests.red", Game.redTeamChest);
-        saveChests(state, "chests.blue", Game.blueTeamChest);
-        state.set("favorites.red", new ArrayList<>(FavoriteManager.getFavorites("red")));
-        state.set("favorites.blue", new ArrayList<>(FavoriteManager.getFavorites("blue")));
+
         return state;
     }
 

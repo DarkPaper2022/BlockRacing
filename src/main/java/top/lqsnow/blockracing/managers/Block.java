@@ -55,10 +55,62 @@ public class Block {
     public static int maxBlockAmount;
     public static List<String> redTeamBlocks = new ArrayList<>();
     public static List<String> blueTeamBlocks = new ArrayList<>();
+    public static List<String> greenTeamBlocks = new ArrayList<>();
+    public static List<String> yellowTeamBlocks = new ArrayList<>();
+
     public static List<String> redTeamBonusBlocks = new ArrayList<>();
     public static List<String> blueTeamBonusBlocks = new ArrayList<>();
+    public static List<String> greenTeamBonusBlocks = new ArrayList<>();
+    public static List<String> yellowTeamBonusBlocks = new ArrayList<>();
+
     public static List<String> redTeamRemainingBlocks = new ArrayList<>();
     public static List<String> blueTeamRemainingBlocks = new ArrayList<>();
+    public static List<String> greenTeamRemainingBlocks = new ArrayList<>();
+    public static List<String> yellowTeamRemainingBlocks = new ArrayList<>();
+
+    public static List<String> getTeamBlocks(String teamId) {
+        if (teamId == null) return List.of();
+        return switch (teamId.toLowerCase(Locale.ROOT)) {
+            case "red" -> redTeamBlocks;
+            case "blue" -> blueTeamBlocks;
+            case "green" -> greenTeamBlocks;
+            case "yellow" -> yellowTeamBlocks;
+            default -> List.of();
+        };
+    }
+
+    public static List<String> getTeamBonusBlocks(String teamId) {
+        if (teamId == null) return List.of();
+        return switch (teamId.toLowerCase(Locale.ROOT)) {
+            case "red" -> redTeamBonusBlocks;
+            case "blue" -> blueTeamBonusBlocks;
+            case "green" -> greenTeamBonusBlocks;
+            case "yellow" -> yellowTeamBonusBlocks;
+            default -> List.of();
+        };
+    }
+
+    public static void setTeamBonusBlocks(String teamId, List<String> bonus) {
+        if (teamId == null) return;
+        List<String> copy = List.copyOf(bonus);
+        switch (teamId.toLowerCase(Locale.ROOT)) {
+            case "red" -> redTeamBonusBlocks = copy;
+            case "blue" -> blueTeamBonusBlocks = copy;
+            case "green" -> greenTeamBonusBlocks = copy;
+            case "yellow" -> yellowTeamBonusBlocks = copy;
+        }
+    }
+
+    public static List<String> getTeamRemainingBlocks(String teamId) {
+        if (teamId == null) return List.of();
+        return switch (teamId.toLowerCase(Locale.ROOT)) {
+            case "red" -> redTeamRemainingBlocks;
+            case "blue" -> blueTeamRemainingBlocks;
+            case "green" -> greenTeamRemainingBlocks;
+            case "yellow" -> yellowTeamRemainingBlocks;
+            default -> List.of();
+        };
+    }
 
     public Block() {
         loadTargets();
@@ -95,6 +147,8 @@ public class Block {
     public static void setupBlocks() {
         redTeamRemainingBlocks.clear();
         blueTeamRemainingBlocks.clear();
+        greenTeamRemainingBlocks.clear();
+        yellowTeamRemainingBlocks.clear();
 
         List<String> sharedBlocks = generateBlocks();
         List<String> sharedBonusBlocks = generateBonusBlocks();
@@ -103,14 +157,21 @@ public class Block {
 
         redTeamBlocks = List.copyOf(sharedTargets);
         blueTeamBlocks = List.copyOf(sharedTargets);
+        greenTeamBlocks = List.copyOf(sharedTargets);
+        yellowTeamBlocks = List.copyOf(sharedTargets);
+
         redTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
         blueTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
+        greenTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
+        yellowTeamBonusBlocks = List.copyOf(sharedBonusBlocks);
+
         redTeamRemainingBlocks.addAll(List.copyOf(redTeamBlocks));
         blueTeamRemainingBlocks.addAll(List.copyOf(blueTeamBlocks));
+        greenTeamRemainingBlocks.addAll(List.copyOf(greenTeamBlocks));
+        yellowTeamRemainingBlocks.addAll(List.copyOf(yellowTeamBlocks));
+
         LOGGER.info("[BlockRacing] Blocks generate complete.");
-        LOGGER.info("Red team blocks: " + redTeamBlocks.toString());
-        LOGGER.info("Blue team blocks: " + blueTeamBlocks.toString());
-        LOGGER.info("Bonus blocks: " + sharedBonusBlocks);
+        LOGGER.info("Targets count: " + redTeamBlocks.size() + ", Bonus: " + sharedBonusBlocks);
     }
 
     public static List<String> generateSampleBlocks(int blockAmount) {

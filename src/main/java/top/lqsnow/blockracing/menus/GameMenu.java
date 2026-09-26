@@ -19,9 +19,11 @@ import top.lqsnow.blockracing.toolkit.menu.MenuView;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import top.lqsnow.blockracing.managers.Team;
 
 import static top.lqsnow.blockracing.managers.Game.*;
 import static top.lqsnow.blockracing.managers.Gui.openTeamChest;
@@ -63,10 +65,9 @@ public final class GameMenu extends MenuView {
                         .lore(Message.MENU_WAYPOINTS_LORE.getStringList(player))
                         .build(),
                 (player, click) -> {
-                    if (redTeamPlayers.contains(player.getName())) {
-                        new WayPointMenu(redWaypoint, redWaypointIconCache).open(player);
-                    } else if (blueTeamPlayers.contains(player.getName())) {
-                        new WayPointMenu(blueWaypoint, blueWaypointIconCache).open(player);
+                    String team = Team.getTeam(player);
+                    if (!team.isEmpty()) {
+                        new WayPointMenu(Game.getTeamWaypoints(team), Game.getTeamWaypointIcons(team)).open(player);
                     }
                 }
         ));
@@ -125,12 +126,20 @@ public final class GameMenu extends MenuView {
         player.closeInventory();
         player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
         player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_TITLE.getString(player));
-        player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_RED.getString(player));
-        sendBlockSection(player, getCurrentBlocks("red"));
-        player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
-        player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_BLUE.getString(player));
-        sendBlockSection(player, getCurrentBlocks("blue"));
-        player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
+        List<String> activeTeams = Team.getActiveTeamIds();
+        if (activeTeams.isEmpty()) activeTeams = List.of("red", "blue");
+        for (String teamId : activeTeams) {
+            Message titleMsg = switch (teamId.toLowerCase(java.util.Locale.ROOT)) {
+                case "red" -> Message.NOTICE_BLOCK_OVERVIEW_RED;
+                case "blue" -> Message.NOTICE_BLOCK_OVERVIEW_BLUE;
+                case "green" -> Message.NOTICE_BLOCK_OVERVIEW_GREEN;
+                case "yellow" -> Message.NOTICE_BLOCK_OVERVIEW_YELLOW;
+                default -> Message.NOTICE_BLOCK_OVERVIEW_RED;
+            };
+            player.sendMessage(titleMsg.getString(player));
+            sendBlockSection(player, getCurrentBlocks(teamId));
+            player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
+        }
     }
 
     private static void sendBlockSection(Player player, List<String> blocks) {
@@ -148,25 +157,26 @@ public final class GameMenu extends MenuView {
             return;
         }
 
-        if (redTeamPlayers.contains(player.getName()) && redTeamScore < Setting.getRandomTeleportCost()
-                || blueTeamPlayers.contains(player.getName()) && blueTeamScore < Setting.getRandomTeleportCost()) {
+        String team = Team.getTeam(player);
+        if (team.isEmpty()) {
+            player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+            return;
+        }
+
+        int score = Game.getTeamScore(team);
+        int cost = Setting.getRandomTeleportCost();
+        if (score < cost) {
             player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
             return;
         }
 
         player.closeInventory();
         randomTeleport(player, false);
-        if (redTeamPlayers.contains(player.getName())) {
-            redTeamScore -= Setting.getRandomTeleportCost();
-            sendAll(Message.NOTICE_RANDOM_TP,
-                    (viewer, text) -> text.replace("%score%", String.valueOf(Setting.getRandomTeleportCost())).replace("%player%",
-                            Message.TEAM_RED_COLOR.getString(viewer) + player.getName()));
-        } else if (blueTeamPlayers.contains(player.getName())) {
-            blueTeamScore -= Setting.getRandomTeleportCost();
-            sendAll(Message.NOTICE_RANDOM_TP,
-                    (viewer, text) -> text.replace("%score%", String.valueOf(Setting.getRandomTeleportCost())).replace("%player%",
-                            Message.TEAM_BLUE_COLOR.getString(viewer) + player.getName()));
-        }
+        Game.setTeamScore(team, score - cost);
+        Message colorMsg = Team.getTeamColorMessage(team);
+        sendAll(Message.NOTICE_RANDOM_TP,
+                (viewer, text) -> text.replace("%score%", String.valueOf(cost)).replace("%player%",
+                        colorMsg.getString(viewer) + player.getName()));
         Scoreboard.updateScoreboard();
         GameProgressStore.saveNow();
     }
@@ -221,10 +231,10 @@ public final class GameMenu extends MenuView {
     }
 
     public static final class WayPointMenu extends MenuView {
-        private final HashMap<Integer, Location> waypoints;
-        private final HashMap<Integer, Material> iconCache;
+        private final Map<Integer, Location> waypoints;
+        private final Map<Integer, Material> iconCache;
 
-        public WayPointMenu(HashMap<Integer, Location> waypoints, HashMap<Integer, Material> iconCache) {
+        public WayPointMenu(Map<Integer, Location> waypoints, Map<Integer, Material> iconCache) {
             super(menuSize(Setting.getMaxTeamWaypointNum()),
                     player -> Message.MENU_WAYPOINT_TITLE.getString(player));
             this.waypoints = waypoints;
@@ -306,11 +316,11 @@ public final class GameMenu extends MenuView {
     }
 
     private static List<Player> getOnlineTeammates(Player player) {
-        List<String> team = redTeamPlayers.contains(player.getName())
-                ? redTeamPlayers
-                : blueTeamPlayers.contains(player.getName()) ? blueTeamPlayers : List.of();
+        String team = Team.getTeam(player);
+        if (team.isEmpty()) return List.of();
+        List<String> teamPlayers = Team.getPlayers(team);
         List<Player> teammates = new ArrayList<>();
-        for (String name : team) {
+        for (String name : teamPlayers) {
             Player teammate = org.bukkit.Bukkit.getPlayerExact(name);
             if (teammate != null && teammate.isOnline() && !teammate.equals(player)) {
                 teammates.add(teammate);
@@ -339,8 +349,9 @@ public final class GameMenu extends MenuView {
             player.closeInventory();
             return;
         }
-        boolean sameTeam = redTeamPlayers.contains(player.getName()) && redTeamPlayers.contains(targetName)
-                || blueTeamPlayers.contains(player.getName()) && blueTeamPlayers.contains(targetName);
+        String pTeam = Team.getTeam(player);
+        String tTeam = Team.getTeam(targetName);
+        boolean sameTeam = !pTeam.isEmpty() && pTeam.equalsIgnoreCase(tTeam);
         if (!sameTeam) {
             player.sendMessage(Message.NOTICE_PLAYER_NOT_IN_SAME_TEAM.getString(player));
             player.closeInventory();

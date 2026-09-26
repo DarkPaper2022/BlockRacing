@@ -182,7 +182,7 @@ class SharedTeamProgressTest {
         Game.GameState previous = Game.currentGameState;
         try {
             Game.currentGameState = Game.GameState.INGAME;
-            assertFalse(Team.joinTeam(player("Alex", 0, null), null, false));
+            assertFalse(Team.joinTeam(player("Alex", 0, null), (org.bukkit.scoreboard.Team) null, false));
         } finally {
             Game.currentGameState = previous;
         }

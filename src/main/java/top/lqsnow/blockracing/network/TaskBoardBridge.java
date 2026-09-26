@@ -109,35 +109,32 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
     }
 
     static String team(Player viewer) {
-        return Team.redTeamPlayers.contains(viewer.getName()) ? "red"
-                : Team.blueTeamPlayers.contains(viewer.getName()) ? "blue" : "";
+        return Team.getTeam(viewer);
     }
 
     static String status(boolean remaining, boolean available) {
-        // Both sides lose a mutually claimed task. Absence is NOT proof this team won it.
         return !remaining ? "resolved" : available ? "active" : "queued";
     }
 
     public static Map<String, Object> snapshot(Player viewer) {
         String team = team(viewer);
-        boolean red = team.equals("red");
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("version", 1);
         data.put("team", team);
         data.put("state", Game.getCurrentGameState().name());
         data.put("chinese", LanguageManager.usesChinese(viewer));
-        data.put("score", team.isEmpty() ? 0 : red ? Game.redTeamProgressScore : Game.blueTeamProgressScore);
-        data.put("winScore", team.isEmpty() ? 0 : red ? Game.redTeamWinScore : Game.blueTeamWinScore);
-        data.put("totalScore", team.isEmpty() ? 0 : red ? Game.redTeamTotalScore : Game.blueTeamTotalScore);
+        data.put("score", team.isEmpty() ? 0 : Game.getTeamProgressScore(team));
+        data.put("winScore", team.isEmpty() ? 0 : Game.getTeamWinScore(team));
+        data.put("totalScore", team.isEmpty() ? 0 : Game.getTeamTotalScore(team));
         List<Map<String, Object>> tasks = new ArrayList<>();
         data.put("tasks", tasks);
         if (team.isEmpty() || Game.getCurrentGameState() == Game.GameState.PREGAME) return data;
-        List<String> original = red ? Block.redTeamBlocks : Block.blueTeamBlocks;
+        List<String> original = Block.getTeamBlocks(team);
         if (original.size() > 512) {
             data.put("error", "目标超过 512 项，使用 /menu targets / Too many tasks; use /menu targets");
             return data;
         }
-        Set<String> remaining = new HashSet<>(red ? Block.redTeamRemainingBlocks : Block.blueTeamRemainingBlocks);
+        Set<String> remaining = new HashSet<>(Block.getTeamRemainingBlocks(team));
         Set<String> available = new HashSet<>(Game.getCurrentBlocks(team));
         for (int index = 0; index < original.size(); index++) {
             String target = original.get(index);

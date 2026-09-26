@@ -14,6 +14,7 @@ import top.lqsnow.blockracing.managers.Gui;
 import top.lqsnow.blockracing.managers.Message;
 import top.lqsnow.blockracing.managers.Scoreboard;
 import top.lqsnow.blockracing.managers.Setting;
+import top.lqsnow.blockracing.managers.Team;
 import top.lqsnow.blockracing.menus.GameMenu;
 
 import java.util.ArrayList;
@@ -88,10 +89,9 @@ public class Menu implements CommandExecutor, TabCompleter {
             }
 
             if (args.length == 1) {
-                if (redTeamPlayers.contains(player.getName())) {
-                    new GameMenu.WayPointMenu(redWaypoint, redWaypointIconCache).open(player);
-                } else if (blueTeamPlayers.contains(player.getName())) {
-                    new GameMenu.WayPointMenu(blueWaypoint, blueWaypointIconCache).open(player);
+                String team = Team.getTeam(player);
+                if (!team.isEmpty()) {
+                    new GameMenu.WayPointMenu(Game.getTeamWaypoints(team), Game.getTeamWaypointIcons(team)).open(player);
                 }
                 return true;
             }
@@ -145,28 +145,23 @@ public class Menu implements CommandExecutor, TabCompleter {
                 Game.randomTeleport(player, false);
                 freeRandomTPList.remove(player.getName());
             } else {
-                if (redTeamPlayers.contains(player.getName())) {
-                    if (redTeamScore < Setting.getRandomTeleportCost()) {
-                        player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
-                        return true;
-                    }
-                } else if (blueTeamPlayers.contains(player.getName())) {
-                    if (blueTeamScore < Setting.getRandomTeleportCost()) {
-                        player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
-                        return true;
-                    }
+                String team = Team.getTeam(player);
+                if (team.isEmpty()) {
+                    player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+                    return true;
+                }
+                int curScore = Game.getTeamScore(team);
+                int cost = Setting.getRandomTeleportCost();
+                if (curScore < cost) {
+                    player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
+                    return true;
                 }
                 player.closeInventory();
                 randomTeleport(player, false);
-                if (redTeamPlayers.contains(player.getName())) {
-                    redTeamScore -= Setting.getRandomTeleportCost();
-                    sendAll(Message.NOTICE_RANDOM_TP, (viewer, text) -> text.replace("%score%", String.valueOf(Setting.getRandomTeleportCost())).replace("%player%",
-                            Message.TEAM_RED_COLOR.getString(viewer) + player.getName()));
-                } else if (blueTeamPlayers.contains(player.getName())) {
-                    blueTeamScore -= Setting.getRandomTeleportCost();
-                    sendAll(Message.NOTICE_RANDOM_TP, (viewer, text) -> text.replace("%score%", String.valueOf(Setting.getRandomTeleportCost())).replace("%player%",
-                            Message.TEAM_BLUE_COLOR.getString(viewer) + player.getName()));
-                }
+                Game.setTeamScore(team, curScore - cost);
+                Message colorMsg = Team.getTeamColorMessage(team);
+                sendAll(Message.NOTICE_RANDOM_TP, (viewer, text) -> text.replace("%score%", String.valueOf(cost)).replace("%player%",
+                        colorMsg.getString(viewer) + player.getName()));
                 Scoreboard.updateScoreboard();
                 top.lqsnow.blockracing.managers.GameProgressStore.saveNow();
             }

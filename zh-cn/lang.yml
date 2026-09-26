@@ -27,6 +27,8 @@ scoreboard:
     title: '&b&l方块竞速'
     red-score: '&c红队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
     blue-score: '&9蓝队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
+    green-score: '&a绿队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
+    yellow-score: '&e黄队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
     block-format: '&8[%difficulty%&8] &f%block%'
     dividing-line: '&8&m--------------------------------'
     favorites-header: '&8&m--&r &e★ 队伍收藏 &8&m-------'
@@ -48,6 +50,16 @@ team:
     prefix: '&9[蓝队]'
     chat: '&8[&a队伍&8] &9%s&7: &f%s'
     color: '&9'
+  green:
+    name: '&a绿队'
+    prefix: '&a[绿队]'
+    chat: '&8[&a队伍&8] &a%s&7: &f%s'
+    color: '&a'
+  yellow:
+    name: '&e黄队'
+    prefix: '&e[黄队]'
+    chat: '&8[&a队伍&8] &e%s&7: &f%s'
+    color: '&e'
 menu:
   pregame-menu:
     title: '&0准备菜单'
@@ -55,6 +67,10 @@ menu:
     join-red-lore: '&c点击此处加入红队'
     join-blue: '&9加入蓝队'
     join-blue-lore: '&9点击此处加入蓝队'
+    join-green: '&a加入绿队'
+    join-green-lore: '&a点击此处加入绿队'
+    join-yellow: '&e加入黄队'
+    join-yellow-lore: '&e点击此处加入黄队'
     ready: '&e准备'
     ready-lore: '&9点击此处准备'
     start: '&b开始游戏'
@@ -176,11 +192,11 @@ rule-book:
   - '&b&l任务竞速
 
 
-    &0双方共享任务，一方完成后另一方无法再获得。普通任务按分值计入胜利进度，达到开局总分的 50%（向上取整）获胜。通过 /menu targets 查看任务和个人进度。'
+    &0双方共享任务，一方完成后另一方无法再获得。常规与 Bonus 任务均按分值计入胜利进度，达到常规总分的目标比例（默认 50% 向上取整）获胜。通过 /menu targets 查看任务和个人进度。'
   - '&b&l积分与 Bonus
 
 
-    &0普通任务另奖励 1 点可用积分，极速模式为 3 点。Bonus 按其分值奖励可用积分，不计胜利进度。定位、随机传送和补给消耗可用积分，不扣胜利进度。共享任务不允许轮换。'
+    &0任务完成时，其分值将全额奖励为本队的可用积分，并计入胜利进度。定位、随机传送和补给消耗可用积分，不扣胜利进度。共享任务不允许轮换。'
   - '&b&l配置与交流
 
 
@@ -204,8 +220,12 @@ notice:
   recovered-reset-hover: '&7点击参与 /restartgame 重启投票'
   join-red: '&8[&c队伍&8] &f%player% &7加入了&c红队&7。'
   join-blue: '&8[&9队伍&8] &f%player% &7加入了&9蓝队&7。'
+  join-green: '&8[&a队伍&8] &f%player% &7加入了&a绿队&7。'
+  join-yellow: '&8[&e队伍&8] &f%player% &7加入了&e黄队&7。'
   already-in-red: '&c您已经加入红队了！'
   already-in-blue: '&c您已经加入蓝队了！'
+  already-in-green: '&c您已经加入绿队了！'
+  already-in-yellow: '&c您已经加入黄队了！'
   ready: '&8[&a准备&8] &f%player% &7已准备。'
   cancel-ready: '&8[&c准备&8] &f%player% &7取消了准备。'
   all-ready: '&8[&a准备&8] &f所有人均已准备，可以开始游戏。'
@@ -225,18 +245,26 @@ notice:
   random-tp: '&a玩家%player%&a使用了随机传送！队伍积分-%score%'
   red-collect: '&8[&c红队&8] &f收集了 &b%block% &8· &7%player%'
   blue-collect: '&8[&9蓝队&8] &f收集了 &b%block% &8· &7%player%'
+  green-collect: '&8[&a绿队&8] &f收集了 &b%block% &8· &7%player%'
+  yellow-collect: '&8[&e黄队&8] &f收集了 &b%block% &8· &7%player%'
   team-chest-full: '%team%&c队伍箱子已满！%block%无法放入队伍箱子！'
   supply-purchased: '&8[&6补给&8] &f%player% &7为%team%&7购买了团队补给，积分 &c-5&7。'
   supply-speed-only: '&c团队补给仅在极速模式中可用！'
   red-win: '&c&l红队获胜！'
   blue-win: '&9&l蓝队获胜！'
+  green-win: '&a&l绿队获胜！'
+  yellow-win: '&e&l黄队获胜！'
   red-team-chest: '&c红队队伍箱子'
   blue-team-chest: '&9蓝队队伍箱子'
+  green-team-chest: '&a绿队队伍箱子'
+  yellow-team-chest: '&e黄队队伍箱子'
   remove-waypoint: '&a&n点击此处删除记录点%index%'
   tp-success: '&a已传送到 %x% %y% %z%'
   tp-ocean: '&e检测您被传送到了海洋，正在重新传送'
   red-remove-waypoint: '&b玩家 &c%player% &b移除了传送点%index%！'
   blue-remove-waypoint: '&b玩家 &9%player% &b移除了传送点%index%！'
+  green-remove-waypoint: '&b玩家 &a%player% &b移除了传送点%index%！'
+  yellow-remove-waypoint: '&b玩家 &e%player% &b移除了传送点%index%！'
   cannot-roll: '&c本局使用共享目标清单，不能轮换方块！'
   roll-request: '&b玩家 %player% 申请轮换方块！本队所有在线玩家同意即可轮换！'
   roll-request-cancel: '&c玩家 %player% 取消申请轮换方块！'
@@ -259,6 +287,8 @@ notice:
   ranking: '&8&m------------&r &b&l收集排行 &8&m------------'
   ranking-red: '&c■ &f%player% &8· &b%amount%'
   ranking-blue: '&9■ &f%player% &8· &b%amount%'
+  ranking-green: '&a■ &f%player% &8· &b%amount%'
+  ranking-yellow: '&e■ &f%player% &8· &b%amount%'
   ranking-offline: '&7■ %player% &8· &b%amount%'
   ranking-divider: '&8&m--------------------------------'
   version-mismatch: '&c警告！当前您的config.yml和lang.yml的文件版本，与插件的版本不对应！您可能更新了插件，但没有更新配置文件！这可能会导致一些意料之外的错误！您可以将\plugins\BlockRacing文件夹中的两个配置文件删除，然后重启服务器，亦或是到github上下载最新版本的配置文件替换！'
@@ -279,6 +309,8 @@ notice:
     title: '&b&l当前目标方块'
     red: '&c&l红队'
     blue: '&9&l蓝队'
+    green: '&a&l绿队'
+    yellow: '&e&l黄队'
     entry: '&7%index%. &f%block%'
     divider: '&8&m--------------------------------'
   favorite:

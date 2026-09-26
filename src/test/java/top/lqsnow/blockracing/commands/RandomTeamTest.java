@@ -31,4 +31,18 @@ class RandomTeamTest {
 
         assertEquals(teams.get(0).size(), teams.get(1).size());
     }
+
+    @Test
+    void splitsIntoThreeOrFourTeamsFairly() {
+        List<Integer> players = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<List<Integer>> threeTeams = RandomTeam.splitPlayers(players, 3, new Random(123));
+        assertEquals(3, threeTeams.size());
+        assertEquals(10, threeTeams.stream().mapToInt(List::size).sum());
+        assertTrue(threeTeams.stream().allMatch(t -> t.size() == 3 || t.size() == 4));
+
+        List<List<Integer>> fourTeams = RandomTeam.splitPlayers(players, 4, new Random(123));
+        assertEquals(4, fourTeams.size());
+        assertEquals(10, fourTeams.stream().mapToInt(List::size).sum());
+        assertTrue(fourTeams.stream().allMatch(t -> t.size() == 2 || t.size() == 3));
+    }
 }
