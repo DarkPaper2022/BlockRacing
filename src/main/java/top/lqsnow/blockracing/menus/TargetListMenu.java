@@ -143,7 +143,7 @@ public final class TargetListMenu extends MenuView {
         if (visual != null) type = visual.actionLabel(chinese);
         lore.add("§7#" + entry.index() + " | " + type);
         lore.add(color + score + (chinese ? " 分" : " points"));
-        if (Block.isBonusTarget(target)) lore.add(chinese ? "§6奖励可用积分，不计胜利进度" : "§6Currency reward; no victory progress");
+        if (Block.isBonusTarget(target)) lore.add(chinese ? "§6高难 Bonus 悬赏目标" : "§6Bonus bounty target");
         if (!preview) lore.addAll(Goal.getProgressLore(target, viewer));
         else lore.add(chinese ? "§8仅预览图标，不抽样或修改本局目标" : "§8UI preview only; no task sampling or game changes");
         for (String line : Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(viewer)) {

@@ -24,7 +24,8 @@ public enum Config {
     SPEED_MODE("speed-mode"),
     CONFIG_VERSION("config-version"),
     MAX_TEAM_CHEST_NUM("max-team-chest-num"),
-    MAX_TEAM_WAYPOINT_NUM("max-team-waypoint-num");
+    MAX_TEAM_WAYPOINT_NUM("max-team-waypoint-num"),
+    VICTORY_SCORE_PERCENT("victory-score-percent");
 
     private static File file;
     private static FileConfiguration config;

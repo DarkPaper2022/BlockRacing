@@ -58,7 +58,7 @@ class GameRoundSettlementTest {
     }
 
     @Test
-    void bonusRewardGrantsSpendableScoreWithoutWinningAndMainThresholdWinsRound() {
+    void bonusRewardGrantsSpendableScoreAndProgressAndAllowsWinningGame() {
         Block.redTeamBlocks = new ArrayList<>(List.of("EASY_0", "NORMAL_2", "BONUS_0"));
         Block.blueTeamBlocks = new ArrayList<>(List.of("EASY_0", "NORMAL_2", "BONUS_0"));
         Block.redTeamBonusBlocks = new ArrayList<>(List.of("BONUS_0"));
@@ -69,8 +69,11 @@ class GameRoundSettlementTest {
         Game.blueTeamTotalBlockAmount = 3;
         Game.redTeamCurrentBlockAmount = 0;
         Game.blueTeamCurrentBlockAmount = 0;
-        Game.redTeamTotalScore = Block.getMainTotalScore(Block.redTeamBlocks); // 1 + 4 = 5
+        // Total score only counts regular targets: EASY_0 (1) + NORMAL_2 (4) = 5
+        Game.redTeamTotalScore = Block.getMainTotalScore(Block.redTeamBlocks);
         Game.blueTeamTotalScore = Block.getMainTotalScore(Block.blueTeamBlocks);
+        assertEquals(5, Game.redTeamTotalScore);
+        Setting.setVictoryScorePercent(50);
         Game.redTeamWinScore = 3;
         Game.blueTeamWinScore = 3;
         Game.redTeamProgressScore = 0;
@@ -79,33 +82,27 @@ class GameRoundSettlementTest {
         Game.blueTeamScore = 0;
         Game.currentGameState = Game.GameState.INGAME;
 
-        // Completing a bonus task grants spendable score (11) and removes it from both teams, but does not add progress score or trigger win
-        Game.redTaskComplete("BONUS_0", "Alice");
-        assertEquals(Game.GameState.INGAME, Game.currentGameState);
-        assertEquals(0, Game.redTeamProgressScore);
-        assertEquals(11, Game.redTeamScore);
-        assertEquals(1, Game.redTeamCurrentBlockAmount);
-        assertFalse(Block.redTeamRemainingBlocks.contains("BONUS_0"));
-        assertFalse(Block.blueTeamRemainingBlocks.contains("BONUS_0"));
-        assertEquals(2, Game.blueTeamTotalBlockAmount);
-        assertTrue(Files.exists(tempDir.resolve("game-progress.yml")));
-
-        // Completing EASY_0 (1 pt) advances progress score to 1 (still < 3 win score)
+        // Completing EASY_0 (1 pt) advances progress score to 1 (< 3 win score)
         Game.redTaskComplete("EASY_0", "Alice");
         assertEquals(Game.GameState.INGAME, Game.currentGameState);
         assertEquals(1, Game.redTeamProgressScore);
-        assertEquals(12, Game.redTeamScore);
+        assertEquals(1, Game.redTeamScore);
+        assertEquals(1, Game.redTeamCurrentBlockAmount);
 
-        // Completing NORMAL_2 (4 pts) reaches 5 >= 3 win score and settles the game into END state
-        Game.redTaskComplete("NORMAL_2", "Alice");
+        // Completing a bonus task grants spendable score (11) AND progress score (11)
+        // 1 + 11 = 12 >= 3 win score, immediately triggering victory settlement
+        Game.redTaskComplete("BONUS_0", "Alice");
         assertEquals(Game.GameState.END, Game.currentGameState);
-        assertEquals(5, Game.redTeamProgressScore);
-        assertEquals(3, Game.redTeamCurrentBlockAmount);
-        assertEquals(3, Game.collectAmount.get("Alice"));
+        assertEquals(12, Game.redTeamProgressScore);
+        assertEquals(12, Game.redTeamScore);
+        assertEquals(2, Game.redTeamCurrentBlockAmount);
+        assertFalse(Block.redTeamRemainingBlocks.contains("BONUS_0"));
+        assertFalse(Block.blueTeamRemainingBlocks.contains("BONUS_0"));
+        assertEquals(2, Game.collectAmount.get("Alice"));
         assertFalse(Files.exists(tempDir.resolve("game-progress.yml")));
 
         // Further completions after END are ignored
-        Game.blueTaskComplete("EASY_0", "Bob");
+        Game.blueTaskComplete("NORMAL_2", "Bob");
         assertEquals(0, Game.blueTeamProgressScore);
     }
 

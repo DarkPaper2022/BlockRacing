@@ -22,6 +22,7 @@ class TaskSamplingTest {
         config.set("available-task-amount", 64);
         config.set("bonus-score-threshold", 11);
         config.set("bonus-target-amount", 3);
+        config.set("victory-score-percent", 50);
         config.set("locate-cost", 5);
         config.set("random-teleport-cost", 2);
         config.set("game-mode", "racing");
@@ -90,12 +91,21 @@ class TaskSamplingTest {
     }
 
     @Test
-    void victoryThresholdUsesHalfTheInitialScoreRoundedUp() throws Exception {
+    void victoryThresholdUsesConfiguredScorePercentRoundedUp() throws Exception {
         var method = Game.class.getDeclaredMethod("getWinScore", int.class);
         method.setAccessible(true);
+        Setting.setVictoryScorePercent(50);
         assertEquals(51, method.invoke(null, 101));
         assertEquals(50, method.invoke(null, 100));
         assertEquals(1, method.invoke(null, 1));
+
+        Setting.setVictoryScorePercent(60);
+        assertEquals(61, method.invoke(null, 101));
+        assertEquals(60, method.invoke(null, 100));
+
+        Setting.setVictoryScorePercent(30);
+        assertEquals(31, method.invoke(null, 101));
+        assertEquals(30, method.invoke(null, 100));
     }
 
     @Test

@@ -184,13 +184,13 @@ rule-book:
   - '&b&lTask race
 
 
-    &0Both teams share exclusive tasks. Regular tasks award victory points. Reach half of the initial regular-task total,
-    rounded up, to win. Use /menu targets for tasks and personal progress.'
+    &0Both teams share exclusive tasks. Regular and Bonus tasks award victory progress score. Reach the configured victory
+    percentage (default 50% rounded up) of the regular-task total to win. Use /menu targets for tasks and personal progress.'
   - '&b&lCurrency and Bonus
 
 
-    &0Regular tasks also award 1 currency, or 3 in speed mode. Bonus awards its score as currency only. Locate, random teleport
-    and supplies spend currency, not victory points. Shared tasks cannot be rolled.'
+    &0Regular tasks also award 1 currency, or 3 in speed mode. Bonus tasks award their score as currency as well as victory
+    progress. Locate, random teleport and supplies spend currency, not victory points. Shared tasks cannot be rolled.'
   - '&b&lSettings and chat
 
 

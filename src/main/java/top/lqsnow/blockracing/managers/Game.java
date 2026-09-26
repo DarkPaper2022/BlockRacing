@@ -765,10 +765,10 @@ public class Game {
         if (skipMutualTask(blueTeamRemainingBlocks, block)) {
             blueTeamTotalBlockAmount -= 1;
         }
+        redTeamProgressScore += Block.getTargetScore(block);
         if (Block.isBonusTarget(block)) {
             redTeamScore += Block.getTargetScore(block);
         } else {
-            redTeamProgressScore += Block.getTargetScore(block);
             if (Setting.isSpeedMode())
                 redTeamScore += 3;
             else
@@ -779,7 +779,7 @@ public class Game {
         updateScoreboard();
         GameProgressStore.saveNow();
         top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
-        if (!Block.isBonusTarget(block) && redTeamProgressScore >= redTeamWinScore) {
+        if (redTeamProgressScore >= redTeamWinScore) {
             redWin();
             showRanking();
             return;
@@ -817,10 +817,10 @@ public class Game {
         if (skipMutualTask(redTeamRemainingBlocks, block)) {
             redTeamTotalBlockAmount -= 1;
         }
+        blueTeamProgressScore += Block.getTargetScore(block);
         if (Block.isBonusTarget(block)) {
             blueTeamScore += Block.getTargetScore(block);
         } else {
-            blueTeamProgressScore += Block.getTargetScore(block);
             if (Setting.isSpeedMode())
                 blueTeamScore += 3;
             else
@@ -831,7 +831,7 @@ public class Game {
         updateScoreboard();
         GameProgressStore.saveNow();
         top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
-        if (!Block.isBonusTarget(block) && blueTeamProgressScore >= blueTeamWinScore) {
+        if (blueTeamProgressScore >= blueTeamWinScore) {
             blueWin();
             showRanking();
             return;
@@ -924,7 +924,8 @@ public class Game {
     }
 
     private static int getWinScore(int totalScore) {
-        return Math.max(1, (totalScore + 1) / 2);
+        int percent = Setting.getVictoryScorePercent();
+        return Math.max(1, (int) Math.ceil(totalScore * (percent / 100.0)));
     }
 
     private static boolean skipMutualTask(List<String> opponentRemainingBlocks, String completedBlock) {

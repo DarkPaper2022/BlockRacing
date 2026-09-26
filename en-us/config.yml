@@ -22,6 +22,10 @@ bonus-score-threshold: 11
 # 每局抽取多少个 bonus 任务
 bonus-target-amount: 3
 
+# 胜利门槛比例（百分比，默认 50 表示达到常规任务总分的 50% 向上取整即胜利）
+# 范围：1 - 100
+victory-score-percent: 50
+
 # 同时可做/可见的队首任务数量
 # 默认：64
 # 最大：128

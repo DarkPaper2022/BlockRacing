@@ -9,6 +9,9 @@ public class Setting {
     public static final int MAX_EASY_TARGETS_PER_GAME = 128;
     public static final int MIN_COST = 0;
     public static final int MAX_COST = 128;
+    public static final int MIN_VICTORY_SCORE_PERCENT = 1;
+    public static final int MAX_VICTORY_SCORE_PERCENT = 100;
+    public static final int DEFAULT_VICTORY_SCORE_PERCENT = 50;
 
     private static boolean enableMediumBlock;
     private static boolean enableHardBlock;
@@ -21,6 +24,7 @@ public class Setting {
     private static int bonusTargetAmount;
     private static int maxTeamChestNum;
     private static  int maxTeamWaypointNum;
+    private static int victoryScorePercent;
     private static boolean speedMode;
     public enum GameMode {NORMAL, RACING}
     private static GameMode currentGameMode = GameMode.NORMAL;
@@ -38,6 +42,9 @@ public class Setting {
         speedMode = Config.SPEED_MODE.getBoolean();
         maxTeamChestNum = clamp(Config.MAX_TEAM_CHEST_NUM.getInt(), 1, 53);
         maxTeamWaypointNum = clamp(Config.MAX_TEAM_WAYPOINT_NUM.getInt(), 1, 53);
+        int percent = Config.VICTORY_SCORE_PERCENT.getInt();
+        victoryScorePercent = clamp(percent > 0 ? percent : DEFAULT_VICTORY_SCORE_PERCENT,
+                MIN_VICTORY_SCORE_PERCENT, MAX_VICTORY_SCORE_PERCENT);
         try {
             setCurrentGameMode(GameMode.valueOf(Config.GAME_MODE.getString().toUpperCase(java.util.Locale.ROOT)));
         } catch (IllegalArgumentException | NullPointerException ex) {
@@ -95,6 +102,11 @@ public class Setting {
         Config.MAX_TEAM_CHEST_NUM.setInt(chestNum);
     }
 
+    public static void setVictoryScorePercent(int percent) {
+        Setting.victoryScorePercent = clamp(percent, MIN_VICTORY_SCORE_PERCENT, MAX_VICTORY_SCORE_PERCENT);
+        Config.VICTORY_SCORE_PERCENT.setInt(Setting.victoryScorePercent);
+    }
+
     public static void setSpeedMode(boolean speedMode) {
         Setting.speedMode = speedMode;
         Config.SPEED_MODE.setBoolean(speedMode);
@@ -123,6 +135,7 @@ public class Setting {
     public static int getBonusTargetAmount() { return bonusTargetAmount; }
     public static int getMaxTeamChestNum() { return maxTeamChestNum; }
     public static int getMaxTeamWaypointNum() { return maxTeamWaypointNum; }
+    public static int getVictoryScorePercent() { return victoryScorePercent; }
     public static boolean isSpeedMode() { return speedMode; }
     public static GameMode getCurrentGameMode() { return currentGameMode; }
 
