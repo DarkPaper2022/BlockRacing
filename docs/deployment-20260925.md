@@ -8,7 +8,7 @@
 - BlockRacing 26.2.1；仅启用这一项外部插件，加载 682 个启用目标。
 - 规则配置：64 个普通目标、最多 8 个一分目标、3 个 Bonus、64 项同时开放，竞速模式，非极速模式。
 - HMCL 26.2：Fabric Loader 0.19.3、Fabric API 0.154.0；安装 `blockracing-client-0.1.0.jar` 并启用 `BlockRacing-TaskIcons-26.2.zip`。
-- 启动脚本固定使用本机 Java 27，内存 `-Xms2G -Xmx4G`，不再在每次启动前运行旧 `clean.py`。
+- 启动脚本 `start.sh` 支持 `重开` / `继续` 参数，并在脚本内部全自动管理 tmux 会话 `blockracing`。
 
 服务端最终启动日志确认 Paper build 129、BlockRacing 26.2.1、`Done`，并监听 TCP 25565。客户端模组基线在真实已安装的 Loader/API 版本上重新编译，客户端 11 项测试通过。
 
