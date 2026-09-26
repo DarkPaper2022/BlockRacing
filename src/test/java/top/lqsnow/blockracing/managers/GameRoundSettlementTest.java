@@ -82,7 +82,7 @@ class GameRoundSettlementTest {
         Game.blueTeamScore = 0;
         Game.currentGameState = Game.GameState.INGAME;
 
-        // Completing EASY_0 (1 pt) advances progress score to 1 (< 3 win score)
+        // Completing EASY_0 (1 pt) advances progress score to 1 and grants 1 spendable score (< 3 win score)
         Game.redTaskComplete("EASY_0", "Alice");
         assertEquals(Game.GameState.INGAME, Game.currentGameState);
         assertEquals(1, Game.redTeamProgressScore);

@@ -766,14 +766,7 @@ public class Game {
             blueTeamTotalBlockAmount -= 1;
         }
         redTeamProgressScore += Block.getTargetScore(block);
-        if (Block.isBonusTarget(block)) {
-            redTeamScore += Block.getTargetScore(block);
-        } else {
-            if (Setting.isSpeedMode())
-                redTeamScore += 3;
-            else
-                redTeamScore += 1;
-        }
+        redTeamScore += Block.getTargetScore(block);
         redTeamCurrentBlockAmount += 1;
         if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
@@ -818,14 +811,7 @@ public class Game {
             redTeamTotalBlockAmount -= 1;
         }
         blueTeamProgressScore += Block.getTargetScore(block);
-        if (Block.isBonusTarget(block)) {
-            blueTeamScore += Block.getTargetScore(block);
-        } else {
-            if (Setting.isSpeedMode())
-                blueTeamScore += 3;
-            else
-                blueTeamScore += 1;
-        }
+        blueTeamScore += Block.getTargetScore(block);
         blueTeamCurrentBlockAmount += 1;
         if (!Goal.TEAM_COMPLETION_SOURCE.equals(player)) collect(player);
         updateScoreboard();
