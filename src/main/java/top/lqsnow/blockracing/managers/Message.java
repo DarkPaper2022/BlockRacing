@@ -221,6 +221,14 @@ public enum Message {
     NOTICE_BLOCK_OVERVIEW_ENTRY("notice.block-overview.entry"),
     NOTICE_BLOCK_OVERVIEW_DIVIDER("notice.block-overview.divider"),
 
+    // favorites
+    NOTICE_FAVORITE_ADDED("notice.favorite.added"),
+    NOTICE_FAVORITE_REMOVED("notice.favorite.removed"),
+    NOTICE_FAVORITE_LIMIT_REACHED("notice.favorite.limit-reached"),
+    NOTICE_FAVORITE_NOT_AVAILABLE("notice.favorite.not-available"),
+    NOTICE_FAVORITE_NO_TEAM("notice.favorite.no-team"),
+    SCOREBOARD_FAVORITES_HEADER("scoreboard.ingame.favorites-header"),
+
     // chat
     CHAT_GLOBAL_FORMAT("chat.global-format"),
     CHAT_TEAM_HINT("chat.team-hint"),

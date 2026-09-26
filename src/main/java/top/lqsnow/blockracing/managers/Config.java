@@ -25,6 +25,7 @@ public enum Config {
     CONFIG_VERSION("config-version"),
     MAX_TEAM_CHEST_NUM("max-team-chest-num"),
     MAX_TEAM_WAYPOINT_NUM("max-team-waypoint-num"),
+    MAX_FAVORITE_TARGETS("max-favorite-targets"),
     VICTORY_SCORE_PERCENT("victory-score-percent");
 
     private static File file;
@@ -89,15 +90,15 @@ public enum Config {
     }
 
     public void setStringList(List<String> value) {
-        config.set(path, value);
+        if (config != null) config.set(path, value);
     }
 
     public void setBoolean(boolean value) {
-        config.set(path, value);
+        if (config != null) config.set(path, value);
     }
 
     public void setInt(int value) {
-        config.set(path, value);
+        if (config != null) config.set(path, value);
     }
 
     public static void saveConfig() {

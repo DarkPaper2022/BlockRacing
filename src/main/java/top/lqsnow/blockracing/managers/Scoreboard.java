@@ -30,9 +30,16 @@ public final class Scoreboard {
      * The canonical board owns the teams used by the game logic. Players receive
      * localized copies whose team entries are synchronized by {@link #syncPlayerTeams()}.
      */
-    public static final org.bukkit.scoreboard.Scoreboard scoreboard =
-            Bukkit.getScoreboardManager() != null ? Bukkit.getScoreboardManager().getNewScoreboard() : null;
+    public static final org.bukkit.scoreboard.Scoreboard scoreboard = getInitialScoreboard();
     public static Objective sidebar;
+
+    private static org.bukkit.scoreboard.Scoreboard getInitialScoreboard() {
+        try {
+            return Bukkit.getScoreboardManager() != null ? Bukkit.getScoreboardManager().getNewScoreboard() : null;
+        } catch (Throwable t) {
+            return null;
+        }
+    }
 
     private Scoreboard() {
     }
@@ -183,7 +190,7 @@ public final class Scoreboard {
                 .replace("%current_block%", String.valueOf(redTeamCurrentBlockAmount))
                 .replace("%total_block%", String.valueOf(redTeamTotalBlockAmount));
         contentLines.add(redScore);
-        setSlot(board, objective, 11, redScore);
+        setSlot(board, objective, 15, redScore);
 
         String blueScore = text(Message.SCOREBOARD_BLUE_SCORE, player)
                 .replace("%score%", String.valueOf(blueTeamScore))
@@ -193,12 +200,29 @@ public final class Scoreboard {
                 .replace("%current_block%", String.valueOf(blueTeamCurrentBlockAmount))
                 .replace("%total_block%", String.valueOf(blueTeamTotalBlockAmount));
         contentLines.add(blueScore);
-        setSlot(board, objective, 5, blueScore);
+        setSlot(board, objective, 14, blueScore);
 
-        setSlot(board, objective, 6, dynamicDivider(contentLines));
-        setSlot(board, objective, 1, player == null || LanguageManager.usesChinese(player)
-                ? "§7/menu targets §8> §b任务与进度"
-                : "§7/menu targets §8> §bTasks & progress");
+        // Blank line between scores and favorites header
+        setSlot(board, objective, 13, " ");
+
+        // Combined divider and team pinned header
+        String header = text(Message.SCOREBOARD_FAVORITES_HEADER, player);
+        setSlot(board, objective, 12, header);
+
+        // Render N fixed favorite slots
+        String team = top.lqsnow.blockracing.managers.Team.getTeam(player);
+        List<String> favorites = FavoriteManager.getFavorites(team);
+        int maxSlots = Math.min(10, Math.max(1, Setting.getMaxFavoriteTargets()));
+        for (int i = 0; i < maxSlots; i++) {
+            int slotNumber = 11 - i;
+            if (slotNumber < 1) break;
+            if (i < favorites.size()) {
+                String target = favorites.get(i);
+                setSlot(board, objective, slotNumber, " §6" + (i + 1) + ". " + getBlockDisplay(target, player));
+            } else {
+                setSlot(board, objective, slotNumber, " ");
+            }
+        }
     }
 
     private static void syncPlayerTeams(PlayerBoard view, Player player) {
@@ -269,7 +293,7 @@ public final class Scoreboard {
     }
 
     private static String genEntry(int slot) {
-        return "\u00A7" + Integer.toHexString(slot);
+        return "\u00A7" + Integer.toHexString(slot) + "\u00A7r";
     }
 
     private static void setTitle(Objective objective, String title) {

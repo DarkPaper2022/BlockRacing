@@ -10,6 +10,7 @@ import java.util.zip.GZIPOutputStream;
 /** Versioned, bounded UTF-8 JSON in a single Paper/Fabric custom payload. */
 public final class BoardWire {
     public static final String REQUEST = "blockracing:board_request";
+    public static final String FAVORITE_ACTION = "blockracing:board_favorite";
     public static final String SNAPSHOT = "blockracing:board_v1";
     public static final int MAX_PACKET = 30_000;
     public static final int MAX_JSON = 512 * 1024;

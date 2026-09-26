@@ -50,7 +50,17 @@ public final class TargetListMenu extends MenuView {
             setButton(slot, MenuButton.of(viewer -> {
                 int index = page * PAGE_SIZE + offset;
                 return index < entries.size() ? item(entries.get(index), viewer) : null;
-            }, (viewer, click) -> { }));
+            }, (viewer, click) -> {
+                if (preview) return;
+                int index = page * PAGE_SIZE + offset;
+                if (index < entries.size()) {
+                    Entry entry = entries.get(index);
+                    if (entry.target() != null) {
+                        top.lqsnow.blockracing.managers.FavoriteManager.toggleFavorite(viewer, entry.target());
+                        refresh(viewer);
+                    }
+                }
+            }));
         }
         setButton(45, MenuButton.of(
                 viewer -> ItemBuilder.of(Material.ARROW).name(Message.MENU_TARGET_LIST_PREVIOUS.getString(viewer)).build(),
@@ -144,7 +154,15 @@ public final class TargetListMenu extends MenuView {
         lore.add("§7#" + entry.index() + " | " + type);
         lore.add(color + score + (chinese ? " 分" : " points"));
         if (Block.isBonusTarget(target)) lore.add(chinese ? "§6高难 Bonus 悬赏目标" : "§6Bonus bounty target");
-        if (!preview) lore.addAll(Goal.getProgressLore(target, viewer));
+        if (!preview) {
+            boolean favorited = top.lqsnow.blockracing.managers.FavoriteManager.isFavorited(team, target);
+            if (favorited) {
+                lore.add(chinese ? "§e★ [已加入队伍收藏，点击取消]" : "§e★ [Pinned to scoreboard, click to unpin]");
+            } else {
+                lore.add(chinese ? "§7点击加入队伍收藏 (显示在计分板)" : "§7Click to pin to team scoreboard");
+            }
+            lore.addAll(Goal.getProgressLore(target, viewer));
+        }
         else lore.add(chinese ? "§8仅预览图标，不抽样或修改本局目标" : "§8UI preview only; no task sampling or game changes");
         for (String line : Message.MENU_TARGET_LIST_ITEM_LORE.getStringList(viewer)) {
             lore.add(line.replace("%index%", String.valueOf(entry.index()))

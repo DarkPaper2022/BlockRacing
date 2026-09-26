@@ -258,6 +258,7 @@ public class Game {
         collectAmount.clear();
         freeRandomTPList.clear();
         Goal.resetProgress();
+        FavoriteManager.reset();
         inGamePlayers.clear();
         setupBlocks();
         redTeamTotalBlockAmount = redTeamBlocks.size();
@@ -762,7 +763,9 @@ public class Game {
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(() -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         redTeamRemainingBlocks.remove(block);
+        FavoriteManager.onTaskCompletedOrRemoved("red", block);
         if (skipMutualTask(blueTeamRemainingBlocks, block)) {
+            FavoriteManager.onTaskCompletedOrRemoved("blue", block);
             blueTeamTotalBlockAmount -= 1;
         }
         redTeamProgressScore += Block.getTargetScore(block);
@@ -807,7 +810,9 @@ public class Game {
                 .replace("%block%", getTargetDisplayName(block)).replace("%player%", player).replaceAll("§.", ""));
         playSound(() -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
         blueTeamRemainingBlocks.remove(block);
+        FavoriteManager.onTaskCompletedOrRemoved("blue", block);
         if (skipMutualTask(redTeamRemainingBlocks, block)) {
+            FavoriteManager.onTaskCompletedOrRemoved("red", block);
             redTeamTotalBlockAmount -= 1;
         }
         blueTeamProgressScore += Block.getTargetScore(block);

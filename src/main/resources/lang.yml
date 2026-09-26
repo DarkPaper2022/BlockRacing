@@ -29,6 +29,7 @@ scoreboard:
     blue-score: '&9蓝队 &e%progress_score%/%win_score% &7总%total_score% &6余%score%'
     block-format: '&8[%difficulty%&8] &f%block%'
     dividing-line: '&8&m--------------------------------'
+    favorites-header: '&8&m--&r &e★ 队伍收藏 &8&m-------'
     bottom-slot: ''
     block-difficulty:
       easy: '&a简单'
@@ -280,6 +281,12 @@ notice:
     blue: '&9&l蓝队'
     entry: '&7%index%. &f%block%'
     divider: '&8&m--------------------------------'
+  favorite:
+    added: '&a[队伍收藏] &e%player% &a收藏了目标：&f%target%'
+    removed: '&c[队伍收藏] &e%player% &c取消了收藏：&f%target%'
+    limit-reached: '&c[队伍收藏] 队伍收藏已满（上限 %max% 个），请先取消已有收藏！'
+    not-available: '&c该目标已不可完成，无法收藏！'
+    no-team: '&c你未加入任何队伍，无法收藏目标！'
 chat:
   global-format: '&8[&e&l全部&8] %team% &f%player%&7: &f%message%'
   team-hint: '&8[&b提示&8] &7当前为队伍聊天；使用 &f/shout 消息&7，或以 &f@ / ! &7开头发送给所有人。'

@@ -104,6 +104,7 @@ public final class GameProgressStore {
             Game.blueWaypoint = readLocations(state.getConfigurationSection("waypoints.blue"));
             restoreChests(state, "chests.red", Game.redTeamChest);
             restoreChests(state, "chests.blue", Game.blueTeamChest);
+            FavoriteManager.restore(state.getStringList("favorites.red"), state.getStringList("favorites.blue"));
             recoveredGame = true;
             Main.getInstance().getLogger().info("Recovered unfinished BlockRacing game progress.");
             return true;
@@ -211,6 +212,8 @@ public final class GameProgressStore {
         Game.blueWaypoint.forEach((index, location) -> state.set("waypoints.blue." + index, location));
         saveChests(state, "chests.red", Game.redTeamChest);
         saveChests(state, "chests.blue", Game.blueTeamChest);
+        state.set("favorites.red", new ArrayList<>(FavoriteManager.getFavorites("red")));
+        state.set("favorites.blue", new ArrayList<>(FavoriteManager.getFavorites("blue")));
         return state;
     }
 

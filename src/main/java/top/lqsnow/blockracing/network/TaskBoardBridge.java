@@ -28,6 +28,7 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
         activeBridge = this;
         var messenger = plugin.getServer().getMessenger();
         messenger.registerIncomingPluginChannel(plugin, BoardWire.REQUEST, this);
+        messenger.registerIncomingPluginChannel(plugin, BoardWire.FAVORITE_ACTION, this);
         messenger.registerOutgoingPluginChannel(plugin, BoardWire.SNAPSHOT);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         Bukkit.getScheduler().runTaskTimer(plugin, this::update, 20L, 20L);
@@ -39,6 +40,17 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (BoardWire.FAVORITE_ACTION.equals(channel)) {
+            if (message != null && message.length > 0 && message.length <= 160) {
+                String target = new String(message, java.nio.charset.StandardCharsets.UTF_8).trim();
+                if (!target.isEmpty()) {
+                    Bukkit.getScheduler().runTask(plugin, () -> {
+                        FavoriteManager.toggleFavorite(player, target);
+                    });
+                }
+            }
+            return;
+        }
         if (!BoardWire.REQUEST.equals(channel) || !BoardWire.validRequest(message)) return;
         UUID id = player.getUniqueId();
         if (message[0] == 0) { leases.remove(id); return; }
@@ -145,6 +157,7 @@ public final class TaskBoardBridge implements PluginMessageListener, Listener {
             row.put("glint", Block.isBonusTarget(target) || (visual != null && visual.glint()));
             row.put("score", Block.getTargetScore(target));
             row.put("bonus", Block.isBonusTarget(target));
+            row.put("favorited", FavoriteManager.isFavorited(team, target));
             row.put("status", status);
             int[] progress = Goal.isGoal(target) && status.equals("active")
                     ? Goal.getBoardProgress(target, viewer) : new int[]{0, 1};

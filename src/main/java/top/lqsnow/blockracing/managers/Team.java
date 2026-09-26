@@ -103,4 +103,17 @@ public class Team {
         Scoreboard.syncPlayerTeams();
     }
 
+    public static String getTeam(Player player) {
+        if (player == null) return "";
+        if (redTeamPlayers.contains(player.getName())) return "red";
+        if (blueTeamPlayers.contains(player.getName())) return "blue";
+        return "";
+    }
+
+    public static String getTeam(String playerName) {
+        if (playerName == null) return "";
+        if (redTeamPlayers.contains(playerName)) return "red";
+        if (blueTeamPlayers.contains(playerName)) return "blue";
+        return "";
+    }
 }

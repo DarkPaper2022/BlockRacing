@@ -58,5 +58,10 @@ max-team-chest-num: 8
 # 最大：53
 max-team-waypoint-num: 8
 
+# 队伍收藏目标最大显示/收藏数量 (N)
+# 默认：5
+# 范围：1 - 10
+max-favorite-targets: 5
+
 # 如果你不知道这是什么，不要动它
 config-version: 26.2.1

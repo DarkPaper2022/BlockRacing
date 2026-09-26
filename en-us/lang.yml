@@ -29,6 +29,7 @@ scoreboard:
     blue-score: '&9Blue &e%progress_score%/%win_score% &7tot %total_score% &6sp %score%'
     block-format: '&8[%difficulty%&8] &f%block%'
     dividing-line: '&8&m--------------------------------'
+    favorites-header: '&8&m--&r &e★ Pinned Targets &8&m--'
     bottom-slot: ''
     block-difficulty:
       easy: '&aEASY'
@@ -298,6 +299,12 @@ notice:
     blue: '&9&lBlue Team'
     entry: '&7%index%. &f%block%'
     divider: '&8&m--------------------------------'
+  favorite:
+    added: '&a[Team Pinned] &e%player% &apinned target: &f%target%'
+    removed: '&c[Team Pinned] &e%player% &cunpinned target: &f%target%'
+    limit-reached: '&c[Team Pinned] Pinned list is full (limit: %max%). Unpin one first!'
+    not-available: '&cThis target is no longer available and cannot be pinned!'
+    no-team: '&cYou are not on a team and cannot pin targets!'
 chat:
   global-format: '&8[&e&lALL&8] %team% &f%player%&7: &f%message%'
   team-hint: '&8[&bTip&8] &7You are in team chat. Use &f/shout message&7 or start with &f@ / ! &7to message everyone.'
