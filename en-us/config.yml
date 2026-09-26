@@ -51,12 +51,12 @@ speed-mode: false
 # 团队箱子个数
 # 默认：8
 # 最大：53
-max-team-chest-num: 8
+max-team-chest-num: 53
 
 # 路径点个数
 # 默认：8
 # 最大：53
-max-team-waypoint-num: 8
+max-team-waypoint-num: 53
 
 # 队伍收藏目标最大显示/收藏数量 (N)
 # 默认：5
