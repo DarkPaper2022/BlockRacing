@@ -582,9 +582,7 @@ public class Game {
 
     // Random Teleport
     public static void randomTeleport(Player player, boolean avoidOcean) {
-        World playerWorld = getPrimaryWorld();
-        int maxAttempts = avoidOcean ? 12 : 1;
-        startAsyncRandomTeleport(player, playerWorld, avoidOcean, 1, maxAttempts);
+        RandomTeleportManager.executeTeleport(player, avoidOcean);
     }
 
     private static ItemStack createRuleBook(Player player) {
@@ -707,21 +705,18 @@ public class Game {
     }
 
     public static synchronized void addRandomTeleportCandidate(Location location) {
-        if (location != null) {
-            randomTpPool.addLast(location);
-        }
     }
 
     public static synchronized Location pollRandomTeleportCandidate() {
-        return randomTpPool.pollFirst();
+        return RandomTeleportManager.pollCandidate();
     }
 
     public static synchronized int getRandomTeleportPoolSize() {
-        return randomTpPool.size();
+        return RandomTeleportManager.getPoolSize();
     }
 
     public static synchronized List<Location> getRandomTeleportPoolSnapshot() {
-        return List.copyOf(randomTpPool);
+        return RandomTeleportManager.getPoolSnapshot();
     }
 
     // Waypoints
@@ -1127,7 +1122,7 @@ public class Game {
         Game.currentGameState = currentGameState;
     }
 
-    private static World getPrimaryWorld() {
+    public static World getPrimaryWorld() {
         return Bukkit.getWorlds().stream()
                 .filter(world -> world.getEnvironment() == World.Environment.NORMAL)
                 .findFirst()

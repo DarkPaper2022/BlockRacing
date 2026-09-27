@@ -92,6 +92,7 @@ public class Main extends JavaPlugin {
             Scoreboard.setPreGameScoreboard();
         }
         GameProgressStore.startAutosave();
+        RandomTeleportManager.startWarmer();
         new top.lqsnow.blockracing.network.TaskBoardBridge(this).start();
         new Game.runPer2Tick().runTaskTimer(this, 0L, 2L);
 
@@ -115,6 +116,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        RandomTeleportManager.stopWarmer();
         if (Game.getCurrentGameState() == Game.GameState.INGAME) {
             GameProgressStore.saveNow();
         } else {
