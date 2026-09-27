@@ -36,7 +36,8 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (!args[0].equalsIgnoreCase("red") && !args[0].equalsIgnoreCase("blue")) {
+        String team = args[0].toLowerCase();
+        if (!top.lqsnow.blockracing.managers.TeamId.isValid(team)) {
             player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
@@ -47,19 +48,14 @@ public class GetBlock implements CommandExecutor, TabCompleter {
             player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
-        List<String> currentBlocks = getCurrentBlocks(args[0].toLowerCase());
+        List<String> currentBlocks = getCurrentBlocks(team);
         if (index < 1 || index > currentBlocks.size()) {
             player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;
         }
 
-        if (args[0].equalsIgnoreCase("red")) {
-            String block = currentBlocks.get(index - 1);
-            player.sendMessage(Game.getTargetDisplayName(block, player));
-        } else if (args[0].equalsIgnoreCase("blue")) {
-            String block = currentBlocks.get(index - 1);
-            player.sendMessage(Game.getTargetDisplayName(block, player));
-        }
+        String block = currentBlocks.get(index - 1);
+        player.sendMessage(Game.getTargetDisplayName(block, player));
         return true;
     }
 
@@ -69,12 +65,15 @@ public class GetBlock implements CommandExecutor, TabCompleter {
         List<String> completions = new ArrayList<>();
 
         if (args.length == 1) {
-            completions.add("red");
-            completions.add("blue");
+            for (top.lqsnow.blockracing.managers.TeamId t : top.lqsnow.blockracing.managers.TeamId.ALL) {
+                completions.add(t.id());
+            }
         } else if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("red") || args[0].equalsIgnoreCase("blue")) {
-                for (int index = 1; index <= getCurrentBlocks(args[0].toLowerCase(java.util.Locale.ROOT)).size(); index++) {
-                    completions.add(String.valueOf(index));
+            String team = args[0].toLowerCase();
+            if (top.lqsnow.blockracing.managers.TeamId.isValid(team)) {
+                List<String> currentBlocks = getCurrentBlocks(team);
+                for (int i = 1; i <= currentBlocks.size(); i++) {
+                    completions.add(String.valueOf(i));
                 }
             }
         }

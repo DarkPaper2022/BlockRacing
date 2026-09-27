@@ -39,7 +39,8 @@ public final class TaskActionListener implements Listener {
 
     private static boolean active(Player player) {
         return Game.getCurrentGameState() == Game.GameState.INGAME
-                && (Team.redTeamPlayers.contains(player.getName()) || Team.blueTeamPlayers.contains(player.getName()));
+                && player != null
+                && !Team.getTeam(player).isEmpty();
     }
 
     private static void afterAction(Player player, Runnable check) {

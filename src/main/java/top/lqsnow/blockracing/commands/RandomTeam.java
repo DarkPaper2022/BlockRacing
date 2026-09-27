@@ -86,13 +86,15 @@ public class RandomTeam implements CommandExecutor {
             return;
         }
 
-        // Determine how many teams to split into:
-        // If players currently joined 3 or 4 teams, balance across those teams; otherwise balance across 2 teams (red and blue).
+        // Determine target teams:
+        // If 2 or more teams currently have members, shuffle across those active teams.
+        // Otherwise default to red and blue.
         List<String> activeTeams = Team.getActiveTeamIds();
-        int numTeams = Math.max(2, Math.min(TeamId.ALL.size(), activeTeams.size()));
-        List<String> targetTeamIds = new ArrayList<>();
-        for (int i = 0; i < numTeams; i++) {
-            targetTeamIds.add(TeamId.ALL.get(i).id());
+        List<String> targetTeamIds;
+        if (activeTeams.size() >= 2) {
+            targetTeamIds = new ArrayList<>(activeTeams);
+        } else {
+            targetTeamIds = List.of(TeamId.RED.id(), TeamId.BLUE.id());
         }
 
         List<List<Player>> splits = splitPlayers(Bukkit.getOnlinePlayers(), targetTeamIds.size(), new Random());

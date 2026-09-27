@@ -79,12 +79,14 @@ public class Menu implements CommandExecutor, TabCompleter {
                 player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
                 return true;
             }
+            String team = Team.getTeam(player);
+            if (team.isEmpty()) {
+                player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+                return true;
+            }
 
             if (args.length == 1) {
-                String team = Team.getTeam(player);
-                if (!team.isEmpty()) {
-                    new GameMenu.WayPointMenu(Game.getTeamWaypoints(team), Game.getTeamWaypointIcons(team)).open(player);
-                }
+                new GameMenu.WayPointMenu(Game.getTeamWaypoints(team), Game.getTeamWaypointIcons(team)).open(player);
                 return true;
             }
 
@@ -133,15 +135,15 @@ public class Menu implements CommandExecutor, TabCompleter {
                 player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
                 return true;
             }
+            String team = Team.getTeam(player);
+            if (team.isEmpty()) {
+                player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+                return true;
+            }
             if (freeRandomTPList.contains(player.getName())) {
                 Game.randomTeleport(player, false);
                 freeRandomTPList.remove(player.getName());
             } else {
-                String team = Team.getTeam(player);
-                if (team.isEmpty()) {
-                    player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
-                    return true;
-                }
                 int curScore = Game.getTeamScore(team);
                 int cost = Setting.getRandomTeleportCost();
                 if (curScore < cost) {

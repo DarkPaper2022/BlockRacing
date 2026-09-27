@@ -171,7 +171,7 @@ public class Block {
         yellowTeamRemainingBlocks.addAll(List.copyOf(yellowTeamBlocks));
 
         LOGGER.info("[BlockRacing] Blocks generate complete.");
-        LOGGER.info("Targets count: " + redTeamBlocks.size() + ", Bonus: " + sharedBonusBlocks);
+        LOGGER.info("Targets count: " + sharedTargets.size() + ", Bonus: " + sharedBonusBlocks);
     }
 
     public static List<String> generateSampleBlocks(int blockAmount) {

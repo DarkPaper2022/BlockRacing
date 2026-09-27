@@ -21,6 +21,10 @@ public final class Shout implements CommandExecutor {
             player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
             return true;
         }
+        if (top.lqsnow.blockracing.managers.Team.getTeam(player).isEmpty()) {
+            player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+            return true;
+        }
         if (args.length == 0) {
             player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
             return true;

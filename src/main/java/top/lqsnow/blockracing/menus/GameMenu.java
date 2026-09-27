@@ -28,8 +28,6 @@ import top.lqsnow.blockracing.managers.Team;
 import static top.lqsnow.blockracing.managers.Game.*;
 import static top.lqsnow.blockracing.managers.Gui.openTeamChest;
 import static top.lqsnow.blockracing.managers.Gui.updateMenu;
-import static top.lqsnow.blockracing.managers.Team.blueTeamPlayers;
-import static top.lqsnow.blockracing.managers.Team.redTeamPlayers;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public final class GameMenu extends MenuView {
@@ -127,15 +125,11 @@ public final class GameMenu extends MenuView {
         player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
         player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_TITLE.getString(player));
         List<String> activeTeams = Team.getActiveTeamIds();
-        if (activeTeams.isEmpty()) activeTeams = List.of("red", "blue");
+        if (activeTeams.isEmpty()) {
+            activeTeams = top.lqsnow.blockracing.managers.TeamId.ALL.stream().map(top.lqsnow.blockracing.managers.TeamId::id).toList();
+        }
         for (String teamId : activeTeams) {
-            Message titleMsg = switch (teamId.toLowerCase(java.util.Locale.ROOT)) {
-                case "red" -> Message.NOTICE_BLOCK_OVERVIEW_RED;
-                case "blue" -> Message.NOTICE_BLOCK_OVERVIEW_BLUE;
-                case "green" -> Message.NOTICE_BLOCK_OVERVIEW_GREEN;
-                case "yellow" -> Message.NOTICE_BLOCK_OVERVIEW_YELLOW;
-                default -> Message.NOTICE_BLOCK_OVERVIEW_RED;
-            };
+            Message titleMsg = Team.getBlockOverviewMessage(teamId);
             player.sendMessage(titleMsg.getString(player));
             sendBlockSection(player, getCurrentBlocks(teamId));
             player.sendMessage(Message.NOTICE_BLOCK_OVERVIEW_DIVIDER.getString(player));
@@ -336,8 +330,11 @@ public final class GameMenu extends MenuView {
             meta.setOwningPlayer(teammate);
             head.setItemMeta(meta);
         }
+        String team = Team.getTeam(teammate);
+        top.lqsnow.blockracing.managers.TeamId teamId = top.lqsnow.blockracing.managers.TeamId.fromString(team);
+        String colorCode = teamId != null ? teamId.colorCode() : "§f";
         return ItemBuilder.of(head)
-                .name("§f" + teammate.getName())
+                .name(colorCode + teammate.getName())
                 .lore(Message.MENU_TEAMMATE_TELEPORT_PLAYER_LORE.getStringList(viewer))
                 .build();
     }

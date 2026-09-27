@@ -111,6 +111,7 @@ public class Team {
         targetTeam.addEntry(player.getName());
         targetList.add(player.getName());
         Scoreboard.syncPlayerTeams();
+        Scoreboard.updateScoreboard();
 
         if (sendMessage) {
             sendAll(getJoinTeamMessage(targetId),
@@ -132,6 +133,14 @@ public class Team {
         return blueTeamPlayers.contains(player.getName());
     }
 
+    public static boolean isPlayerInGreenTeam(Player player) {
+        return greenTeamPlayers.contains(player.getName());
+    }
+
+    public static boolean isPlayerInYellowTeam(Player player) {
+        return yellowTeamPlayers.contains(player.getName());
+    }
+
     public static void clearTeams() {
         for (TeamId t : TeamId.ALL) {
             String id = t.id();
@@ -142,6 +151,7 @@ public class Team {
             getPlayers(id).clear();
         }
         Scoreboard.syncPlayerTeams();
+        Scoreboard.updateScoreboard();
     }
 
     public static void restoreTeams(Map<String, List<String>> teams) {
@@ -160,6 +170,7 @@ public class Team {
             });
         }
         Scoreboard.syncPlayerTeams();
+        Scoreboard.updateScoreboard();
     }
 
     public static void restoreTeams(List<String> redPlayers, List<String> bluePlayers) {
@@ -290,6 +301,16 @@ public class Team {
             case "green" -> Message.NOTICE_GREEN_REMOVE_WAYPOINT;
             case "yellow" -> Message.NOTICE_YELLOW_REMOVE_WAYPOINT;
             default -> Message.NOTICE_RED_REMOVE_WAYPOINT;
+        };
+    }
+
+    public static Message getBlockOverviewMessage(String teamId) {
+        return switch (teamId.toLowerCase(Locale.ROOT)) {
+            case "red" -> Message.NOTICE_BLOCK_OVERVIEW_RED;
+            case "blue" -> Message.NOTICE_BLOCK_OVERVIEW_BLUE;
+            case "green" -> Message.NOTICE_BLOCK_OVERVIEW_GREEN;
+            case "yellow" -> Message.NOTICE_BLOCK_OVERVIEW_YELLOW;
+            default -> Message.NOTICE_BLOCK_OVERVIEW_RED;
         };
     }
 

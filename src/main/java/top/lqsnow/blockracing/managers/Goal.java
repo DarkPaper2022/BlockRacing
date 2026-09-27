@@ -284,7 +284,7 @@ public class Goal {
     }
 
     private static boolean isParticipant(Player player) {
-        return Team.redTeamPlayers.contains(player.getName()) || Team.blueTeamPlayers.contains(player.getName());
+        return player != null && !Team.getTeam(player).isEmpty();
     }
 
     public static void recordKill(Player player, EntityType entityType) {

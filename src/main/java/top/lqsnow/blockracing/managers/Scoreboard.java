@@ -173,10 +173,13 @@ public final class Scoreboard {
         setTitle(objective, text(Message.SCOREBOARD_INGAME_TITLE, player));
 
         // Determine which teams to show on scoreboard
-        // Show active teams (teams with players); if fewer than 2 active, show first 2 default (red, blue)
-        List<String> displayTeams = top.lqsnow.blockracing.managers.Team.getActiveTeamIds();
-        if (displayTeams.size() < 2) {
-            displayTeams = List.of("red", "blue");
+        // Show active teams (teams with players); if fewer than 2 active, supplement with others in order
+        List<String> displayTeams = new ArrayList<>(top.lqsnow.blockracing.managers.Team.getActiveTeamIds());
+        for (TeamId t : TeamId.ALL) {
+            if (displayTeams.size() >= 2) break;
+            if (!displayTeams.contains(t.id())) {
+                displayTeams.add(t.id());
+            }
         }
 
         int currentSlot = 15;
@@ -198,23 +201,25 @@ public final class Scoreboard {
             setSlot(board, objective, currentSlot--, " ");
         }
 
-        // Combined divider and team pinned header
-        if (currentSlot >= 1) {
-            String header = text(Message.SCOREBOARD_FAVORITES_HEADER, player);
-            setSlot(board, objective, currentSlot--, header);
-        }
-
-        // Render favorite slots
+        // Render favorite slots (for spectators without a team, don't fill with blanks)
         String playerTeam = top.lqsnow.blockracing.managers.Team.getTeam(player);
-        List<String> favorites = FavoriteManager.getFavorites(playerTeam);
-        int maxSlots = Math.min(10, Math.max(1, Setting.getMaxFavoriteTargets()));
-        for (int i = 0; i < maxSlots; i++) {
-            if (currentSlot < 1) break;
-            if (i < favorites.size()) {
-                String target = favorites.get(i);
-                setSlot(board, objective, currentSlot--, " §6" + (i + 1) + ". " + getBlockDisplay(target, player));
-            } else {
-                setSlot(board, objective, currentSlot--, " ");
+        if (!playerTeam.isEmpty()) {
+            // Combined divider and team pinned header
+            if (currentSlot >= 1) {
+                String header = text(Message.SCOREBOARD_FAVORITES_HEADER, player);
+                setSlot(board, objective, currentSlot--, header);
+            }
+
+            List<String> favorites = FavoriteManager.getFavorites(playerTeam);
+            int maxSlots = Math.min(10, Math.max(1, Setting.getMaxFavoriteTargets()));
+            for (int i = 0; i < maxSlots; i++) {
+                if (currentSlot < 1) break;
+                if (i < favorites.size()) {
+                    String target = favorites.get(i);
+                    setSlot(board, objective, currentSlot--, " §6" + (i + 1) + ". " + getBlockDisplay(target, player));
+                } else {
+                    setSlot(board, objective, currentSlot--, " ");
+                }
             }
         }
     }

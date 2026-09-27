@@ -375,10 +375,16 @@ public class Game {
         if (getCurrentGameState().equals(GameState.INGAME))
             return;
 
-        // Exist unready players
-        if (!(readyPlayers.size() == Bukkit.getOnlinePlayers().size())) {
-            List<String> unreadyPlayers = getOnlinePlayersString();
-            unreadyPlayers.removeAll(readyPlayers);
+        // Check if all team players are ready (spectators who haven't joined a team do not block game start)
+        List<String> teamPlayerNames = new ArrayList<>();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (!Team.getTeam(p).isEmpty()) {
+                teamPlayerNames.add(p.getName());
+            }
+        }
+        List<String> unreadyPlayers = new ArrayList<>(teamPlayerNames);
+        unreadyPlayers.removeAll(readyPlayers);
+        if (!unreadyPlayers.isEmpty()) {
             player.sendMessage(Message.NOTICE_EXIST_UNREADY.getString(player));
             player.sendMessage(Message.NOTICE_UNREADY_PLAYERS.getString(player) + unreadyPlayers);
             return;
@@ -761,6 +767,11 @@ public class Game {
     public static void setWaypoint(Player player, String team, int index) {
         Location waypoint = player.getLocation();
         getTeamWaypoints(team).put(index, waypoint);
+        if ("red".equalsIgnoreCase(team)) {
+            redWaypoint.put(index, waypoint);
+        } else if ("blue".equalsIgnoreCase(team)) {
+            blueWaypoint.put(index, waypoint);
+        }
         GameProgressStore.saveNow();
     }
 
@@ -879,6 +890,14 @@ public class Game {
         teamTaskComplete("blue", block, player);
     }
 
+    public static void greenTaskComplete(String block, String player) {
+        teamTaskComplete("green", block, player);
+    }
+
+    public static void yellowTaskComplete(String block, String player) {
+        teamTaskComplete("yellow", block, player);
+    }
+
     public static void teamTaskComplete(String teamId, String block, String player) {
         if (currentGameState != GameState.INGAME) return;
         List<String> remaining = Block.getTeamRemainingBlocks(teamId);
@@ -925,7 +944,34 @@ public class Game {
 
         if (getTeamProgressScore(teamId) >= getTeamWinScore(teamId)) {
             teamWin(teamId);
-            showRanking();
+            return;
+        }
+
+        // Check if all non-bonus targets have been exhausted without any team reaching win score
+        List<String> activeTeams = Team.getActiveTeamIds();
+        boolean hasRemainingRegular = false;
+        for (String id : activeTeams) {
+            for (String t : Block.getTeamRemainingBlocks(id)) {
+                if (!Block.isBonusTarget(t)) {
+                    hasRemainingRegular = true;
+                    break;
+                }
+            }
+            if (hasRemainingRegular) break;
+        }
+        if (!hasRemainingRegular && !activeTeams.isEmpty()) {
+            // Settle by highest progress score
+            String leadingTeam = activeTeams.get(0);
+            int highestScore = getTeamProgressScore(leadingTeam);
+            for (int i = 1; i < activeTeams.size(); i++) {
+                String candidate = activeTeams.get(i);
+                int score = getTeamProgressScore(candidate);
+                if (score > highestScore) {
+                    highestScore = score;
+                    leadingTeam = candidate;
+                }
+            }
+            teamWin(leadingTeam);
             return;
         }
 
@@ -963,6 +1009,14 @@ public class Game {
         teamWin("blue");
     }
 
+    public static void greenWin() {
+        teamWin("green");
+    }
+
+    public static void yellowWin() {
+        teamWin("yellow");
+    }
+
     public static void teamWin(String teamId) {
         Message winMsg = Team.getTeamWinMessage(teamId);
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -975,6 +1029,7 @@ public class Game {
         }
         sendAll(winMsg);
         playSound(() -> Sound.UI_TOAST_CHALLENGE_COMPLETE);
+        showRanking();
         setCurrentGameState(GameState.END);
         GameProgressStore.clear();
         top.lqsnow.blockracing.network.TaskBoardBridge.pushAll();
@@ -1032,18 +1087,9 @@ public class Game {
 
     public static List<String> getOnlineTeamPlayers(String team) {
         List<String> onlineTeamPlayers = new ArrayList<>();
-
-        if (team.equals("red")) {
-            for (String player : redTeamPlayers) {
-                if (Bukkit.getPlayer(player) != null) {
-                    onlineTeamPlayers.add(player);
-                }
-            }
-        } else {
-            for (String player : blueTeamPlayers) {
-                if (Bukkit.getPlayer(player) != null) {
-                    onlineTeamPlayers.add(player);
-                }
+        for (String player : Team.getPlayers(team)) {
+            if (Bukkit.getPlayerExact(player) != null) {
+                onlineTeamPlayers.add(player);
             }
         }
         return onlineTeamPlayers;

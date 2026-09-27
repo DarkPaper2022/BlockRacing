@@ -22,8 +22,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static top.lqsnow.blockracing.managers.Gui.updateMenu;
 import static top.lqsnow.blockracing.managers.Scoreboard.updateScoreboard;
-import static top.lqsnow.blockracing.managers.Team.isPlayerInBlueTeam;
-import static top.lqsnow.blockracing.managers.Team.isPlayerInRedTeam;
 import static top.lqsnow.blockracing.managers.Block.*;
 import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
@@ -63,7 +61,7 @@ public class BasicListener implements Listener {
     @EventHandler
     private void onAdvancement(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
-        if (isInGame() && (Team.redTeamPlayers.contains(player.getName()) || Team.blueTeamPlayers.contains(player.getName()))) {
+        if (isInGame() && !Team.getTeam(player).isEmpty()) {
             Goal.recordAdvancement(player, event.getAdvancement());
         }
     }
@@ -125,13 +123,17 @@ public class BasicListener implements Listener {
 
     @EventHandler
     private void onPlayerRespawn(PlayerRespawnEvent event) {
-        event.getPlayer().sendMessage(Message.NOTICE_SPAWN_PROTECT.getString(event.getPlayer()));
+        Player player = event.getPlayer();
+        if (Team.getTeam(player).isEmpty() || player.getGameMode() == org.bukkit.GameMode.SPECTATOR) {
+            return;
+        }
+        player.sendMessage(Message.NOTICE_SPAWN_PROTECT.getString(player));
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, -1, 0, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, -1, 0, false, false));
             if (Game.getCurrentGameState().equals(Game.GameState.INGAME) && Setting.isSpeedMode()) {
-                event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.HASTE, -1, 4, false, false));
-                event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, -1, 1, false, false));
-                event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, -1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.HASTE, -1, 4, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, -1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, -1, 1, false, false));
             }
         }, 10L);
     }

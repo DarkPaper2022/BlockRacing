@@ -12,7 +12,10 @@ import top.lqsnow.blockracing.managers.Team;
 import top.lqsnow.blockracing.toolkit.item.ItemBuilder;
 import top.lqsnow.blockracing.toolkit.menu.MenuButton;
 import top.lqsnow.blockracing.toolkit.menu.MenuView;
+import top.lqsnow.blockracing.managers.TeamId;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
@@ -25,28 +28,36 @@ public final class PreGameMenu extends MenuView {
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44,
             45, 46, 47, 48, 49, 50, 51, 52, 53
     );
-    private static final Set<Integer> BLUE_BACKGROUND = Set.of(15, 31, 32, 40, 41, 42);
+    private static final Set<Integer> BLUE_BACKGROUND = Set.of(31, 32, 40);
 
     public PreGameMenu() {
         super(54, player -> Message.MENU_PREGAME_TITLE.getString(player));
 
         // 4 Team Selection buttons: Red (11), Blue (12), Green (13), Yellow (14)
-        setButton(11, MenuButton.of(
-                player -> item(Material.RED_WOOL, Message.MENU_JOIN_RED.getString(player)),
-                (player, click) -> Team.joinTeam(player, "red", true)
-        ));
-        setButton(12, MenuButton.of(
-                player -> item(Material.BLUE_WOOL, Message.MENU_JOIN_BLUE.getString(player)),
-                (player, click) -> Team.joinTeam(player, "blue", true)
-        ));
-        setButton(13, MenuButton.of(
-                player -> item(Material.LIME_WOOL, Message.MENU_JOIN_GREEN.getString(player)),
-                (player, click) -> Team.joinTeam(player, "green", true)
-        ));
-        setButton(14, MenuButton.of(
-                player -> item(Material.YELLOW_WOOL, Message.MENU_JOIN_YELLOW.getString(player)),
-                (player, click) -> Team.joinTeam(player, "yellow", true)
-        ));
+        for (TeamId teamId : TeamId.ALL) {
+            int slot = 11 + teamId.ordinal();
+            setButton(slot, MenuButton.of(
+                    player -> {
+                        Message nameMsg = Team.getTeamNameMessage(teamId.id());
+                        Message loreMsg = switch (teamId) {
+                            case RED -> Message.MENU_JOIN_RED_LORE;
+                            case BLUE -> Message.MENU_JOIN_BLUE_LORE;
+                            case GREEN -> Message.MENU_JOIN_GREEN_LORE;
+                            case YELLOW -> Message.MENU_JOIN_YELLOW_LORE;
+                        };
+                        List<String> lore = new ArrayList<>(loreMsg.getStringList(player));
+                        List<String> members = Team.getPlayers(teamId.id());
+                        if (!members.isEmpty()) {
+                            lore.add("§7" + String.join(", ", members));
+                        }
+                        return ItemBuilder.of(teamId.woolMaterial())
+                                .name(nameMsg.getString(player))
+                                .lore(lore)
+                                .build();
+                    },
+                    (player, click) -> Team.joinTeam(player, teamId.id(), true)
+            ));
+        }
 
         setButton(20, toggleButton(
                 Setting::isEnableMediumBlock,

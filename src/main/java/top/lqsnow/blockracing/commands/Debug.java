@@ -10,9 +10,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.lqsnow.blockracing.managers.Block;
 import top.lqsnow.blockracing.managers.LanguageManager;
 import top.lqsnow.blockracing.managers.Message;
 import top.lqsnow.blockracing.managers.Scoreboard;
+import top.lqsnow.blockracing.managers.Team;
 import top.lqsnow.blockracing.utils.TranslationUtil;
 
 import java.util.ArrayList;
@@ -55,102 +57,76 @@ public class Debug implements CommandExecutor, TabCompleter {
                 player.sendMessage("&cThis command can only be used after the start of the game!");
                 return true;
             }
-            if (args[1].equalsIgnoreCase("red")) {
-                if (args[2].equalsIgnoreCase("all") || args[2].isEmpty()) {
-                    int amount = getCurrentBlocks("red").size();
-                    for (int i = 0; i < amount; i++) redTaskComplete(redTeamRemainingBlocks.get(0), "Debug");
-                    return true;
+            String team = args[1].toLowerCase();
+            if (args[2].equalsIgnoreCase("all") || args[2].isEmpty()) {
+                int amount = getCurrentBlocks(team).size();
+                for (int i = 0; i < amount; i++) {
+                    List<String> rem = Block.getTeamRemainingBlocks(team);
+                    if (!rem.isEmpty()) {
+                        teamTaskComplete(team, rem.get(0), "Debug");
+                    }
                 }
-                redTaskComplete(getCurrentBlocks("red").get(Integer.parseInt(args[2]) - 1), "Debug");
-            } else if (args[1].equalsIgnoreCase("blue")) {
-                if (args[2].equalsIgnoreCase("all") || args[2].isEmpty()) {
-                    int amount = getCurrentBlocks("blue").size();
-                    for (int i = 0; i < amount; i++) blueTaskComplete(blueTeamRemainingBlocks.get(0), "Debug");
-                    return true;
-                }
-                blueTaskComplete(getCurrentBlocks("blue").get(Integer.parseInt(args[2]) - 1), "Debug");
+                return true;
             }
+            teamTaskComplete(team, getCurrentBlocks(team).get(Integer.parseInt(args[2]) - 1), "Debug");
         }
 
         // Set score
         if (args[0].equalsIgnoreCase("setscore")) {
-            if (args[1].equalsIgnoreCase("red")) {
-                redTeamScore = Integer.parseInt(args[2]);
-            } else if (args[1].equalsIgnoreCase("blue")) {
-                blueTeamScore = Integer.parseInt(args[2]);
-            }
+            String team = args[1].toLowerCase();
+            setTeamScore(team, Integer.parseInt(args[2]));
             updateScoreboard();
         }
 
         // Query block list
         if (args[0].equalsIgnoreCase("getblock")) {
-            if (args[1].equalsIgnoreCase("red")) {
-                if (args[2].equalsIgnoreCase("remain")) {
-                    sender.sendMessage("Red remaining blocks：" + redTeamRemainingBlocks.toString());
-                } else if (args[2].equalsIgnoreCase("all")) {
-                    sender.sendMessage("Red all blocks：" + redTeamBlocks.toString());
-                }
-            } else if (args[1].equalsIgnoreCase("blue")) {
-                if (args[2].equalsIgnoreCase("remain")) {
-                    sender.sendMessage("Blue remaining blocks：" + blueTeamRemainingBlocks.toString());
-                } else if (args[2].equalsIgnoreCase("all")) {
-                    sender.sendMessage("Blue all blocks：" + blueTeamBlocks.toString());
-                }
+            String team = args[1].toLowerCase();
+            if (args[2].equalsIgnoreCase("remain")) {
+                sender.sendMessage(team + " remaining blocks：" + Block.getTeamRemainingBlocks(team).toString());
+            } else if (args[2].equalsIgnoreCase("all")) {
+                sender.sendMessage(team + " all blocks：" + Block.getTeamBlocks(team).toString());
             }
         }
 
         // Get translation
         if (args[0].equalsIgnoreCase("gettranslation")) {
-            if (args[1].equalsIgnoreCase("red")) {
-                String block = getCurrentBlocks("red").get(Integer.parseInt(args[2]) - 1);
-                Material material = Material.getMaterial(block);
-                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, getTargetDisplayName(block, player), material == null ? "custom-goal" : material.translationKey()));
-            } else if (args[1].equalsIgnoreCase("blue")) {
-                String block = getCurrentBlocks("blue").get(Integer.parseInt(args[2]) - 1);
-                Material material = Material.getMaterial(block);
-                sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, getTargetDisplayName(block, player), material == null ? "custom-goal" : material.translationKey()));
-            }
+            String team = args[1].toLowerCase();
+            String block = getCurrentBlocks(team).get(Integer.parseInt(args[2]) - 1);
+            Material material = Material.getMaterial(block);
+            sender.sendMessage(String.format("The translation of %s is: %s, key: %s", block, getTargetDisplayName(block, player), material == null ? "custom-goal" : material.translationKey()));
         }
 
         // Get team situation
         if (args[0].equalsIgnoreCase("getteam")) {
-            player.sendMessage("Red team Players: " + redTeamPlayers.toString());
-            player.sendMessage("Blue team Players: " + blueTeamPlayers.toString());
+            for (top.lqsnow.blockracing.managers.TeamId t : top.lqsnow.blockracing.managers.TeamId.ALL) {
+                player.sendMessage(t.id() + " team Players: " + Team.getPlayers(t.id()).toString());
+            }
         }
 
         // Set team member
         if (args[0].equalsIgnoreCase("setteam")) {
-            if (args[1].equalsIgnoreCase("red") || args[1].equalsIgnoreCase("blue")) {
+            String team = args[1].toLowerCase();
+            if (top.lqsnow.blockracing.managers.TeamId.isValid(team)) {
                 if (args[2].equalsIgnoreCase("add")) {
                     Player p = Bukkit.getPlayerExact(args[3]);
                     if (p == null) {
                         player.sendMessage(t("&cThe player does not exist!"));
                         return true;
                     }
-                    boolean result;
-                    if (args[1].equalsIgnoreCase("red")) {
-                        result = joinTeam(p, redTeam, false);
-                    } else {
-                        result = joinTeam(p, blueTeam, false);
-                    }
+                    boolean result = joinTeam(p, team, false);
                     if (result) {
-                        player.sendMessage(t(String.format("&aSuccessfully added %s to the %s team", p.getName(), args[1].toLowerCase())));
+                        player.sendMessage(t(String.format("&aSuccessfully added %s to the %s team", p.getName(), team)));
                         if (p.getGameMode().equals(GameMode.SPECTATOR)) {
                             player.sendMessage(t("&eDetected that the player is in spectator mode. If you want him to join the game, please ask him to rejoin the server!"));
                         }
                     } else {
-                        player.sendMessage(t(String.format("&cThe player has already joined the %s team!", args[1].toLowerCase())));
+                        player.sendMessage(t(String.format("&cThe player has already joined the %s team!", team)));
                     }
                 } else if (args[2].equalsIgnoreCase("remove")) {
                     String targetName = args[3];
-                    boolean result = false;
-                    if (args[1].equalsIgnoreCase("red")) {
-                        result = redTeam.removeEntry(targetName);
-                        redTeamPlayers.remove(targetName);
-                    } else if (args[1].equalsIgnoreCase("blue")) {
-                        result = blueTeam.removeEntry(targetName);
-                        blueTeamPlayers.remove(targetName);
-                    }
+                    boolean result = Team.getPlayers(team).remove(targetName);
+                    org.bukkit.scoreboard.Team sb = Team.getScoreboardTeam(team);
+                    if (sb != null) sb.removeEntry(targetName);
                     Scoreboard.syncPlayerTeams();
                     if (result) {
                         player.sendMessage(t("&aSuccessfully removed player from team"));
@@ -184,7 +160,7 @@ public class Debug implements CommandExecutor, TabCompleter {
     }
 
     private boolean isTeam(String value) {
-        return value.equalsIgnoreCase("red") || value.equalsIgnoreCase("blue");
+        return top.lqsnow.blockracing.managers.TeamId.isValid(value);
     }
 
     private boolean isInteger(String value) {
@@ -220,8 +196,9 @@ public class Debug implements CommandExecutor, TabCompleter {
             completions.add("setteam");
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("skip") || args[0].equalsIgnoreCase("setscore") || args[0].equalsIgnoreCase("getblock") || args[0].equalsIgnoreCase("gettranslation") || args[0].equalsIgnoreCase("setteam")) {
-                completions.add("red");
-                completions.add("blue");
+                for (top.lqsnow.blockracing.managers.TeamId t : top.lqsnow.blockracing.managers.TeamId.ALL) {
+                    completions.add(t.id());
+                }
             }
         } else if (args.length == 3) {
             if (args[0].equalsIgnoreCase("skip")) {
@@ -247,8 +224,7 @@ public class Debug implements CommandExecutor, TabCompleter {
                 if (args[2].equalsIgnoreCase("add")) {
                     return getOnlinePlayersString();
                 } else if (args[2].equalsIgnoreCase("remove")) {
-                    if (args[1].equalsIgnoreCase("red")) return redTeamPlayers;
-                    else if (args[1].equalsIgnoreCase("blue")) return blueTeamPlayers;
+                    return Team.getPlayers(args[1].toLowerCase());
                 }
             }
         }
