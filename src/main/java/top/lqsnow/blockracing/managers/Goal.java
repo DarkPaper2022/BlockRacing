@@ -446,8 +446,8 @@ public class Goal {
         }
 
         List<String> members = teamMembers(player.getName());
-        List<Inventory> chests = Team.redTeamPlayers.contains(player.getName()) ? Game.redTeamChest
-                : Team.blueTeamPlayers.contains(player.getName()) ? Game.blueTeamChest : List.of();
+        String team = Team.getTeam(player);
+        List<Inventory> chests = team.isEmpty() ? List.of() : Game.getTeamChests(team);
         Progress progress = teamProgress(target, members, chests, Bukkit::getPlayer);
         if (progress == null) {
             return List.of();
@@ -489,8 +489,8 @@ public class Goal {
 
     /** Read-only numeric UI projection; does not check off targets or import advancements. */
     public static int[] getBoardProgress(String target, Player player) {
-        List<Inventory> chests = Team.redTeamPlayers.contains(player.getName()) ? Game.redTeamChest
-                : Team.blueTeamPlayers.contains(player.getName()) ? Game.blueTeamChest : List.of();
+        String team = Team.getTeam(player);
+        List<Inventory> chests = team.isEmpty() ? List.of() : Game.getTeamChests(team);
         Progress progress = teamProgress(target, teamMembers(player.getName()), chests, Bukkit::getPlayer);
         return progress == null ? new int[]{0, 1}
                 : new int[]{Math.max(0, progress.current()), Math.max(1, progress.required())};
@@ -513,8 +513,10 @@ public class Goal {
 
 
     private static List<String> teamMembers(String player) {
-        if (Team.redTeamPlayers.contains(player)) return Team.redTeamPlayers;
-        if (Team.blueTeamPlayers.contains(player)) return Team.blueTeamPlayers;
+        String team = Team.getTeam(player);
+        if (!team.isEmpty()) {
+            return Team.getPlayers(team);
+        }
         return List.of(player);
     }
 

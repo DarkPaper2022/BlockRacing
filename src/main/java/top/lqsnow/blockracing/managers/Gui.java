@@ -2,10 +2,13 @@ package top.lqsnow.blockracing.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import top.lqsnow.blockracing.menus.GameMenu;
 import top.lqsnow.blockracing.menus.PreGameMenu;
 import top.lqsnow.blockracing.toolkit.menu.MenuManager;
 import top.lqsnow.blockracing.toolkit.menu.MenuView;
+
+import java.util.List;
 
 import static top.lqsnow.blockracing.managers.Game.redTeamChest;
 import static top.lqsnow.blockracing.managers.Game.blueTeamChest;
@@ -21,12 +24,16 @@ public class Gui {
 
     @SuppressWarnings("deprecation") // InventoryView has no component-based title setter in Paper 26.2.
     public static void openTeamChest(Player player, int index) {
-        if (redTeamPlayers.contains(player.getName())) {
-            player.openInventory(redTeamChest.get(index));
-            player.getOpenInventory().setTitle(Message.MENU_RED_CHEST.getString(player) + (index + 1));
-        } else if (blueTeamPlayers.contains(player.getName())) {
-            player.openInventory(blueTeamChest.get(index));
-            player.getOpenInventory().setTitle(Message.MENU_BLUE_CHEST.getString(player) + (index + 1));
+        String team = Team.getTeam(player);
+        if (team.isEmpty()) {
+            player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+            return;
+        }
+        List<org.bukkit.inventory.Inventory> chests = Game.getTeamChests(team);
+        if (index >= 0 && index < chests.size()) {
+            player.openInventory(chests.get(index));
+            Message titleMsg = Team.getMenuTeamChestMessage(team);
+            player.getOpenInventory().setTitle(titleMsg.getString(player) + " " + (index + 1));
         }
     }
 

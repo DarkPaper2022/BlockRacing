@@ -56,29 +56,21 @@ public class Menu implements CommandExecutor, TabCompleter {
                 player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
                 return true;
             }
-            if (redTeamPlayers.contains(player.getName())) {
-                if (args.length == 1) {
-                    new GameMenu.TeamChestSelectMenu().open(player);
-                    return true;
-                }
-                Integer ith = parseIndex(args[1], redTeamChest.size());
-                if (ith == null) {
-                    player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
-                    return true;
-                }
-                Gui.openTeamChest(player, ith - 1);
-            } else if (blueTeamPlayers.contains(player.getName())) {
-                if (args.length == 1) {
-                    new GameMenu.TeamChestSelectMenu().open(player);
-                    return true;
-                }
-                Integer ith = parseIndex(args[1], blueTeamChest.size());
-                if (ith == null) {
-                    player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
-                    return true;
-                }
-                Gui.openTeamChest(player, ith - 1);
+            String team = Team.getTeam(player);
+            if (team.isEmpty()) {
+                player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
+                return true;
             }
+            if (args.length == 1) {
+                new GameMenu.TeamChestSelectMenu().open(player);
+                return true;
+            }
+            Integer ith = parseIndex(args[1], Setting.getMaxTeamChestNum());
+            if (ith == null) {
+                player.sendMessage(Message.NOTICE_ERROR_COMMAND.getString(player));
+                return true;
+            }
+            Gui.openTeamChest(player, ith - 1);
             return true;
         }
 
