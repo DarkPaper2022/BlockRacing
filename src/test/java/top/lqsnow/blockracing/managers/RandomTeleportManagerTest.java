@@ -36,4 +36,11 @@ public class RandomTeleportManagerTest {
         assertEquals(epochBefore + 1, epochAfter);
         assertEquals(0, RandomTeleportManager.getReadyCount());
     }
+
+    @Test
+    public void fullCoverageIsNotReadyWhileFinalAsyncChunksAreInFlight() {
+        assertFalse(RandomTeleportManager.isCoverageComplete(625, 621, 4));
+        assertFalse(RandomTeleportManager.isCoverageComplete(625, 625, 1));
+        assertTrue(RandomTeleportManager.isCoverageComplete(625, 625, 0));
+    }
 }

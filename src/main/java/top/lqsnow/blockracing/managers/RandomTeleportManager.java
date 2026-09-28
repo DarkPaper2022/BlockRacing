@@ -110,7 +110,9 @@ public final class RandomTeleportManager {
         final int centerChunkZ;
         final int radius;
         final List<long[]> chunkCoords = new ArrayList<>();
+        final AtomicInteger nextChunkIndex = new AtomicInteger(0);
         final AtomicInteger completedChunks = new AtomicInteger(0);
+        final AtomicInteger inFlightChunks = new AtomicInteger(0);
         final AtomicBoolean failed = new AtomicBoolean(false);
 
         GenerationJob(long candidateId, long gEpoch, long genEpoch, World world, Location landing,
@@ -437,7 +439,8 @@ public final class RandomTeleportManager {
                 // Build square coverage list in outward concentric rings (5.1, 5.2)
                 buildConcentricRingCoords(centerChunkX, centerChunkZ, radius, job.chunkCoords);
                 // Center chunk is already loaded/generated
-                job.completedChunks.incrementAndGet();
+                job.nextChunkIndex.set(1);
+                job.completedChunks.set(1);
 
                 ACTIVE_JOBS.put(cId, job);
                 advanceActiveJobs();
@@ -471,19 +474,21 @@ public final class RandomTeleportManager {
             }
 
             int totalRequired = job.chunkCoords.size();
+            if (isCoverageComplete(totalRequired, job.completedChunks.get(), job.inFlightChunks.get())) {
+                if (!ACTIVE_JOBS.remove(job.candidateId, job)) continue;
+                Candidate candidate = new Candidate(
+                        job.candidateId, job.gEpoch, job.genEpoch,
+                        job.world.getUID(), job.landing,
+                        job.centerChunkX, job.centerChunkZ, job.radius
+                );
+                synchronized (RandomTeleportManager.class) {
+                    READY_POOL.addLast(candidate);
+                }
+                continue;
+            }
             while (INFLIGHT_CHUNKS.get() < MAX_INFLIGHT_CHUNKS) {
-                int nextIndex = job.completedChunks.get();
+                int nextIndex = job.nextChunkIndex.getAndIncrement();
                 if (nextIndex >= totalRequired) {
-                    // All chunks in coverage finished! Publish as READY (D6, 05)
-                    ACTIVE_JOBS.remove(job.candidateId);
-                    Candidate candidate = new Candidate(
-                            job.candidateId, job.gEpoch, job.genEpoch,
-                            job.world.getUID(), job.landing,
-                            job.centerChunkX, job.centerChunkZ, job.radius
-                    );
-                    synchronized (RandomTeleportManager.class) {
-                        READY_POOL.addLast(candidate);
-                    }
                     break;
                 }
 
@@ -493,20 +498,26 @@ public final class RandomTeleportManager {
                 long key = (((long) chunkX) << 32) | (chunkZ & 0xFFFFFFFFL);
 
                 if (!PENDING_CHUNK_KEYS.add(key)) {
-                    // Already in flight by another request; count as progressed
-                    job.completedChunks.incrementAndGet();
-                    continue;
+                    // Another job owns this chunk. Retry after its completion rather than
+                    // treating a merely scheduled chunk as generated.
+                    job.nextChunkIndex.decrementAndGet();
+                    break;
                 }
 
                 INFLIGHT_CHUNKS.incrementAndGet();
+                job.inFlightChunks.incrementAndGet();
                 job.world.getChunkAtAsync(chunkX, chunkZ, true, false).whenComplete((ch, ex) -> {
                     PENDING_CHUNK_KEYS.remove(key);
                     INFLIGHT_CHUNKS.decrementAndGet();
 
                     Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                        job.inFlightChunks.decrementAndGet();
                         if (ex != null) {
                             job.failed.set(true);
                             ACTIVE_JOBS.remove(job.candidateId);
+                            // A different job may have paused on this chunk key. Removing the
+                            // key above must wake the scheduler even when the owner failed.
+                            advanceActiveJobs();
                             return;
                         }
                         job.completedChunks.incrementAndGet();
@@ -515,6 +526,10 @@ public final class RandomTeleportManager {
                 });
             }
         }
+    }
+
+    static boolean isCoverageComplete(int totalRequired, int completed, int inFlight) {
+        return totalRequired > 0 && completed == totalRequired && inFlight == 0;
     }
 
     // =========================================================================
