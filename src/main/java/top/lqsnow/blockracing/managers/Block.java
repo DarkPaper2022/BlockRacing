@@ -30,6 +30,7 @@ public class Block {
     private static final String CATEGORY_TAG_PREFIX = "category:";
     private static final String GROUP_TAG_PREFIX = "group:";
     private static final String TARGETS_FILE_NAME = "Targets.csv";
+    private static final String TEST_TARGETS_PROPERTY = "blockracing.test.targets";
     private static final List<String> WOOD_FAMILIES = List.of(
             "DARK_OAK",
             "PALE_OAK",
@@ -150,8 +151,17 @@ public class Block {
         greenTeamRemainingBlocks.clear();
         yellowTeamRemainingBlocks.clear();
 
-        List<String> sharedBlocks = generateBlocks();
-        List<String> sharedBonusBlocks = generateBonusBlocks();
+        List<String> fixtureTargets = parseTestTargets(System.getProperty(TEST_TARGETS_PROPERTY));
+        List<String> sharedBlocks;
+        List<String> sharedBonusBlocks;
+        if (fixtureTargets == null) {
+            sharedBlocks = generateBlocks();
+            sharedBonusBlocks = generateBonusBlocks();
+        } else {
+            sharedBlocks = fixtureTargets.stream().filter(target -> !isBonusTarget(target)).toList();
+            sharedBonusBlocks = fixtureTargets.stream().filter(Block::isBonusTarget).toList();
+            LOGGER.info("[BlockRacing] E2E target-generation fixture enabled: " + fixtureTargets);
+        }
         List<String> sharedTargets = new ArrayList<>(sharedBlocks);
         sharedTargets.addAll(sharedBonusBlocks);
 
@@ -172,6 +182,27 @@ public class Block {
 
         LOGGER.info("[BlockRacing] Blocks generate complete.");
         LOGGER.info("Targets count: " + sharedTargets.size() + ", Bonus: " + sharedBonusBlocks);
+    }
+
+    /**
+     * Deliberately narrow E2E seam: only target-list generation is replaceable. Gameplay,
+     * scoring, mutual exclusion, inventory checks and settlement still use production code.
+     */
+    static List<String> parseTestTargets(String configured) {
+        if (configured == null || configured.isBlank()) return null;
+        LinkedHashSet<String> selected = new LinkedHashSet<>();
+        for (String token : configured.split(",")) {
+            String target = token.trim().toUpperCase(Locale.ROOT);
+            if (target.isEmpty()) continue;
+            if (!targetScores.containsKey(target)) {
+                throw new IllegalArgumentException("Unknown blockracing.test.targets entry: " + target);
+            }
+            selected.add(target);
+        }
+        if (selected.isEmpty()) {
+            throw new IllegalArgumentException("blockracing.test.targets must contain at least one target");
+        }
+        return List.copyOf(selected);
     }
 
     public static List<String> generateSampleBlocks(int blockAmount) {

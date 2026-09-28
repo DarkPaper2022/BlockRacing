@@ -117,4 +117,12 @@ class TaskSamplingTest {
         assertEquals(7, Game.getCurrentBlocks("red").size());
         assertTrue(Game.getCurrentBlocks("red").containsAll(Block.redTeamBonusBlocks));
     }
+
+    @Test
+    void e2eFixtureOnlyReplacesTargetGeneration() {
+        assertNull(Block.parseTestTargets(null));
+        assertEquals(List.of("NORMAL_1", "EASY_2"),
+                Block.parseTestTargets(" normal_1, easy_2, NORMAL_1 "));
+        assertThrows(IllegalArgumentException.class, () -> Block.parseTestTargets("MISSING"));
+    }
 }
