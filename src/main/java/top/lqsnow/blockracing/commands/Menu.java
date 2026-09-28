@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import top.lqsnow.blockracing.managers.Game;
 import top.lqsnow.blockracing.managers.Gui;
 import top.lqsnow.blockracing.managers.Message;
+import top.lqsnow.blockracing.managers.RandomTeleportManager;
 import top.lqsnow.blockracing.managers.Scoreboard;
 import top.lqsnow.blockracing.managers.Setting;
 import top.lqsnow.blockracing.managers.Team;
@@ -131,34 +132,7 @@ public class Menu implements CommandExecutor, TabCompleter {
         }
 
         if (args[0].equalsIgnoreCase("randomTP") && args.length == 1) {
-            if (Game.getCurrentGameState().equals(Game.GameState.PREGAME)) {
-                player.sendMessage(Message.NOTICE_GAME_NOT_START.getString(player));
-                return true;
-            }
-            String team = Team.getTeam(player);
-            if (team.isEmpty()) {
-                player.sendMessage(Message.NOTICE_SPECTATOR.getString(player));
-                return true;
-            }
-            if (freeRandomTPList.contains(player.getName())) {
-                Game.randomTeleport(player, false);
-                freeRandomTPList.remove(player.getName());
-            } else {
-                int curScore = Game.getTeamScore(team);
-                int cost = Setting.getRandomTeleportCost();
-                if (curScore < cost) {
-                    player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
-                    return true;
-                }
-                player.closeInventory();
-                randomTeleport(player, false);
-                Game.setTeamScore(team, curScore - cost);
-                Message colorMsg = Team.getTeamColorMessage(team);
-                sendAll(Message.NOTICE_RANDOM_TP, (viewer, text) -> text.replace("%score%", String.valueOf(cost)).replace("%player%",
-                        colorMsg.getString(viewer) + player.getName()));
-                Scoreboard.updateScoreboard();
-                top.lqsnow.blockracing.managers.GameProgressStore.saveNow();
-            }
+            RandomTeleportManager.requestRtp(player, RandomTeleportManager.RequestReason.USER, false);
             return true;
         }
 

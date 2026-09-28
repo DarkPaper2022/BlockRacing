@@ -344,6 +344,7 @@ public class Game {
     }
 
     public static void playerQuit(Player player) {
+        RandomTeleportManager.onPlayerQuit(player);
         Goal.playerDisconnected(player);
         if (currentGameState == GameState.INGAME) GameProgressStore.saveNow();
         redRollPlayers.remove(player.getName());
@@ -403,6 +404,15 @@ public class Game {
             return;
         }
 
+        // Check if pregenerated RTP candidates meet the required threshold (03)
+        int participatingPlayers = teamPlayerNames.size();
+        if (!RandomTeleportManager.isStartThresholdMet(participatingPlayers)) {
+            int currentReady = RandomTeleportManager.getReadyCount();
+            int required = RandomTeleportManager.getStartRequirement(participatingPlayers);
+            player.sendMessage(String.format("§e目的地全视距生成准备中（当前就绪 %d/%d），请稍候...", currentReady, required));
+            return;
+        }
+
         // Start the game
         sendAll(Message.NOTICE_START);
         startGame();
@@ -445,6 +455,7 @@ public class Game {
 
         locateCost = Setting.getLocateCost();
         updateScoreboard();
+        Bukkit.getOnlinePlayers().forEach(RandomTeleportManager::grantFreeRtp);
         Bukkit.getOnlinePlayers().forEach((Player player) -> freeRandomTPList.add(player.getName()));
         new runPer5Tick().runTaskTimer(Main.getInstance(), 0L, 5L);
         World world = getPrimaryWorld();
@@ -504,7 +515,7 @@ public class Game {
     public static void initPlayer(Player player) {
         // General
         player.getInventory().clear();
-        randomTeleport(player, true);
+        RandomTeleportManager.requestRtp(player, RandomTeleportManager.RequestReason.INITIAL, true);
         player.setHealth(20);
         player.setExp(0);
         player.setLevel(0);
@@ -582,7 +593,7 @@ public class Game {
 
     // Random Teleport
     public static void randomTeleport(Player player, boolean avoidOcean) {
-        RandomTeleportManager.executeTeleport(player, avoidOcean);
+        RandomTeleportManager.requestRtp(player, RandomTeleportManager.RequestReason.USER, avoidOcean);
     }
 
     private static ItemStack createRuleBook(Player player) {
