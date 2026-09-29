@@ -404,16 +404,10 @@ public class Game {
             return;
         }
 
-        // Check if pregenerated RTP candidates meet the required threshold (03)
-        int participatingPlayers = teamPlayerNames.size();
-        if (!RandomTeleportManager.isStartThresholdMet(participatingPlayers)) {
-            int currentReady = RandomTeleportManager.getReadyCount();
-            int required = RandomTeleportManager.getStartRequirement(participatingPlayers);
-            player.sendMessage(String.format("§e目的地全视距生成准备中（当前就绪 %d/%d），请稍候...", currentReady, required));
-            return;
-        }
-
         // Start the game
+        Bukkit.getLogger().info("[BlockRacing] Starting game with RTP pool ready="
+                + RandomTeleportManager.getReadyCount()
+                + "; missing initial destinations will be queued");
         sendAll(Message.NOTICE_START);
         startGame();
     }

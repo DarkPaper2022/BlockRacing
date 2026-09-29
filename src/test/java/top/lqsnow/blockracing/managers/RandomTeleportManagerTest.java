@@ -22,10 +22,9 @@ public class RandomTeleportManagerTest {
     }
 
     @Test
-    public void testStartThresholdCalculation() {
-        // Nmin = P + 4, P = 4 -> Nmin = 8
-        assertEquals(8, RandomTeleportManager.getStartRequirement(4));
-        assertFalse(RandomTeleportManager.isStartThresholdMet(4));
+    public void onlyInitialTeleportWaitsForCandidate() {
+        assertTrue(RandomTeleportManager.waitsForCandidate(RandomTeleportManager.RequestReason.INITIAL));
+        assertFalse(RandomTeleportManager.waitsForCandidate(RandomTeleportManager.RequestReason.USER));
     }
 
     @Test

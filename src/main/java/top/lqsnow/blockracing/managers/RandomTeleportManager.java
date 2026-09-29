@@ -38,6 +38,7 @@ public final class RandomTeleportManager {
 
     public enum RequestStatus {
         ACCEPTED,
+        WAITING_FOR_CANDIDATE,
         RESERVED,
         TELEPORTING,
         SETTLING,
@@ -131,7 +132,6 @@ public final class RandomTeleportManager {
     // --- Budget & Config ---
     private static final int MAX_COORD_RANGE = 10000;
     private static final int TARGET_POOL_SIZE = 24;
-    private static final int START_RESERVE = 4;
     private static final int MAX_INFLIGHT_CHUNKS = 4;
     private static final int MAX_ACTIVE_CANDIDATES = 2;
     private static final Random RANDOM = new Random();
@@ -207,14 +207,6 @@ public final class RandomTeleportManager {
         return READY_POOL.size();
     }
 
-    public static synchronized int getStartRequirement(int participatingPlayerCount) {
-        return participatingPlayerCount + START_RESERVE;
-    }
-
-    public static synchronized boolean isStartThresholdMet(int participatingPlayerCount) {
-        return getReadyCount() >= getStartRequirement(participatingPlayerCount);
-    }
-
     // =========================================================================
     // Public Request & Settlement Workflow (06, 07)
     // =========================================================================
@@ -253,16 +245,53 @@ public final class RandomTeleportManager {
         // 3. Obtain a verified READY candidate from the pool
         Candidate candidate = pollReadyCandidate(currentGEpoch);
         if (candidate == null) {
-            ACTIVE_REQUESTS.remove(playerId, request);
-            player.sendMessage("§e目的地生成准备中，请稍后再试...");
+            if (waitsForCandidate(reason)) {
+                request.status = RequestStatus.WAITING_FOR_CANDIDATE;
+                player.sendMessage("§e游戏已开始；目的地仍在生成，完成后将自动传送...");
+            } else {
+                ACTIVE_REQUESTS.remove(playerId, request);
+                player.sendMessage("§e目的地生成准备中，请稍后再试...");
+            }
             triggerWarmup();
+            return;
+        }
+        beginTeleport(request, player, candidate);
+    }
+
+    static boolean waitsForCandidate(RequestReason reason) {
+        return reason == RequestReason.INITIAL;
+    }
+
+    private static void dispatchWaitingRequests() {
+        long currentGameEpoch = GAME_EPOCH.get();
+        for (RtpRequest request : ACTIVE_REQUESTS.values()) {
+            if (request.status != RequestStatus.WAITING_FOR_CANDIDATE) continue;
+            if (request.gameEpoch != currentGameEpoch) {
+                ACTIVE_REQUESTS.remove(request.playerId, request);
+                continue;
+            }
+            Player player = Bukkit.getPlayer(request.playerId);
+            if (player == null || !player.isOnline()) {
+                ACTIVE_REQUESTS.remove(request.playerId, request);
+                continue;
+            }
+            Candidate candidate = pollReadyCandidate(currentGameEpoch);
+            if (candidate == null) break;
+            beginTeleport(request, player, candidate);
+        }
+    }
+
+    private static void beginTeleport(RtpRequest request, Player player, Candidate candidate) {
+        if (ACTIVE_REQUESTS.get(request.playerId) != request
+                || request.gameEpoch != GAME_EPOCH.get()) {
+            returnCandidate(candidate);
             return;
         }
         request.candidate = candidate;
 
         // 4. Reserve payment in main thread (07)
-        if (reason == RequestReason.USER) {
-            if (FREE_RTP_PLAYERS.remove(playerId)) {
+        if (request.reason == RequestReason.USER) {
+            if (FREE_RTP_PLAYERS.remove(request.playerId)) {
                 request.freeUsed = true;
             } else {
                 String team = Team.getTeam(player);
@@ -271,7 +300,7 @@ public final class RandomTeleportManager {
                 if (currentScore < cost) {
                     // Not enough score: rollback candidate and release request
                     returnCandidate(candidate);
-                    ACTIVE_REQUESTS.remove(playerId, request);
+                    ACTIVE_REQUESTS.remove(request.playerId, request);
                     player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
                     return;
                 }
@@ -355,7 +384,9 @@ public final class RandomTeleportManager {
         if (player == null) return;
         UUID pid = player.getUniqueId();
         RtpRequest req = ACTIVE_REQUESTS.get(pid);
-        if (req != null && req.status == RequestStatus.RESERVED) {
+        if (req != null && req.status == RequestStatus.WAITING_FOR_CANDIDATE) {
+            ACTIVE_REQUESTS.remove(pid, req);
+        } else if (req != null && req.status == RequestStatus.RESERVED) {
             // Cancel before teleport if possible
             settleRequest(req, player, false);
         }
@@ -484,6 +515,7 @@ public final class RandomTeleportManager {
                 synchronized (RandomTeleportManager.class) {
                     READY_POOL.addLast(candidate);
                 }
+                dispatchWaitingRequests();
                 continue;
             }
             while (INFLIGHT_CHUNKS.get() < MAX_INFLIGHT_CHUNKS) {

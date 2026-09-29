@@ -136,7 +136,7 @@ BLUE_PID=$!
 sample_process_group_rss "${BLUE_PID}" "${RUN_LOG_DIR}/blue.group.resources" &
 BLUE_SAMPLER_PID=$!
 
-echo "[4/5] Waiting for clients (natural lobby start may wait for RTP pre-generation)"
+echo "[4/5] Waiting for clients (game start must not wait for RTP pre-generation)"
 red_status=0
 blue_status=0
 wait "${RED_PID}" || red_status=$?
