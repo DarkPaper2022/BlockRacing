@@ -112,6 +112,7 @@ public final class RandomTeleportManager {
         final int centerChunkX;
         final int centerChunkZ;
         final int radius;
+        final long startedAtNanos;
         final List<long[]> chunkCoords = new ArrayList<>();
         final AtomicInteger nextChunkIndex = new AtomicInteger(0);
         final AtomicInteger completedChunks = new AtomicInteger(0);
@@ -119,7 +120,7 @@ public final class RandomTeleportManager {
         final AtomicBoolean failed = new AtomicBoolean(false);
 
         GenerationJob(long candidateId, long gEpoch, long genEpoch, World world, Location landing,
-                      int centerChunkX, int centerChunkZ, int radius) {
+                      int centerChunkX, int centerChunkZ, int radius, long startedAtNanos) {
             this.candidateId = candidateId;
             this.gEpoch = gEpoch;
             this.genEpoch = genEpoch;
@@ -128,6 +129,7 @@ public final class RandomTeleportManager {
             this.centerChunkX = centerChunkX;
             this.centerChunkZ = centerChunkZ;
             this.radius = radius;
+            this.startedAtNanos = startedAtNanos;
         }
     }
 
@@ -465,6 +467,7 @@ public final class RandomTeleportManager {
         long cId = CANDIDATE_SEQ.incrementAndGet();
         long gEpoch = GAME_EPOCH.get();
         long genEpoch = GENERATION_EPOCH.get();
+        long startedAtNanos = System.nanoTime();
 
         // Sample center coordinates
         int blockX = RANDOM.nextInt(MAX_COORD_RANGE * 2) - MAX_COORD_RANGE;
@@ -495,7 +498,8 @@ public final class RandomTeleportManager {
 
                 // Center valid! Create full view-distance expanding job (05)
                 int radius = world.getViewDistance();
-                GenerationJob job = new GenerationJob(cId, gEpoch, genEpoch, world, landing, centerChunkX, centerChunkZ, radius);
+                GenerationJob job = new GenerationJob(cId, gEpoch, genEpoch, world, landing,
+                        centerChunkX, centerChunkZ, radius, startedAtNanos);
 
                 // Build square coverage list in outward concentric rings (5.1, 5.2)
                 buildConcentricRingCoords(centerChunkX, centerChunkZ, radius, job.chunkCoords);
@@ -545,6 +549,10 @@ public final class RandomTeleportManager {
                 synchronized (RandomTeleportManager.class) {
                     READY_POOL.addLast(candidate);
                 }
+                long durationMillis = (System.nanoTime() - job.startedAtNanos) / 1_000_000L;
+                LOGGER.info("[BlockRacing] RTP candidate ready: id=" + job.candidateId
+                        + ", chunks=" + totalRequired + ", durationMs=" + durationMillis
+                        + ", inflightLimit=" + MAX_INFLIGHT_CHUNKS);
                 dispatchWaitingRequests();
                 continue;
             }
