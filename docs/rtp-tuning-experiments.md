@@ -73,6 +73,9 @@ correctness gate。
 3. `Xmx=4G` 不应作为区块生成加速项。本结果只覆盖约两分钟的隔离 E2E；正式长期开服是否保留
    4G 应由在线人数、长时堆占用和 GC 日志决定，不能仅凭本 slice 下调。
 
+已将本机 `run-e2e.sh` 默认值更新为 worker=7、inflight=6、Xms=1G、Xmx=2G；这些值均可通过
+`BLOCKRACING_E2E_*` 环境变量覆盖。正式服启动参数未随本实验修改。
+
 ## 结果路径
 
 - metadata：`bench/rtp-tuning/.bench-local/runs/98a01d4687de515bfc38fef00966638cdb7888ff6b3254669f4ee6e5388562e6/metadata.json`
