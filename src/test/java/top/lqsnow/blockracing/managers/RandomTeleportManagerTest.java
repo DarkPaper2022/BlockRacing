@@ -18,6 +18,7 @@ public class RandomTeleportManagerTest {
     @AfterEach
     public void clearConfigurationProperties() {
         System.clearProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY);
+        System.clearProperty(RandomTeleportManager.TARGET_POOL_SIZE_PROPERTY);
     }
 
     @Test
@@ -25,12 +26,6 @@ public class RandomTeleportManagerTest {
         assertEquals(0, RandomTeleportManager.getPoolSize());
         assertEquals(0, RandomTeleportManager.getReadyCount());
         assertNull(RandomTeleportManager.pollCandidate());
-    }
-
-    @Test
-    public void onlyInitialTeleportWaitsForCandidate() {
-        assertTrue(RandomTeleportManager.waitsForCandidate(RandomTeleportManager.RequestReason.INITIAL));
-        assertFalse(RandomTeleportManager.waitsForCandidate(RandomTeleportManager.RequestReason.USER));
     }
 
     @Test
@@ -68,5 +63,16 @@ public class RandomTeleportManagerTest {
         System.setProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY, "many");
         assertThrows(IllegalArgumentException.class, () -> RandomTeleportManager.positiveIntProperty(
                 RandomTeleportManager.MAX_INFLIGHT_PROPERTY, 4));
+    }
+
+    @Test
+    public void nonNegativePropertyAllowsDisablingTheTestPool() {
+        System.setProperty(RandomTeleportManager.TARGET_POOL_SIZE_PROPERTY, "0");
+        assertEquals(0, RandomTeleportManager.nonNegativeIntProperty(
+                RandomTeleportManager.TARGET_POOL_SIZE_PROPERTY, 24));
+
+        System.setProperty(RandomTeleportManager.TARGET_POOL_SIZE_PROPERTY, "-1");
+        assertThrows(IllegalArgumentException.class, () -> RandomTeleportManager.nonNegativeIntProperty(
+                RandomTeleportManager.TARGET_POOL_SIZE_PROPERTY, 24));
     }
 }

@@ -13,6 +13,7 @@ SERVER_XMX="${BLOCKRACING_E2E_XMX:-2G}"
 WORKER_THREADS="${BLOCKRACING_E2E_WORKER_THREADS:-7}"
 MAX_INFLIGHT="${BLOCKRACING_E2E_MAX_INFLIGHT:-6}"
 RTP_SEED="${BLOCKRACING_E2E_RTP_SEED:-20260929}"
+RTP_POOL_SIZE="${BLOCKRACING_E2E_RTP_POOL_SIZE:-24}"
 LEVEL_SEED="${BLOCKRACING_E2E_LEVEL_SEED:-blockracing-e2e-20260929}"
 RUN_LOG_DIR="${ROOT_DIR}/target/e2e-logs/$(date +%Y%m%d-%H%M%S)"
 RED_NAME="TestBot_Red"
@@ -35,6 +36,10 @@ if [[ ! "${MAX_INFLIGHT}" =~ ^[1-9][0-9]*$ ]]; then
   echo "BLOCKRACING_E2E_MAX_INFLIGHT must be a positive integer" >&2
   exit 2
 fi
+if [[ ! "${RTP_POOL_SIZE}" =~ ^[0-9]+$ ]]; then
+  echo "BLOCKRACING_E2E_RTP_POOL_SIZE must be a non-negative integer" >&2
+  exit 2
+fi
 if [[ "${WORKER_THREADS}" != "auto" && ! "${WORKER_THREADS}" =~ ^[1-9][0-9]*$ ]]; then
   echo "BLOCKRACING_E2E_WORKER_THREADS must be 'auto' or a positive integer" >&2
   exit 2
@@ -46,6 +51,7 @@ SERVER_JVM_ARGS=(
   "-Dblockracing.test.targets=${TARGETS}"
   "-Dblockracing.rtp.max-inflight=${MAX_INFLIGHT}"
   "-Dblockracing.test.rtp.seed=${RTP_SEED}"
+  "-Dblockracing.test.rtp.target-pool-size=${RTP_POOL_SIZE}"
 )
 if [[ "${WORKER_THREADS}" != "auto" ]]; then
   SERVER_JVM_ARGS+=("-DPaper.WorkerThreadCount=${WORKER_THREADS}")
@@ -124,7 +130,7 @@ level-seed=${LEVEL_SEED}
 EOF
 
 echo "[2/5] Starting isolated Paper server on ${SERVER_PORT} (runtime: ${RUNTIME_DIR})"
-echo "      Xms=${SERVER_XMS} Xmx=${SERVER_XMX} workers=${WORKER_THREADS} inflight=${MAX_INFLIGHT} level-seed=${LEVEL_SEED} rtp-seed=${RTP_SEED}"
+echo "      Xms=${SERVER_XMS} Xmx=${SERVER_XMX} workers=${WORKER_THREADS} inflight=${MAX_INFLIGHT} rtp-pool=${RTP_POOL_SIZE} level-seed=${LEVEL_SEED} rtp-seed=${RTP_SEED}"
 cd "${RUNTIME_DIR}"
 mkfifo "${SERVER_INPUT}"
 exec 9<>"${SERVER_INPUT}"

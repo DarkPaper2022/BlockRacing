@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  * Implements BlockRacing RTP Design v1.0:
  * - Single pending RTP request per player (D1)
  * - Complete destination view-distance pregeneration (D2)
+ * - Foreground center-only fallback when the completed cache is empty
  * - Center first, then ring outward (D3)
  * - Pre-generate only, no permanent keep-alive tickets (D4)
  * - Best-effort landing verification at generation time (D5)
@@ -32,6 +33,7 @@ public final class RandomTeleportManager {
     private static final Logger LOGGER = Logger.getLogger("BlockRacing");
     static final String MAX_INFLIGHT_PROPERTY = "blockracing.rtp.max-inflight";
     static final String RANDOM_SEED_PROPERTY = "blockracing.test.rtp.seed";
+    static final String TARGET_POOL_SIZE_PROPERTY = "blockracing.test.rtp.target-pool-size";
 
     public enum RequestReason {
         INITIAL,
@@ -40,7 +42,7 @@ public final class RandomTeleportManager {
 
     public enum RequestStatus {
         ACCEPTED,
-        WAITING_FOR_CANDIDATE,
+        SEARCHING_FALLBACK,
         RESERVED,
         TELEPORTING,
         SETTLING,
@@ -118,6 +120,7 @@ public final class RandomTeleportManager {
         final AtomicInteger completedChunks = new AtomicInteger(0);
         final AtomicInteger inFlightChunks = new AtomicInteger(0);
         final AtomicBoolean failed = new AtomicBoolean(false);
+        final AtomicBoolean cancelled = new AtomicBoolean(false);
 
         GenerationJob(long candidateId, long gEpoch, long genEpoch, World world, Location landing,
                       int centerChunkX, int centerChunkZ, int radius, long startedAtNanos) {
@@ -135,7 +138,8 @@ public final class RandomTeleportManager {
 
     // --- Budget & Config ---
     private static final int MAX_COORD_RANGE = 10000;
-    private static final int TARGET_POOL_SIZE = 24;
+    private static final int MAX_FAST_FALLBACK_ATTEMPTS = 8;
+    private static final int TARGET_POOL_SIZE = nonNegativeIntProperty(TARGET_POOL_SIZE_PROPERTY, 24);
     private static final int MAX_INFLIGHT_CHUNKS = positiveIntProperty(MAX_INFLIGHT_PROPERTY, 4);
     private static final int MAX_ACTIVE_CANDIDATES = 2;
     private static final Random RANDOM = configuredRandom();
@@ -163,6 +167,22 @@ public final class RandomTeleportManager {
             int value = Integer.parseInt(configured);
             if (value < 1) {
                 throw new IllegalArgumentException(propertyName + " must be at least 1, got " + configured);
+            }
+            return value;
+        } catch (NumberFormatException ex) {
+            throw new IllegalArgumentException(propertyName + " must be an integer, got " + configured, ex);
+        }
+    }
+
+    static int nonNegativeIntProperty(String propertyName, int defaultValue) {
+        String configured = System.getProperty(propertyName);
+        if (configured == null || configured.isBlank()) {
+            return defaultValue;
+        }
+        try {
+            int value = Integer.parseInt(configured);
+            if (value < 0) {
+                throw new IllegalArgumentException(propertyName + " must be non-negative, got " + configured);
             }
             return value;
         } catch (NumberFormatException ex) {
@@ -274,43 +294,36 @@ public final class RandomTeleportManager {
             return;
         }
 
+        // Avoid cancelling useful background work for a request that cannot be paid.
+        // Payment is still reserved atomically in beginTeleport after an actual target exists.
+        if (reason == RequestReason.USER && !hasFreeRtp(player)) {
+            String team = Team.getTeam(player);
+            if (Game.getTeamScore(team) < Setting.getRandomTeleportCost()) {
+                ACTIVE_REQUESTS.remove(playerId, request);
+                player.sendMessage(Message.NOTICE_NOT_ENOUGH_SCORE.getString(player));
+                return;
+            }
+        }
+
         // 3. Obtain a verified READY candidate from the pool
         Candidate candidate = pollReadyCandidate(currentGEpoch);
         if (candidate == null) {
-            if (waitsForCandidate(reason)) {
-                request.status = RequestStatus.WAITING_FOR_CANDIDATE;
-                player.sendMessage("§e游戏已开始；目的地仍在生成，完成后将自动传送...");
-            } else {
-                ACTIVE_REQUESTS.remove(playerId, request);
-                player.sendMessage("§e目的地生成准备中，请稍后再试...");
+            // A cache miss must not put the player behind the full 625-chunk
+            // pre-generation job. Prefer an already verified center from a
+            // background job and stop scheduling the rest of its ring.
+            candidate = takeActiveCandidateForForeground(currentGEpoch);
+            if (candidate != null) {
+                beginTeleport(request, player, candidate);
+                return;
             }
+
+            // No verified center exists yet: use the old center-only async path.
+            request.status = RequestStatus.SEARCHING_FALLBACK;
+            startFastFallback(request, player, 1);
             triggerWarmup();
             return;
         }
         beginTeleport(request, player, candidate);
-    }
-
-    static boolean waitsForCandidate(RequestReason reason) {
-        return reason == RequestReason.INITIAL;
-    }
-
-    private static void dispatchWaitingRequests() {
-        long currentGameEpoch = GAME_EPOCH.get();
-        for (RtpRequest request : ACTIVE_REQUESTS.values()) {
-            if (request.status != RequestStatus.WAITING_FOR_CANDIDATE) continue;
-            if (request.gameEpoch != currentGameEpoch) {
-                ACTIVE_REQUESTS.remove(request.playerId, request);
-                continue;
-            }
-            Player player = Bukkit.getPlayer(request.playerId);
-            if (player == null || !player.isOnline()) {
-                ACTIVE_REQUESTS.remove(request.playerId, request);
-                continue;
-            }
-            Candidate candidate = pollReadyCandidate(currentGameEpoch);
-            if (candidate == null) break;
-            beginTeleport(request, player, candidate);
-        }
     }
 
     private static void beginTeleport(RtpRequest request, Player player, Candidate candidate) {
@@ -416,7 +429,7 @@ public final class RandomTeleportManager {
         if (player == null) return;
         UUID pid = player.getUniqueId();
         RtpRequest req = ACTIVE_REQUESTS.get(pid);
-        if (req != null && req.status == RequestStatus.WAITING_FOR_CANDIDATE) {
+        if (req != null && req.status == RequestStatus.SEARCHING_FALLBACK) {
             ACTIVE_REQUESTS.remove(pid, req);
         } else if (req != null && req.status == RequestStatus.RESERVED) {
             // Cancel before teleport if possible
@@ -440,8 +453,91 @@ public final class RandomTeleportManager {
 
     private static synchronized void returnCandidate(Candidate candidate) {
         if (candidate != null && candidate.gameEpoch == GAME_EPOCH.get()
-                && candidate.generationEpoch == GENERATION_EPOCH.get()) {
+                && candidate.generationEpoch == GENERATION_EPOCH.get()
+                && candidate.viewDistanceRadius > 0) {
             READY_POOL.addFirst(candidate);
+        }
+    }
+
+    private static Candidate takeActiveCandidateForForeground(long currentGameEpoch) {
+        while (true) {
+            GenerationJob job = ACTIVE_JOBS.values().stream()
+                    .filter(candidate -> candidate.gEpoch == currentGameEpoch
+                            && candidate.genEpoch == GENERATION_EPOCH.get()
+                            && !candidate.failed.get() && !candidate.cancelled.get())
+                    .min(Comparator.comparingLong(candidate -> candidate.candidateId))
+                    .orElse(null);
+            if (job == null) return null;
+            if (!ACTIVE_JOBS.remove(job.candidateId, job)) continue;
+
+            job.cancelled.set(true);
+            LOGGER.info("[BlockRacing] RTP cache miss: promoting active candidate id=" + job.candidateId
+                    + " after " + job.completedChunks.get() + " chunks; remaining ring cancelled");
+            return new Candidate(
+                    job.candidateId, job.gEpoch, job.genEpoch,
+                    job.world.getUID(), job.landing,
+                    job.centerChunkX, job.centerChunkZ, 0
+            );
+        }
+    }
+
+    private static void startFastFallback(RtpRequest request, Player player, int attempt) {
+        if (ACTIVE_REQUESTS.get(request.playerId) != request
+                || request.gameEpoch != GAME_EPOCH.get() || !player.isOnline()) {
+            ACTIVE_REQUESTS.remove(request.playerId, request);
+            return;
+        }
+
+        World world = Game.getPrimaryWorld();
+        if (world == null) {
+            failFastFallback(request, player);
+            return;
+        }
+
+        int blockX = RANDOM.nextInt(MAX_COORD_RANGE * 2) - MAX_COORD_RANGE;
+        int blockZ = RANDOM.nextInt(MAX_COORD_RANGE * 2) - MAX_COORD_RANGE;
+        long startedAtNanos = System.nanoTime();
+
+        try {
+            world.getChunkAtAsync(blockX >> 4, blockZ >> 4, true, false).whenComplete((chunk, error) ->
+                    Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                        if (ACTIVE_REQUESTS.get(request.playerId) != request
+                                || request.gameEpoch != GAME_EPOCH.get() || !player.isOnline()) {
+                            ACTIVE_REQUESTS.remove(request.playerId, request);
+                            return;
+                        }
+
+                        Location landing = error == null && chunk != null
+                                ? findSafeLandingLocation(world, blockX, blockZ) : null;
+                        if (landing != null) {
+                            long durationMillis = (System.nanoTime() - startedAtNanos) / 1_000_000L;
+                            LOGGER.info("[BlockRacing] RTP fast fallback ready: attempts=" + attempt
+                                    + ", durationMs=" + durationMillis);
+                            Candidate foreground = new Candidate(
+                                    CANDIDATE_SEQ.incrementAndGet(), request.gameEpoch, GENERATION_EPOCH.get(),
+                                    world.getUID(), landing, blockX >> 4, blockZ >> 4, 0
+                            );
+                            beginTeleport(request, player, foreground);
+                        } else if (attempt < MAX_FAST_FALLBACK_ATTEMPTS) {
+                            startFastFallback(request, player, attempt + 1);
+                        } else {
+                            failFastFallback(request, player);
+                        }
+                    }));
+        } catch (Throwable ignored) {
+            if (attempt < MAX_FAST_FALLBACK_ATTEMPTS) {
+                startFastFallback(request, player, attempt + 1);
+            } else {
+                failFastFallback(request, player);
+            }
+        }
+    }
+
+    private static void failFastFallback(RtpRequest request, Player player) {
+        if (!ACTIVE_REQUESTS.remove(request.playerId, request)) return;
+        request.status = RequestStatus.DONE;
+        if (player.isOnline()) {
+            player.sendMessage("§c暂时无法找到安全的随机传送目的地，请稍后再试。");
         }
     }
 
@@ -533,7 +629,8 @@ public final class RandomTeleportManager {
         if (ACTIVE_JOBS.isEmpty()) return;
 
         for (GenerationJob job : ACTIVE_JOBS.values()) {
-            if (job.failed.get() || job.gEpoch != GAME_EPOCH.get() || job.genEpoch != GENERATION_EPOCH.get()) {
+            if (job.failed.get() || job.cancelled.get()
+                    || job.gEpoch != GAME_EPOCH.get() || job.genEpoch != GENERATION_EPOCH.get()) {
                 ACTIVE_JOBS.remove(job.candidateId);
                 continue;
             }
@@ -553,7 +650,6 @@ public final class RandomTeleportManager {
                 LOGGER.info("[BlockRacing] RTP candidate ready: id=" + job.candidateId
                         + ", chunks=" + totalRequired + ", durationMs=" + durationMillis
                         + ", inflightLimit=" + MAX_INFLIGHT_CHUNKS);
-                dispatchWaitingRequests();
                 continue;
             }
             while (INFLIGHT_CHUNKS.get() < MAX_INFLIGHT_CHUNKS) {

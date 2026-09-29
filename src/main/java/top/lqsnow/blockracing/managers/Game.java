@@ -407,7 +407,7 @@ public class Game {
         // Start the game
         Bukkit.getLogger().info("[BlockRacing] Starting game with RTP pool ready="
                 + RandomTeleportManager.getReadyCount()
-                + "; missing initial destinations will be queued");
+                + "; cache misses use foreground center-only generation");
         sendAll(Message.NOTICE_START);
         startGame();
     }
