@@ -3,6 +3,7 @@ package top.lqsnow.blockracing.managers;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +13,11 @@ public class RandomTeleportManagerTest {
     @BeforeEach
     public void setUp() {
         RandomTeleportManager.clearPool();
+    }
+
+    @AfterEach
+    public void clearConfigurationProperties() {
+        System.clearProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY);
     }
 
     @Test
@@ -41,5 +47,26 @@ public class RandomTeleportManagerTest {
         assertFalse(RandomTeleportManager.isCoverageComplete(625, 621, 4));
         assertFalse(RandomTeleportManager.isCoverageComplete(625, 625, 1));
         assertTrue(RandomTeleportManager.isCoverageComplete(625, 625, 0));
+    }
+
+    @Test
+    public void positiveIntegerPropertyUsesDefaultAndConfiguredValue() {
+        assertEquals(4, RandomTeleportManager.positiveIntProperty(
+                RandomTeleportManager.MAX_INFLIGHT_PROPERTY, 4));
+
+        System.setProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY, "7");
+        assertEquals(7, RandomTeleportManager.positiveIntProperty(
+                RandomTeleportManager.MAX_INFLIGHT_PROPERTY, 4));
+    }
+
+    @Test
+    public void positiveIntegerPropertyRejectsInvalidValues() {
+        System.setProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY, "0");
+        assertThrows(IllegalArgumentException.class, () -> RandomTeleportManager.positiveIntProperty(
+                RandomTeleportManager.MAX_INFLIGHT_PROPERTY, 4));
+
+        System.setProperty(RandomTeleportManager.MAX_INFLIGHT_PROPERTY, "many");
+        assertThrows(IllegalArgumentException.class, () -> RandomTeleportManager.positiveIntProperty(
+                RandomTeleportManager.MAX_INFLIGHT_PROPERTY, 4));
     }
 }

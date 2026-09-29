@@ -8,6 +8,12 @@ PAPER_JAR="${BLOCKRACING_PAPER_JAR:-/home/darkpaper/Game/blockracing-draftout/se
 SERVER_JAVA="${BLOCKRACING_SERVER_JAVA:-/usr/lib/jvm/java-27-openjdk/bin/java}"
 SERVER_PORT="${BLOCKRACING_E2E_PORT:-25575}"
 TARGETS="${BLOCKRACING_E2E_TARGETS:-CHERRY_PLANKS,STONE,DIRT,COBBLESTONE}"
+SERVER_XMS="${BLOCKRACING_E2E_XMS:-1G}"
+SERVER_XMX="${BLOCKRACING_E2E_XMX:-2G}"
+WORKER_THREADS="${BLOCKRACING_E2E_WORKER_THREADS:-auto}"
+MAX_INFLIGHT="${BLOCKRACING_E2E_MAX_INFLIGHT:-4}"
+RTP_SEED="${BLOCKRACING_E2E_RTP_SEED:-20260929}"
+LEVEL_SEED="${BLOCKRACING_E2E_LEVEL_SEED:-blockracing-e2e-20260929}"
 RUN_LOG_DIR="${ROOT_DIR}/target/e2e-logs/$(date +%Y%m%d-%H%M%S)"
 RED_NAME="TestBot_Red"
 BLUE_NAME="TestBot_Blue"
@@ -20,6 +26,30 @@ BLUE_SAMPLER_PID=""
 SERVER_INPUT="${RUN_LOG_DIR}/server.stdin"
 
 mkdir -p "${RUNTIME_DIR}/plugins" "${RUN_LOG_DIR}"
+
+if [[ ! "${SERVER_XMS}" =~ ^[1-9][0-9]*[mMgG]$ || ! "${SERVER_XMX}" =~ ^[1-9][0-9]*[mMgG]$ ]]; then
+  echo "BLOCKRACING_E2E_XMS/XMX must look like 1G or 2048M" >&2
+  exit 2
+fi
+if [[ ! "${MAX_INFLIGHT}" =~ ^[1-9][0-9]*$ ]]; then
+  echo "BLOCKRACING_E2E_MAX_INFLIGHT must be a positive integer" >&2
+  exit 2
+fi
+if [[ "${WORKER_THREADS}" != "auto" && ! "${WORKER_THREADS}" =~ ^[1-9][0-9]*$ ]]; then
+  echo "BLOCKRACING_E2E_WORKER_THREADS must be 'auto' or a positive integer" >&2
+  exit 2
+fi
+
+SERVER_JVM_ARGS=(
+  "-Xms${SERVER_XMS}"
+  "-Xmx${SERVER_XMX}"
+  "-Dblockracing.test.targets=${TARGETS}"
+  "-Dblockracing.rtp.max-inflight=${MAX_INFLIGHT}"
+  "-Dblockracing.test.rtp.seed=${RTP_SEED}"
+)
+if [[ "${WORKER_THREADS}" != "auto" ]]; then
+  SERVER_JVM_ARGS+=("-DPaper.WorkerThreadCount=${WORKER_THREADS}")
+fi
 
 sample_process_group_rss() {
   local process_group="$1"
@@ -90,14 +120,16 @@ view-distance=12
 simulation-distance=8
 max-players=4
 sync-chunk-writes=false
+level-seed=${LEVEL_SEED}
 EOF
 
-echo "[2/5] Starting isolated Paper server on ${SERVER_PORT} (world cache: ${RUNTIME_DIR})"
+echo "[2/5] Starting isolated Paper server on ${SERVER_PORT} (runtime: ${RUNTIME_DIR})"
+echo "      Xms=${SERVER_XMS} Xmx=${SERVER_XMX} workers=${WORKER_THREADS} inflight=${MAX_INFLIGHT} level-seed=${LEVEL_SEED} rtp-seed=${RTP_SEED}"
 cd "${RUNTIME_DIR}"
 mkfifo "${SERVER_INPUT}"
 exec 9<>"${SERVER_INPUT}"
 setsid /usr/bin/time -v -o "${RUN_LOG_DIR}/server.resources" \
-  "${SERVER_JAVA}" -Xms1G -Xmx2G -Dblockracing.test.targets="${TARGETS}" \
+  "${SERVER_JAVA}" "${SERVER_JVM_ARGS[@]}" \
   -jar "${PAPER_JAR}" --nogui <"${SERVER_INPUT}" \
   > >(tee "${RUN_LOG_DIR}/server.log") 2>&1 &
 SERVER_PID=$!
@@ -116,6 +148,18 @@ until rg -q 'Done \(' "${RUN_LOG_DIR}/server.log" 2>/dev/null; do
   fi
   sleep 1
 done
+
+actual_workers="$(rg -o 'Paper is using [0-9]+ worker threads' "${RUN_LOG_DIR}/server.log" \
+  | tail -1 | rg -o '[0-9]+' || true)"
+if [[ -z "${actual_workers}" ]]; then
+  echo "Could not determine Paper worker count from server log" >&2
+  exit 1
+fi
+if [[ "${WORKER_THREADS}" != "auto" && "${actual_workers}" != "${WORKER_THREADS}" ]]; then
+  echo "Paper worker mismatch: requested=${WORKER_THREADS}, actual=${actual_workers}" >&2
+  exit 1
+fi
+echo "      Paper reported ${actual_workers} worker threads"
 
 # The clients issue only vanilla/plugin commands. OP is test-runtime authority,
 # not a server-side completion hook; all completion checks remain production code.

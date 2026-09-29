@@ -30,6 +30,8 @@ import java.util.logging.Logger;
  */
 public final class RandomTeleportManager {
     private static final Logger LOGGER = Logger.getLogger("BlockRacing");
+    static final String MAX_INFLIGHT_PROPERTY = "blockracing.rtp.max-inflight";
+    static final String RANDOM_SEED_PROPERTY = "blockracing.test.rtp.seed";
 
     public enum RequestReason {
         INITIAL,
@@ -132,9 +134,9 @@ public final class RandomTeleportManager {
     // --- Budget & Config ---
     private static final int MAX_COORD_RANGE = 10000;
     private static final int TARGET_POOL_SIZE = 24;
-    private static final int MAX_INFLIGHT_CHUNKS = 4;
+    private static final int MAX_INFLIGHT_CHUNKS = positiveIntProperty(MAX_INFLIGHT_PROPERTY, 4);
     private static final int MAX_ACTIVE_CANDIDATES = 2;
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = configuredRandom();
 
     private static final AtomicInteger INFLIGHT_CHUNKS = new AtomicInteger(0);
     private static final Map<Long, GenerationJob> ACTIVE_JOBS = new ConcurrentHashMap<>();
@@ -149,6 +151,34 @@ public final class RandomTeleportManager {
     );
 
     private RandomTeleportManager() {}
+
+    static int positiveIntProperty(String propertyName, int defaultValue) {
+        String configured = System.getProperty(propertyName);
+        if (configured == null || configured.isBlank()) {
+            return defaultValue;
+        }
+        try {
+            int value = Integer.parseInt(configured);
+            if (value < 1) {
+                throw new IllegalArgumentException(propertyName + " must be at least 1, got " + configured);
+            }
+            return value;
+        } catch (NumberFormatException ex) {
+            throw new IllegalArgumentException(propertyName + " must be an integer, got " + configured, ex);
+        }
+    }
+
+    private static Random configuredRandom() {
+        String configured = System.getProperty(RANDOM_SEED_PROPERTY);
+        if (configured == null || configured.isBlank()) {
+            return new Random();
+        }
+        try {
+            return new Random(Long.parseLong(configured));
+        } catch (NumberFormatException ex) {
+            throw new IllegalArgumentException(RANDOM_SEED_PROPERTY + " must be a long, got " + configured, ex);
+        }
+    }
 
     // =========================================================================
     // Epoch and Lifecycle Management (08)
