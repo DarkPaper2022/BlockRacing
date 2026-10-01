@@ -329,7 +329,6 @@ MAGMA_CREAM,block,1,,,岩浆膏
 EGG,block,1,,,鸡蛋
 WRITABLE_BOOK,block,1,,,书与笔
 FEATHER,block,1,,,羽毛
-ANVIL,block,2,,,铁砧
 ARMADILLO_SCUTE,block,1,,,犰狳鳞甲
 BEEHIVE,block,1,,,蜂箱
 BEE_NEST,block,1,,,蜂巢
@@ -339,7 +338,7 @@ BLACKSTONE_STAIRS,block,1,,,黑石楼梯
 BLACKSTONE_WALL,block,1,,,黑石墙
 BLUE_ICE,block,1,,,蓝冰
 BOOKSHELF,block,1,,,书架
-CHIPPED_ANVIL,block,2,,,开裂的铁砧
+CHIPPED_ANVIL,block,-1,,,开裂的铁砧
 CHISELED_BOOKSHELF,block,1,,,雕纹书架
 CHISELED_NETHER_BRICKS,block,1,,,雕纹下界砖块
 CHISELED_POLISHED_BLACKSTONE,block,1,,,雕纹磨制黑石
@@ -436,15 +435,10 @@ BLUE_EGG,block,2,,,寒带鸡蛋
 BROWN_EGG,block,2,,,热带鸡蛋
 AMETHYST_CLUSTER,block,1,,,紫水晶簇
 ANCIENT_DEBRIS,block,3,,,远古残骸
-BRAIN_CORAL,block,2,,,脑纹珊瑚
-BRAIN_CORAL_BLOCK,block,2,,,脑纹珊瑚块
-BRAIN_CORAL_FAN,block,2,,,脑纹珊瑚扇
 CALIBRATED_SCULK_SENSOR,block,2,,,校频幽匿感测体
 COAL_ORE,block,1,,,煤矿石
 COPPER_ORE,block,1,,,铜矿石
 DEAD_BRAIN_CORAL,block,2,,,失活的脑纹珊瑚
-DEAD_BRAIN_CORAL_BLOCK,block,2,,,失活的脑纹珊瑚块
-DEAD_BRAIN_CORAL_FAN,block,2,,,失活的脑纹珊瑚扇
 DEEPSLATE_COPPER_ORE,block,1,,,深层铜矿石
 DEEPSLATE_DIAMOND_ORE,block,1,,,深层钻石矿石
 DEEPSLATE_GOLD_ORE,block,1,,,深层金矿石
@@ -462,7 +456,6 @@ REDSTONE_ORE,block,1,,,红石矿石
 SMALL_AMETHYST_BUD,block,1,,,小型紫晶芽
 SPONGE,block,2,,,海绵
 TURTLE_EGG,block,2,,,海龟蛋
-WET_SPONGE,block,2,,,湿海绵
 WAXED_EXPOSED_CHISELED_COPPER,block,1,,,涂蜡的斑驳雕纹铜块
 WAXED_EXPOSED_COPPER,block,1,,,涂蜡的斑驳铜块
 WAXED_EXPOSED_COPPER_TRAPDOOR,block,2,,,涂蜡的斑驳铜活板门
