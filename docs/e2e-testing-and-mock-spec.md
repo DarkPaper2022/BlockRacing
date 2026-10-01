@@ -148,3 +148,27 @@ break/craft/use-block、equipment、damage/death、钓鱼、望远镜、持续�
 - 默认大缓存回归（日志 `target/e2e-logs/20260929-134227`）：通过。容量恢复为 24，开局已有 3 个
   完整候选；两个客户端均正确识别立即发生的初始缓存传送，三个用户 RTP 为 153/198/131 ms，
   两端均 PASS，说明前台降级没有影响缓存命中的快路径。
+
+## P0 验收：三客户端 `run-acceptance.sh`（进行中）
+
+入口 `./run-acceptance.sh`：独立世界 `target/e2e-runtime-acceptance`，红 A/红 B/蓝三客户端，脚本见
+`client-mod/.../test/AcceptanceScenario.java`。跨客户端顺序用 `sync/` 目录的屏障文件；中途由脚本正常
+`stop` Paper 并以同一存档重启。Tab 面板用 xdotool 向 Xvfb 注入真实按键，截图在 `screens/`。目标 fixture
+中的 goal 需写 `DRAFTOUT:<id>`。测试环境额外设 `spawn_mobs=false`、`immediate_respawn=true`。
+
+2026-10-01 进度（最后一次日志 `target/e2e-logs/acceptance-20261001-224*`，未跑通全程）：
+
+- 已实测通过：Tab 按住/松开/长按不闪烁、Shift+Tab 玩家列表、CapsLock/NumLock、按住时 Esc、导航键、
+  聊天内 Tab、GUI 缩放 1–4 截图；30 进度并集（队友重复授予只计一次、蓝队隔离）；唱片并集（重复只计一次、
+  放入队伍箱仍计、蓝队隔离）；小数伤害跨人求和且跨重启保留；重启后面板快照（分数/进度/状态）一致；
+  7 种敌对生物跨人去重（重复种类不加）；无效果喝牛奶不计、有效果喝牛奶计分。
+- 尚未跑到：炼药锅、织布机（红方预览关闭不计 + 蓝方普通点击取出、互斥）、堆肥（仅填满不计、取骨粉后计）、
+  唱片机、深层钻石/绿宝石矿、Bonus 不进总分且不单独致胜、同批三目标只结算一次、END 后完成被忽略。
+  最后一次失败于炼药锅：上一步牛奶在提前结算时未松开使用键，导致皮革甲被穿上；已修复，待重跑。
+- 实测发现并修复：
+  1. 客户端：Shift+Tab 后先松 Shift 再松 Tab，原版玩家列表卡住（释放事件被模组吞掉）。现仅在面板打开时拦截释放。
+  2. 服务端：`blockracing.test.targets` 非法时，状态已切为 INGAME 才抛异常，留下无目标的半开局；现在开局前校验并拒绝。
+  3. 测试框架：并发 `downloadAssets` 竞争、插件 `/tp` 覆盖原版（改用 `minecraft:teleport`）、重连时登录阶段被
+     重试打断、延迟模拟器在重连握手期间生效导致断线（断开时清空，JOIN 后重新设置）。
+- 设计说明（非缺陷）：开局 60 秒抗性 V 下受到的伤害最终值为 0，不计入"承受伤害"；开局工具会给每人
+  `story/upgrade_tools` 进度；`actions:` 类目标各动作独立记录、按队共享，不要求同一人按顺序完成。

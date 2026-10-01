@@ -403,6 +403,13 @@ public class Game {
         if (Setting.getBlockAmount() == 0 || !checkBlock()) {
             return;
         }
+        try {
+            Block.validateTestTargets();
+        } catch (IllegalArgumentException invalidFixture) {
+            Bukkit.getLogger().warning("[BlockRacing] Refusing to start: " + invalidFixture.getMessage());
+            player.sendMessage("§c" + invalidFixture.getMessage());
+            return;
+        }
 
         // Start the game
         Bukkit.getLogger().info("[BlockRacing] Starting game with RTP pool ready="
@@ -1018,6 +1025,8 @@ public class Game {
     }
 
     public static void teamWin(String teamId) {
+        Bukkit.getLogger().info("[BlockRacing] Round settled: winner=" + teamId
+                + " progress=" + getTeamProgressScore(teamId) + "/" + getTeamWinScore(teamId));
         Message winMsg = Team.getTeamWinMessage(teamId);
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.closeInventory();

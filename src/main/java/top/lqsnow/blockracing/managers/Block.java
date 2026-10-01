@@ -188,6 +188,11 @@ public class Block {
      * Deliberately narrow E2E seam: only target-list generation is replaceable. Gameplay,
      * scoring, mutual exclusion, inventory checks and settlement still use production code.
      */
+    /** Fails before any round state changes, so a bad fixture cannot leave a half-started round. */
+    static void validateTestTargets() {
+        parseTestTargets(System.getProperty(TEST_TARGETS_PROPERTY));
+    }
+
     static List<String> parseTestTargets(String configured) {
         if (configured == null || configured.isBlank()) return null;
         LinkedHashSet<String> selected = new LinkedHashSet<>();
