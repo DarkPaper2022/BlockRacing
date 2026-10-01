@@ -162,6 +162,9 @@ public final class Scoreboard {
             lines.put(slot, originalMessage
                     .replace("%game_mode%", displayedGameMode)
                     .replace("%block_amount%", String.valueOf(Setting.getBlockAmount()))
+                    .replace("%victory_percent%", Setting.getVictoryScorePercent() + "%")
+                    .replace("%mutual_exclusion%", text(Setting.isMutualExclusion()
+                            ? Message.MENU_ENABLED : Message.MENU_DISABLED, player))
                     .replace("%blocks%", blocks));
         }
         lines.forEach((slot, line) -> setSlot(board, objective, slot, line));
@@ -173,13 +176,11 @@ public final class Scoreboard {
         setTitle(objective, text(Message.SCOREBOARD_INGAME_TITLE, player));
 
         // Determine which teams to show on scoreboard
-        // Show active teams (teams with players); if fewer than 2 active, supplement with others in order
+        // Show teams with players (a single team may play alone); fall back to red/blue if none
         List<String> displayTeams = new ArrayList<>(top.lqsnow.blockracing.managers.Team.getActiveTeamIds());
-        for (TeamId t : TeamId.ALL) {
-            if (displayTeams.size() >= 2) break;
-            if (!displayTeams.contains(t.id())) {
-                displayTeams.add(t.id());
-            }
+        if (displayTeams.isEmpty()) {
+            displayTeams.add(TeamId.RED.id());
+            displayTeams.add(TeamId.BLUE.id());
         }
 
         int currentSlot = 15;

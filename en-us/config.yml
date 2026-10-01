@@ -26,6 +26,10 @@ bonus-target-amount: 3
 # 范围：1 - 100
 victory-score-percent: 50
 
+# 任务互斥：true 时某队完成任务后，其他队伍的同一任务直接结算移除；
+# false 时各队可分别完成同一任务并各自得分
+mutual-exclusion: true
+
 # 同时可做/可见的队首任务数量
 # 默认：64
 # 最大：128
@@ -38,8 +42,8 @@ locate-cost: 5
 random-teleport-cost: 2
 
 # 游戏模式：
-# normal - 普通模式：双方共享互斥任务；普通物品任务完成后向对方队伍箱子赠送一组物品
-# racing - 竞速模式：双方共享互斥任务，不赠送物品
+# normal - 普通模式：各队任务列表相同；普通物品任务完成后向对方队伍箱子赠送一组物品
+# racing - 竞速模式：各队任务列表相同，不赠送物品
 game-mode: racing
 
 # 极速模式：

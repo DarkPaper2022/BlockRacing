@@ -62,6 +62,64 @@ class MultiTeamRoundSettlementTest {
         serverField.setAccessible(true);
         serverField.set(null, previousServer);
         Game.currentGameState = Game.GameState.PREGAME;
+        Setting.setMutualExclusion(true);
+    }
+
+    private static void giveAllTeams(List<String> targets, int total, int win) {
+        for (TeamId t : TeamId.ALL) {
+            String id = t.id();
+            Block.getTeamBlocks(id).addAll(targets);
+            Block.getTeamRemainingBlocks(id).addAll(targets);
+            Game.setTeamTotalBlockAmount(id, targets.size());
+            Game.setTeamTotalScore(id, total);
+            Game.setTeamWinScore(id, win);
+        }
+    }
+
+    @Test
+    void withoutMutualExclusionEveryTeamScoresTheSameTask() {
+        Setting.setMutualExclusion(false);
+        giveAllTeams(List.of("EASY_0", "NORMAL_1", "NORMAL_2"), 6, 6);
+        Team.getPlayers("red").add("Alice");
+        Team.getPlayers("blue").add("Bob");
+        Game.currentGameState = Game.GameState.INGAME;
+
+        Game.teamTaskComplete("red", "NORMAL_1", "Alice");
+        assertFalse(Block.getTeamRemainingBlocks("red").contains("NORMAL_1"));
+        assertTrue(Block.getTeamRemainingBlocks("blue").contains("NORMAL_1"), "blue keeps its own copy");
+        assertEquals(3, Game.getTeamTotalBlockAmount("blue"));
+
+        Game.teamTaskComplete("blue", "NORMAL_1", "Bob");
+        assertEquals(3, Game.getTeamProgressScore("red"));
+        assertEquals(3, Game.getTeamProgressScore("blue"));
+        assertFalse(Block.getTeamRemainingBlocks("blue").contains("NORMAL_1"));
+        assertEquals(Game.GameState.INGAME, Game.currentGameState);
+
+        // A repeated completion by the same team is still ignored.
+        Game.teamTaskComplete("red", "NORMAL_1", "Alice");
+        assertEquals(3, Game.getTeamProgressScore("red"));
+    }
+
+    @Test
+    void singleTeamCanPlayAndWinAlone() {
+        giveAllTeams(List.of("EASY_0", "NORMAL_1", "NORMAL_2"), 6, 3);
+        Team.getPlayers("red").add("Alice");
+        assertEquals(List.of("red"), Team.getActiveTeamIds());
+        Game.currentGameState = Game.GameState.INGAME;
+
+        Game.teamTaskComplete("red", "EASY_0", "Alice");
+        assertEquals(Game.GameState.INGAME, Game.currentGameState);
+        Game.teamTaskComplete("red", "NORMAL_2", "Alice");
+        assertEquals(Game.GameState.END, Game.currentGameState, "reaching the win line ends a solo round");
+        assertEquals(5, Game.getTeamProgressScore("red")); // EASY_0 (1) + NORMAL_2 (4)
+    }
+
+    @Test
+    void mutualExclusionSettingIsSavedWithTheRound() {
+        Setting.setMutualExclusion(false);
+        assertFalse(GameProgressStore.snapshot().getBoolean("settings.mutual-exclusion", true));
+        Setting.setMutualExclusion(true);
+        assertTrue(GameProgressStore.snapshot().getBoolean("settings.mutual-exclusion", false));
     }
 
     @Test

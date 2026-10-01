@@ -49,6 +49,7 @@ import org.bukkit.projectiles.ProjectileSource;
 public class BasicListener implements Listener {
     private static final LegacyComponentSerializer LEGACY_SERIALIZER = LegacyComponentSerializer.legacySection();
     public static List<String> editAmountPlayer = new CopyOnWriteArrayList<>();
+    public static List<String> editVictoryPercentPlayer = new CopyOnWriteArrayList<>();
 
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent event) {
@@ -99,6 +100,14 @@ public class BasicListener implements Listener {
             return;
         }
 
+        // Change victory score percent
+        if (editVictoryPercentPlayer.contains(player.getName())) {
+            event.setCancelled(true);
+            String message = LEGACY_SERIALIZER.serialize(event.message());
+            Bukkit.getScheduler().runTask(Main.getInstance(), () -> handleVictoryPercentInput(player, message));
+            return;
+        }
+
         TeamChat.handle(event);
     }
 
@@ -118,6 +127,32 @@ public class BasicListener implements Listener {
             editAmountPlayer.remove(player.getName());
         } catch (NumberFormatException ex) {
             player.sendMessage(Message.NOTICE_SET_BLOCKS_ERROR.getString(player));
+        }
+    }
+
+    private void handleVictoryPercentInput(Player player, String message) {
+        if (!editVictoryPercentPlayer.contains(player.getName())) return;
+        if (!Game.getCurrentGameState().equals(Game.GameState.PREGAME)) {
+            editVictoryPercentPlayer.remove(player.getName());
+            return;
+        }
+        if (message.equalsIgnoreCase("quit")) {
+            player.sendMessage(Message.NOTICE_SET_BLOCKS_QUIT.getString(player));
+            editVictoryPercentPlayer.remove(player.getName());
+            return;
+        }
+        try {
+            int percent = Integer.parseInt(message.trim().replace("%", ""));
+            if (percent < Setting.MIN_VICTORY_SCORE_PERCENT || percent > Setting.MAX_VICTORY_SCORE_PERCENT) {
+                throw new NumberFormatException();
+            }
+            Setting.setVictoryScorePercent(percent);
+            sendAll(Message.NOTICE_SET_VICTORY_PERCENT_SUCCESS, (viewer, text) -> text + percent + "%");
+            editVictoryPercentPlayer.remove(player.getName());
+            updateMenu(new PreGameMenu());
+            updateScoreboard();
+        } catch (NumberFormatException ex) {
+            player.sendMessage(Message.NOTICE_SET_VICTORY_PERCENT_ERROR.getString(player));
         }
     }
 

@@ -30,6 +30,7 @@ public class Setting {
     private static int maxFavoriteTargets = DEFAULT_MAX_FAVORITE_TARGETS;
     private static int victoryScorePercent;
     private static boolean speedMode;
+    private static boolean mutualExclusion = true;
     public enum GameMode {NORMAL, RACING}
     private static GameMode currentGameMode = GameMode.NORMAL;
 
@@ -44,6 +45,8 @@ public class Setting {
         locateCost = clamp(Config.LOCATE_COST.getInt(), MIN_COST, MAX_COST);
         randomTeleportCost = clamp(Config.RANDOM_TELEPORT_COST.getInt(), MIN_COST, MAX_COST);
         speedMode = Config.SPEED_MODE.getBoolean();
+        // Missing key keeps the original rule: tasks are mutually exclusive.
+        mutualExclusion = Config.MUTUAL_EXCLUSION.getBoolean(true);
         maxTeamChestNum = clamp(Config.MAX_TEAM_CHEST_NUM.getInt(), 1, 53);
         maxTeamWaypointNum = clamp(Config.MAX_TEAM_WAYPOINT_NUM.getInt(), 1, 53);
         int favConfig = Config.MAX_FAVORITE_TARGETS.getInt();
@@ -124,6 +127,15 @@ public class Setting {
         Config.SPEED_MODE.setBoolean(speedMode);
     }
 
+    public static void setMutualExclusion(boolean mutualExclusion) {
+        Setting.mutualExclusion = mutualExclusion;
+        Config.MUTUAL_EXCLUSION.setBoolean(mutualExclusion);
+    }
+
+    public static void toggleMutualExclusion() {
+        setMutualExclusion(!isMutualExclusion());
+    }
+
     public static void toggleMediumBlock() {
         setEnableMediumBlock(!isEnableMediumBlock());
     }
@@ -150,6 +162,7 @@ public class Setting {
     public static int getMaxFavoriteTargets() { return maxFavoriteTargets; }
     public static int getVictoryScorePercent() { return victoryScorePercent; }
     public static boolean isSpeedMode() { return speedMode; }
+    public static boolean isMutualExclusion() { return mutualExclusion; }
     public static GameMode getCurrentGameMode() { return currentGameMode; }
 
     public static void setCurrentGameMode(GameMode mode) {

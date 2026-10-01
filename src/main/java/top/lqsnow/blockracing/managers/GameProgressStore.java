@@ -99,6 +99,8 @@ public final class GameProgressStore {
             Game.blueTeamRollCount = state.getInt("rolls.blue");
             Game.locateCost = state.getInt("locate-cost");
             Setting.setSpeedMode(state.getBoolean("settings.speed-mode", Setting.isSpeedMode()));
+            // Saves from before the toggle existed were always mutually exclusive.
+            Setting.setMutualExclusion(state.getBoolean("settings.mutual-exclusion", true));
             try {
                 Setting.setCurrentGameMode(Setting.GameMode.valueOf(
                         state.getString("settings.game-mode", Setting.getCurrentGameMode().name())));
@@ -222,6 +224,7 @@ public final class GameProgressStore {
         state.set("rolls.blue", Game.blueTeamRollCount);
         state.set("locate-cost", Game.locateCost);
         state.set("settings.speed-mode", Setting.isSpeedMode());
+        state.set("settings.mutual-exclusion", Setting.isMutualExclusion());
         state.set("settings.game-mode", Setting.getCurrentGameMode().name());
         state.set("players.in-game", new ArrayList<>(Game.inGamePlayers));
         state.set("players.free-random-tp", new ArrayList<>(Game.freeRandomTPList));

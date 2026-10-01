@@ -46,6 +46,7 @@ import top.lqsnow.blockracing.toolkit.item.ItemBuilder;
 import top.lqsnow.blockracing.toolkit.material.Materials;
 import top.lqsnow.blockracing.toolkit.text.Texts;
 import static top.lqsnow.blockracing.listeners.BasicListener.editAmountPlayer;
+import static top.lqsnow.blockracing.listeners.BasicListener.editVictoryPercentPlayer;
 import static top.lqsnow.blockracing.managers.Block.*;
 import static top.lqsnow.blockracing.managers.Block.blueTeamBlocks;
 import static top.lqsnow.blockracing.managers.Block.blueTeamRemainingBlocks;
@@ -351,6 +352,7 @@ public class Game {
         blueRollPlayers.remove(player.getName());
         readyPlayers.remove(player.getName());
         editAmountPlayer.remove(player.getName());
+        editVictoryPercentPlayer.remove(player.getName());
         Restart.removeVote(player);
     }
 
@@ -391,9 +393,9 @@ public class Game {
             return;
         }
 
-        // Must have at least 2 distinct teams with players
+        // A single team may play alone; it still needs at least one player
         List<String> activeTeams = Team.getActiveTeamIds();
-        if (activeTeams.size() < 2) {
+        if (activeTeams.isEmpty()) {
             player.sendMessage(Message.NOTICE_NOT_ENOUGH_PLAYERS.getString(player));
             return;
         }
@@ -424,6 +426,7 @@ public class Game {
         setCurrentGameState(GameState.INGAME);
         closeAllPlayersMenu();
         editAmountPlayer.clear();
+        editVictoryPercentPlayer.clear();
         redTeamRollCount = 0;
         blueTeamRollCount = 0;
         redRollPlayers.clear();
@@ -927,14 +930,16 @@ public class Game {
         remaining.remove(block);
         FavoriteManager.onTaskCompletedOrRemoved(teamId, block);
 
-        // Mutual task exclusion across all other teams
-        for (TeamId other : TeamId.ALL) {
-            String otherId = other.id();
-            if (otherId.equalsIgnoreCase(teamId)) continue;
-            List<String> otherRem = Block.getTeamRemainingBlocks(otherId);
-            if (skipMutualTask(otherRem, block)) {
-                FavoriteManager.onTaskCompletedOrRemoved(otherId, block);
-                setTeamTotalBlockAmount(otherId, getTeamTotalBlockAmount(otherId) - 1);
+        // Mutual task exclusion across all other teams; when disabled every team can score it
+        if (Setting.isMutualExclusion()) {
+            for (TeamId other : TeamId.ALL) {
+                String otherId = other.id();
+                if (otherId.equalsIgnoreCase(teamId)) continue;
+                List<String> otherRem = Block.getTeamRemainingBlocks(otherId);
+                if (skipMutualTask(otherRem, block)) {
+                    FavoriteManager.onTaskCompletedOrRemoved(otherId, block);
+                    setTeamTotalBlockAmount(otherId, getTeamTotalBlockAmount(otherId) - 1);
+                }
             }
         }
 
@@ -987,6 +992,8 @@ public class Game {
             for (TeamId other : TeamId.ALL) {
                 String otherId = other.id();
                 if (otherId.equalsIgnoreCase(teamId) || Team.getPlayers(otherId).isEmpty()) continue;
+                // Without mutual exclusion the gift would complete the receiver's own copy of the task.
+                if (Block.getTeamRemainingBlocks(otherId).contains(block)) continue;
                 List<Inventory> opponentChests = getTeamChests(otherId);
                 boolean placed = false;
                 for (int i = opponentChests.size() - 1; i >= 0; i--) {

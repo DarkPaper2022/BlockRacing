@@ -26,7 +26,8 @@ public enum Config {
     MAX_TEAM_CHEST_NUM("max-team-chest-num"),
     MAX_TEAM_WAYPOINT_NUM("max-team-waypoint-num"),
     MAX_FAVORITE_TARGETS("max-favorite-targets"),
-    VICTORY_SCORE_PERCENT("victory-score-percent");
+    VICTORY_SCORE_PERCENT("victory-score-percent"),
+    MUTUAL_EXCLUSION("mutual-exclusion");
 
     private static File file;
     private static FileConfiguration config;
@@ -79,6 +80,10 @@ public enum Config {
 
     public boolean getBoolean() {
         return config.getBoolean(path);
+    }
+
+    public boolean getBoolean(boolean fallback) {
+        return config.getBoolean(path, fallback);
     }
 
     public int getInt() {

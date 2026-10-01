@@ -20,15 +20,17 @@ import java.util.Set;
 import java.util.function.BooleanSupplier;
 
 import static top.lqsnow.blockracing.listeners.BasicListener.editAmountPlayer;
+import static top.lqsnow.blockracing.listeners.BasicListener.editVictoryPercentPlayer;
 import static top.lqsnow.blockracing.managers.Gui.updateMenu;
 import static top.lqsnow.blockracing.managers.Scoreboard.updateScoreboard;
+import static top.lqsnow.blockracing.utils.CommandUtil.sendAll;
 
 public final class PreGameMenu extends MenuView {
     private static final Set<Integer> GREEN_BACKGROUND = Set.of(
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44,
             45, 46, 47, 48, 49, 50, 51, 52, 53
     );
-    private static final Set<Integer> BLUE_BACKGROUND = Set.of(31, 32, 40);
+    private static final Set<Integer> BLUE_BACKGROUND = Set.of(31, 40);
 
     public PreGameMenu() {
         super(54, player -> Message.MENU_PREGAME_TITLE.getString(player));
@@ -76,8 +78,21 @@ public final class PreGameMenu extends MenuView {
                         .build(),
                 (player, click) -> {
                     player.closeInventory();
+                    editVictoryPercentPlayer.remove(player.getName());
                     editAmountPlayer.add(player.getName());
                     player.sendMessage(Message.NOTICE_SET_BLOCKS.getString(player));
+                }
+        ));
+        setButton(23, MenuButton.of(
+                player -> ItemBuilder.of(Material.GOLD_INGOT)
+                        .name(Message.MENU_VICTORY_PERCENT.getString(player) + Setting.getVictoryScorePercent() + "%")
+                        .lore(Message.MENU_VICTORY_PERCENT_LORE.getStringList(player))
+                        .build(),
+                (player, click) -> {
+                    player.closeInventory();
+                    editAmountPlayer.remove(player.getName());
+                    editVictoryPercentPlayer.add(player.getName());
+                    player.sendMessage(Message.NOTICE_SET_VICTORY_PERCENT.getString(player));
                 }
         ));
         setButton(29, MenuButton.of(this::normalModeItem, (player, click) -> {
@@ -88,6 +103,21 @@ public final class PreGameMenu extends MenuView {
             Setting.setCurrentGameMode(Setting.GameMode.RACING);
             refreshSettings();
         }));
+        setButton(32, MenuButton.of(
+                player -> ItemBuilder.of(Setting.isMutualExclusion() ? Material.IRON_CHAIN : Material.SHEARS)
+                        .name(Setting.isMutualExclusion()
+                                ? Message.MENU_MUTUAL_EXCLUSION_ENABLED.getString(player)
+                                : Message.MENU_MUTUAL_EXCLUSION_DISABLED.getString(player))
+                        .lore(Message.MENU_MUTUAL_EXCLUSION_LORE.getStringList(player))
+                        .build(),
+                (player, click) -> {
+                    Setting.toggleMutualExclusion();
+                    sendAll(Setting.isMutualExclusion()
+                            ? Message.NOTICE_SET_MUTUAL_EXCLUSION_ENABLED
+                            : Message.NOTICE_SET_MUTUAL_EXCLUSION_DISABLED);
+                    refreshSettings();
+                }
+        ));
         setButton(33, MenuButton.of(
                 player -> ItemBuilder.of(Setting.isSpeedMode() ? Material.GREEN_CONCRETE : Material.YELLOW_CONCRETE)
                         .name(Setting.isSpeedMode()

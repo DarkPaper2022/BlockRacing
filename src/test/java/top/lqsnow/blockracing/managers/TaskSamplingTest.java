@@ -26,6 +26,7 @@ class TaskSamplingTest {
         config.set("locate-cost", 5);
         config.set("random-teleport-cost", 2);
         config.set("game-mode", "racing");
+        config.set("mutual-exclusion", true);
         Field field = Config.class.getDeclaredField("config");
         field.setAccessible(true);
         field.set(null, config);
